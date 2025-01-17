@@ -1,0 +1,84 @@
+.main-container {
+    max-width: 500px;
+    padding: 20px;
+  }
+  
+  .free-transfers-notice {
+    background-color: #f8f0ff;
+  }
+  
+  .form-control, .form-select {
+    border: 1px solid #e0e0e0;
+    /* padding: 7px; */
+    font-size: 16px;
+  }
+  
+  .form-control::placeholder {
+    color: #999;
+  }
+  
+  .form-control:focus, .form-select:focus {
+    box-shadow: none;
+    border-color: #98E7D0;
+  }
+  
+  .success-monitor {
+    background-color: #f8f9fa;
+  }
+  
+  .monitor-icon {
+    background-color: #e8f8f4;
+    padding: 8px;
+    border-radius: 50%;
+  }
+  
+  .btn-link {
+    text-decoration: none;
+    color: #666;
+    padding: 0;
+    margin-right: 20px;
+  }
+  
+  .btn-link.active {
+    /* color: #20c997; */
+    position: relative;
+  }
+  
+  .btn-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    /* background-color: #20c997; */
+  }
+  
+  .transfer-item .name {
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  .transfer-item .account-info {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .transfer-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  
+  .transfer-icon.purple {
+    background-color: #7c3aed;
+  }
+  
+  .transfer-icon.green {
+    background-color: #20c997;
+  }
+  
+  /* Bootstrap Icons */
+  /* @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"); */
+  
+  

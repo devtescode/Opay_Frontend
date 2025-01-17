@@ -1,11 +1,176 @@
-import React from 'react'
 
-const Bank = () => {
+import React, { useState } from 'react';
+import './BankTransfer.css';
+import Data from '../Data.json';
+
+export default function Bank() {
+  const [accountNumber, setAccountNumber] = useState('');
+  const [selectedBank, setSelectedBank] = useState('');
+  const [activeTab, setActiveTab] = useState('recents');
+
+  const handleAccountNumberChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setAccountNumber(value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Input Validation
+    if (!accountNumber || !selectedBank) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    if (accountNumber.length !== 10) {
+        alert('Account number must be 10 digits.');
+        return;
+    }
+
+    const bankCode = selectedBank; // Use the selected bank's code
+    try {
+        const response = await fetch('http://localhost:4000/useropay/useraccount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                AccountNumber: accountNumber,
+                Bankcode: bankCode,
+            }),
+        });
+
+        const data = await response.json();
+        if (response.ok && data.status) {
+            alert(`Account Validated: ${data.accountName}`);
+        } else {
+            alert(data.message || 'Failed to validate account.');
+        }
+    } catch (err) {
+        console.error('Error:', err);
+        alert('Failed to connect to the server. Please try again later.');
+    }
+};
+
+
+
   return (
-    <div>
-        Bank
+    <div className="container main-container">
+      {/* Header */}
+      <div className="header-section d-flex justify-content-between align-items-center mb-3">
+        <div className="d-flex align-items-center gap-2">
+          <button className="btn btn-link text-dark p-0">
+            {/* <i className="bi bi-chevron-left fs-5"></i> */}
+            <i class="ri-arrow-left-s-line"></i>
+          </button>
+          <h5 className="mb-0">Transfer to Bank Account</h5>
+        </div>
+        <button className="btn btn-link text-success p-0">History </button>
+      </div>
+
+      {/* Promo Banner */}
+      <div className="promo-banner mb-3">
+        {/* <img 
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-16%20at%2015.33.22_4062ae61.jpg-Tb0bl4oo1PobEngZ2vvZz04R74SJTF.jpeg" 
+          alt="Promo Banner" 
+          className="w-100 rounded-3"
+        /> */}
+      </div>
+
+      {/* Free Transfers Notice */}
+      <div className="free-transfers-notice mb-4 p-2 rounded-3">
+        <div className="d-flex align-items-center gap-2">
+          <i className="bi bi-lightning-charge-fill text-primary"></i>
+          <span className="text-primary">Free transfers for the day: 3</span>
+        </div>
+      </div>
+
+      <div className="transfer-form-section mb-4 border rounded-2 p-2">
+        <h5 className="mb-3">Recipient Account</h5>
+        <form onSubmit={handleSubmit}>
+          <div className=''>
+            <div className="mb-1">
+              <input
+                 type="text"
+                 className="form-control form-control-lg"
+                 placeholder="Enter 10 digits Account Number"
+                 value={accountNumber}
+                 onChange={handleAccountNumberChange}
+              />
+            </div>
+            <div className="mb-3">
+            <select
+                className="form-select form-select-lg"
+                value={selectedBank}
+                onChange={(e) => setSelectedBank(e.target.value)}
+              >
+                <option value="">Select Bank</option>
+                {Data.banks.map((bank) => (
+                  <option key={bank.code} value={bank.code}>
+                    {bank.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className='text-center'>
+              <button
+                type="submit"
+                className="btn btn-success w-75 p-2 rounded-5"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      {/* Success Rate Monitor */}
+      <div className="success-monitor mb-4 p-3 rounded-3 d-flex justify-content-between align-items-center">
+        <div className="d-flex align-items-center gap-3">
+          <div className="monitor-icon">
+            <i className="bi bi-wifi text-success"></i>
+          </div>
+          <span>Bank Transfer Success Rate Monitor</span>
+        </div>
+        <i className="bi bi-chevron-right"></i>
+      </div>
+
+      {/* Recents/Favourites Section */}
+      <div className="recent-transfers-section">
+        <div className="tabs-header d-flex mb-3">
+          <button
+            className={`btn btn-link ${activeTab === 'recents' ? 'active' : ''}`}
+            onClick={() => setActiveTab('recents')}
+          >
+            Recents
+          </button>
+          <button
+            className={`btn btn-link ${activeTab === 'favourites' ? 'active' : ''}`}
+            onClick={() => setActiveTab('favourites')}
+          >
+            Favourites
+          </button>
+        </div>
+
+        <div className="transfers-list">
+          <div className="transfer-item d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <div className="name">Datagenix Data</div>
+              <div className="account-info">8123958568 Palmpay</div>
+            </div>
+            <div className="transfer-icon purple"></div>
+          </div>
+
+          <div className="transfer-item d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <div className="name">JAWAD ALAO ADEKANBI</div>
+              <div className="account-info">9152280668 OPay</div>
+            </div>
+            <div className="transfer-icon green"></div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Bank
