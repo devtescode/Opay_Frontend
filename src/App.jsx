@@ -9,6 +9,7 @@ import Notfound from './assets/components/Notfoundpage/Notfound'
 import CreateUserLogin from './assets/components/CreateUserLoginPage/CreateUserLogin'
 import ProtectedRoute from './assets/components/ProtectedRouteUser/ProtectedRoute'
 import Bank from './assets/components/Bankpage/Bank'
+import Transferform from './assets/components/Transferformpage/Transferform'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Route path='/admindb' element={<Admindb/>}/>
       <Route path='/createlogin' element={<CreateUserLogin/>}/>
       <Route path='/bank' element={<Bank/>}/>
+      <Route path='/transfer' element={<Transferform/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>
