@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Transfermodal from "../Transfermodalpage/Transfarmodal";
 
 function Transferform() {
     const [amount, setAmount] = useState("");
     const [remark, setRemark] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [accountDetails, setAccountDetails] = useState(null);
 
     const handleAmountClick = (value) => {
         setAmount(value);
@@ -10,10 +13,9 @@ function Transferform() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert(`Amount: ${amount}\nRemark: ${remark}`);
+        setShowModal(true); // Show modal on confirm
     };
 
-    const [accountDetails, setAccountDetails] = useState(null);
 
     useEffect(() => {
         const storedAccount = localStorage.getItem("selectedAccount");
@@ -92,6 +94,7 @@ function Transferform() {
                     </form>
                 </div>
             </div>
+            {showModal && <Transfermodal/>}
         </div>
     );
 }
