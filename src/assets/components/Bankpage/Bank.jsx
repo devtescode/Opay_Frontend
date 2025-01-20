@@ -2,11 +2,16 @@
 import React, { useState } from 'react';
 import './BankTransfer.css';
 import Data from '../Data.json';
+import { useNavigate } from 'react-router-dom';
 
 export default function Bank() {
   const [accountNumber, setAccountNumber] = useState('');
-  const [selectedBank, setSelectedBank] = useState('');
+  // const [selectedBank, setSelectedBank] = useState('');
   const [activeTab, setActiveTab] = useState('recents');
+  const [accountName, setAccountName] = useState(''); // For showing validated name
+  const [selectedBankCode, setSelectedBankCode] = useState("");
+
+  const navigate = useNavigate()
 
   const handleAccountNumberChange = (e) => {
     const value = e.target.value.replace(/\D/g, '').slice(0, 10);
@@ -17,40 +22,59 @@ export default function Bank() {
     e.preventDefault();
 
     // Input Validation
-    if (!accountNumber || !selectedBank) {
-        alert('Please fill in all fields.');
-        return;
+    if (!accountNumber || !selectedBankCode) {
+      alert('Please fill in all fields.');
+      return;
     }
 
     if (accountNumber.length !== 10) {
-        alert('Account number must be 10 digits.');
-        return;
+      alert('Account number must be 10 digits.');
+      return;
     }
 
-    const bankCode = selectedBank; // Use the selected bank's code
+    // const bankCode = selectedBank; 
+
+    const selectedBank = Data.banks.find((bank) => bank.code === selectedBankCode);
+
+
+    if (!selectedBank) {
+      alert(`Unknown bank code: ${selectedBankCode}`); // Alerting selected code for debugging
+      return;
+    }
     try {
-        const response = await fetch('http://localhost:4000/useropay/useraccount', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                AccountNumber: accountNumber,
-                Bankcode: bankCode,
-            }),
-        });
+      const response = await fetch('http://localhost:4000/useropay/useraccount', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          AccountNumber: accountNumber,
+          Bankcode: selectedBankCode,
+        }),
+      });
 
-        const data = await response.json();
-        if (response.ok && data.status) {
-            alert(`Account Validated: ${data.accountName}`);
-        } else {
-            alert(data.message || 'Failed to validate account.');
-        }
+      const data = await response.json();
+      if (response.ok && data.status) {
+        setAccountName(data.accountName); // Update account name
+
+        // Save details to localStorage
+        const accountDetails = {
+          accountName: data.accountName,
+          accountNumber,
+          // bankName: selectedBank,
+          bankName: selectedBank.name, // Save the bank name here
+          // accountName: data.accountName,
+        };
+        localStorage.setItem("selectedAccount", JSON.stringify(accountDetails));
+        navigate("/transfer")
+      } else {
+        alert(data.message || 'Failed to validate account.');
+      }
     } catch (err) {
-        console.error('Error:', err);
-        alert('Failed to connect to the server. Please try again later.');
+      console.error('Error:', err);
+      alert('Failed to connect to the server. Please try again later.');
     }
-};
+  };
 
 
 
@@ -91,18 +115,18 @@ export default function Bank() {
           <div className=''>
             <div className="mb-1">
               <input
-                 type="text"
-                 className="form-control form-control-lg"
-                 placeholder="Enter 10 digits Account Number"
-                 value={accountNumber}
-                 onChange={handleAccountNumberChange}
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Enter 10 digits Account Number"
+                value={accountNumber}
+                onChange={handleAccountNumberChange}
               />
             </div>
             <div className="mb-3">
-            <select
+              <select
                 className="form-select form-select-lg"
-                value={selectedBank}
-                onChange={(e) => setSelectedBank(e.target.value)}
+                value={selectedBankCode}
+                onChange={(e) => setSelectedBankCode(e.target.value)}
               >
                 <option value="">Select Bank</option>
                 {Data.banks.map((bank) => (
@@ -122,6 +146,12 @@ export default function Bank() {
             </div>
           </div>
         </form>
+        {/* {accountName && (
+                <div className="mt-3">
+                    <h4>Validated Account:</h4>
+                    <p>{accountName}</p>
+                </div>
+            )} */}
       </div>
 
       {/* Success Rate Monitor */}

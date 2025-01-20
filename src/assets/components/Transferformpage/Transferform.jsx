@@ -1,7 +1,4 @@
-
-
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Transferform() {
     const [amount, setAmount] = useState("");
@@ -16,6 +13,15 @@ function Transferform() {
         alert(`Amount: ${amount}\nRemark: ${remark}`);
     };
 
+    const [accountDetails, setAccountDetails] = useState(null);
+
+    useEffect(() => {
+        const storedAccount = localStorage.getItem("selectedAccount");
+        if (storedAccount) {
+            setAccountDetails(JSON.parse(storedAccount));
+        }
+    }, []);
+
     return (
         <div className="" style={{height:"100vh", }}>
             
@@ -25,16 +31,20 @@ function Transferform() {
                 </div>
                 <div className="card-body p-2">
                     <div className="d-flex align-items-center py-4 ">
-                        <img
+                        {/* <img
                             src="https://via.placeholder.com/50"
                             alt="Bank Logo"
                             className="rounded-circle"
                             style={{ marginRight: "15px" }}
-                        />
+                        /> */}
+                         {accountDetails ? (
                         <div>
-                            <h6 className="mb-1">TESLIM AYODELE AGBOOLA</h6>
-                            <p className="mb-0 text-muted">1521667789 Access Bank</p>
+                            <h6 className="mb-1"> {accountDetails.accountName}</h6>
+                            <p className="mb-0 text-muted"> {accountDetails.accountNumber} {accountDetails.bankName}</p>
                         </div>
+                         ) : (
+                            <p>No account details found. Please go back and select an account.</p>
+                         )}
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4 bg-white p-2 rounded-3 ">
