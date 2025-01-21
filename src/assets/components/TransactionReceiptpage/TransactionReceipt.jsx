@@ -18,6 +18,28 @@ function TransactionReceipt() {
     }
   }, []);
 
+  const getOrdinal = (day) => {
+    const suffix = ["th", "st", "nd", "rd"];
+    const value = day % 100;
+    return day + (suffix[(value - 20) % 10] || suffix[value] || suffix[0]);
+  };
+
+  const formatDate = () => {
+    const now = new Date();
+    const options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false, // Use 24-hour format
+    };
+    let formattedDate = now.toLocaleString("en-US", options);
+    let day = now.getDate();
+    formattedDate = formattedDate.replace(day, getOrdinal(day));
+    return formattedDate;
+  };
 
   return (
     <>
@@ -47,7 +69,7 @@ function TransactionReceipt() {
             <div className="text-center mb-4">
               <h2 className="text-success"> {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}</h2>
               <h5 className="" style={{ fontWeight: "normal" }}>Successful</h5>
-              <small className="text-muted">Jan 20th, 2025 14:50:33</small>
+              <small className="text-muted">{formatDate()}</small>
             </div>
 
             {/* Transaction Details */}
