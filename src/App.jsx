@@ -10,7 +10,8 @@ import CreateUserLogin from './assets/components/CreateUserLoginPage/CreateUserL
 import ProtectedRoute from './assets/components/ProtectedRouteUser/ProtectedRoute'
 import Bank from './assets/components/Bankpage/Bank'
 import Transferform from './assets/components/Transferformpage/Transferform'
-import Transfarmodal from './assets/components/Transfermodalpage/Transfarmodal'
+import TransferSuccess from './assets/components/TransferSuccessPage/TransferSuccess'
+import TransactionReceipt from './assets/components/TransactionReceiptpage/TransactionReceipt'
 
 function App() {
 
@@ -25,7 +26,8 @@ function App() {
       <Route path='/createlogin' element={<CreateUserLogin/>}/>
       <Route path='/bank' element={<Bank/>}/>
       <Route path='/transfer' element={<Transferform/>}/>
-      <Route path='/transfermodal' element={<Transfarmodal/>}/>
+      <Route path='/transfersuccess' element={<TransferSuccess/>}/>
+      <Route path='/transactionreceipt' element={<TransactionReceipt/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>

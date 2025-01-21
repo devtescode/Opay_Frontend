@@ -1,18 +1,24 @@
-import { ArrowLeft, X, Wallet, Check } from "lucide-react";
+import { X, Wallet, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 
-const Transfermodal = () => {
-  const [showModal, setShowModal] = useState(true);
+const Transfermodal = ({ showModal, setShowModal }) => {
   const [accountData, setAccountData] = useState(null);
+  const [amount, setAmount] = useState(null);
 
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => {
+    setShowModal(false); // Close modal and reset its visibility state
+  };
 
-  // Fetch the account data from localStorage when the component mounts
   useEffect(() => {
     const savedAccount = localStorage.getItem("selectedAccount");
     if (savedAccount) {
       setAccountData(JSON.parse(savedAccount));
+    }
+
+    const savedAmount = localStorage.getItem("transferAmount");
+    if (savedAmount) {
+      setAmount(parseFloat(savedAmount));
     }
   }, []);
 
@@ -54,7 +60,9 @@ const Transfermodal = () => {
           <Button variant="link" className="position-absolute end-0 me-3 p-0" onClick={handleClose}>
             <X size={24} />
           </Button>
-          <Modal.Title className="w-100 text-center h4 mb-0">₦100.00</Modal.Title>
+          <Modal.Title className="w-100 text-center h4 mb-0">
+            ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body className="p-4">
