@@ -57,8 +57,8 @@ const Transfermodal = ({ showModal, setShowModal }) => {
         className="custom-modal"
       >
         <Modal.Header className="border-bottom">
-          <Button variant="link" className="position-absolute end-0 me-3 p-0" onClick={handleClose}>
-            <X size={24} />
+          <Button variant="link" className="position-absolute me-2 p-0" onClick={handleClose}>
+            <X size={18} />
           </Button>
           <Modal.Title className="w-100 text-center h4 mb-0">
             ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
@@ -81,7 +81,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
             </div>
             <div className="d-flex justify-content-between">
               <span className="text-secondary">Amount</span>
-              <span className="fw-medium">₦100.00</span>
+              <span className="fw-medium">  ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
             </div>
             <div className="d-flex justify-content-between">
               <span className="text-secondary">Transaction Fee</span>
