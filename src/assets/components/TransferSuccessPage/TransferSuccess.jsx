@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import {
     Share,
     PersonPlusFill,
     List
 } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 
 const TransferSuccess = () => {
+    const navigate = useNavigate()
+    const [amount, setAmount] = useState(null);
+    useEffect(() => {
+        const savedAmount = localStorage.getItem("transferAmount");
+        if (savedAmount) {
+            setAmount(parseFloat(savedAmount));
+        }
+    }, []);
+
+    const shareBtn =()=>{
+        navigate('/transactionreceipt')
+    }
     return (
         <Container className="py-4 px-3 max-width-500">
             {/* Success Header */}
             <div className="text-center mb-4">
-                <div className='text-end text-success' style={{fontSize:"18px"}}>
+                <div className='text-end text-success' style={{ fontSize: "18px" }}>
                     <p>
                         Done
                     </p>
@@ -22,7 +35,10 @@ const TransferSuccess = () => {
                     </svg>
                 </div>
                 <h4 className="mb-2">Transfer successful</h4>
-                <h3 className="mb-3">₦100.00</h3>
+                <h3 className="mb-3">
+                    {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}
+                </h3>
+
                 <p className="text-success">
                     The recipient account is expected to be credited within 5 minutes,
                     subject to notification by the bank.
@@ -32,19 +48,19 @@ const TransferSuccess = () => {
             {/* Action Buttons */}
             <Row className="text-center mb-4 g-2">
                 <Col xs={4}>
-                    <Button variant="light " className="w-100 py-2">
+                    <Button variant="light " className="w-100 py-2" onClick={shareBtn} style={{height:"90px"}}>
                         <Share className="mb-2 text-success" size={20} />
                         <div className="small">Share Receipt</div>
                     </Button>
                 </Col>
                 <Col xs={4}>
-                    <Button variant="light" className="w-100 py-2">
+                    <Button variant="light" className="w-100 py-2"  style={{height:"90px"}}>
                         <PersonPlusFill className="mb-2 text-success" size={20} />
                         <div className="small">Add to favourites</div>
                     </Button>
                 </Col>
                 <Col xs={4}>
-                    <Button variant="light" className="w-100 py-2">
+                    <Button variant="light" className="w-100 py-2"  style={{height:"90px"}}>
                         <List className="mb-2 text-success" size={20} />
                         <div className="small">View Details</div>
                     </Button>

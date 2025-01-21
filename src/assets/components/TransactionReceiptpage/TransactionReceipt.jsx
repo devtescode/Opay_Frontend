@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { ArrowLeft } from 'react-bootstrap-icons';
 
 function TransactionReceipt() {
+
+  const [amount, setAmount] = useState(null);
+  const [accountDetails, setAccountDetails] = useState(null);
+  useEffect(() => {
+    const savedAmount = localStorage.getItem("transferAmount");
+    if (savedAmount) {
+      setAmount(parseFloat(savedAmount));
+    }
+    // Retrieve selected account details from localStorage
+    const storedAccount = localStorage.getItem("selectedAccount");
+    if (storedAccount) {
+      setAccountDetails(JSON.parse(storedAccount));
+    }
+  }, []);
+
+
   return (
-    <div className="container py-4" style={{maxWidth: "480px"}}>
+    <div className="container py-4" style={{ maxWidth: "480px" }}>
       {/* Header */}
       <div className="d-flex align-items-center mb-4">
         {/* <ArrowLeft className="me-2" size={24} /> */}
@@ -16,10 +32,10 @@ function TransactionReceipt() {
         <div className="card-body">
           {/* Logo and Title */}
           <div className="text-center mb-4 border">
-            <img 
-            //   src={`${process.env.PUBLIC_URL}/opay-logo.png`} 
-              alt="OPay" 
-              height="40" 
+            <img
+              //   src={`${process.env.PUBLIC_URL}/opay-logo.png`} 
+              alt="OPay"
+              height="40"
               className="mb-3"
             />
             <h5>Transaction Receipt</h5>
@@ -27,8 +43,8 @@ function TransactionReceipt() {
 
           {/* Amount and Status */}
           <div className="text-center mb-4">
-            <h2 className="text-success">₦100.00</h2>
-            <h5 className="text-success">Successful</h5>
+            <h2 className="text-success"> {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}</h2>
+            <h5 className="" style={{fontWeight:"normal"}}>Successful</h5>
             <small className="text-muted">Jan 20th, 2025 14:50:33</small>
           </div>
 
@@ -39,7 +55,17 @@ function TransactionReceipt() {
                 <span className="text-muted">Recipient Details</span>
               </div>
               <div className="col-7 text-end">
-                <span>Palmpay | 8123958568</span>
+                {/* <span>{accountDetails.accountName} {accountDetails.bankName} | {accountDetails.accountNumber} </span> */}
+                {accountDetails ? (
+                            <div>
+                                <p className="mb-1 text-muted" style={{fontSize:"12px"}}>{accountDetails.accountName}</p>
+                                <p className="mb-0 text-muted">
+                                    {accountDetails.bankName} | {accountDetails.accountNumber} 
+                                </p>
+                            </div>
+                        ) : (
+                            <p>No account details found. Please go back and select an account.</p>
+                        )}  
               </div>
             </div>
 
@@ -48,7 +74,7 @@ function TransactionReceipt() {
                 <span className="text-muted">Sender Details</span>
               </div>
               <div className="col-7 text-end">
-                <span>OPay | 806****821</span>
+                <span className="text-muted">OPay | 806****821</span>
               </div>
             </div>
 
@@ -57,7 +83,7 @@ function TransactionReceipt() {
                 <span className="text-muted">Transaction Type</span>
               </div>
               <div className="col-7 text-end">
-                <span>Transfer to Bank Account</span>
+                <span className="text-muted">Transfer to Bank Account</span>
               </div>
             </div>
 
@@ -66,7 +92,7 @@ function TransactionReceipt() {
                 <span className="text-muted">Transaction No.</span>
               </div>
               <div className="col-7 text-end">
-                <span className="text-break">250120020100886992707982</span>
+                <span className="text-break text-muted" >250120020100886992707982</span>
               </div>
             </div>
 
@@ -75,7 +101,7 @@ function TransactionReceipt() {
                 <span className="text-muted">Session ID</span>
               </div>
               <div className="col-7 text-end">
-                <span className="text-break">1000042501201350441257512479</span>
+                <span className="text-break text-muted">100004250120135044125751241279</span>
               </div>
             </div>
           </div>

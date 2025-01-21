@@ -1,14 +1,20 @@
 import { X, Wallet, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Transfermodal = ({ showModal, setShowModal }) => {
+  const navigate = useNavigate()
   const [accountData, setAccountData] = useState(null);
   const [amount, setAmount] = useState(null);
 
   const handleClose = () => {
     setShowModal(false); // Close modal and reset its visibility state
   };
+
+  const PaymodelBtn = ()=>{
+    navigate("/transfersuccess")
+  }
 
   useEffect(() => {
     const savedAccount = localStorage.getItem("selectedAccount");
@@ -127,7 +133,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
               </div>
             </div>
 
-            <Button variant="success" className="w-100 py-3 mt-4">
+            <Button variant="success" className="w-75 py-2 mt-4 mx-auto rounded-5 fs-5" onClick={PaymodelBtn}>
               Pay
             </Button>
           </div>
