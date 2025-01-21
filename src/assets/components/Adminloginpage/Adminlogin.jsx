@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_URLS } from '../../../../utils/apiConfig';
 
 const Adminlogin = () => {
     const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const Adminlogin = () => {
         setSuccessMessage('');
 
         try {
-            const response = await axios.post('http://localhost:4000/useropay/adminlogin', { email, password });
+            const response = await axios.post(API_URLS.adminlogin, { email, password });
             localStorage.setItem('adminToken', response.data.token); // Save the token
             // If successful, show the success message
             setSuccessMessage(response.data.message);

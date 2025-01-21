@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './BankTransfer.css';
 import Data from '../Data.json';
 import { useNavigate } from 'react-router-dom';
+import { API_URLS } from '../../../../utils/apiConfig';
 
 export default function Bank() {
   const [accountNumber, setAccountNumber] = useState('');
@@ -42,7 +43,7 @@ export default function Bank() {
       return;
     }
     try {
-      const response = await fetch('http://localhost:4000/useropay/useraccount', {
+      const response = await fetch(API_URLS.useraccount , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

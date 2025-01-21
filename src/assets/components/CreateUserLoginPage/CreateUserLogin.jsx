@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../Navbarpage/Navbar'
 import NavbarTop from '../NavbarToppage/NavbarTop'
 import axios from 'axios';
+import { API_URLS } from '../../../../utils/apiConfig';
 
 const CreateUserLogin = () => {
     const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const CreateUserLogin = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/useropay/createuser', formData);
+            const response = await axios.post(API_URLS.createuser, formData);
             alert(response.data.message);
             console.log("Admin create details",response.data.message);
             

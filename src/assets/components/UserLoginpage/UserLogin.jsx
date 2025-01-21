@@ -5,6 +5,7 @@ import { Container, Form, Button, Image } from 'react-bootstrap';
 import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 import LoginProfile from "../../../../public/Image/Profile.jpg";
 import image from "../../../../public/Image/image.jpg";
+import { API_URLS } from '../../../../utils/apiConfig';
 
 const UserLogin = () => {
     const [password, setPassword] = useState(''); // Store password input
@@ -28,7 +29,7 @@ const UserLogin = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:4000/useropay/userlogin', { password }); // Replace with your API endpoint
+            const response = await axios.post(API_URLS.userlogin, { password }); // Replace with your API endpoint
 
             // Assuming a successful response contains user details and a token
             if (response.status === 200) {
