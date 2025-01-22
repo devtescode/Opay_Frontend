@@ -88,6 +88,7 @@ function TransactionReceipt() {
               <h5 className="" style={{ fontWeight: "normal" }}>Successful</h5>
               <small className="text-muted">{formatDate()}</small>
             </div>
+            <hr />
 
             {/* Transaction Details */}
             <div className="mb-3">
