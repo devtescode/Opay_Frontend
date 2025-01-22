@@ -6,6 +6,9 @@ function TransactionReceipt() {
 
   const [amount, setAmount] = useState(null);
   const [accountDetails, setAccountDetails] = useState(null);
+  const [userfullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(''); // For storing phone number
+
   useEffect(() => {
     const savedAmount = localStorage.getItem("transferAmount");
     if (savedAmount) {
@@ -16,6 +19,14 @@ function TransactionReceipt() {
     if (storedAccount) {
       setAccountDetails(JSON.parse(storedAccount));
     }
+
+     // Retrieve the user data from localStorage
+     const userData = localStorage.getItem("user");
+     if (userData) {
+       const user = JSON.parse(userData); // Parse the JSON string
+       setFullName(user.fullname); // Set the fullname in state
+       setPhoneNumber(user.phoneNumber);
+     }
   }, []);
 
   const getOrdinal = (day) => {
@@ -41,6 +52,9 @@ function TransactionReceipt() {
     return formattedDate;
   };
 
+
+  
+  
   return (
     <>
       <div className="d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto" >
@@ -79,7 +93,7 @@ function TransactionReceipt() {
                   <span className="text-muted">Recipient Details</span>
                 </div>
                 <div className="col-7 text-end">
-                  {/* <span>{accountDetails.accountName} {accountDetails.bankName} | {accountDetails.accountNumber} </span> */}
+                
                   {accountDetails ? (
                     <div>
                       <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>{accountDetails.accountName}</p>
@@ -93,15 +107,24 @@ function TransactionReceipt() {
                 </div>
               </div>
 
-              <div className="row mb-2">
+                  <div className="row mb-2">
                 <div className="col-5">
                   <span className="text-muted">Sender Details</span>
                 </div>
                 <div className="col-7 text-end">
-                  <span className="text-muted">OPay | 806****821</span>
+                
+                  {/* {accountDetails ? ( */}
+                    <div>
+                      <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>{userfullName ? userfullName : "No user data found"}</p>
+                      <p className="mb-0 text-muted">
+                        Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 4)}****${phoneNumber.slice(8)}`}
+                      </p>
+                    </div>
+                  {/* ) : (
+                    <p>No account details found. Please go back and select an account.</p>
+                  )} */}
                 </div>
               </div>
-
               <div className="row mb-2">
                 <div className="col-5">
                   <span className="text-muted">Transaction Type</span>

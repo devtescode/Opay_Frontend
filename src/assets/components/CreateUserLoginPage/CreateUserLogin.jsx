@@ -7,6 +7,7 @@ import { API_URLS } from '../../../../utils/apiConfig';
 const CreateUserLogin = () => {
     const [formData, setFormData] = useState({
         username: '',
+        fullname: '',
         phoneNumber: '',
         password: '',
     });
@@ -44,6 +45,13 @@ const CreateUserLogin = () => {
                                 value={formData.username}
                                 className='form-control my-2'
                                 placeholder='Username' />
+
+                            <input type="text"
+                                name="fullname"
+                                onChange={handleChange}
+                                value={formData.fullname}
+                                className='form-control my-2'
+                                placeholder='Fullname' />
 
                             <input
                                 name="phoneNumber"
