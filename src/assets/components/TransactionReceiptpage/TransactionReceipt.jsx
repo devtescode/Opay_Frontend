@@ -121,7 +121,7 @@ function TransactionReceipt() {
                  
                       <p  className="mb-1 text-muted" style={{ fontSize: "12px", textTransform: "uppercase"  }}>{userfullName ? userfullName : "No user data found"}</p>
                       <p className="mb-0 text-muted">
-                        Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 4)}****${phoneNumber.slice(8)}`}
+                        Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)}`}
                       </p>
                     </div>
                   {/* ) : (

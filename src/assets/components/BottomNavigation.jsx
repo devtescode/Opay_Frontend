@@ -8,7 +8,7 @@ const BottomNavigation = () => {
   const navigate = useNavigate()
   const MeLogOutBtn =()=>{
     navigate("/userlogin")
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
     localStorage.removeItem("token");
     localStorage.removeItem("selectedAccount");
     localStorage.removeItem("transferAmount");

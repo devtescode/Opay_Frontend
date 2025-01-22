@@ -63,6 +63,7 @@ const CreateUserLogin = () => {
                                 name="phoneNumber"
                                 onChange={handleChange}
                                 value={formData.phoneNumber}
+                                 maxLength="10"
                                 type="text" className='form-control my-2'
                                 placeholder='Phone Number' />
 

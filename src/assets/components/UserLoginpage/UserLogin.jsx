@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // For navigation after login
 import axios from 'axios'; // For API requests
 import { Container, Form, Button, Image } from 'react-bootstrap';
 import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
-import LoginProfile from "../../../../public/Image/Profile.jpg";
+// import LoginProfile from "../../../../public/Image/Profile.jpg";
 import image from "../../../../public/Image/image.jpg";
 import { API_URLS } from '../../../../utils/apiConfig';
 
@@ -59,15 +59,17 @@ const UserLogin = () => {
             <div className="text-center mb-4">
                 <div className="position-relative d-inline-block mb-2">
                     <Image
-                        src={LoginProfile}
+                        // src={LoginProfile}
+                        src='https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc'
                         alt="Profile"
                         roundedCircle
                         style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                     />
                 </div>
                 <h6 className="mb-4">
-                    {username ? username : 'Tescode'}
-                    {phoneNumber && ` (${phoneNumber.slice(0, 4)}****${phoneNumber.slice(8)})`}
+                    {username ? username : 'Welcome'}
+                    {/* {phoneNumber && ` (${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)})`} */}
+                    {phoneNumber && ` (${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)})`}
                 </h6>
             </div>
 
