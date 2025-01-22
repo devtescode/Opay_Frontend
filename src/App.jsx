@@ -18,7 +18,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path='/userlogin' element={<UserLogin/>}/>
+      <Route path='/' element={<UserLogin/>}/>
       {/* <Route path='/userdb' element={<UserDb/>}/> */}
       <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
       <Route path='/admin' element={<Adminlogin/>}/>

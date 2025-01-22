@@ -6,7 +6,7 @@ const ProtectedRoute = ({ element }) => {
 
   // If there's no token, redirect to the login page
   if (!token) {
-    return <Navigate to="/userlogin" />;
+    return <Navigate to="/" />;
   }
 
   return element; // If token exists, allow access to the protected route
