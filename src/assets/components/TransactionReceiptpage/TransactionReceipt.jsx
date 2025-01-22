@@ -167,7 +167,7 @@ function TransactionReceipt() {
           </div>
         </div>
         <div className="row g-2 mt-3 fixed-bottom shadow-lg" style={{ alignItems: "center" }}>
-          <div className='d-flex justify-content-between p-3' style={{ alignItems: "center" }}>
+          <div className='d-flex justify-content-between p-2' style={{ alignItems: "center" }}>
 
 
             <div className=" text-success text-center" style={{ alignItems: "center" }}>
