@@ -64,7 +64,7 @@ function TransactionReceipt() {
         {/* <ArrowLeft className="me-2" size={24} /> */}
         <h5 className="mb-0 d-flex text-muted" style={{ alignItems: "center" }}><i class="ri-arrow-drop-left-line text-muted" onClick={BackBtn} style={{ fontSize: "40px" }}></i> Share Receipt</h5>
       </div>
-      <div className="container mt-2" style={{ maxWidth: "580px" }}>
+      <div className="col-md-6 mx-auto col-sm-12 mt-2" style={{ maxWidth: "580px" }}>
         {/* Header */}
 
         {/* Receipt Card */}
