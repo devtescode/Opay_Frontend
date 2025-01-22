@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { ArrowLeft } from 'react-bootstrap-icons';
 
@@ -8,7 +9,7 @@ function TransactionReceipt() {
   const [accountDetails, setAccountDetails] = useState(null);
   const [userfullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(''); // For storing phone number
-
+  const navigate = useNavigate()
   useEffect(() => {
     const savedAmount = localStorage.getItem("transferAmount");
     if (savedAmount) {
@@ -52,14 +53,16 @@ function TransactionReceipt() {
     return formattedDate;
   };
 
-
+  const BackBtn =()=>{
+    navigate("/transfersuccess")
+  }
   
   
   return (
     <>
       <div className="d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto" >
         {/* <ArrowLeft className="me-2" size={24} /> */}
-        <h5 className="mb-0 d-flex text-muted" style={{ alignItems: "center" }}><i class="ri-arrow-drop-left-line text-muted" style={{ fontSize: "40px" }}></i> Share Receipt</h5>
+        <h5 className="mb-0 d-flex text-muted" style={{ alignItems: "center" }}><i class="ri-arrow-drop-left-line text-muted" onClick={BackBtn} style={{ fontSize: "40px" }}></i> Share Receipt</h5>
       </div>
       <div className="container mt-4" style={{ maxWidth: "580px" }}>
         {/* Header */}
@@ -115,7 +118,8 @@ function TransactionReceipt() {
                 
                   {/* {accountDetails ? ( */}
                     <div>
-                      <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>{userfullName ? userfullName : "No user data found"}</p>
+                 
+                      <p  className="mb-1 text-muted" style={{ fontSize: "12px", textTransform: "uppercase"  }}>{userfullName ? userfullName : "No user data found"}</p>
                       <p className="mb-0 text-muted">
                         Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 4)}****${phoneNumber.slice(8)}`}
                       </p>

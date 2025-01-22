@@ -23,8 +23,13 @@ const CreateUserLogin = () => {
         try {
             const response = await axios.post(API_URLS.createuser, formData);
             alert(response.data.message);
-            console.log("Admin create details",response.data.message);
-            
+            // console.log("Admin create details",response.data.message);
+            setFormData({
+                username: '',
+                fullname: '',
+                phoneNumber: '',
+                password: '',
+            });
         } catch (error) {
             alert('Error creating user');
         }
@@ -50,6 +55,7 @@ const CreateUserLogin = () => {
                                 name="fullname"
                                 onChange={handleChange}
                                 value={formData.fullname}
+                                // style={{ textTransform: "uppercase" }}
                                 className='form-control my-2'
                                 placeholder='Fullname' />
 
