@@ -12,8 +12,17 @@ import Bank from './assets/components/Bankpage/Bank'
 import Transferform from './assets/components/Transferformpage/Transferform'
 import TransferSuccess from './assets/components/TransferSuccessPage/TransferSuccess'
 import TransactionReceipt from './assets/components/TransactionReceiptpage/TransactionReceipt'
+import { useEffect, useState } from 'react'
+import SplashScreen from './assets/components/SplashScreenpage/SplashScreen'
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true); // Track whether the splash screen should be shown
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Hide the splash screen after 3 seconds
+    }, 3000);
+    return () => clearTimeout(timer); // Cleanup timer when the component unmounts
+  }, []);
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js').then(registration => {
@@ -25,19 +34,23 @@ function App() {
   }
   return (
     <>
-    <Routes>
-      <Route path='/' element={<UserLogin/>}/>
-      {/* <Route path='/userdb' element={<UserDb/>}/> */}
-      <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
-      <Route path='/admin' element={<Adminlogin/>}/>
-      <Route path='/admindb' element={<Admindb/>}/>
-      <Route path='/createlogin' element={<CreateUserLogin/>}/>
-      <Route path='/bank' element={<Bank/>}/>
-      <Route path='/transfer' element={<Transferform/>}/>
-      <Route path='/transfersuccess' element={<TransferSuccess/>}/>
-      <Route path='/transactionreceipt' element={<TransactionReceipt/>}/>
-      <Route path='*' element={<Notfound/>}/>
-    </Routes>
+     {isLoading ? ( // Display the splash screen while loading
+        <SplashScreen/>
+      ) : (
+      <Routes>
+        <Route path='/' element={<UserLogin />} />
+        {/* <Route path='/userdb' element={<UserDb/>}/> */}
+        <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
+        <Route path='/admin' element={<Adminlogin />} />
+        <Route path='/admindb' element={<Admindb />} />
+        <Route path='/createlogin' element={<CreateUserLogin />} />
+        <Route path='/bank' element={<Bank />} />
+        <Route path='/transfer' element={<Transferform />} />
+        <Route path='/transfersuccess' element={<TransferSuccess />} />
+        <Route path='/transactionreceipt' element={<TransactionReceipt />} />
+        <Route path='*' element={<Notfound />} />
+      </Routes>
+      )}
     </>
   )
 }
