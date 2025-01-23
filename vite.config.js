@@ -18,7 +18,7 @@ export default defineConfig({
         name: 'Opay',
         short_name: 'OPay',
         description: 'My OPay Web App built with Vite',
-        theme_color: '#00B875',
+        theme_color: '#ffffff',
         background_color: '#00B875',
         icons: [
           {
