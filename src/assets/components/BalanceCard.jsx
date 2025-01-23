@@ -2,8 +2,13 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { EyeFill, ChevronRight } from 'react-bootstrap-icons';
 import '/src/App.css';
+import { useNavigate } from 'react-router-dom';
 
 const BalanceCard = () => {
+    const navigate = useNavigate()
+    const TransactionBtn=()=>{
+        navigate("/storetransaction")
+    }
     return (
         <Card className="styles bgEmerald text-white p-3 mb-2">
 
@@ -12,7 +17,7 @@ const BalanceCard = () => {
                     <EyeFill size={16} />
                     <span className="small">Available Balance</span>
                 </div>
-                <div variant="light" className="text-white">
+                <div variant="light" className="text-white" style={{cursor:"pointer"}} onClick={TransactionBtn}>
                 Transaction History
                     {/* className="ms-1" */}
                     <ChevronRight className="" />

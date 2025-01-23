@@ -1,3 +1,4 @@
+import axios from "axios";
 import { X, Wallet, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
@@ -12,9 +13,35 @@ const Transfermodal = ({ showModal, setShowModal }) => {
     setShowModal(false); // Close modal and reset its visibility state
   };
 
-  const PaymodelBtn = ()=>{
-    navigate("/transfersuccess")
-  }
+  // const PaymodelBtn = ()=>{
+  //   navigate("/transfersuccess")
+  // }
+  const PaymodelBtn = async () => {
+    const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
+    const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
+    const userId = JSON.parse(localStorage.getItem('user')).userId; 
+
+    // console.log('LocalStorage User userId:', userId);
+//     const user = JSON.parse(localStorage.getItem('user'));
+// console.log('LocalStorage User Data:', user);
+  
+    const transactionData = {
+      userId,
+      bankName: savedAccount?.bankName,
+      accountNumber: savedAccount?.accountNumber,
+      accountName: savedAccount?.accountName,
+      amount: savedAmount,
+    };
+  
+    console.log('Transaction Data:', transactionData); // Debugging
+    try {
+      await axios.post('http://localhost:4000/useropay/transactions', transactionData);
+      navigate('/transfersuccess');
+    } catch (error) {
+      console.error('Failed to save transaction:', error.response?.data || error.message);
+    }
+  };
+  
 
   useEffect(() => {
     const savedAccount = localStorage.getItem("selectedAccount");

@@ -12,6 +12,7 @@ import Bank from './assets/components/Bankpage/Bank'
 import Transferform from './assets/components/Transferformpage/Transferform'
 import TransferSuccess from './assets/components/TransferSuccessPage/TransferSuccess'
 import TransactionReceipt from './assets/components/TransactionReceiptpage/TransactionReceipt'
+import StoreTransaction from './assets/components/StoreTransactionpage/StoreTransaction'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
       <Route path='/transfer' element={<Transferform/>}/>
       <Route path='/transfersuccess' element={<TransferSuccess/>}/>
       <Route path='/transactionreceipt' element={<TransactionReceipt/>}/>
+      <Route path="/storetransaction" element={<StoreTransaction/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>
