@@ -4,7 +4,7 @@
     "start_url": "/",
     "display": "standalone",
     "background_color": "#00B875",
-    "theme_color": "#00B875",
+    "theme_color": "#ffffff",
     "icons": [
         {
             "src": "/icons/opay.jpg",
