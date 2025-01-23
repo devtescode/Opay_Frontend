@@ -5,21 +5,18 @@ import '/src/App.css';
 
 const BalanceCard = () => {
     return (
-        <Card className="styles bgEmerald text-white p-3 mb-4">
+        <Card className="styles bgEmerald text-white p-3 mb-2">
+
             <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className="d-flex align-items-center gap-2">
+            <div className="d-flex align-items-center gap-2">
                     <EyeFill size={16} />
                     <span className="small">Available Balance</span>
                 </div>
-                <Button
-                    variant="link"
-                    className="text-white p-0 d-flex align-items-center"
-                    style={{ textDecoration: 'none' }}
-                >
-                    Transaction History
-                    <ChevronRight className="ms-1" />
-                </Button>
-
+                <div variant="light" className="text-white">
+                Transaction History
+                    {/* className="ms-1" */}
+                    <ChevronRight className="" />
+                </div>
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <span className="fs-4 fw-bold">₦ 1,105,500.24</span>

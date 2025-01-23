@@ -5,7 +5,7 @@ import { PlusSlashMinus } from 'react-bootstrap-icons';
 const RecentTransactions = () => {
   return (
     <div className="mb-4">
-      <Card className="mb-3">
+      <Card className="mb-2">
         <Card.Body className="d-flex align-items-center justify-content-between">
           <div className="d-flex align-items-center gap-3">
             <div className="rounded-circle bg-light d-flex align-items-center justify-content-center" style={{ width: 40, height: 40 }}>
