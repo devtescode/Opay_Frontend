@@ -6,5 +6,6 @@ export const API_URLS = {
     createuser: `${baseURL}/useropay/createuser`,
     useraccount: `${baseURL}/useropay/useraccount`,
     getransactions: (userId)=>`${baseURL}/useropay/getransactions/${userId}`,
-    // http://localhost:4000/useropay/getransactions/${userId}
+    transactions: `${baseURL}/useropay/transactions`,
+   
 };

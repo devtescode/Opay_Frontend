@@ -3,6 +3,7 @@ import { X, Wallet, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { API_URLS } from "../../../../utils/apiConfig";
 
 const Transfermodal = ({ showModal, setShowModal }) => {
   const navigate = useNavigate()
@@ -35,7 +36,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
   
     console.log('Transaction Data:', transactionData); // Debugging
     try {
-      await axios.post('http://localhost:4000/useropay/transactions', transactionData);
+      await axios.post(API_URLS.transactions, transactionData);
       navigate('/transfersuccess');
     } catch (error) {
       console.error('Failed to save transaction:', error.response?.data || error.message);
