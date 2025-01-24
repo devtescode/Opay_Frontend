@@ -1,9 +1,44 @@
-import React from 'react';
-import { Dropdown, Nav } from 'react-bootstrap';
-// BarChart2
-import { ArrowLeft, ArrowDown, ArrowUp, Download,  } from 'react-bootstrap-icons';
+import React, { useEffect, useState } from 'react';
+import { Dropdown, Nav,Spinner } from 'react-bootstrap';
+import { ArrowLeft, ArrowDown, ArrowUp, Download } from 'react-bootstrap-icons';
+import axios from 'axios';
 
 const StoreTransaction = () => {
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const userId = JSON.parse(localStorage.getItem('user')).userId; // Get userId from localStorage
+        const response = await axios.get(`http://localhost:4000/useropay/getransactions/${userId}`); // Replace with your actual endpoint
+        setTransactions(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching transaction history:', err);
+        setError('Failed to fetch transactions');
+        setLoading(false);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <Spinner animation="border" role="status" variant="primary">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
+  }
+  
+  if (error) {
+    return <p className="text-danger text-center">{error}</p>;
+  }
+
   return (
     <div className="container-fluid bg-light d-flex flex-column vh-100">
       {/* Header */}
@@ -49,35 +84,38 @@ const StoreTransaction = () => {
         </div>
       </div>
 
-      {/* Transactions List - Now Scrollable */}
+      {/* Transactions List */}
       <div className="flex-grow-1 overflow-auto bg-white mt-2">
-        <div className="d-flex align-items-center p-3 border-bottom">
-          <div className="rounded-circle p-2 me-3 bg-light-purple">
-            <span className="text-purple">%</span>
-          </div>
-          <div className="flex-grow-1">
-            <div className="text-truncate">OWealth Interest</div>
-            <small className="text-muted">Jan 23rd, 03:14:12</small>
-          </div>
-          <div className="text-end text-success">
-            +₦0.09
-            <div className="small text-success">Successful</div>
-          </div>
-        </div>
+        {transactions.length === 0 ? (
+          <p className="text-center p-3">No transactions available</p>
+        ) : (
+          transactions.map((transaction) => (
+            <div className="d-flex align-items-center p-3 border-bottom" key={transaction._id}>
+              <div
+                className={`rounded-circle p-2 me-3 ${transaction.amount > 0 ? 'bg-light-green' : 'bg-light-red'
+                  }`}
+              >
+                {transaction.amount > 0 ? (
+                  <ArrowUp className="text-success" />
+                ) : (
+                  <ArrowDown className="text-danger" />
+                )}
+              </div>
+              <div className="flex-grow-1">
+               <div className="text-truncate">Transfar to {transaction.accountName}</div>
+                <small className="text-muted">
+                  {new Date(transaction.createdAt).toLocaleString()}
+                </small>
+              </div>
+              <div className="text-end text-dark">
+                -₦{Math.abs(transaction.amount).toLocaleString()}.00
+                <div className="small text-success">{transaction.status}ful</div>
+              </div>
 
-        <div className="d-flex align-items-center p-3 border-bottom">
-          <div className="rounded-circle p-2 me-3 bg-light-green">
-            <ArrowUp className="text-success" />
-          </div>
-          <div className="flex-grow-1">
-            <div className="text-truncate">Transfer to KABIRU AYINDE ADEGBOYE</div>
-            <small className="text-muted">Jan 22nd, 12:02:52</small>
-          </div>
-          <div className="text-end">
-            -₦5,000.00
-            <div className="small text-success">Successful</div>
-          </div>
-        </div>
+
+            </div>
+          ))
+        )}
       </div>
 
       {/* Bottom Navigation */}
