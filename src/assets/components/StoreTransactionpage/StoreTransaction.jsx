@@ -109,7 +109,7 @@ const StoreTransaction = () => {
                 )}
               </div>
               <div className="flex-grow-1">
-               <div className="text-truncate">Transfar to {transaction.accountName}</div>
+               <div className="text-truncate">Transfer to {transaction.accountName}</div>
                 <small className="text-muted">
                   {new Date(transaction.createdAt).toLocaleString()}
                 </small>
