@@ -46,7 +46,7 @@ const TransactionDetails = () => {
                 {/* Transaction Details */}
                 <div className="card mx-3 mt-4">
                     <div className="card-body ">
-                        <h6 className="mb-4">Transaction Details</h6>
+                        <h6 className="mb-4 fw-bold ">Transaction Details</h6>
 
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Recipient Details</div>
@@ -104,7 +104,7 @@ const TransactionDetails = () => {
                 {/* More Actions */}
                 <div className="card mx-3 mt-4 mb-5">
                     <div className="card-body">
-                        <h6 className="mb-3">More Actions</h6>
+                        <h6 className="mb-3 fw-bold">More Actions</h6>
                         <button className="btn btn-link text-dark text-decoration-none d-flex justify-content-between align-items-center w-100 p-0">
                             <span>Choose Category</span>
                             <div className="d-flex align-items-center gap-2">
