@@ -11,7 +11,7 @@ const Header = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser); // Parse the stored string into an object
-      setUsername(parsedUser.username); // Set the username state
+      setUsername(parsedUser.username); 
     }
   }, []);
   return (
