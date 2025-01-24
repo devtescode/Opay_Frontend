@@ -41,12 +41,12 @@ const TransactionDetails = () => {
 
                 {/* Transaction Details */}
                 <div className="card mx-3 mt-4">
-                    <div className="card-body">
+                    <div className="card-body ">
                         <h6 className="mb-4">Transaction Details</h6>
 
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Recipient Details</div>
-                            <div className="col-6 text-end">
+                            <div className="col-6 text-end text-muted">
                             {transaction.accountName}
                                 <div className="text-secondary small">{transaction.bankName} | {transaction.accountNumber}</div>
                             </div>
@@ -59,12 +59,12 @@ const TransactionDetails = () => {
 
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Transaction Type</div>
-                            <div className="col-6 text-end">Transfer to Bank Account</div>
+                            <div className="col-6 text-end text-muted">Transfer to Bank Account</div>
                         </div>
 
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Transaction No.</div>
-                            <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2">
+                            <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
                                 250122010100912837604658
                                 <Copy size={14} className="text-secondary" />
                             </div>
@@ -73,20 +73,20 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Payment Method</div>
                             <div className="col-6 text-end">
-                            <div>Wallet -₦{transaction.amount.toLocaleString()}.00</div>
+                            <div className="text-muted">Wallet -₦{transaction.amount.toLocaleString()}.00</div>
 
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-6 text-secondary">Transaction Date</div>
-                            <div className="col-6 text-end">{new Date(transaction.createdAt).toLocaleString()}</div>
+                            <div className="col-6 text-end text-muted">{new Date(transaction.createdAt).toLocaleString()}</div>
                         </div>
 
                         
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Session ID</div>
-                            <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2">
+                            <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
                                 100000197126285093975188088239
                                 <Copy size={14} className="text-secondary" />
                             </div>
