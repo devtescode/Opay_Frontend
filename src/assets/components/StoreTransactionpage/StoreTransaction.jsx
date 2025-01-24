@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Dropdown, Nav,Spinner } from 'react-bootstrap';
 import { ArrowLeft, ArrowDown, ArrowUp, Download } from 'react-bootstrap-icons';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { API_URLS } from '../../../../utils/apiConfig';
 
 const StoreTransaction = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const userId = JSON.parse(localStorage.getItem('user')).userId; // Get userId from localStorage
-        const response = await axios.get(`http://localhost:4000/useropay/getransactions/${userId}`); // Replace with your actual endpoint
+        const userId = JSON.parse(localStorage.getItem('user')).userId;
+        const response = await axios.get(API_URLS.getransactions(userId)); 
         setTransactions(response.data);
         setLoading(false);
       } catch (err) {
@@ -24,6 +27,10 @@ const StoreTransaction = () => {
 
     fetchTransactions();
   }, []);
+
+  const TranferBtnBack =()=>{
+    navigate("/userdb")
+  }
 
   if (loading) {
     return (
@@ -44,7 +51,7 @@ const StoreTransaction = () => {
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center p-3 bg-white">
         <div className="d-flex align-items-center">
-          <ArrowLeft className="me-3" size={20} />
+          <ArrowLeft className="me-3" size={20} onClick={TranferBtnBack}/>
           <h5 className="mb-0">Transactions</h5>
         </div>
         <Download className="text-success" size={20} />
