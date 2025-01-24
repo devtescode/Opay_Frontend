@@ -13,6 +13,7 @@ import Transferform from './assets/components/Transferformpage/Transferform'
 import TransferSuccess from './assets/components/TransferSuccessPage/TransferSuccess'
 import TransactionReceipt from './assets/components/TransactionReceiptpage/TransactionReceipt'
 import StoreTransaction from './assets/components/StoreTransactionpage/StoreTransaction'
+import TransactionDetails from './assets/components/TransactionDetailspage/TransactionDetails'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
       <Route path='/transfersuccess' element={<TransferSuccess/>}/>
       <Route path='/transactionreceipt' element={<TransactionReceipt/>}/>
       <Route path="/storetransaction" element={<StoreTransaction/>}/>
+      <Route path='/transactiondetails'element={<TransactionDetails/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>

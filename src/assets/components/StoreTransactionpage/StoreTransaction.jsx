@@ -32,6 +32,10 @@ const StoreTransaction = () => {
     navigate("/userdb")
   }
 
+  const handleTransactionClick = (transaction) => {
+    navigate('/transactiondetails', { state: transaction });
+  };
+
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
@@ -97,7 +101,10 @@ const StoreTransaction = () => {
           <p className="text-center p-3">No transactions available</p>
         ) : (
           transactions.map((transaction) => (
-            <div className="d-flex align-items-center p-3 border-bottom" key={transaction._id}>
+            <div className="d-flex align-items-center p-3 border-bottom" key={transaction._id}
+            onClick={() => handleTransactionClick(transaction)}
+            style={{ cursor: 'pointer' }}
+            >
               <div
                 className={`rounded-circle p-2 me-3 ${transaction.amount > 0 ? 'bg-light-green' : 'bg-light-red'
                   }`}
