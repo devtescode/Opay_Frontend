@@ -1,11 +1,15 @@
 import React from "react"
 import { ArrowLeft, CheckCircle, ChevronRight, Copy } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
+
 
 const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
-  
+    const BankToBtn=()=>{
+        navigate("/storetransaction")
+    }
     if (!transaction) {
       return <p className="text-center text-danger">No transaction details available</p>;
     }
@@ -15,7 +19,7 @@ const TransactionDetails = () => {
                 {/* Header */}
                 <div className="d-flex justify-content-between align-items-center p-3 bg-white">
                     <button className="btn btn-link text-dark" onClick={() => navigate(-1)}>
-                        <ArrowLeft size={24} />
+                        <ArrowLeft size={24} onClick={BankToBtn}/>
                     </button>
                     <h5 className="mb-0">Transaction Details</h5>
                     <button className="btn btn-link text-success">
@@ -80,7 +84,10 @@ const TransactionDetails = () => {
 
                         <div className="row">
                             <div className="col-6 text-secondary">Transaction Date</div>
-                            <div className="col-6 text-end text-muted">{new Date(transaction.createdAt).toLocaleString()}</div>
+                            <div className="col-6 text-end text-muted">
+                                {/* {new Date(transaction.createdAt).toLocaleString()} */}
+                                 {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
+                                </div>
                         </div>
 
                         

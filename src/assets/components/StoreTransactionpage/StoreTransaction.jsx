@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowDown, ArrowUp, Download } from 'react-bootstrap-icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
+import { format } from "date-fns";
 
 const StoreTransaction = () => {
   const [transactions, setTransactions] = useState([]);
@@ -118,7 +119,8 @@ const StoreTransaction = () => {
               <div className="flex-grow-1">
                <div className="text-truncate">Transfer to {transaction.accountName}</div>
                 <small className="text-muted">
-                  {new Date(transaction.createdAt).toLocaleString()}
+                  {/* {new Date(transaction.createdAt).toLocaleString()} */}
+                  {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
                 </small>
               </div>
               <div className="text-end text-dark">
