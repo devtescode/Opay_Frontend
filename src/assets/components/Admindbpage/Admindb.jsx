@@ -30,7 +30,7 @@ const Admindb = () => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get(API_URLS.getallusers);
-                
+
                 setUsers(response.data);
                 setLoading(false);
             } catch (error) {
@@ -60,22 +60,22 @@ const Admindb = () => {
     const [userCount, setUserCount] = useState(0);
     const [transactionCount, setTransactionCount] = useState(0);
     const [totalCount, setTotalCount] = useState(0);
-  
+
     useEffect(() => {
-      const fetchCounts = async () => {
-        try {
-          const response = await axios.get(API_URLS.getCounts);
-          setUserCount(response.data.userCount);
-          setTransactionCount(response.data.transactionCount);
-          setTotalCount(response.data.totalCount);
-        } catch (error) {
-          console.error("Error fetching counts:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchCounts();
+        const fetchCounts = async () => {
+            try {
+                const response = await axios.get(API_URLS.getCounts);
+                setUserCount(response.data.userCount);
+                setTransactionCount(response.data.transactionCount);
+                setTotalCount(response.data.totalCount);
+            } catch (error) {
+                console.error("Error fetching counts:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCounts();
     }, []);
 
     return (
@@ -121,45 +121,49 @@ const Admindb = () => {
                         </div>
                     </div>
                 ) : (
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Fullname</th>
-                                <th scope="col">Phone No</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.length > 0 ? (
-                                users.map((user, index) => (
-                                    <tr key={user._id}>
-                                        <th scope="row">{index + 1}</th>
-                                        <td>{user.username || "N/A"}</td>
-                                        <td>{user.fullname || "N/A"}</td>
-                                        <td>{user.phoneNumber || "N/A"}</td>
-                                        <td>
-                                            <button
-                                                className="btn btn-primary btn-sm me-2"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#transactionModal"
-                                                onClick={() => handleShowTransactions(user._id)}
-                                            >Show</button>
-                                            {/* <button className="btn btn-danger btn-sm">Delete</button> */}
+                    <div className="table-responsive"> {/* Make the table scrollable */}
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Fullname</th>
+                                    <th scope="col">Phone No</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {users.length > 0 ? (
+                                    users.map((user, index) => (
+                                        <tr key={user._id}>
+                                            <th scope="row">{index + 1}</th>
+                                            <td>{user.username || "N/A"}</td>
+                                            <td>{user.fullname || "N/A"}</td>
+                                            <td>{user.phoneNumber || "N/A"}</td>
+                                            <td>
+                                                <button
+                                                    className="btn btn-primary btn-sm me-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#transactionModal"
+                                                    onClick={() => handleShowTransactions(user._id)}
+                                                >
+                                                    Show
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="5" className="text-center">
+                                            No users found.
                                         </td>
                                     </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan="5" className="text-center">
-                                        No users found.
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
+
 
                 <div
                     className="modal fade"
