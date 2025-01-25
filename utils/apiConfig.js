@@ -9,4 +9,5 @@ export const API_URLS = {
     transactions: `${baseURL}/useropay/transactions`,
     getallusers: `${baseURL}/useropay/getallusers`,
     gettransactions: (userId)=>`${baseURL}/useropay/gettransactions/${userId}`,
+    getCounts: `${baseURL}/useropay/getCounts`,
 };

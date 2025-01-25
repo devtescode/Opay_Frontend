@@ -57,6 +57,27 @@ const Admindb = () => {
         }
     };
 
+    const [userCount, setUserCount] = useState(0);
+    const [transactionCount, setTransactionCount] = useState(0);
+    const [totalCount, setTotalCount] = useState(0);
+  
+    useEffect(() => {
+      const fetchCounts = async () => {
+        try {
+          const response = await axios.get(API_URLS.getCounts);
+          setUserCount(response.data.userCount);
+          setTransactionCount(response.data.transactionCount);
+          setTotalCount(response.data.totalCount);
+        } catch (error) {
+          console.error("Error fetching counts:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchCounts();
+    }, []);
+
     return (
         <div>
             <Navbar />
@@ -69,23 +90,23 @@ const Admindb = () => {
                                 <h4>Users</h4>
                             </div>
                             <div>
-                                <h1>4</h1>
+                                <h1>{userCount}</h1>
                             </div>
                         </div>
                         <div class="col-12 col-md bg-white">
                             <div>
-                                <h4>Transaction</h4>
+                                <h4>Transactions</h4>
                             </div>
                             <div>
-                                <h1>4</h1>
+                                <h1>{transactionCount}</h1>
                             </div>
                         </div>
                         <div class="col-12 col-md bg-white">
                             <div>
-                                <h4>users</h4>
+                                <h4>All</h4>
                             </div>
                             <div>
-                                <h1>4</h1>
+                                <h1>{totalCount}</h1>
                             </div>
                         </div>
                     </div>
