@@ -7,5 +7,6 @@ export const API_URLS = {
     useraccount: `${baseURL}/useropay/useraccount`,
     getransactions: (userId)=>`${baseURL}/useropay/getransactions/${userId}`,
     transactions: `${baseURL}/useropay/transactions`,
-   
+    getallusers: `${baseURL}/useropay/getallusers`,
+    gettransactions: (userId)=>`${baseURL}/useropay/gettransactions/${userId}`,
 };
