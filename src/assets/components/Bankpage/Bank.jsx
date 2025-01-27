@@ -4,6 +4,8 @@ import './BankTransfer.css';
 import Data from '../Data.json';
 import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
+import TransactionDetailsBanks from '../TransactionDetailsBanks/TransactionDetailsBanks';
+import axios from 'axios';
 
 export default function Bank() {
   const [accountNumber, setAccountNumber] = useState('');
@@ -11,6 +13,7 @@ export default function Bank() {
   const [activeTab, setActiveTab] = useState('recents');
   const [accountName, setAccountName] = useState(''); // For showing validated name
   const [selectedBankCode, setSelectedBankCode] = useState("");
+  const [showAll, setShowAll] = useState(false)
 
   const navigate = useNavigate()
 
@@ -43,7 +46,7 @@ export default function Bank() {
       return;
     }
     try {
-      const response = await fetch(API_URLS.useraccount , {
+      const response = await fetch(API_URLS.useraccount, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +69,19 @@ export default function Bank() {
           bankName: selectedBank.name, // Save the bank name here
           // accountName: data.accountName,
         };
+
         localStorage.setItem("selectedAccount", JSON.stringify(accountDetails));
+
+        
+        // const userId = JSON.parse(localStorage.getItem("user")).userData.userId;
+        const userId = JSON.parse(localStorage.getItem('user')).userId;
+        
+        
+        await axios.post(API_URLS.saveRecentTransaction , {
+          userId,
+          accountDetails,
+        });
+        
         navigate("/transfer")
       } else {
         alert(data.message || 'Failed to validate account.');
@@ -77,7 +92,9 @@ export default function Bank() {
     }
   };
 
-
+  const HistroyBtn=()=>{
+    navigate("/storetransaction")
+  }
 
   return (
     <div className="container main-container">
@@ -90,7 +107,7 @@ export default function Bank() {
           </button>
           <h5 className="mb-0">Transfer to Bank Account</h5>
         </div>
-        <button className="btn btn-link text-success p-0">History </button>
+        <button className="btn btn-link text-success p-0" onClick={HistroyBtn}>History </button>
       </div>
 
       {/* Promo Banner */}
@@ -165,42 +182,7 @@ export default function Bank() {
         </div>
         <i className="bi bi-chevron-right"></i>
       </div>
-
-      {/* Recents/Favourites Section */}
-      <div className="recent-transfers-section">
-        <div className="tabs-header d-flex mb-3">
-          <button
-            className={`btn btn-link ${activeTab === 'recents' ? 'active' : ''}`}
-            onClick={() => setActiveTab('recents')}
-          >
-            Recents
-          </button>
-          <button
-            className={`btn btn-link ${activeTab === 'favourites' ? 'active' : ''}`}
-            onClick={() => setActiveTab('favourites')}
-          >
-            Favourites
-          </button>
-        </div>
-
-        <div className="transfers-list">
-          <div className="transfer-item d-flex justify-content-between align-items-center mb-3">
-            <div>
-              <div className="name">Datagenix Data</div>
-              <div className="account-info">8123958568 Palmpay</div>
-            </div>
-            <div className="transfer-icon purple"></div>
-          </div>
-
-          <div className="transfer-item d-flex justify-content-between align-items-center mb-3">
-            <div>
-              <div className="name">JAWAD ALAO ADEKANBI</div>
-              <div className="account-info">9152280668 OPay</div>
-            </div>
-            <div className="transfer-icon green"></div>
-          </div>
-        </div>
-      </div>
+      <TransactionDetailsBanks />
     </div>
   );
 }
