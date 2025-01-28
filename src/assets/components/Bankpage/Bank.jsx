@@ -188,7 +188,8 @@ export default function Bank() {
       <div className="success-monitor mb-4 p-3 rounded-3 d-flex justify-content-between align-items-center">
         <div className="d-flex align-items-center gap-3">
           <div className="monitor-icon">
-            <i className="bi bi-wifi text-success"></i>
+            {/* <i className="bi bi-wifi text-success"></i> */}
+            <i class="ri-base-station-fill"></i>
           </div>
           <span>Bank Transfer Success Rate Monitor</span>
         </div>
