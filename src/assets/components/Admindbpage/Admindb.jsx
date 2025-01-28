@@ -281,7 +281,7 @@ const Admindb = () => {
                                                             {new Date(transaction.createdAt).toLocaleDateString()}
                                                         </td>
                                                         <td>
-                                                            <button className='btn btn-danger' onClick={() => handleDeleteTransaction(transaction._id)}>Delete</button>
+                                                            <button className='btn btn-danger' onClick={() => handleDeleteTransaction(transaction._id)}><i class="ri-close-circle-line"></i></button>
                                                         </td>
                                                     </tr>
                                                 ))}
