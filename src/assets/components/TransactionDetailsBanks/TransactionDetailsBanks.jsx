@@ -3,7 +3,7 @@ import axios from "axios";
 import { Search } from "react-bootstrap-icons";
 import { API_URLS } from "../../../../utils/apiConfig";
 
-export default function TransactionDetailsBanks() {
+export default function TransactionDetailsBanks({onTransactionSelect}) {
     const [transactions, setTransactions] = useState([]);  // Initializing as an empty array
     const [showAll, setShowAll] = useState(false);
 
@@ -54,22 +54,28 @@ export default function TransactionDetailsBanks() {
         }
     };
 
+    const handleTransactionClick = (transaction) => {
+        if (onTransactionSelect) {
+            // Pass the bank name and account number to the parent
+            onTransactionSelect(transaction);
+        }
+    };
 
     return (
         <div className="bg-light">
             <div className="p-3">
-                <div className="position-relative">
+                {/* <div className="position-relative">
                     <input
                         type="text"
                         className="form-control bg-white rounded-3 ps-5"
                         placeholder="Account number or name"
-                        style={{ height: "50px" }}
+                        style={{ height: "30px",  }}
                     />
                     <Search
                         className="position-absolute text-muted"
                         style={{ left: "15px", top: "50%", transform: "translateY(-50%)" }}
                     />
-                </div>
+                </div> */}
             </div>
 
             <div className="px-3 border-bottom">
@@ -95,6 +101,7 @@ export default function TransactionDetailsBanks() {
                             bank={transaction.bankName}
                             transactionId={transaction._id}  // Passing transactionId as a prop
                             handleDeleteTransaction={handleDeleteTransaction}  // Passing the delete function as a prop
+                            onClick={() => handleTransactionClick(transaction)} // Pass the transaction to the parent
                         />
                     ))
                 ) : (
@@ -116,7 +123,7 @@ export default function TransactionDetailsBanks() {
 }
 
 
-function BeneficiaryItem({ icon, iconBg, name, account, bank, transactionId, handleDeleteTransaction }) {
+function BeneficiaryItem({ icon, iconBg, name, account, bank, transactionId, handleDeleteTransaction, onClick }) {
     const [showDelete, setShowDelete] = useState(false);  // State to toggle the delete option
 
     const handleDeleteClick = () => {
@@ -124,7 +131,7 @@ function BeneficiaryItem({ icon, iconBg, name, account, bank, transactionId, han
     };
 
     return (
-        <div className="d-flex align-items-center bg-white rounded-3 p-3 mb-2">
+        <div className="d-flex align-items-center bg-white rounded-3 p-3 mb-2" onClick={onClick}>  {/* Added onClick here to trigger the parent transaction select */}
             <div
                 className={`rounded-circle bg-${iconBg} text-white d-flex align-items-center justify-content-center`}
                 style={{ width: 40, height: 40, minWidth: 40 }}
@@ -150,7 +157,6 @@ function BeneficiaryItem({ icon, iconBg, name, account, bank, transactionId, han
                         className="position-absolute bg-white p-1"
                         style={{ top: '20px', left: '-10px', borderRadius: '5px', fontSize: '12px' }}
                         onClick={() => handleDeleteTransaction(transactionId)}  // Call the delete function when clicked
-
                     >
                         Delete
                     </div>
@@ -159,3 +165,4 @@ function BeneficiaryItem({ icon, iconBg, name, account, bank, transactionId, han
         </div>
     );
 }
+

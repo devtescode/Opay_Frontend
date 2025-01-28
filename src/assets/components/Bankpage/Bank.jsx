@@ -39,8 +39,8 @@ export default function Bank() {
     // const bankCode = selectedBank; 
 
     const selectedBank = Data.banks.find((bank) => bank.code === selectedBankCode);
-
-
+    // console.log(selectedBank);
+    
     if (!selectedBank) {
       alert(`Unknown bank code: ${selectedBankCode}`); // Alerting selected code for debugging
       return;
@@ -96,6 +96,17 @@ export default function Bank() {
     navigate("/storetransaction")
   }
 
+
+  const handleTransactionSelect = (transaction) => {
+    setAccountNumber(transaction.accountNumber);    
+    // Find the bank code based on the bank name from the Data.banks array
+    const bank = Data.banks.find(bank => bank.name === transaction.bankName);
+    if (bank) {
+        setSelectedBankCode(bank.code);
+    }
+
+    // console.log(transaction.bankName);
+  };
   return (
     <div className="container main-container">
       {/* Header */}
@@ -145,6 +156,7 @@ export default function Bank() {
                 className="form-select form-select-lg"
                 value={selectedBankCode}
                 onChange={(e) => setSelectedBankCode(e.target.value)}
+                
               >
                 <option value="">Select Bank</option>
                 {Data.banks.map((bank) => (
@@ -182,7 +194,9 @@ export default function Bank() {
         </div>
         <i className="bi bi-chevron-right"></i>
       </div>
-      <TransactionDetailsBanks />
+      <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect}/>
+      {/* <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect} /> */}
+
     </div>
   );
 }
