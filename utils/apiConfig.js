@@ -14,4 +14,5 @@ export const API_URLS = {
     // getrecentransaction: `${baseURL}/useropay/getrecentransaction`,
     getrecentransaction: (userId, showAll)=>`${baseURL}/useropay/getrecentransaction/${userId}?showAll=${showAll}`,
     deleterecenttransaction: (transactionId) => `${baseURL}/useropay/deleterecenttransaction/${transactionId}`,
+    deleteuserTransaction: (transactionId) => `${baseURL}/useropay/deleteuserTransaction/${transactionId}`,
 };

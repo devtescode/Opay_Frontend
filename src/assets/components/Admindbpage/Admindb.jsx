@@ -78,6 +78,27 @@ const Admindb = () => {
         fetchCounts();
     }, []);
 
+
+    const handleDeleteTransaction = async (transactionId) => {
+        try {
+            // Confirm deletion with the user before proceeding
+            const confirmDelete = window.confirm('Are you sure you want to delete this transaction?');
+            if (!confirmDelete) return; // Abort if user cancels
+    
+            // Call the delete API endpoint
+            const response = await axios.delete(API_URLS.deleteuserTransaction(transactionId));
+            alert(response.data.message); // Show success message
+    
+            // After successful deletion, filter out the deleted transaction from the state
+            setTransactions(transactions.filter(transaction => transaction._id !== transactionId));
+        } catch (error) {
+            console.error('Error deleting transaction:', error);
+            alert('Error deleting the transaction. Please try again later.');
+        }
+    };
+    
+
+
     return (
         <div>
             <Navbar />
@@ -207,6 +228,8 @@ const Admindb = () => {
                                                     <th>Amount</th>
                                                     {/* <th>Status</th> */}
                                                     <th>Date</th>
+                                                    <th>Action</th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -231,6 +254,9 @@ const Admindb = () => {
                                                         </td> */}
                                                         <td>
                                                             {new Date(transaction.createdAt).toLocaleDateString()}
+                                                        </td>
+                                                        <td>
+                                                           <button className='btn btn-danger' onClick={() => handleDeleteTransaction(transaction._id)}>Delete</button>
                                                         </td>
                                                     </tr>
                                                 ))}
