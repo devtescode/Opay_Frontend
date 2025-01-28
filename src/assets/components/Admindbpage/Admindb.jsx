@@ -264,7 +264,7 @@ const Admindb = () => {
                                                         <td>{transaction.bankName}</td>
                                                         <td>{transaction.accountNumber}</td>
                                                         <td>{transaction.accountName}</td>
-                                                        <td>N{transaction.amount.toFixed(2)}</td>
+                                                        <td>₦{transaction.amount.toFixed(2)}</td>
                                                         {/* <td>
                                                             <span
                                                                 className={`badge bg-${transaction.status === "success"
