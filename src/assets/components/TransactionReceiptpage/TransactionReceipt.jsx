@@ -61,17 +61,17 @@ function TransactionReceipt({initialStatus }) {
   }
 
   // const [status, setStatus] = useState(initialStatus); // Set initial status from backend
-  const [status, setStatus] = useState(initialStatus || "success"); // Default to "pending" if undefined
+  const [status, setStatus] = useState(initialStatus || "successful"); // Default to "pending" if undefined
 
   // Function to handle double-tap
   const handleDoubleTap = async () => {
     let newStatus;
-    if (status === 'success') {
+    if (status === 'successful') {
       newStatus = 'pending';
     } else if (status === 'pending') {
       newStatus = 'failed';
     } else {
-      newStatus = 'success';
+      newStatus = 'successful';
     }
 
     // if (!transactionId) {
