@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
 import { format } from "date-fns";
 
-const StoreTransaction = () => {
+const StoreTransaction = ({transactionStatus}) => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -125,7 +125,7 @@ const StoreTransaction = () => {
               </div>
               <div className="text-end text-dark">
                 -₦{Math.abs(transaction.amount).toLocaleString()}.00
-                <div className="small text-success">{transaction.status}ful</div>
+                <div className="small text-success">{transaction.status}</div>
               </div>
 
 

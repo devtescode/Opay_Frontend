@@ -17,14 +17,54 @@ const Transfermodal = ({ showModal, setShowModal }) => {
   // const PaymodelBtn = ()=>{
   //   navigate("/transfersuccess")
   // }
+  // const PaymodelBtn = async () => {
+  //   const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
+  //   const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
+  //   const userId = JSON.parse(localStorage.getItem('user')).userId;
+
+  //   // console.log('LocalStorage User userId:', userId);
+  //   //     const user = JSON.parse(localStorage.getItem('user'));
+  //   // console.log('LocalStorage User Data:', user);
+
+  //   const transactionData = {
+  //     userId,
+  //     bankName: savedAccount?.bankName,
+  //     accountNumber: savedAccount?.accountNumber,
+  //     accountName: savedAccount?.accountName,
+  //     amount: savedAmount,
+  //   };
+
+  //   console.log('Transaction Data:', transactionData); // Debugging
+  //   // try {
+  //   //   await axios.post(API_URLS.transactions, transactionData);
+  //   //   navigate('/transfersuccess');
+  //   // } catch (error) {
+  //   //   console.error('Failed to save transaction:', error.response?.data || error.message);
+  //   // }
+  //   try {
+  //     const response = await axios.post(API_URLS.transactions, transactionData);
+
+  //     if (response.data.transactionId) {
+  //       console.log("Transaction ID:", response.data.transactionId);
+
+  //       // Store transaction ID in localStorage
+  //       localStorage.setItem("transactionId", response.data.transactionId);
+
+  //       // Navigate to the success page
+  //       navigate('/transfersuccess');
+  //     } else {
+  //       console.error("Transaction ID not found in response:", response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error('Failed to save transaction:', error.response?.data || error.message);
+  //   }
+  // };
+
+
   const PaymodelBtn = async () => {
     const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
     const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
     const userId = JSON.parse(localStorage.getItem('user')).userId; 
-
-    // console.log('LocalStorage User userId:', userId);
-//     const user = JSON.parse(localStorage.getItem('user'));
-// console.log('LocalStorage User Data:', user);
   
     const transactionData = {
       userId,
@@ -36,13 +76,26 @@ const Transfermodal = ({ showModal, setShowModal }) => {
   
     console.log('Transaction Data:', transactionData); // Debugging
     try {
-      await axios.post(API_URLS.transactions, transactionData);
-      navigate('/transfersuccess');
+      const response = await axios.post(API_URLS.transactions, transactionData);
+      
+      if (response.data.transactionId) {
+        const transactionId = response.data.transactionId;
+        console.log("Transaction ID:", transactionId);
+  
+        // Store the transactionId in localStorage
+        localStorage.setItem("transactionId", transactionId);
+  
+        // Navigate to the success page
+        navigate('/transfersuccess');
+      } else {
+        console.error("Transaction ID not found in response:", response.data);
+      }
     } catch (error) {
       console.error('Failed to save transaction:', error.response?.data || error.message);
     }
   };
   
+
 
   useEffect(() => {
     const savedAccount = localStorage.getItem("selectedAccount");

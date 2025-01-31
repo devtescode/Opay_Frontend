@@ -1,10 +1,13 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URLS } from '../../../../utils/apiConfig';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { ArrowLeft } from 'react-bootstrap-icons';
 
-function TransactionReceipt() {
-
+function TransactionReceipt({initialStatus }) {
+  
+  // console.log("Transaction ID received as prop:", transactionId);
   const [amount, setAmount] = useState(null);
   const [accountDetails, setAccountDetails] = useState(null);
   const [userfullName, setFullName] = useState("");
@@ -21,13 +24,13 @@ function TransactionReceipt() {
       setAccountDetails(JSON.parse(storedAccount));
     }
 
-     // Retrieve the user data from localStorage
-     const userData = localStorage.getItem("user");
-     if (userData) {
-       const user = JSON.parse(userData); // Parse the JSON string
-       setFullName(user.fullname); // Set the fullname in state
-       setPhoneNumber(user.phoneNumber);
-     }
+    // Retrieve the user data from localStorage
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      const user = JSON.parse(userData); // Parse the JSON string
+      setFullName(user.fullname); // Set the fullname in state
+      setPhoneNumber(user.phoneNumber);
+    }
   }, []);
 
   const getOrdinal = (day) => {
@@ -53,11 +56,62 @@ function TransactionReceipt() {
     return formattedDate;
   };
 
-  const BackBtn =()=>{
+  const BackBtn = () => {
     navigate("/transfersuccess")
   }
-  
-  
+
+  // const [status, setStatus] = useState(initialStatus); // Set initial status from backend
+  const [status, setStatus] = useState(initialStatus || "success"); // Default to "pending" if undefined
+
+  // Function to handle double-tap
+  const handleDoubleTap = async () => {
+    let newStatus;
+    if (status === 'success') {
+      newStatus = 'pending';
+    } else if (status === 'pending') {
+      newStatus = 'failed';
+    } else {
+      newStatus = 'success';
+    }
+
+    // if (!transactionId) {
+    //   console.error("Transaction ID is missing!");
+    //   return;
+    // }
+
+    if (!transactionId || transactionId === "undefined") {
+      console.error("Invalid transaction ID:", transactionId);
+      return;
+    }
+    
+    
+    try {
+      // http://localhost:4000/useropay/changetransactions/${transactionId}
+      await axios.put(API_URLS.changetransactions(transactionId), { status: newStatus });
+      setStatus(newStatus); // Update status locally after the request succeeds
+      // console.log("Transaction ID:", transactionId);
+    } catch (error) {
+      console.error('Error updating transaction status:', error);
+    }
+  };
+
+
+  const [transactionId, setTransactionId] = useState(null);
+
+  useEffect(() => {
+    const storedTransactionId = localStorage.getItem("transactionId");
+    if (storedTransactionId) {
+      setTransactionId(storedTransactionId);
+    }
+  }, []); // Empty dependency array means this runs only once when the component mounts
+
+  if (transactionId === null) {
+    return <p>Loading...</p>; // Optional: Show loading if transactionId isn't available yet
+  }
+
+
+
+
   return (
     <>
       <div className="d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto" >
@@ -85,9 +139,17 @@ function TransactionReceipt() {
             {/* Amount and Status */}
             <div className="text-center mb-4">
               <h2 className="text-success"> {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}</h2>
-              <h5 className="" style={{ fontWeight: "normal" }}>Successful</h5>
+              {/* <h5 className="" style={{ fontWeight: "normal" }}>Successful</h5> */}
+              <h5
+                onClick={handleDoubleTap}
+                style={{ fontWeight: "normal", cursor: "pointer" }}
+              >
+                {status ? status.charAt(0).toUpperCase() + status.slice(1)  : "Loading..."}
+              </h5>
+
               <small className="text-muted">{formatDate()}</small>
             </div>
+            {/* + "ful" */}
             <hr />
 
             {/* Transaction Details */}
@@ -97,7 +159,7 @@ function TransactionReceipt() {
                   <span className="text-muted">Recipient Details</span>
                 </div>
                 <div className="col-7 text-end">
-                
+
                   {accountDetails ? (
                     <div>
                       <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>{accountDetails.accountName}</p>
@@ -111,20 +173,20 @@ function TransactionReceipt() {
                 </div>
               </div>
 
-                  <div className="row mb-2">
+              <div className="row mb-2">
                 <div className="col-5">
                   <span className="text-muted">Sender Details</span>
                 </div>
                 <div className="col-7 text-end">
-                
+
                   {/* {accountDetails ? ( */}
-                    <div>
-                 
-                      <p  className="mb-1 text-muted" style={{ fontSize: "12px", textTransform: "uppercase"  }}>{userfullName ? userfullName : "No user data found"}</p>
-                      <p className="mb-0 text-muted">
-                        Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)}`}
-                      </p>
-                    </div>
+                  <div>
+
+                    <p className="mb-1 text-muted" style={{ fontSize: "12px", textTransform: "uppercase" }}>{userfullName ? userfullName : "No user data found"}</p>
+                    <p className="mb-0 text-muted">
+                      Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)}`}
+                    </p>
+                  </div>
                   {/* ) : (
                     <p>No account details found. Please go back and select an account.</p>
                   )} */}
@@ -144,7 +206,7 @@ function TransactionReceipt() {
                   <span className="text-muted">Transaction No.</span>
                 </div>
                 <div className="col-7 text-end">
-                  <span className="text-break text-muted" >250120020100886992707982</span>
+                  <span className="text-break text-muted" >{transactionId}</span>
                 </div>
               </div>
 

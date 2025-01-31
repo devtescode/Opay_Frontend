@@ -55,6 +55,8 @@ export default function TransactionDetailsBanks({onTransactionSelect}) {
     };
 
     const handleTransactionClick = (transaction) => {
+        console.log("Clicked transaction:", transaction); 
+        console.log("Transaction ID:", transaction?._id); 
         if (onTransactionSelect) {
             // Pass the bank name and account number to the parent
             onTransactionSelect(transaction);

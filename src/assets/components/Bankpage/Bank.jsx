@@ -75,7 +75,7 @@ export default function Bank() {
         
         // const userId = JSON.parse(localStorage.getItem("user")).userData.userId;
         const userId = JSON.parse(localStorage.getItem('user')).userId;
-        
+          
         
         await axios.post(API_URLS.saveRecentTransaction , {
           userId,
