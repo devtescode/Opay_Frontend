@@ -159,6 +159,8 @@ function TransactionReceipt({ initialStatus }) {
 
               <small className="text-muted">{formatDate()}</small>
 
+                {/* {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")} */}
+
             </div>
             {/* + "ful" */}
             <hr />

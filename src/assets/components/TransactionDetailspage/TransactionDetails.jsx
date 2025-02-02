@@ -48,7 +48,7 @@ const TransactionDetails = () => {
                         </div>
 
                         <p className="text-secondary mb-1">Transfer to {transaction.accountName}</p>
-                        <h2 className="mb-3">₦{transaction.amount.toLocaleString()}</h2>
+                        <h2 className="mb-1">₦{transaction.amount.toLocaleString()}.00</h2>
 
                         <div className="d-flex align-items-center justify-content-center gap-2">
                             {transaction.status === "pending" ? (
@@ -99,7 +99,7 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Transaction No.</div>
                             <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
-                                250122010100912837604658
+                                2501220101009128376046
                                 <Copy size={14} className="text-secondary" />
                             </div>
                         </div>
@@ -124,7 +124,7 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Session ID</div>
                             <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
-                                100000197126285093975188088239
+                                1000001971262850939751880
                                 <Copy size={14} className="text-secondary" />
                             </div>
                         </div>
