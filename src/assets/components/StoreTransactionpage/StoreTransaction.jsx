@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Dropdown, Nav,Spinner } from 'react-bootstrap';
+import { Dropdown, Nav, Spinner } from 'react-bootstrap';
 import { ArrowLeft, ArrowDown, ArrowUp, Download } from 'react-bootstrap-icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
 import { format } from "date-fns";
 
-const StoreTransaction = ({transactionStatus}) => {
+const StoreTransaction = ({ transactionStatus }) => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ const StoreTransaction = ({transactionStatus}) => {
     const fetchTransactions = async () => {
       try {
         const userId = JSON.parse(localStorage.getItem('user')).userId;
-        const response = await axios.get(API_URLS.getransactions(userId)); 
+        const response = await axios.get(API_URLS.getransactions(userId));
         setTransactions(response.data);
         setLoading(false);
       } catch (err) {
@@ -29,7 +29,7 @@ const StoreTransaction = ({transactionStatus}) => {
     fetchTransactions();
   }, []);
 
-  const TranferBtnBack =()=>{
+  const TranferBtnBack = () => {
     navigate("/userdb")
   }
 
@@ -46,7 +46,7 @@ const StoreTransaction = ({transactionStatus}) => {
       </div>
     );
   }
-  
+
   if (error) {
     return <p className="text-danger text-center">{error}</p>;
   }
@@ -56,7 +56,7 @@ const StoreTransaction = ({transactionStatus}) => {
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center p-3 bg-white">
         <div className="d-flex align-items-center">
-          <ArrowLeft className="me-3" size={20} onClick={TranferBtnBack}/>
+          <ArrowLeft className="me-3" size={20} onClick={TranferBtnBack} />
           <h5 className="mb-0">Transactions</h5>
         </div>
         <Download className="text-success" size={20} />
@@ -103,8 +103,8 @@ const StoreTransaction = ({transactionStatus}) => {
         ) : (
           transactions.map((transaction) => (
             <div className="d-flex align-items-center p-3 border-bottom" key={transaction._id}
-            onClick={() => handleTransactionClick(transaction)}
-            style={{ cursor: 'pointer' }}
+              onClick={() => handleTransactionClick(transaction)}
+              style={{ cursor: 'pointer' }}
             >
               <div
                 className={`rounded-circle p-2 me-3 ${transaction.amount > 0 ? 'bg-light-green' : 'bg-light-red'
@@ -117,7 +117,7 @@ const StoreTransaction = ({transactionStatus}) => {
                 )}
               </div>
               <div className="flex-grow-1">
-               <div className="text-truncate">Transfer to {transaction.accountName}</div>
+                <div className="text-truncate">Transfer to {transaction.accountName}</div>
                 <small className="text-muted">
                   {/* {new Date(transaction.createdAt).toLocaleString()} */}
                   {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
@@ -125,7 +125,17 @@ const StoreTransaction = ({transactionStatus}) => {
               </div>
               <div className="text-end text-dark">
                 -₦{Math.abs(transaction.amount).toLocaleString()}.00
-                <div className="small text-success">{transaction.status}</div>
+                <div
+                  className={`small ${transaction.status === "pending"
+                      ? "text-warning"
+                      : transaction.status === "failed"
+                        ? "text-danger"
+                        : "text-success"
+                    }`}
+                >
+                  {transaction.status}
+                </div>
+
               </div>
 
 

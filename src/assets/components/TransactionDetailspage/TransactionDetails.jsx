@@ -1,5 +1,5 @@
 import React from "react"
-import { ArrowLeft, CheckCircle, ChevronRight, Copy } from "react-bootstrap-icons"
+import { ArrowLeft, CheckCircle, ChevronRight, Copy,  XCircle, Clock } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
@@ -7,11 +7,11 @@ import { format } from "date-fns";
 const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
-    const BankToBtn=()=>{
+    const BankToBtn = () => {
         navigate("/storetransaction")
     }
     if (!transaction) {
-      return <p className="text-center text-danger">No transaction details available</p>;
+        return <p className="text-center text-danger">No transaction details available</p>;
     }
     return (
         <div className="">
@@ -19,7 +19,7 @@ const TransactionDetails = () => {
                 {/* Header */}
                 <div className="d-flex justify-content-between align-items-center p-3 bg-white">
                     <button className="btn btn-link text-dark" onClick={() => navigate(-1)}>
-                        <ArrowLeft size={24} onClick={BankToBtn}/>
+                        <ArrowLeft size={24} onClick={BankToBtn} />
                     </button>
                     <h5 className="mb-0">Transaction Details</h5>
                     <button className="btn btn-link text-success">
@@ -30,15 +30,45 @@ const TransactionDetails = () => {
                 {/* Transaction Card */}
                 <div className="card mx-3 mt-4 border-0 text-center">
                     <div className="card-body">
-                        <div className="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mb-3">
-                            <CheckCircle className="text-success" size={32} />
-                            {/* <CheckCircle className={`text-${transaction.status === 'Successful' ? 'success' : 'danger'}`} size={32} /> */}
+                        <div
+                            className={`rounded-circle p-3 d-inline-flex mb-3 ${transaction.status === "pending"
+                                    ? "bg-warning bg-opacity-10"
+                                    : transaction.status === "failed"
+                                        ? "bg-danger bg-opacity-10"
+                                        : "bg-success bg-opacity-10"
+                                }`}
+                        >
+                            {transaction.status === "pending" ? (
+                                <Clock className="text-warning" size={32} /> // Pending icon
+                            ) : transaction.status === "failed" ? (
+                                <XCircle className="text-danger" size={32} /> // Failed icon
+                            ) : (
+                                <CheckCircle className="text-success" size={32} /> // Success icon
+                            )}
                         </div>
-                        <p className="text-secondary mb-1">Transfer to {transaction.accountName} </p>
+
+                        <p className="text-secondary mb-1">Transfer to {transaction.accountName}</p>
                         <h2 className="mb-3">₦{transaction.amount.toLocaleString()}</h2>
+
                         <div className="d-flex align-items-center justify-content-center gap-2">
-                            <CheckCircle className="text-success" size={16} />
-                            <span className="text-success">{transaction.status}</span>
+                            {transaction.status === "pending" ? (
+                                <Clock className="text-warning" size={16} />
+                            ) : transaction.status === "failed" ? (
+                                <XCircle className="text-danger" size={16} />
+                            ) : (
+                                <CheckCircle className="text-success" size={16} />
+                            )}
+
+                            <span
+                                className={`${transaction.status === "pending"
+                                        ? "text-warning"
+                                        : transaction.status === "failed"
+                                            ? "text-danger"
+                                            : "text-success"
+                                    }`}
+                            >
+                                {transaction.status}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -51,7 +81,7 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Recipient Details</div>
                             <div className="col-6 text-end text-muted">
-                            {transaction.accountName}
+                                {transaction.accountName}
                                 <div className="text-secondary small">{transaction.bankName} | {transaction.accountNumber}</div>
                             </div>
                         </div>
@@ -77,7 +107,7 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Payment Method</div>
                             <div className="col-6 text-end">
-                            <div className="text-muted">Wallet -₦{transaction.amount.toLocaleString()}.00</div>
+                                <div className="text-muted">Wallet -₦{transaction.amount.toLocaleString()}.00</div>
 
                             </div>
                         </div>
@@ -86,11 +116,11 @@ const TransactionDetails = () => {
                             <div className="col-6 text-secondary">Transaction Date</div>
                             <div className="col-6 text-end text-muted">
                                 {/* {new Date(transaction.createdAt).toLocaleString()} */}
-                                 {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
-                                </div>
+                                {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
+                            </div>
                         </div>
 
-                        
+
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Session ID</div>
                             <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">

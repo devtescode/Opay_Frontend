@@ -5,8 +5,8 @@ import { API_URLS } from '../../../../utils/apiConfig';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { ArrowLeft } from 'react-bootstrap-icons';
 
-function TransactionReceipt({initialStatus }) {
-  
+function TransactionReceipt({ initialStatus }) {
+
   // console.log("Transaction ID received as prop:", transactionId);
   const [amount, setAmount] = useState(null);
   const [accountDetails, setAccountDetails] = useState(null);
@@ -83,8 +83,8 @@ function TransactionReceipt({initialStatus }) {
       console.error("Invalid transaction ID:", transactionId);
       return;
     }
-    
-    
+
+
     try {
       // http://localhost:4000/useropay/changetransactions/${transactionId}
       await axios.put(API_URLS.changetransactions(transactionId), { status: newStatus });
@@ -140,14 +140,26 @@ function TransactionReceipt({initialStatus }) {
             <div className="text-center mb-4">
               <h2 className="text-success"> {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}</h2>
               {/* <h5 className="" style={{ fontWeight: "normal" }}>Successful</h5> */}
-              <h5
+              {/* <h5
                 onClick={handleDoubleTap}
                 style={{ fontWeight: "normal", cursor: "pointer" }}
               >
                 {status ? status.charAt(0).toUpperCase() + status.slice(1)  : "Loading..."}
+              </h5> */}
+              <h5
+                onClick={handleDoubleTap}
+                style={{
+                  fontWeight: "normal",
+                  cursor: "pointer",
+                  color: status === "pending" ? "yellow" : status === "failed" ? "red" : "green"
+                }}
+              >
+                {status ? status.charAt(0).toUpperCase() + status.slice(1) : "Loading..."}
               </h5>
 
+
               <small className="text-muted">{formatDate()}</small>
+              
             </div>
             {/* + "ful" */}
             <hr />
