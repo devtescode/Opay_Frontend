@@ -206,7 +206,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                     />
                     <div>
                       <p className="fw-medium mb-0">OWealth</p>
-                      <p className="text-secondary mb-0">₦3,401.57</p>
+                      <p className="text-secondary mb-0">₦90,701.57</p>
                     </div>
                   </div>
                   <Check size={24} className="text-success" />
