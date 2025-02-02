@@ -24,10 +24,10 @@ const UserLogin = () => {
             setPhoneNumber(parsedUser.phoneNumber); // Set the phone number
         }
     }, []);
-
+    const [isLoading, setIsLoading] = useState(false); // Track loading state
     const handleLogin = async (e) => {
         e.preventDefault();
-
+        setIsLoading(true); // Disable button
         try {
             const response = await axios.post(API_URLS.userlogin, { password }); // Replace with your API endpoint
 
@@ -46,6 +46,9 @@ const UserLogin = () => {
             console.error(error);
             // Set error message based on the backend response or a generic message
             setErrorMessage(error.response?.data?.message || 'Login failed. Please try again.');
+        }
+        finally {
+            setIsLoading(false); // Re-enable button after request completes
         }
     };
 
@@ -88,7 +91,7 @@ const UserLogin = () => {
 
                     <Button
                         variant="link"
-                        className="position-absolute top-50 end-0 translate-middle-y text-muted pe-3"
+                        className="position-absolute top-50 end-0 translate-middle-y text-muted"
                         onClick={() => setShowPassword(!showPassword)}
                         type="button"
                     >
@@ -113,9 +116,10 @@ const UserLogin = () => {
                         type="submit"
                         variant="success"
                         className="w-75 py-2 mb-5 rounded-5"
-                        style={{ backgroundColor: '#00B974', borderColor: '#00D632' }}
+                        style={{ backgroundColor: "#00B974", borderColor: "#00D632" }}
+                        disabled={isLoading} // Disable when loading
                     >
-                        Login
+                        {isLoading ? "Login" : "Login"}
                     </Button>
                 </div>
 
