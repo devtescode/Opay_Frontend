@@ -74,9 +74,9 @@ const TransactionDetails = () => {
                 </div>
 
                 {/* Transaction Details */}
-                <div className="card mx-3 mt-4">
+                <div className="card mx-3 mt-4" style={{fontSize:"12px"}}>
                     <div className="card-body ">
-                        <h6 className="mb-4 fw-bold ">Transaction Details</h6>
+                        <h6 className="mb-4 fw-bold" style={{fontSize:"20px"}}>Transaction Details</h6>
 
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Recipient Details</div>
