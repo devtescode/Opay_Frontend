@@ -117,7 +117,7 @@ const StoreTransaction = ({ transactionStatus }) => {
                 )}
               </div>
               <div className="flex-grow-1">
-                <div className="text-truncate"style={{fontSize:"12px"}}>Transfer to {transaction.accountName}</div>
+                <div className="text-truncate" style={{ fontSize: "12px" }}>Transfer to {transaction.accountName}</div>
                 <small className="text-muted">
                   {/* {new Date(transaction.createdAt).toLocaleString()} */}
                   {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
@@ -127,10 +127,10 @@ const StoreTransaction = ({ transactionStatus }) => {
                 -₦{Math.abs(transaction.amount).toLocaleString()}.00
                 <div
                   className={`small ${transaction.status === "pending"
-                      ? "text-warning"
-                      : transaction.status === "failed"
-                        ? "text-danger"
-                        : "text-success"
+                    ? "text-warning"
+                    : transaction.status === "failed"
+                      ? "text-danger"
+                      : "text-success"
                     }`}
                 >
                   {transaction.status}
@@ -148,12 +148,16 @@ const StoreTransaction = ({ transactionStatus }) => {
       <Nav className="bg-white border-top">
         <div className="d-flex w-100 justify-content-around p-2">
           <div className="text-center text-success">
-            <ArrowDown size={24} />
+            {/* <ArrowDown size={24} /> */}
+            {/* <div className='border'> */}
+              <i class="ri-arrow-left-right-line bg-success text-white p-1 rounded-2"></i>
+            {/* </div> */}
             <div className="small">Transactions</div>
           </div>
           <div className="text-center text-muted">
             {/* <BarChart2 size={24} /> */}
-            <div className="small">Statistics</div>
+            <i class="ri-pie-chart-line"></i>
+            <div className="small text-muted">Statistics</div>
           </div>
         </div>
       </Nav>
