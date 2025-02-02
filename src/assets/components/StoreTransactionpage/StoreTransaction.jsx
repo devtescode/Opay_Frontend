@@ -89,7 +89,7 @@ const StoreTransaction = ({ transactionStatus }) => {
 
       {/* Transaction Period */}
       <div className="p-3 bg-white">
-        <h6>Jan 2025</h6>
+        <h6>Feb 2025</h6>
         <div className="text-muted small">
           <span>In: ₦23,722.75</span>
           <span className="ms-3">Out: ₦29,416.00</span>
