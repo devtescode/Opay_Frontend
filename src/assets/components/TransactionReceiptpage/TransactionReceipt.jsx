@@ -148,18 +148,17 @@ function TransactionReceipt({ initialStatus }) {
               </h5> */}
               <h5
                 onClick={handleDoubleTap}
-                style={{
-                  fontWeight: "normal",
-                  cursor: "pointer",
-                  color: status === "pending" ? "yellow" : status === "failed" ? "red" : "green"
-                }}
+                className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "success"}`}
+                style={{ fontWeight: "normal", cursor: "pointer" }}
               >
                 {status ? status.charAt(0).toUpperCase() + status.slice(1) : "Loading..."}
               </h5>
 
 
+
+
               <small className="text-muted">{formatDate()}</small>
-              
+
             </div>
             {/* + "ful" */}
             <hr />
