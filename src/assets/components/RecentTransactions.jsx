@@ -25,7 +25,7 @@ const RecentTransactions = () => {
   
         if (!isMounted) return; // Prevent state update if component unmounts
   
-        console.log("API Response:", response.data);
+        // console.log("API Response:", response.data);
   
         setTransactions(response.data); // Directly set the last two transactions
         setLoading(false);
