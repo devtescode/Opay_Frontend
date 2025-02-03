@@ -57,9 +57,9 @@ const UserLogin = () => {
             {/* Profile Section */}
             <Image
                 src={image}
-                style={{ width: '80px', height: '60px', objectFit: 'contain' }}
+                style={{ width: '100px', height: '60px', objectFit: 'contain' }}
             />
-            <div className="text-center mb-4">
+            <div className="text-center mb-4 mt-4">
                 <div className="position-relative d-inline-block mb-2">
                     <Image
                         // src={LoginProfile}
@@ -69,7 +69,7 @@ const UserLogin = () => {
                         style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                     />
                 </div>
-                <h6 className="mb-4">
+                <h6 className="mb-4 mt-2 fs-3">
                     {username ? username : 'Welcome'}
                     {/* {phoneNumber && ` (${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)})`} */}
                     {phoneNumber && ` (${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)})`}
