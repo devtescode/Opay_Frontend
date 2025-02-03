@@ -82,7 +82,7 @@ const UserLogin = () => {
                     <Form.Control
                         type={showPassword ? 'text' : 'password'}
                         placeholder="Enter 6-digit Password"
-                        className="py-2 px-3 border-1"
+                        className="py-2 px-3 border-1 fs-5"
                         style={{ borderColor: '#00B974' }}
                         maxLength={14}
                         value={password}
@@ -106,7 +106,7 @@ const UserLogin = () => {
                 )}
 
                 <div className="text-end mb-4">
-                    <Button variant="link" className="text-decoration-none p-0" style={{ color: '#00B974' }}>
+                    <Button variant="link" className="text-decoration-none" style={{ color: '#00B974' }}>
                         Forgot Password?
                     </Button>
                 </div>
