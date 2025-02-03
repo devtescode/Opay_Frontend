@@ -123,21 +123,27 @@ const UserLogin = () => {
                     </Button>
                 </div>
 
-                <div className="d-flex justify-content-between mb-5">
-                    <Button variant="link" className="text-decoration-none p-0" style={{ color: '#00B974' }}>
-                        Switch Account
-                    </Button>
-                    <Button variant="link" className="text-decoration-none p-0" style={{ color: '#00B974' }}>
-                        Login with FingerPrint
-                    </Button>
-                </div>
+                <div className='fixed-bottom mb-4'>
 
-                {/* Footer */}
-                <div className="text-center text-muted" style={{ fontSize: '0.8rem' }}>
-                    <span>Licensed by the </span>
-                    <strong>CBN</strong>
-                    <span> and insured by the </span>
-                    <strong>NDIC</strong>
+                    <div className="d-flex justify-content-center mb-4 text-center">
+                        <Button variant="link" className="text-decoration-none p-0" style={{ color: '#00B974' }}>
+                            Switch Account
+                        </Button>
+                        <Button variant="link" className="p-0 text-muted">
+                            |
+                        </Button>
+                        <Button variant="link" className="text-decoration-none p-0" style={{ color: '#00B974' }}>
+                            Login with FingerPrint
+                        </Button>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="text-center text-muted" style={{ fontSize: '0.8rem' }}>
+                        <span>Licensed by the </span>
+                        <strong>CBN</strong>
+                        <span> and insured by the </span>
+                        <strong>NDIC</strong>
+                    </div>
                 </div>
             </Form>
         </Container>
