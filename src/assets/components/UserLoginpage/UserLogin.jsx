@@ -44,11 +44,11 @@ const UserLogin = () => {
             }
         } catch (error) {
             console.error(error);
-            // Set error message based on the backend response or a generic message
-            setErrorMessage(error.response?.data?.message || 'Login failed. Please try again.');
-        }
-        finally {
-            setIsLoading(false); // Re-enable button after request completes
+            setErrorMessage(
+                error.response?.data?.message || 'Network issue. Please try again.'
+            );
+        } finally {
+            setIsLoading(false);
         }
     };
 
