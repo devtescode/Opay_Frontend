@@ -14,25 +14,35 @@ const RecentTransactions = () => {
   const navigate = useNavigate()
   
   useEffect(() => {
+    let isMounted = true; // Flag to prevent unnecessary re-renders
+  
     const fetchRecentTransactions = async () => {
       try {
-        const userId = JSON.parse(localStorage.getItem('user')).userId;
-        const response = await axios.get(API_URLS.getransactions(userId));
-        
-        // Sort by createdAt and get the last two transactions
-        const recentTransactions = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 2);
-        
-        setTransactions(recentTransactions);
+        const userId = JSON.parse(localStorage.getItem("user"))?.userId;
+        if (!userId) return;
+  
+        const response = await axios.get(API_URLS.getlasttwotrnasaction(userId));
+  
+        if (!isMounted) return; // Prevent state update if component unmounts
+  
+        console.log("API Response:", response.data);
+  
+        setTransactions(response.data); // Directly set the last two transactions
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching recent transactions:', err);
-        setError('Failed to fetch recent transactions');
+        console.error("Error fetching transactions:", err);
+        setError("Failed to fetch recent transactions");
         setLoading(false);
       }
     };
-
+  
     fetchRecentTransactions();
+  
+    return () => {
+      isMounted = false; // Cleanup to prevent unnecessary re-renders
+    };
   }, []);
+  
 
   const handleTransactionClick = (transaction) => {
     navigate('/transactiondetails', { state: transaction });

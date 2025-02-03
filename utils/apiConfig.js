@@ -15,6 +15,6 @@ export const API_URLS = {
     getrecentransaction: (userId, showAll)=>`${baseURL}/useropay/getrecentransaction/${userId}?showAll=${showAll}`,
     deleterecenttransaction: (transactionId) => `${baseURL}/useropay/deleterecenttransaction/${transactionId}`,
     deleteuserTransaction: (transactionId) => `${baseURL}/useropay/deleteuserTransaction/${transactionId}`,
-    // http://localhost:4000/useropay/changetransactions/${transactionId}
-    changetransactions : (transactionId)=> `${baseURL}/useropay/changetransactions/${transactionId}`
+    changetransactions : (transactionId)=> `${baseURL}/useropay/changetransactions/${transactionId}`,
+    getlasttwotrnasaction: (userId)=>`${baseURL}/useropay/getlasttwotrnasaction/${userId}`,
 };
