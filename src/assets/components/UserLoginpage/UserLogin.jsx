@@ -59,7 +59,7 @@ const UserLogin = () => {
                 src={image}
                 style={{ width: '100px', height: '60px', objectFit: 'contain' }}
             />
-            <div className="text-center mb-4 mt-4">
+            <div className="text-center mb-4 mt-3">
                 <div className="position-relative d-inline-block mb-2">
                     <Image
                         // src={LoginProfile}
