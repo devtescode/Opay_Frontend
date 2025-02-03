@@ -10,12 +10,12 @@ const BalanceCard = () => {
         navigate("/storetransaction")
     }
     return (
-        <Card className="styles bgEmerald text-white p-3 mb-2">
+        <Card className="styles bgEmerald text-white p-3 mb-2 rounded-3" style={{marginTop:"57px"}}>
 
             <div className="d-flex justify-content-between align-items-center mb-2">
             <div className="d-flex align-items-center gap-2">
-                    <EyeFill size={16} />
                     <span className="small">Available Balance</span>
+                    <EyeFill size={16} />
                 </div>
                 <div variant="light" className="text-white" style={{cursor:"pointer"}} onClick={TransactionBtn}>
                 Transaction History
@@ -24,7 +24,7 @@ const BalanceCard = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-between align-items-center">
-                <span className="fs-4 fw-bold">₦ 1,105,500.24</span>
+                <span className="fs-4 fw-bold d-flex" style={{alignItems:"center"}}>₦90,701.57 <ChevronRight size={16} /></span>
                 <Button variant="light" className="text-success">
                     + Add Money
                 </Button>
