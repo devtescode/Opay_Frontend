@@ -59,7 +59,7 @@ const UserLogin = () => {
                 src={image}
                 style={{ width: '100px', height: '60px', objectFit: 'contain' }}
             />
-            <div className="text-center mb-4 mt-3">
+            <div className="text-center mb-4 mt-2">
                 <div className="position-relative d-inline-block mb-2">
                     <Image
                         // src={LoginProfile}
@@ -95,7 +95,7 @@ const UserLogin = () => {
                         onClick={() => setShowPassword(!showPassword)}
                         type="button"
                     >
-                        {showPassword ? <EyeSlashFill size={20} /> : <EyeFill size={20} />}
+                        {showPassword ? < EyeFill size={20} /> : <EyeSlashFill size={20} />}
                     </Button>
                 </div>
 
