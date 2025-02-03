@@ -14,7 +14,7 @@ const services = [
 
 const Services = () => {
   return (
-    <Row className="g-3 mb-4">
+    <Row className="g-3 mb-4 bg-white">
       {services.map((service, index) => (
         <Col key={index} xs={3}>
           <Button variant="outline-light" className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3">
