@@ -202,7 +202,7 @@ const Admindb = () => {
                                     <th scope="col">Username</th>
                                     <th scope="col">Fullname</th>
                                     <th scope="col">Phone No</th>
-                                    <th scope="col">Show </th>
+                                    <th scope="col">History </th>
                                     <th scope="col">Block/Unblock</th>
                                 </tr>
                             </thead>
@@ -221,7 +221,7 @@ const Admindb = () => {
                                                     data-bs-target="#transactionModal"
                                                     onClick={() => handleShowTransactions(user._id)}
                                                 >
-                                                    Show 
+                                                    <i class="ri-history-line px-3"></i> 
                                                 </button>
                                                 {/* Block/Unblock Button */}
                                                 
@@ -236,7 +236,7 @@ const Admindb = () => {
                                                     </button>
                                                 ) : (
                                                     <button
-                                                        className="btn  btn-warning btn-sm mt-sm-0 mt-2"
+                                                        className="btn  btn-warning btn-sm"
                                                         onClick={() => blockUser(user._id)}
                                                     >
                                                         
