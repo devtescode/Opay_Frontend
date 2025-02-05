@@ -122,6 +122,33 @@ const Admindb = () => {
         }
     };
 
+    const blockUser = async (userId) => {
+        try {
+            await axios.put(API_URLS.blockUser(userId), { blocked: true });
+            setUsers(prevUsers =>
+                prevUsers.map(user =>
+                    user._id === userId ? { ...user, blocked: true } : user
+                )
+            );
+        } catch (error) {
+            console.error("Error blocking user:", error);
+        }
+    };
+    
+    const unblockUser = async (userId) => {
+        try {
+            await axios.put(API_URLS.unblockUser(userId), { blocked: false });
+            setUsers(prevUsers =>
+                prevUsers.map(user =>
+                    user._id === userId ? { ...user, blocked: false } : user
+                )
+            );
+        } catch (error) {
+            console.error("Error unblocking user:", error);
+        }
+    };
+    
+
 
 
     return (
@@ -195,7 +222,25 @@ const Admindb = () => {
                                                 >
                                                     Show
                                                 </button>
+                                                {/* Block/Unblock Button */}
+                                                {user.blocked ? (
+                                                    <button
+                                                        className="btn btn-danger btn-sm"
+                                                        onClick={() => unblockUser(user._id)}
+                                                    >
+                                                        Block
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        className="btn  btn-warning btn-sm"
+                                                        onClick={() => blockUser(user._id)}
+                                                    >
+                                                        
+                                                        Unblock
+                                                    </button>
+                                                )}
                                             </td>
+
                                         </tr>
                                     ))
                                 ) : (
@@ -265,18 +310,18 @@ const Admindb = () => {
                                                         <td>{transaction.accountNumber}</td>
                                                         <td>{transaction.accountName}</td>
                                                         <td>₦{Math.abs(transaction.amount).toLocaleString()}.00</td>
-                                                        {/* <td>
+                                                        <td>
                                                             <span
-                                                                className={`badge bg-${transaction.status === "success"
-                                                                        ? "success"
-                                                                        : transaction.status === "pending"
-                                                                            ? "warning"
-                                                                            : "danger"
+                                                                className={`badge bg-${transaction.status === "successful"
+                                                                    ? "success"
+                                                                    : transaction.status === "pending"
+                                                                        ? "warning"
+                                                                        : "danger"
                                                                     }`}
                                                             >
                                                                 {transaction.status}
                                                             </span>
-                                                        </td> */}
+                                                        </td>
                                                         <td>
                                                             {new Date(transaction.createdAt).toLocaleDateString()}
                                                         </td>

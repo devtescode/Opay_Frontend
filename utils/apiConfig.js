@@ -17,4 +17,7 @@ export const API_URLS = {
     deleteuserTransaction: (transactionId) => `${baseURL}/useropay/deleteuserTransaction/${transactionId}`,
     changetransactions : (transactionId)=> `${baseURL}/useropay/changetransactions/${transactionId}`,
     getlasttwotrnasaction: (userId)=>`${baseURL}/useropay/getlasttwotrnasaction/${userId}`,
+    blockUser: (userId)=>`${baseURL}/useropay/blockUser/${userId}`,
+    unblockUser: (userId)=>`${baseURL}/useropay/unblockUser/${userId}`,
+    
 };
