@@ -202,7 +202,8 @@ const Admindb = () => {
                                     <th scope="col">Username</th>
                                     <th scope="col">Fullname</th>
                                     <th scope="col">Phone No</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col">Show </th>
+                                    <th scope="col">Block/Unblock</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -213,17 +214,20 @@ const Admindb = () => {
                                             <td>{user.username || "N/A"}</td>
                                             <td>{user.fullname || "N/A"}</td>
                                             <td>{user.phoneNumber || "N/A"}</td>
-                                            <td>
+                                            <td className="">
                                                 <button
                                                     className="btn btn-primary btn-sm me-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#transactionModal"
                                                     onClick={() => handleShowTransactions(user._id)}
                                                 >
-                                                    Show
+                                                    Show 
                                                 </button>
                                                 {/* Block/Unblock Button */}
-                                                {user.blocked ? (
+                                                
+                                            </td>
+                                            <td>
+                                            {user.blocked ? (
                                                     <button
                                                         className="btn btn-danger btn-sm"
                                                         onClick={() => unblockUser(user._id)}
@@ -232,7 +236,7 @@ const Admindb = () => {
                                                     </button>
                                                 ) : (
                                                     <button
-                                                        className="btn  btn-warning btn-sm"
+                                                        className="btn  btn-warning btn-sm mt-sm-0 mt-2"
                                                         onClick={() => blockUser(user._id)}
                                                     >
                                                         
