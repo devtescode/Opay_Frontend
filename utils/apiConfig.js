@@ -19,5 +19,6 @@ export const API_URLS = {
     getlasttwotrnasaction: (userId)=>`${baseURL}/useropay/getlasttwotrnasaction/${userId}`,
     blockUser: (userId)=>`${baseURL}/useropay/blockUser/${userId}`,
     unblockUser: (userId)=>`${baseURL}/useropay/unblockUser/${userId}`,
+    activesessions: `${baseURL}/useropay/activesessions`,
     
 };

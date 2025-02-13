@@ -8,7 +8,7 @@ import image from "../../../../public/Image/image.jpg";
 import { API_URLS } from '../../../../utils/apiConfig';
 
 const UserLogin = () => {
-    const [password, setPassword] = useState(''); // Store password input
+    const [password, setPassword] = useState(''); 
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState(''); // For error handling
     const [username, setUsername] = useState(''); // For storing username
@@ -28,29 +28,29 @@ const UserLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setIsLoading(true); // Disable button
+    
+        const deviceInfo = navigator.userAgent;    
         try {
-            const response = await axios.post(API_URLS.userlogin, { password }); // Replace with your API endpoint
-
-            // Assuming a successful response contains user details and a token
+            const response = await axios.post(API_URLS.userlogin, { password, deviceInfo });
+    
             if (response.status === 200) {
                 const { token, user } = response.data;
-
-                // Save token and user data to localStorage or context (optional)
+    
+                // Save token and user data to localStorage
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(user));
-
-                // Navigate to dashboard
+    
+                // Navigate to user dashboard
                 navigate('/userdb');
             }
         } catch (error) {
             console.error(error);
-            setErrorMessage(
-                error.response?.data?.message || 'Network issue. Please try again.'
-            );
+            setErrorMessage(error.response?.data?.message || 'Network issue. Please try again.');
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     return (
         <Container className="d-flex flex-column align-items-center py-5" style={{ maxWidth: '400px' }}>
