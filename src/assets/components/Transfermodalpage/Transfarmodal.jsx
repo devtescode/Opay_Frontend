@@ -65,7 +65,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
     const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
     const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
     const userId = JSON.parse(localStorage.getItem('user')).userId; 
-  
+    
     const transactionData = {
       userId,
       bankName: savedAccount?.bankName,
@@ -73,9 +73,10 @@ const Transfermodal = ({ showModal, setShowModal }) => {
       accountName: savedAccount?.accountName,
       amount: savedAmount,
     };
-  
+    
     console.log('Transaction Data:', transactionData); // Debugging
     try {
+      setIsLoading(true); // Disable button at the start of submission
       const response = await axios.post(API_URLS.transactions, transactionData);
       
       if (response.data.transactionId) {
@@ -93,9 +94,12 @@ const Transfermodal = ({ showModal, setShowModal }) => {
     } catch (error) {
       console.error('Failed to save transaction:', error.response?.data || error.message);
     }
+    finally {
+      setIsLoading(false);
+    }
   };
+  const [isLoading, setIsLoading] = useState(false); // Track loading state
   
-
 
   useEffect(() => {
     const savedAccount = localStorage.getItem("selectedAccount");
@@ -214,8 +218,12 @@ const Transfermodal = ({ showModal, setShowModal }) => {
               </div>
             </div>
 
-            <Button variant="success" className="w-75 py-2 mt-4 mx-auto rounded-5 fs-5" onClick={PaymodelBtn}>
-              Pay
+            <Button 
+              disabled={isLoading}
+              variant="success"
+              className="w-75 py-2 mt-4 mx-auto rounded-5 fs-5" 
+              onClick={PaymodelBtn}>
+              {isLoading ? "Pay" : "Pay"}
             </Button>
           </div>
         </Modal.Body>

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Transfermodal from "../Transfermodalpage/Transfarmodal";
+import { useNavigate } from "react-router-dom";
 
 function Transferform() {
     const [amount, setAmount] = useState(""); // Changed `amountenter` to `amount`
     const [remark, setRemark] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [accountDetails, setAccountDetails] = useState(null);
+     const [isLoading, setIsLoading] = useState(false); // Track loading state
+    
 
     const handleAmountClick = (value) => {
         setAmount(value); // Set the selected amount directly
@@ -13,19 +16,25 @@ function Transferform() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        setIsLoading(true); // Disable button at the start of submission
+    
         // Validate the amount
         if (!amount || isNaN(amount) || amount < 100 || amount > 5000000) {
             alert("Please enter a valid amount between ₦100.00 and ₦5,000,000.00");
+            setIsLoading(false); // Re-enable button after validation fails
             return;
         }
-
+    
         // Save the amount to localStorage
         localStorage.setItem("transferAmount", amount);
-
+    
         // Open the modal
         setShowModal(true);
+        
+        // Re-enable the button after modal is set
+        setIsLoading(false);
     };
+    
 
     useEffect(() => {
         // Retrieve selected account details from localStorage
@@ -38,7 +47,10 @@ function Transferform() {
     const closeModal = () => {
         setShowModal(false); // Close modal and reset its visibility state
     };
-
+    const navigate = useNavigate()
+    const TransfarBtn=()=>{
+        navigate("/bank")
+    }
     return (
         <div className="transfer-form-container" style={{ height: "100vh" }}>
             <div
@@ -47,7 +59,7 @@ function Transferform() {
             >
                 <div className="card-header text-start bg-white text-center py-3 bg-white">
                     <h6 className="mb-1 text-start">
-                        <i className="ri-arrow-left-s-line mx-2"></i> Transfer to Bank Account
+                        <i className="ri-arrow-left-s-line mx-2" onClick={TransfarBtn}></i> Transfer to Bank Account
                     </h6>
                 </div>
                 <div className="card-body p-2">
@@ -101,8 +113,11 @@ function Transferform() {
                                 type="submit"
                                 className="btn btn-success w-100 p-2"
                                 style={{ borderRadius: "20px" }}
-                            >
-                                Confirm
+                                disabled={isLoading} // Disable when loading
+                                >
+                            
+                                {isLoading ? "Confirm" : "Confirm"}
+                                
                             </button>
                         </div>
                     </form>

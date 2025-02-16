@@ -14,6 +14,7 @@ export default function Bank() {
   const [accountName, setAccountName] = useState(''); // For showing validated name
   const [selectedBankCode, setSelectedBankCode] = useState("");
   const [showAll, setShowAll] = useState(false)
+  const [isLoading, setIsLoading] = useState(false); // Track loading state
 
   const navigate = useNavigate()
 
@@ -24,20 +25,20 @@ export default function Bank() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     // Input Validation
     if (!accountNumber || !selectedBankCode) {
       alert('Please fill in all fields.');
       return;
     }
-
+    
     if (accountNumber.length !== 10) {
       alert('Account number must be 10 digits.');
       return;
     }
-
+    
     // const bankCode = selectedBank; 
-
+    
     const selectedBank = Data.banks.find((bank) => bank.code === selectedBankCode);
     // console.log(selectedBank);
     
@@ -46,6 +47,7 @@ export default function Bank() {
       return;
     }
     try {
+      setIsLoading(true); // Disable button
       const response = await fetch(API_URLS.useraccount, {
         method: 'POST',
         headers: {
@@ -72,16 +74,16 @@ export default function Bank() {
 
         localStorage.setItem("selectedAccount", JSON.stringify(accountDetails));
 
-        
+
         // const userId = JSON.parse(localStorage.getItem("user")).userData.userId;
         const userId = JSON.parse(localStorage.getItem('user')).userId;
-          
-        
-        await axios.post(API_URLS.saveRecentTransaction , {
+
+
+        await axios.post(API_URLS.saveRecentTransaction, {
           userId,
           accountDetails,
         });
-        
+
         navigate("/transfer")
       } else {
         alert(data.message || 'Failed to validate account.');
@@ -90,23 +92,31 @@ export default function Bank() {
       console.error('Error:', err);
       alert('Failed to connect to the server. Please try again later.');
     }
+    finally {
+      setIsLoading(false);
+    }
   };
 
-  const HistroyBtn=()=>{
+  const HistroyBtn = () => {
     navigate("/storetransaction")
   }
 
 
   const handleTransactionSelect = (transaction) => {
-    setAccountNumber(transaction.accountNumber);    
+    setAccountNumber(transaction.accountNumber);
     // Find the bank code based on the bank name from the Data.banks array
     const bank = Data.banks.find(bank => bank.name === transaction.bankName);
     if (bank) {
-        setSelectedBankCode(bank.code);
+      setSelectedBankCode(bank.code);
     }
 
     // console.log(transaction.bankName);
   };
+
+
+  const BankBtn=()=>{
+    navigate("/userdb")
+  }
   return (
     <div className="container main-container">
       {/* Header */}
@@ -114,7 +124,7 @@ export default function Bank() {
         <div className="d-flex align-items-center gap-2">
           <button className="btn btn-link text-dark p-0">
             {/* <i className="bi bi-chevron-left fs-5"></i> */}
-            <i class="ri-arrow-left-s-line"></i>
+            <i class="ri-arrow-left-s-line" onClick={BankBtn}></i>
           </button>
           <h5 className="mb-0">Transfer to Bank Account</h5>
         </div>
@@ -156,7 +166,7 @@ export default function Bank() {
                 className="form-select form-select-lg"
                 value={selectedBankCode}
                 onChange={(e) => setSelectedBankCode(e.target.value)}
-                
+
               >
                 <option value="">Select Bank</option>
                 {Data.banks.map((bank) => (
@@ -170,8 +180,9 @@ export default function Bank() {
               <button
                 type="submit"
                 className="btn btn-success w-75 p-2 rounded-5"
-              >
-                Next
+                disabled={isLoading} // Disable when loading
+                >
+                {isLoading ? "Next" : "Next"}
               </button>
             </div>
           </div>
@@ -195,7 +206,7 @@ export default function Bank() {
         </div>
         <i className="bi bi-chevron-right"></i>
       </div>
-      <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect}/>
+      <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect} />
       {/* <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect} /> */}
 
     </div>
