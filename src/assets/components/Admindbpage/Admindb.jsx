@@ -395,6 +395,7 @@ const Admindb = () => {
                             <div className="modal-header">
                                 <h5 className="modal-title" id="transactionModalLabel">
                                     Transaction History
+                                    <span className='text-danger'> {transactions.length}</span>
                                 </h5>
                                 <button
                                     type="button"
