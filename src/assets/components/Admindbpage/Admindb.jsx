@@ -4,7 +4,7 @@ import NavbarTop from '../NavbarToppage/NavbarTop'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URLS } from '../../../../utils/apiConfig';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 const Admindb = () => {
     const navigate = useNavigate();
@@ -154,7 +154,7 @@ const Admindb = () => {
             try {
                 const response = await fetch(API_URLS.activesessions);
                 const data = await response.json();
-                console.log("Fetched sessions:", data.sessions); // Log the fetched data
+                console.log("Fetched sessions:", data); // Log the fetched data
                 // setSessions(data.sessions);
                 setSessions(data || []); // Handle case where data is empty
 
@@ -162,30 +162,48 @@ const Admindb = () => {
                 console.error('Error fetching sessions:', error);
             }
         };
-    
+
         fetchSessions();
     }, []);
 
 
     const shortenDeviceInfo = (deviceInfo) => {
         if (!deviceInfo) return "Unknown Device";
-    
+
         // Extract key details
         const match = deviceInfo.match(/\((.*?)\)/); // Extract content inside parentheses
         const details = match ? match[1].split(";")[0] : deviceInfo.split(" ")[0]; // Get first part
-    
+
         // Detect browser
         let browser = "Unknown Browser";
         if (deviceInfo.includes("Chrome")) browser = "Chrome";
         else if (deviceInfo.includes("Safari") && !deviceInfo.includes("Chrome")) browser = "Safari";
         else if (deviceInfo.includes("Firefox")) browser = "Firefox";
         else if (deviceInfo.includes("Edge")) browser = "Edge";
-    
+
         return `${details} - ${browser}`;
     };
-    
-    
- 
+
+
+    // const [sessions, setSessions] = useState([]);
+    const handleLogoutSession = async (sessionId) => {
+        try {
+            const response = await fetch(`http://localhost:4000/useropay/logoutsession/${sessionId}`, {
+                method: "DELETE",
+            });
+
+            if (response.ok) {
+                setSessions(sessions.filter(session => session._id !== sessionId));
+                alert("Session logged out successfully!");
+            } else {
+                alert("Failed to log out session");
+            }
+        } catch (error) {
+            console.error("Error logging out session:", error);
+        }
+    };
+
+
 
 
 
@@ -253,7 +271,7 @@ const Admindb = () => {
                                     users.map((user, index) => {
                                         // Get the sessions that belong to this user
                                         const userSessions = sessions.filter(session => session.userId._id === user._id);
-                                        
+
 
 
 
@@ -276,10 +294,14 @@ const Admindb = () => {
                                                             {/* Session-specific details */}
                                                             <td>
 
-                                                             {shortenDeviceInfo(session.deviceInfo)}
+                                                                {shortenDeviceInfo(session.deviceInfo)}
                                                             </td>
                                                             <td> {new Date(session.loggedInAt).toLocaleString()}</td>
-                                                            <td>{new Date(session.expiresAt).toLocaleString()}</td>
+                                                            <td>{new Date(session.expiresAt).toLocaleString()}
+                                                            <td style={{cursor:"pointer"}} className="text-danger" onClick={() => handleLogoutSession(session._id)}>
+                                                                    Log Out
+                                                            </td>
+                                                            </td>
 
                                                             {/* Only show buttons on the first session row */}
                                                             {sessionIndex === 0 && (

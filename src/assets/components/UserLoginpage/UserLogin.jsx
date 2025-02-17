@@ -29,9 +29,10 @@ const UserLogin = () => {
         e.preventDefault();
         setIsLoading(true); // Disable button
     
-        const deviceInfo = navigator.userAgent;    
+        const deviceInfo = navigator.userAgent; 
+        const existingSessionId = localStorage.getItem("sessionId") || null;   
         try {
-            const response = await axios.post(API_URLS.userlogin, { password, deviceInfo });
+            const response = await axios.post(API_URLS.userlogin, { password, deviceInfo, sessionId: existingSessionId });
     
             if (response.status === 200) {
                 const { token, user } = response.data;
@@ -39,6 +40,7 @@ const UserLogin = () => {
                 // Save token and user data to localStorage
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem("sessionId", user.sessionId); // Store sessionId
     
                 // Navigate to user dashboard
                 navigate('/userdb');

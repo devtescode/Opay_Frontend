@@ -109,9 +109,6 @@ function TransactionReceipt({ initialStatus }) {
     return <p>Loading...</p>; // Optional: Show loading if transactionId isn't available yet
   }
 
-
-
-
   return (
     <>
       <div className="d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto" >
