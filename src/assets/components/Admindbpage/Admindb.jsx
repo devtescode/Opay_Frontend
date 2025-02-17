@@ -188,7 +188,7 @@ const Admindb = () => {
     // const [sessions, setSessions] = useState([]);
     const handleLogoutSession = async (sessionId) => {
         try {
-            const response = await fetch(`http://localhost:4000/useropay/logoutsession/${sessionId}`, {
+            const response = await fetch(API_URLS.logoutsession(sessionId), {
                 method: "DELETE",
             });
 
