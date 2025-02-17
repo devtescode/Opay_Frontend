@@ -154,7 +154,7 @@ const Admindb = () => {
             try {
                 const response = await fetch(API_URLS.activesessions);
                 const data = await response.json();
-                console.log("Fetched sessions:", data); // Log the fetched data
+                // console.log("Fetched sessions:", data); // Log the fetched data
                 // setSessions(data.sessions);
                 setSessions(data || []); // Handle case where data is empty
 
@@ -298,9 +298,9 @@ const Admindb = () => {
                                                             </td>
                                                             <td> {new Date(session.loggedInAt).toLocaleString()}</td>
                                                             <td>{new Date(session.expiresAt).toLocaleString()}
-                                                            <td style={{cursor:"pointer"}} className="text-danger" onClick={() => handleLogoutSession(session._id)}>
+                                                                <p style={{ cursor: "pointer" }} className="text-danger" onClick={() => handleLogoutSession(session._id)}>
                                                                     Log Out
-                                                            </td>
+                                                                </p>
                                                             </td>
 
                                                             {/* Only show buttons on the first session row */}
