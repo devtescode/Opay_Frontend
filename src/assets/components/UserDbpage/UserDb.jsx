@@ -23,12 +23,12 @@ const UserDb= () => {
   useEffect(() => {
     // Listen for session logout from the admin panel
     socket.on("sessionLoggedOut", (data) => {
-      console.log("Received sessionLoggedOut event:", data);
+      // console.log("Received sessionLoggedOut event:", data);
       
       const user = JSON.parse(localStorage.getItem("user"));
       const token = localStorage.getItem("token");
       
-      console.log("Stored user:", user);
+      // console.log("Stored user:", user);
       
       // Check if session ID from backend matches session ID stored on client side
       if (user && token && user.sessionId === data.sessionId) {
