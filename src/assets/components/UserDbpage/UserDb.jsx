@@ -18,7 +18,6 @@ const UserDb= () => {
   const navigate = useNavigate();
   // "http://localhost:4000"
   const socket = io(baseURL);
-  console.log(baseURL);
   
   
   useEffect(() => {
