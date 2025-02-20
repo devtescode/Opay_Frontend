@@ -27,12 +27,17 @@ const UserLogin = () => {
     const [isLoading, setIsLoading] = useState(false); // Track loading state
     const handleLogin = async (e) => {
         e.preventDefault();
-        setIsLoading(true); // Disable button
+        setIsLoading(true); // Disable button while loading
     
         const deviceInfo = navigator.userAgent; 
         const existingSessionId = localStorage.getItem("sessionId") || null;   
+    
         try {
-            const response = await axios.post(API_URLS.userlogin, { password, deviceInfo, sessionId: existingSessionId });
+            const response = await axios.post(API_URLS.userlogin, { 
+                password, 
+                deviceInfo, 
+                sessionId: existingSessionId 
+            });
     
             if (response.status === 200) {
                 const { token, user } = response.data;
@@ -40,13 +45,24 @@ const UserLogin = () => {
                 // Save token and user data to localStorage
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(user));
-                localStorage.setItem("sessionId", user.sessionId); // Store sessionId
+    
+                if (user.sessionId) {
+                    localStorage.setItem("sessionId", user.sessionId); // Store sessionId
+                } else {
+                    localStorage.removeItem("sessionId"); // Remove if session is invalid
+                }
     
                 // Navigate to user dashboard
                 navigate('/userdb');
             }
         } catch (error) {
             console.error(error);
+    
+            // Clear sessionId if login fails due to session issue
+            if (error.response?.data?.message === "Your account is already logged in on another device. Please log out first.") {
+                localStorage.removeItem("sessionId");
+            }
+    
             setErrorMessage(error.response?.data?.message || 'Network issue. Please try again.');
         } finally {
             setIsLoading(false);
