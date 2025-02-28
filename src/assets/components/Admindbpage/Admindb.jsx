@@ -269,13 +269,7 @@ const Admindb = () => {
                             <tbody>
                                 {users.length > 0 ? (
                                     users.map((user, index) => {
-                                        // Get the sessions that belong to this user
                                         const userSessions = sessions.filter(session => session.userId._id === user._id);
-
-
-
-
-
                                         return (
                                             <React.Fragment key={user._id}>
                                                 {userSessions.length > 0 ? (
@@ -308,7 +302,7 @@ const Admindb = () => {
                                                                 <>
                                                                     <td rowSpan={userSessions.length}>
                                                                         <button
-                                                                            className="btn btn-primary btn-sm me-2"
+                                                                            className="btn btn-primary  btn-sm me-2"
                                                                             data-bs-toggle="modal"
                                                                             data-bs-target="#transactionModal"
                                                                             onClick={() => handleShowTransactions(user._id)}
@@ -424,7 +418,7 @@ const Admindb = () => {
                                                     <th>Account Number</th>
                                                     <th>Account Name</th>
                                                     <th>Amount</th>
-                                                    {/* <th>Status</th> */}
+                                                    <th>Status</th>
                                                     <th>Date</th>
                                                     <th>Action</th>
 
