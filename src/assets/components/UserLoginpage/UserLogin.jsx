@@ -38,7 +38,7 @@ const UserLogin = () => {
                 deviceInfo, 
                 sessionId: existingSessionId 
             });
-            console.log(response)
+            // console.log(response)
             if (response.status === 200) {
                 const { token, user } = response.data;
     
