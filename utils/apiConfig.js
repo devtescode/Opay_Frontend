@@ -1,5 +1,5 @@
 import { baseURL } from "../config";
-console.log('Base URL:', baseURL)
+// console.log('Base URL:', baseURL)
 export const API_URLS = {
     userlogin: `${baseURL}/useropay/userlogin`,
     adminlogin: `${baseURL}/useropay/adminlogin`,
