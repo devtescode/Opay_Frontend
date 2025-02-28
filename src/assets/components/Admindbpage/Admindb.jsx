@@ -446,7 +446,7 @@ const Admindb = () => {
                                                             </span>
                                                         </td>
                                                         <td>
-                                                            {/* {new Date(transaction.createdAt).toLocaleDateString()} */}
+                                                          
                                                             {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
                                                         </td>
                                                         <td>
