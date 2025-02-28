@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URLS } from '../../../../utils/apiConfig';
 // import Swal from 'sweetalert2';
+import { format } from "date-fns";
 
 const Admindb = () => {
     const navigate = useNavigate();
@@ -445,7 +446,8 @@ const Admindb = () => {
                                                             </span>
                                                         </td>
                                                         <td>
-                                                            {new Date(transaction.createdAt).toLocaleDateString()}
+                                                            {/* {new Date(transaction.createdAt).toLocaleDateString()} */}
+                                                            {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
                                                         </td>
                                                         <td>
                                                             <button className='btn btn-danger' onClick={() => handleDeleteTransaction(transaction._id)}><i class="ri-close-circle-line"></i></button>
