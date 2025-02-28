@@ -213,7 +213,7 @@ const Admindb = () => {
         <div>
             <Navbar />
             <NavbarTop />
-            <div style={{marginTop:"80px"}}>
+            <div style={{marginTop:"60px"}}>
                 <div class="container text-center">
                     <div class="row gap-2">
                         <div class="col-12 col-md bg-white">
