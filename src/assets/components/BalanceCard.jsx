@@ -7,7 +7,7 @@ import { API_URLS } from '../../../utils/apiConfig';
 
 const BalanceCard = () => {
     const navigate = useNavigate();
-    const [showBalance, setShowBalance] = useState(false);
+    const [showBalance, setShowBalance] = useState(true);
     const [balance, setBalance] = useState(0);
 
     const fetchUserBalance = async () => {
