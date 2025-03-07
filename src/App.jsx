@@ -15,6 +15,7 @@ import TransactionReceipt from './assets/components/TransactionReceiptpage/Trans
 import StoreTransaction from './assets/components/StoreTransactionpage/StoreTransaction'
 import TransactionDetails from './assets/components/TransactionDetailspage/TransactionDetails'
 import TransactionDetailsBanks from './assets/components/TransactionDetailsBanks/TransactionDetailsBanks'
+import Addmoney from './assets/components/Addmoneypage/Addmoney'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
       <Route path="/storetransaction" element={<StoreTransaction/>}/>
       <Route path='/transactiondetails'element={<TransactionDetails/>}/>
       <Route path='/TransactionDetailsBanks' element={<TransactionDetailsBanks/>}/>
+      <Route path='/addmoney' element={<Addmoney/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>

@@ -20,6 +20,7 @@ export const API_URLS = {
     blockUser: (userId)=>`${baseURL}/useropay/blockUser/${userId}`,
     unblockUser: (userId)=>`${baseURL}/useropay/unblockUser/${userId}`,
     activesessions: `${baseURL}/useropay/activesessions`,
-   
-    logoutsession: (sessionId)=>`${baseURL}/useropay/logoutsession/${sessionId}`
+    logoutsession: (sessionId)=>`${baseURL}/useropay/logoutsession/${sessionId}`,
+    getuserbalance : `${baseURL}/useropay/getuserbalance`,
+    addmoney : `${baseURL}/useropay/addmoney`
 };
