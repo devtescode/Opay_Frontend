@@ -29,22 +29,37 @@ const Admindb = () => {
     const [modalLoading, setModalLoading] = useState(false);
     const [sessions, setSessions] = useState([]);
     // Fetch users from the backend
+    // useEffect(() => {
+    //     const fetchUsers = async () => {
+    //         try {
+    //             const response = await axios.get(API_URLS.getallusers);
+
+    //             setUsers(response.data);
+    //             setLoading(false);
+    //         } catch (error) {
+    //             console.error("Error fetching users:", error);
+    //             setLoading(false);
+    //         }
+    //     };
+
+    //     fetchUsers();
+    // }, []);
+
     useEffect(() => {
         const fetchUsers = async () => {
+            setLoading(true);
             try {
-                const response = await axios.get(API_URLS.getallusers);
-
-                setUsers(response.data);
-                setLoading(false);
+                const response = await fetch(API_URLS.getallusers);  // Replace with your actual API call
+                const data = await response.json();
+                setUsers(data);
             } catch (error) {
-                console.error("Error fetching users:", error);
-                setLoading(false);
+                console.error("Failed to fetch users:", error);
+            } finally {
+                setLoading(false);  // Set loading to false after fetch completes
             }
         };
-
         fetchUsers();
     }, []);
-
 
     const handleShowTransactions = async (userId) => {
         setSelectedUser(userId);
@@ -229,7 +244,7 @@ const Admindb = () => {
         <div>
             <Navbar />
             <NavbarTop />
-            <div style={{marginTop:"60px"}}>
+            <div style={{ marginTop: "60px" }}>
                 <div class="container text-center">
                     <div class="row gap-2">
                         <div class="col-12 col-md bg-white">
@@ -281,80 +296,64 @@ const Admindb = () => {
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Balance</th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Fullname</th>
-                                    <th scope="col">Phone No</th>
-                                    <th scope="col">Device Info</th>
-                                    <th scope="col">Logged In At</th>
-                                    <th scope="col">Expires At</th>
-                                    <th scope="col">History</th>
-                                    <th scope="col">Block/Unblock</th>
+                                    <th>#</th>
+                                    <th>Balance</th>
+                                    <th>Username</th>
+                                    <th>Fullname</th>
+                                    <th>Phone No</th>
+                                    <th>Device Info</th>
+                                    <th>Logged In At</th>
+                                    <th>Expires At</th>
+                                    <th>History</th>
+                                    <th>Block/Unblock</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {users?.length > 0 ? (
+                                {/* Handle loading state where users haven't been fetched yet */}
+                                {(!users || users.length === 0) ? (
+                                    <tr>
+                                        <td colSpan="10" className="text-center">No users found.</td>
+                                    </tr>
+                                ) : (
                                     users.map((user, index) => {
-                                        // const userSessions = sessions.filter(session => session.userId._id === user._id);
                                         const userSessions = (sessions || []).filter(session => session?.userId?._id === user._id);
+
                                         return (
                                             <React.Fragment key={user._id}>
-                                                {userSessions?.length > 0 ? (
+                                                {userSessions.length > 0 ? (
                                                     userSessions.map((session, sessionIndex) => (
                                                         <tr key={session._id}>
-                                                            {/* Only display user details on the first session row */}
                                                             {sessionIndex === 0 && (
                                                                 <>
                                                                     <th scope="row" rowSpan={userSessions.length}>{index + 1}</th>
-                                                                    <td>{user.walletBalance ? `₦${Number(user.walletBalance).toLocaleString()}` : "N/A"}</td>
-
+                                                                    <td rowSpan={userSessions.length}>
+                                                                        {user.walletBalance ? `₦${Number(user.walletBalance).toLocaleString()}` : "N/A"}
+                                                                    </td>
                                                                     <td rowSpan={userSessions.length}>{user.username || "N/A"}</td>
                                                                     <td rowSpan={userSessions.length}>{user.fullname || "N/A"}</td>
                                                                     <td rowSpan={userSessions.length}>{user.phoneNumber || "N/A"}</td>
                                                                 </>
                                                             )}
-
-                                                            {/* Session-specific details */}
+                                                            <td>{shortenDeviceInfo(session.deviceInfo)}</td>
+                                                            <td>{new Date(session.loggedInAt).toLocaleString()}</td>
                                                             <td>
-
-                                                                {shortenDeviceInfo(session.deviceInfo)}
+                                                                {new Date(session.expiresAt).toLocaleString()}
+                                                                <p style={{ cursor: "pointer" }} className="text-danger" onClick={() => handleLogoutSession(session._id)}>Log Out</p>
                                                             </td>
-                                                            <td> {new Date(session.loggedInAt).toLocaleString()}</td>
-                                                            <td>{new Date(session.expiresAt).toLocaleString()}
-                                                                <p style={{ cursor: "pointer" }} className="text-danger" onClick={() => handleLogoutSession(session._id)}>
-                                                                    Log Out
-                                                                </p>
-                                                            </td>
-
-                                                            {/* Only show buttons on the first session row */}
                                                             {sessionIndex === 0 && (
                                                                 <>
                                                                     <td rowSpan={userSessions.length}>
-                                                                        <button
-                                                                            className="btn btn-primary  btn-sm me-2"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#transactionModal"
-                                                                            onClick={() => handleShowTransactions(user._id)}
-                                                                        >
+                                                                        <button className="btn btn-primary btn-sm me-2"
+                                                                            data-bs-toggle="modal" data-bs-target="#transactionModal"
+                                                                            onClick={() => handleShowTransactions(user._id)}>
                                                                             <i className="ri-history-line px-3"></i>
                                                                         </button>
                                                                     </td>
                                                                     <td rowSpan={userSessions.length}>
                                                                         {user.blocked ? (
-                                                                            <button
-                                                                                className="btn btn-danger btn-sm"
-                                                                                onClick={() => unblockUser(user._id)}
-                                                                            >
-                                                                                Block
-                                                                            </button>
+                                                                            <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user._id)}>Unblock</button>
                                                                         ) : (
-                                                                            <button
-                                                                                className="btn btn-warning btn-sm"
-                                                                                onClick={() => blockUser(user._id)}
-                                                                            >
-                                                                                Unblock
-                                                                            </button>
+                                                                            <button className="btn btn-warning btn-sm" onClick={() => blockUser(user._id)}>Block</button>
                                                                         )}
                                                                     </td>
                                                                 </>
@@ -362,33 +361,25 @@ const Admindb = () => {
                                                         </tr>
                                                     ))
                                                 ) : (
-                                                    // If no active session for the user, display their row without session details
-                                                    <tr key={user._id}>
+                                                    <tr>
                                                         <th scope="row">{index + 1}</th>
-                                                        <td>{user.walletBalance || "N/A"}</td>
+                                                        <td>{user.walletBalance ? `₦${Number(user.walletBalance).toLocaleString()}` : "N/A"}</td>
                                                         <td>{user.username || "N/A"}</td>
                                                         <td>{user.fullname || "N/A"}</td>
                                                         <td>{user.phoneNumber || "N/A"}</td>
                                                         <td colSpan="3" className="text-center">No Active Sessions</td>
                                                         <td>
-                                                            <button
-                                                                className="btn btn-primary btn-sm me-2"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#transactionModal"
-                                                                onClick={() => handleShowTransactions(user._id)}
-                                                            >
+                                                            <button className="btn btn-primary btn-sm me-2"
+                                                                data-bs-toggle="modal" data-bs-target="#transactionModal"
+                                                                onClick={() => handleShowTransactions(user._id)}>
                                                                 <i className="ri-history-line px-3"></i>
                                                             </button>
                                                         </td>
                                                         <td>
                                                             {user.blocked ? (
-                                                                <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user._id)}>
-                                                                    Block
-                                                                </button>
+                                                                <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user._id)}>Unblock</button>
                                                             ) : (
-                                                                <button className="btn btn-warning btn-sm" onClick={() => blockUser(user._id)}>
-                                                                    Unblock
-                                                                </button>
+                                                                <button className="btn btn-warning btn-sm" onClick={() => blockUser(user._id)}>Block</button>
                                                             )}
                                                         </td>
                                                     </tr>
@@ -396,16 +387,12 @@ const Admindb = () => {
                                             </React.Fragment>
                                         );
                                     })
-                                ) : (
-                                    <tr>
-                                        <td colSpan="9" className="text-center">No users found.</td>
-                                    </tr>
                                 )}
                             </tbody>
                         </table>
                     </div>
-
                 )}
+
 
 
                 <div
@@ -476,7 +463,7 @@ const Admindb = () => {
                                                             </span>
                                                         </td>
                                                         <td>
-                                                          
+
                                                             {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
                                                         </td>
                                                         <td>
@@ -495,7 +482,7 @@ const Admindb = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
