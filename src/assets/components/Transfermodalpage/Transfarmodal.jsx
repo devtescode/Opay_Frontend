@@ -163,7 +163,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
     
         // Step 3: Proceed to store transaction if balance update was successful
         const transactionData = {
-            userId,                               
+            userId,                               // Are you sending this correctly?
             bankName: savedAccount?.bankName,
             accountNumber: savedAccount?.accountNumber,
             accountName: savedAccount?.accountName,
