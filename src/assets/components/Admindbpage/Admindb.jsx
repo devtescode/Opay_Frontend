@@ -206,6 +206,22 @@ const Admindb = () => {
 
 
 
+    const [totalBalance, setTotalBalance] = useState(0);
+
+    const fetchtotalBalance = async () => {
+        try {
+            const response = await axios.get(API_URLS.getTotalBalance);
+            setUsers(response.data.users);
+            setTotalBalance(response.data.totalBalance);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchtotalBalance();
+    }, []);
+
 
 
 
@@ -216,6 +232,15 @@ const Admindb = () => {
             <div style={{marginTop:"60px"}}>
                 <div class="container text-center">
                     <div class="row gap-2">
+                        <div class="col-12 col-md bg-white">
+                            <div>
+                                <h4>Amount</h4>
+                            </div>
+                            <div>
+                                <h1>{Number(totalBalance).toLocaleString()}
+                                </h1>
+                            </div>
+                        </div>
                         <div class="col-12 col-md bg-white">
                             <div>
                                 <h4>Users</h4>
@@ -269,7 +294,7 @@ const Admindb = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.length > 0 ? (
+                                {users?.length > 0 ? (
                                     users.map((user, index) => {
                                         const userSessions = sessions.filter(session => session.userId._id === user._id);
                                         return (

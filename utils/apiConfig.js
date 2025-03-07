@@ -23,5 +23,6 @@ export const API_URLS = {
     logoutsession: (sessionId)=>`${baseURL}/useropay/logoutsession/${sessionId}`,
     getuserbalance : `${baseURL}/useropay/getuserbalance`,
     addmoney : `${baseURL}/useropay/addmoney`,
-    updatebalance : `${baseURL}/useropay/updatebalance`
+    updatebalance : `${baseURL}/useropay/updatebalance`,
+    getTotalBalance : `${baseURL}/useropay/getTotalBalance`
 };
