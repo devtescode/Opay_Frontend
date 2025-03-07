@@ -257,6 +257,7 @@ const Admindb = () => {
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Balance</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Fullname</th>
                                     <th scope="col">Phone No</th>
@@ -280,6 +281,8 @@ const Admindb = () => {
                                                             {sessionIndex === 0 && (
                                                                 <>
                                                                     <th scope="row" rowSpan={userSessions.length}>{index + 1}</th>
+                                                                    <td>{user.walletBalance ? `₦${Number(user.walletBalance).toLocaleString()}` : "N/A"}</td>
+
                                                                     <td rowSpan={userSessions.length}>{user.username || "N/A"}</td>
                                                                     <td rowSpan={userSessions.length}>{user.fullname || "N/A"}</td>
                                                                     <td rowSpan={userSessions.length}>{user.phoneNumber || "N/A"}</td>
@@ -336,6 +339,7 @@ const Admindb = () => {
                                                     // If no active session for the user, display their row without session details
                                                     <tr key={user._id}>
                                                         <th scope="row">{index + 1}</th>
+                                                        <td>{user.walletBalance || "N/A"}</td>
                                                         <td>{user.username || "N/A"}</td>
                                                         <td>{user.fullname || "N/A"}</td>
                                                         <td>{user.phoneNumber || "N/A"}</td>
