@@ -296,10 +296,11 @@ const Admindb = () => {
                             <tbody>
                                 {users?.length > 0 ? (
                                     users.map((user, index) => {
-                                        const userSessions = sessions.filter(session => session.userId._id === user._id);
+                                        // const userSessions = sessions.filter(session => session.userId._id === user._id);
+                                        const userSessions = (sessions || []).filter(session => session?.userId?._id === user._id);
                                         return (
                                             <React.Fragment key={user._id}>
-                                                {userSessions.length > 0 ? (
+                                                {userSessions?.length > 0 ? (
                                                     userSessions.map((session, sessionIndex) => (
                                                         <tr key={session._id}>
                                                             {/* Only display user details on the first session row */}
