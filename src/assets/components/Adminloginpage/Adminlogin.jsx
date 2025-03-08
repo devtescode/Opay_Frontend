@@ -9,17 +9,16 @@ const Adminlogin = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Reset previous messages
+        setIsLoading(true);
         setErrorMessage('');
         setSuccessMessage('');
 
         try {
             const response = await axios.post(API_URLS.adminlogin, { email, password });
-            localStorage.setItem('adminToken', response.data.token); // Save the token
-            // If successful, show the success message
+            localStorage.setItem('adminToken', response.data.token); 
             setSuccessMessage(response.data.message);
             // console.log('Login successful', response.data);
             // Optionally, redirect to the admin dashboard or store a token if needed
@@ -30,6 +29,9 @@ const Adminlogin = () => {
             // If there's an error, set the error message
             setErrorMessage(error.response ? error.response.data.message : 'Login failed');
             console.error('Login failed', error);
+        }
+        finally {
+            setIsLoading(false);
         }
     };
 
@@ -109,8 +111,10 @@ const Adminlogin = () => {
                             }}
                             onMouseOver={(e) => e.target.style.opacity = "0.8"}
                             onMouseOut={(e) => e.target.style.opacity = "1"}
+                            disabled={isLoading} // Disable when loading
                         >
-                            Login
+                            {/* Login */}
+                            {isLoading ? "Login..." : "Login"}
                         </button>
                     </div>
                 </form>
