@@ -35,52 +35,88 @@ const Adminlogin = () => {
 
 
     return (
-        <div className='border border-dark bg-dark' style={{ height: "100vh" }}>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-6 col-sm-12 bg-white mx-auto p-2" style={{ alignItems: "center" }}>
-                        <div>
-                            <form onSubmit={handleSubmit} className="login-form">
-                                <div className='text-center'>
-                                    <h2>Admin Login</h2>
-                                </div>
-                                <div>
-                                    <input
-                                        type="email"
-                                        className='form-control my-2'
-                                        placeholder='Email'
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                    <input
-                                        type="text"
-                                        className='form-control my-2'
-                                        placeholder='Password'
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                    <div className='text-center'>
-                                        <button type="submit" className="btn btn-success">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
-                            {/* Display success message */}
-                            {successMessage && (
-                                <div className="alert alert-success mt-3">
-                                    {successMessage}
-                                </div>
-                            )}
-
-                            {/* Display error message */}
-                            {errorMessage && (
-                                <div className="alert alert-danger mt-3">
-                                    {errorMessage}
-                                </div>
-                            )}
-
-                        </div>
-                    </div>
+        <div className="d-flex align-items-center justify-content-center vh-100"
+            style={{
+                background: "linear-gradient(to right, #141e30, #243b55)",
+            }}
+        >
+            <div className="card p-4 rounded shadow-lg"
+                style={{
+                    maxWidth: "400px",
+                    width: "100%",
+                    borderRadius: "15px",
+                    backdropFilter: "blur(10px)",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+                    color: "#fff",
+                }}
+            >
+                <div className="text-center">
+                    <h3 className="mb-3" style={{ color: "#00c6ff" }}>Admin Login</h3>
                 </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="input-group mb-3">
+                        <span className="input-group-text bg-transparent border-light text-white">
+                            <i class="ri-mail-volume-line"></i>
+                        </span>
+                        <input
+                            type="email"
+                            className="form-control text-white"
+                            style={{
+                                background: "rgba(255, 255, 255, 0.2)",
+                                border: "none",
+                                borderRadius: "10px",
+                                padding: "12px",
+                            }}
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="input-group mb-3">
+                        <span className="input-group-text bg-transparent border-light text-white">
+                            <i class="ri-lock-2-fill"></i>
+                        </span>
+                        <input
+                            type="password"
+                            className="form-control text-white"
+                            style={{
+                                background: "rgba(255, 255, 255, 0.2)",
+                                border: "none",
+                                borderRadius: "10px",
+                                padding: "12px",
+                            }}
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className='text-center'>
+
+                        <button type="submit" className="btn w-50"
+                            style={{
+                                background: "linear-gradient(to right, #00c6ff, #0072ff)",
+                                border: "none",
+                                borderRadius: "10px",
+                                padding: "12px",
+                                color: "#fff",
+                                fontWeight: "bold",
+                                transition: "0.3s",
+                            }}
+                            onMouseOver={(e) => e.target.style.opacity = "0.8"}
+                            onMouseOut={(e) => e.target.style.opacity = "1"}
+                        >
+                            Login
+                        </button>
+                    </div>
+                </form>
+
+                {successMessage && <div className="alert alert-success mt-3">{successMessage}</div>}
+                {errorMessage && <div className="alert alert-danger mt-3">{errorMessage}</div>}
             </div>
         </div>
     );
