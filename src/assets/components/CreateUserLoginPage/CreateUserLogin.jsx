@@ -41,7 +41,7 @@ const CreateUserLogin = () => {
             <NavbarTop />
             <div className='container'>
                 <div className="row">
-                    <div className="col-md-6 col-sm-12 bg-light mx-auto">
+                    <div className="col-md-6 col-sm-12 bg-light mx-auto" style={{marginTop:"60px"}}>
                         <h4>Create Details</h4>
                         <div className='p-2'>
                             <input type="text"

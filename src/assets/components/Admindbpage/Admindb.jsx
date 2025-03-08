@@ -45,13 +45,17 @@ const Admindb = () => {
     //     fetchUsers();
     // }, []);
 
+    const [error, setError] = useState(null);
     useEffect(() => {
         const fetchUsers = async () => {
             setLoading(true);
+            setError(null);
             try {
                 const response = await fetch(API_URLS.getallusers);  // Replace with your actual API call
                 const data = await response.json();
                 setUsers(data);
+                // console.log(response);
+
             } catch (error) {
                 console.error("Failed to fetch users:", error);
             } finally {
@@ -309,8 +313,7 @@ const Admindb = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* Handle loading state where users haven't been fetched yet */}
-                                {(!users || users.length === 0) ? (
+                                {(!users || users?.length === 0) ? (
                                     <tr>
                                         <td colSpan="10" className="text-center">No users found.</td>
                                     </tr>
@@ -320,40 +323,40 @@ const Admindb = () => {
 
                                         return (
                                             <React.Fragment key={user._id}>
-                                                {userSessions.length > 0 ? (
+                                                {userSessions?.length > 0 ? (
                                                     userSessions.map((session, sessionIndex) => (
-                                                        <tr key={session._id}>
+                                                        <tr key={session?._id}>
                                                             {sessionIndex === 0 && (
                                                                 <>
                                                                     <th scope="row" rowSpan={userSessions.length}>{index + 1}</th>
                                                                     <td rowSpan={userSessions.length}>
-                                                                        {user.walletBalance ? `₦${Number(user.walletBalance).toLocaleString()}` : "N/A"}
+                                                                        {user?.walletBalance ? `₦${Number(user?.walletBalance).toLocaleString()}` : "N/A"}
                                                                     </td>
-                                                                    <td rowSpan={userSessions.length}>{user.username || "N/A"}</td>
-                                                                    <td rowSpan={userSessions.length}>{user.fullname || "N/A"}</td>
-                                                                    <td rowSpan={userSessions.length}>{user.phoneNumber || "N/A"}</td>
+                                                                    <td rowSpan={userSessions.length}>{user?.username || "N/A"}</td>
+                                                                    <td rowSpan={userSessions.length}>{user?.fullname || "N/A"}</td>
+                                                                    <td rowSpan={userSessions.length}>{user?.phoneNumber || "N/A"}</td>
                                                                 </>
                                                             )}
-                                                            <td>{shortenDeviceInfo(session.deviceInfo)}</td>
-                                                            <td>{new Date(session.loggedInAt).toLocaleString()}</td>
+                                                            <td>{shortenDeviceInfo(session?.deviceInfo)}</td>
+                                                            <td>{session?.loggedInAt ? new Date(session.loggedInAt).toLocaleString() : "N/A"}</td>
                                                             <td>
-                                                                {new Date(session.expiresAt).toLocaleString()}
-                                                                <p style={{ cursor: "pointer" }} className="text-danger" onClick={() => handleLogoutSession(session._id)}>Log Out</p>
+                                                                {session?.expiresAt ? new Date(session.expiresAt).toLocaleString() : "N/A"}
+                                                                <p style={{ cursor: "pointer" }} className="text-danger" onClick={() => handleLogoutSession(session?._id)}>Log Out</p>
                                                             </td>
                                                             {sessionIndex === 0 && (
                                                                 <>
                                                                     <td rowSpan={userSessions.length}>
                                                                         <button className="btn btn-primary btn-sm me-2"
                                                                             data-bs-toggle="modal" data-bs-target="#transactionModal"
-                                                                            onClick={() => handleShowTransactions(user._id)}>
+                                                                            onClick={() => handleShowTransactions(user?._id)}>
                                                                             <i className="ri-history-line px-3"></i>
                                                                         </button>
                                                                     </td>
                                                                     <td rowSpan={userSessions.length}>
-                                                                        {user.blocked ? (
-                                                                            <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user._id)}>Unblock</button>
+                                                                        {user?.blocked ? (
+                                                                            <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user?._id)}>Unblock</button>
                                                                         ) : (
-                                                                            <button className="btn btn-warning btn-sm" onClick={() => blockUser(user._id)}>Block</button>
+                                                                            <button className="btn btn-warning btn-sm" onClick={() => blockUser(user?._id)}>Block</button>
                                                                         )}
                                                                     </td>
                                                                 </>
@@ -363,23 +366,23 @@ const Admindb = () => {
                                                 ) : (
                                                     <tr>
                                                         <th scope="row">{index + 1}</th>
-                                                        <td>{user.walletBalance ? `₦${Number(user.walletBalance).toLocaleString()}` : "N/A"}</td>
-                                                        <td>{user.username || "N/A"}</td>
-                                                        <td>{user.fullname || "N/A"}</td>
-                                                        <td>{user.phoneNumber || "N/A"}</td>
+                                                        <td>{user?.walletBalance ? `₦${Number(user?.walletBalance).toLocaleString()}` : "N/A"}</td>
+                                                        <td>{user?.username || "N/A"}</td>
+                                                        <td>{user?.fullname || "N/A"}</td>
+                                                        <td>{user?.phoneNumber || "N/A"}</td>
                                                         <td colSpan="3" className="text-center">No Active Sessions</td>
                                                         <td>
                                                             <button className="btn btn-primary btn-sm me-2"
                                                                 data-bs-toggle="modal" data-bs-target="#transactionModal"
-                                                                onClick={() => handleShowTransactions(user._id)}>
+                                                                onClick={() => handleShowTransactions(user?._id)}>
                                                                 <i className="ri-history-line px-3"></i>
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            {user.blocked ? (
-                                                                <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user._id)}>Unblock</button>
+                                                            {user?.blocked ? (
+                                                                <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user?._id)}>Unblock</button>
                                                             ) : (
-                                                                <button className="btn btn-warning btn-sm" onClick={() => blockUser(user._id)}>Block</button>
+                                                                <button className="btn btn-warning btn-sm" onClick={() => blockUser(user?._id)}>Block</button>
                                                             )}
                                                         </td>
                                                     </tr>
