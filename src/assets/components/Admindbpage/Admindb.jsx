@@ -23,6 +23,7 @@ const Admindb = () => {
 
 
     const [users, setUsers] = useState([]);
+    const [userss, setUserss] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedUser, setSelectedUser] = useState(null);
     const [transactions, setTransactions] = useState([]);
@@ -45,41 +46,51 @@ const Admindb = () => {
     //     fetchUsers();
     // }, []);
     const [error, setError] = useState(null);
-
     useEffect(() => {
-        console.log("setError exists:", typeof setError !== "undefined");
+        console.log("Fetching users...");
+        setLoading(true);
+        setError(null);
+    
         const fetchUsers = async () => {
-            setLoading(true);
-            setError(null); // Make sure this exists
-
             try {
-                console.log("Fetching users..."); // Debugging
                 const response = await fetch(API_URLS.getallusers);
                 const data = await response.json();
-
-                console.log("Fetched Users:", data);
-
+    
+                console.log("Fetched Users:", data); // Debug API response
+    
                 if (Array.isArray(data)) {
-                    setUsers(data);
+                    console.log("Users found, updating state:", data);
+                    setUsers(data);  // Update state correctly
                 } else {
-                    setUsers([]);
+                    console.log("Invalid data format received.");
+                    setUsers([]);  
                 }
             } catch (error) {
                 console.error("Failed to fetch users:", error);
-                setError(error.message); // Ensure setError exists
+                setError(error.message);
                 setUsers([]);
             } finally {
                 setLoading(false);
             }
         };
-
+    
         fetchUsers();
     }, []);
     
-
+    // Debug when `users` state updates
     useEffect(() => {
         console.log("Updated Users State:", users);
     }, [users]);
+    
+    useEffect(() => {
+        console.log("Loading State:", loading);
+    }, [loading]);
+
+
+
+    // useEffect(() => {
+    //     console.log("Updated Users State:", users);
+    // }, [users]);
 
 
     const handleShowTransactions = async (userId) => {
@@ -202,7 +213,7 @@ const Admindb = () => {
         fetchSessions();
     }, []);
 
-    console.log("Users Length:", users?.length);
+    // console.log("Users Length:", users?.length);
 
 
 
@@ -249,7 +260,7 @@ const Admindb = () => {
     const fetchtotalBalance = async () => {
         try {
             const response = await axios.get(API_URLS.getTotalBalance);
-            setUsers(response.data.users);
+            setUserss(response.data.users);
             setTotalBalance(response.data.totalBalance);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -334,8 +345,8 @@ const Admindb = () => {
                                     <th>Username</th>
                                     <th>Fullname</th>
                                     <th>Phone No</th>
-                                    <th>Device Info</th>
-                                    <th>Logged In At</th>
+                                    <th>Info</th>
+                                    <th>Log-In </th>
                                     <th>Expires At</th>
                                     <th>History</th>
                                     <th>Block/Unblock</th>
@@ -452,7 +463,7 @@ const Admindb = () => {
                             <div className="modal-header">
                                 <h5 className="modal-title" id="transactionModalLabel">
                                     Transaction History
-                                    <span className='text-danger'> {transactions.length}</span>
+                                    <span className='text-danger'>{transactions.length}</span>
                                 </h5>
                                 <button
                                     type="button"
