@@ -44,26 +44,43 @@ const Admindb = () => {
 
     //     fetchUsers();
     // }, []);
-
     const [error, setError] = useState(null);
+
     useEffect(() => {
+        console.log("setError exists:", typeof setError !== "undefined");
         const fetchUsers = async () => {
             setLoading(true);
-            setError(null);
-            try {
-                const response = await fetch(API_URLS.getallusers);  // Replace with your actual API call
-                const data = await response.json();
-                setUsers(data);
-                // console.log(response);
+            setError(null); // Make sure this exists
 
+            try {
+                console.log("Fetching users..."); // Debugging
+                const response = await fetch(API_URLS.getallusers);
+                const data = await response.json();
+
+                console.log("Fetched Users:", data);
+
+                if (Array.isArray(data)) {
+                    setUsers(data);
+                } else {
+                    setUsers([]);
+                }
             } catch (error) {
                 console.error("Failed to fetch users:", error);
+                setError(error.message); // Ensure setError exists
+                setUsers([]);
             } finally {
-                setLoading(false);  // Set loading to false after fetch completes
+                setLoading(false);
             }
         };
+
         fetchUsers();
     }, []);
+    
+
+    useEffect(() => {
+        console.log("Updated Users State:", users);
+    }, [users]);
+
 
     const handleShowTransactions = async (userId) => {
         setSelectedUser(userId);
@@ -174,10 +191,9 @@ const Admindb = () => {
             try {
                 const response = await fetch(API_URLS.activesessions);
                 const data = await response.json();
-                // console.log("Fetched sessions:", data); // Log the fetched data
-                // setSessions(data.sessions);
-                setSessions(data || []); // Handle case where data is empty
 
+                console.log("Fetched Sessions:", data);  // Debugging log
+                setSessions(data || []);
             } catch (error) {
                 console.error('Error fetching sessions:', error);
             }
@@ -185,6 +201,9 @@ const Admindb = () => {
 
         fetchSessions();
     }, []);
+
+    console.log("Users Length:", users?.length);
+
 
 
     const shortenDeviceInfo = (deviceInfo) => {
@@ -242,7 +261,17 @@ const Admindb = () => {
     }, []);
 
 
+    // if (Array.isArray(data)) {
+    //     setUsers(data);
+    // } else {
+    //     setUsers([]);
+    // }
 
+
+    useEffect(() => {
+        console.log("Users:", users);
+        console.log("Sessions:", sessions);
+    }, [users, sessions]);
 
     return (
         <div>
@@ -313,19 +342,15 @@ const Admindb = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {(!users || users?.length === 0) ? (
-                                    <tr>
-                                        <td colSpan="10" className="text-center">No users found.</td>
-                                    </tr>
-                                ) : (
+                                {Array.isArray(users) && users.length > 0 ? (
                                     users.map((user, index) => {
-                                        const userSessions = (sessions || []).filter(session => session?.userId?._id === user._id);
+                                        const userSessions = (sessions || []).filter(session => session?.userId?._id === user?._id);
 
                                         return (
-                                            <React.Fragment key={user._id}>
-                                                {userSessions?.length > 0 ? (
+                                            <React.Fragment key={user?._id || index}>
+                                                {userSessions.length > 0 ? (
                                                     userSessions.map((session, sessionIndex) => (
-                                                        <tr key={session?._id}>
+                                                        <tr key={session?._id || sessionIndex}>
                                                             {sessionIndex === 0 && (
                                                                 <>
                                                                     <th scope="row" rowSpan={userSessions.length}>{index + 1}</th>
@@ -341,14 +366,23 @@ const Admindb = () => {
                                                             <td>{session?.loggedInAt ? new Date(session.loggedInAt).toLocaleString() : "N/A"}</td>
                                                             <td>
                                                                 {session?.expiresAt ? new Date(session.expiresAt).toLocaleString() : "N/A"}
-                                                                <p style={{ cursor: "pointer" }} className="text-danger" onClick={() => handleLogoutSession(session?._id)}>Log Out</p>
+                                                                <p
+                                                                    style={{ cursor: "pointer" }}
+                                                                    className="text-danger"
+                                                                    onClick={() => handleLogoutSession(session?._id)}
+                                                                >
+                                                                    Log Out
+                                                                </p>
                                                             </td>
                                                             {sessionIndex === 0 && (
                                                                 <>
                                                                     <td rowSpan={userSessions.length}>
-                                                                        <button className="btn btn-primary btn-sm me-2"
-                                                                            data-bs-toggle="modal" data-bs-target="#transactionModal"
-                                                                            onClick={() => handleShowTransactions(user?._id)}>
+                                                                        <button
+                                                                            className="btn btn-primary btn-sm me-2"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#transactionModal"
+                                                                            onClick={() => handleShowTransactions(user?._id)}
+                                                                        >
                                                                             <i className="ri-history-line px-3"></i>
                                                                         </button>
                                                                     </td>
@@ -372,9 +406,12 @@ const Admindb = () => {
                                                         <td>{user?.phoneNumber || "N/A"}</td>
                                                         <td colSpan="3" className="text-center">No Active Sessions</td>
                                                         <td>
-                                                            <button className="btn btn-primary btn-sm me-2"
-                                                                data-bs-toggle="modal" data-bs-target="#transactionModal"
-                                                                onClick={() => handleShowTransactions(user?._id)}>
+                                                            <button
+                                                                className="btn btn-primary btn-sm me-2"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#transactionModal"
+                                                                onClick={() => handleShowTransactions(user?._id)}
+                                                            >
                                                                 <i className="ri-history-line px-3"></i>
                                                             </button>
                                                         </td>
@@ -390,7 +427,12 @@ const Admindb = () => {
                                             </React.Fragment>
                                         );
                                     })
+                                ) : (
+                                    <tr>
+                                        <td colSpan="10" className="text-center">No users found.</td>
+                                    </tr>
                                 )}
+
                             </tbody>
                         </table>
                     </div>
