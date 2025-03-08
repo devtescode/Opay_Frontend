@@ -11,19 +11,19 @@ const Addmoney = () => {
             Swal.fire('Error', 'Please enter a valid amount', 'error');
             return;
         }
-
+    
         setIsLoading(true);
-
+    
         try {
             const token = localStorage.getItem('token'); // User should be authenticated
-
+    
             const response = await axios.post(
                 API_URLS.addmoney,
                 { amount: Number(amount) },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-
-            Swal.fire('Success', 'Money added successfully!', 'success');
+    
+            Swal.fire('Success', `${Number(amount).toLocaleString()} has been added successfully to your wallet!`, 'success');
             setAmount('');
         } catch (error) {
             console.error('Add money error:', error);
@@ -32,7 +32,7 @@ const Addmoney = () => {
             setIsLoading(false);
         }
     };
-
+    
 
 
   
