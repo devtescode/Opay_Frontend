@@ -34,30 +34,35 @@ const Addmoney = () => {
     };
 
 
+
+  
+  
+
+
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 col-sm-12 mx-auto shadow-lg text-center p-3" style={{height:"100vh"}}> 
-                    <div>
-                        <h2>Add Money</h2>
-                        <input
-                            type="number"
-                            className='form-control my-2'
-                            placeholder='Enter amount'
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
-                        />
-                        <button
-                            className='btn btn-success'
-                            onClick={handleAddMoney}
-                            disabled={isLoading}
-                        >
-                            {isLoading ? 'Processing...' : 'Submit'}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <div className="card shadow-lg p-4 rounded" style={{ width: "100%", maxWidth: "400px" }}>
+        <h2 className="text-center text-primary mb-4">Add Money</h2>
+        <input
+          type="number"
+          className="form-control mb-3"
+          placeholder="Enter amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        <button
+          className="btn btn-primary w-50 mx-auto"
+          onClick={handleAddMoney}
+          disabled={isLoading || !amount}
+        >
+          {isLoading ? (
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          ) : (
+            "Submit"
+          )}
+        </button>
+      </div>
+    </div>
     );
 };
 
