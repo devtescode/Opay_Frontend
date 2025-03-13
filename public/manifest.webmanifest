@@ -1,7 +1,6 @@
 {
     "name": "Opay",
     "short_name": "Opay",
-    "start_url": "/opaydb",
     "display": "standalone",
 
     "icons": [
