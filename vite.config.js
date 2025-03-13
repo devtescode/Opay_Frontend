@@ -17,8 +17,20 @@ export default defineConfig({
       manifest: {
         start_url: "/opaydb", // Force the app to start at /opaydb
         display: "standalone",
-        display_override: ["minimal-ui"],  // Helps avoid splash screen
-     
+        background_color: "#00B875",
+        theme_color: "#ffffff",
+        icons: [
+          {
+            src: '/icons/opay.jpg',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icons/opay.jpg',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
       },
       workbox: {
         cleanupOutdatedCaches: true,
