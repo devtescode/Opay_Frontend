@@ -12,6 +12,7 @@ self.addEventListener('install', function(event) {
         caches.open('opay-cache').then(function(cache) {
             return cache.addAll([
                 '/opaydb',  // Cache the welcome page
+                '/'
             ]);
         })
     );
@@ -21,7 +22,13 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
     event.respondWith(
         caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
+            if (response) {
+                return response; // Return cached response
+            }
+            return fetch(event.request).catch(() => {
+                // If fetch fails (offline), serve opaydb as fallback
+                return caches.match('/opaydb');
+            });
         })
     );
 });
