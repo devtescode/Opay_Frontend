@@ -1,0 +1,7 @@
+{
+    "name": "Opay",
+    "short_name": "Opay",
+    "start_url": "/opaydb",
+    "display": "standalone",
+    "theme_color": "#ffffff"
+}
