@@ -11,6 +11,7 @@ export default defineConfig({
       manifest: {
         name: 'Opay',
         short_name: 'OPay',
+        "start_url": "/opaydb",
         description: 'My OPay Web App built with Vite',
         theme_color: '#ffffff',
         background_color: '#00B875',
