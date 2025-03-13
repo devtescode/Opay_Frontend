@@ -16,30 +16,31 @@ import StoreTransaction from './assets/components/StoreTransactionpage/StoreTran
 import TransactionDetails from './assets/components/TransactionDetailspage/TransactionDetails'
 import TransactionDetailsBanks from './assets/components/TransactionDetailsBanks/TransactionDetailsBanks'
 import Addmoney from './assets/components/Addmoneypage/Addmoney'
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 import Opaypage from './assets/components/Opaypage'
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-      const isPWA =
-          window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
-      if (isPWA) {
-          setLoading(true);
-          setTimeout(() => {
-              setLoading(false);
-          }, 5000); // Show splash screen for 3 seconds
-      }
-  }, []);
+  // useEffect(() => {
+  //     const isPWA =
+  //         window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
+  //     if (isPWA) {
+  //         setLoading(true);
+  //         setTimeout(() => {
+  //             setLoading(false);
+  //         }, 5000); 
+  //     }
+  // }, []);
 
-  if (loading) {
-      return <Opaypage/>;
-  }
+  // if (loading) {
+  //     return <Opaypage/>;
+  // }
 
   return (
     <>
     <Routes>
+      <Route path='/opaydb' element={<Opaypage/>}/>
       <Route path='/' element={<UserLogin/>}/>
       {/* <Route path='/userdb' element={<UserDb/>}/> */}
       <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
