@@ -10,22 +10,23 @@ export default defineConfig({
       registerType: 'autoUpdate',
       manifest: {
         name: 'Opay',
+       
         start_url: "/opaydb", 
         display: "standalone",
-        // background_color: "#00B875",
+        background_color: "#00B875",
         theme_color: "#ffffff",
-        // icons: [
-        //   {
-        //     src: '/icons/opay.jpg',
-        //     sizes: '192x192',
-        //     type: 'image/png',
-        //   },
-        //   {
-        //     src: '/icons/opay.jpg',
-        //     sizes: '512x512',
-        //     type: 'image/png',
-        //   },
-        // ],
+        icons: [
+          {
+            src: '/icons/opay.jpg',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icons/opay.jpg',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
       },
       workbox: {
         cleanupOutdatedCaches: true,
