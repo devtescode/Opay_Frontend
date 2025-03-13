@@ -1,7 +1,7 @@
 import React from 'react'
 import { Shield } from "lucide-react"
 
-const Opaybackup = () => {
+const Opaypage = () => {
     return (
         <div>
             <div
@@ -43,4 +43,5 @@ const Opaybackup = () => {
         </div>
     )
 }
-export default Opaybackup
+
+export default Opaypage
