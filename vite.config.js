@@ -22,16 +22,16 @@ export default defineConfig({
         // background_color: "#00B875",
         theme_color: "#ffffff",
         icons: [
-          // {
-          //   src: '/icons/opay.jpg',
-          //   sizes: '192x192',
-          //   type: 'image/png',
-          // },
-          // {
-          //   src: '/icons/opay.jpg',
-          //   sizes: '512x512',
-          //   type: 'image/png',
-          // },
+          {
+            src: '/icons/opay.jpg',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icons/opay.jpg',
+            sizes: '512x512',
+            type: 'image/png',
+          },
         ],
       },
       workbox: {
