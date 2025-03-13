@@ -17,7 +17,7 @@ import TransactionDetails from './assets/components/TransactionDetailspage/Trans
 import TransactionDetailsBanks from './assets/components/TransactionDetailsBanks/TransactionDetailsBanks'
 import Addmoney from './assets/components/Addmoneypage/Addmoney'
 import { useEffect, useState } from 'react'
-import Opaybackup from './assets/components/Opaybackup'
+import Opaypage from './assets/components/Opaypage'
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   if (loading) {
-      return <Opaybackup/>;
+      return <Opaypage/>;
   }
 
   return (
