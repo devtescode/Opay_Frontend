@@ -13,24 +13,29 @@ export default defineConfig({
        
         start_url: "/opaydb", 
         display: "standalone",
-        background_color: "#00B875",
+        background_color: "#ffffff",
         theme_color: "#ffffff",
         icons: [
           {
             src: '/icons/opay.jpg',
             sizes: '192x192',
             type: 'image/png',
+            purpose: "any maskable",
           },
           {
             src: '/icons/opay.jpg',
             sizes: '512x512',
             type: 'image/png',
+            purpose: "any maskable",
           },
         ],
       },
       workbox: {
         cleanupOutdatedCaches: true,
         sourcemap: true,
+      },
+      devOptions: {
+        enabled: true, // ✅ Ensure PWA updates immediately in dev mode
       },
     }),
   ],
