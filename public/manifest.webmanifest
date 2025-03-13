@@ -3,7 +3,7 @@
     "short_name": "Opay",
     "start_url": "/opaydb",
     "display": "standalone",
-   
+
     "icons": [
       {
         "src": "/icons/opay.png",

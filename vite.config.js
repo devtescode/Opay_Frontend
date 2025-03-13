@@ -14,7 +14,7 @@ export default defineConfig({
         start_url: "/opaydb", 
         display: "standalone",
         background_color: "#00B875",
-        theme_color: "#ffffff",
+        theme_color: "#00B875",
         icons: [
           {
             src: '/icons/opay.jpg',
