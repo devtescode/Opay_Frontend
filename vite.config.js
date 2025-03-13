@@ -16,14 +16,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       manifest: {
         name: 'Opay',
-        // start_url: "/opaydb", // Force the app to start at /opaydb
-        // short_name: 'OPay',
-        // description: 'My OPay Web App built with Vite',
-        // theme_color: '#ffffff',
-        // background_color: 'undefined',
-        start_url: "/opaydb", // Force the app to start at /opaydb
+       
+        start_url: "/opaydb", 
         display: "standalone",
-        background_color: "#00B875",
+        // background_color: "#00B875",
         theme_color: "#ffffff",
         icons: [
           {
