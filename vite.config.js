@@ -15,7 +15,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        // name: 'Opay',
+        name: 'Opay',
         // start_url: "/opaydb", // Force the app to start at /opaydb
         // short_name: 'OPay',
         // description: 'My OPay Web App built with Vite',
