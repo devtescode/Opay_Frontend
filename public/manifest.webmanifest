@@ -4,17 +4,5 @@
     "start_url": "/opaydb",
     "display": "standalone",
     "theme_color": "#ffffff",
-    "background_color": "transparent",
-    "icons": [
-        {
-            "src": "/icons/opay.jpg",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/opay.jpg",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+    "background_color": "transparent"
 }
