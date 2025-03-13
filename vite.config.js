@@ -15,7 +15,6 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-     
         start_url: "/opaydb", // Force the app to start at /opaydb
         display: "standalone",
         background_color: "#00B875",
