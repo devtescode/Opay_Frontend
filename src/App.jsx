@@ -16,28 +16,42 @@ import StoreTransaction from './assets/components/StoreTransactionpage/StoreTran
 import TransactionDetails from './assets/components/TransactionDetailspage/TransactionDetails'
 import TransactionDetailsBanks from './assets/components/TransactionDetailsBanks/TransactionDetailsBanks'
 import Addmoney from './assets/components/Addmoneypage/Addmoney'
+import Opaybackup from './assets/components/opaybackup'
+import { useEffect, useState } from 'react'
 
 function App() {
+  const [isPWA, setIsPWA] = useState(false);
 
+  useEffect(() => {
+    // Check if app is running in PWA mode
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      setIsPWA(true);
+    }
+  }, []);
   return (
     <>
-    <Routes>
-      <Route path='/' element={<UserLogin/>}/>
-      {/* <Route path='/userdb' element={<UserDb/>}/> */}
-      <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
-      <Route path='/admin' element={<Adminlogin/>}/>
-      <Route path='/admindb' element={<Admindb/>}/>
-      <Route path='/createlogin' element={<CreateUserLogin/>}/>
-      <Route path='/bank' element={<Bank/>}/>
-      <Route path='/transfer' element={<Transferform/>}/>
-      <Route path='/transfersuccess' element={<TransferSuccess/>}/>
-      <Route path='/transactionreceipt' element={<TransactionReceipt/>}/>
-      <Route path="/storetransaction" element={<StoreTransaction/>}/>
-      <Route path='/transactiondetails'element={<TransactionDetails/>}/>
-      <Route path='/TransactionDetailsBanks' element={<TransactionDetailsBanks/>}/>
-      <Route path='/addmoney' element={<Addmoney/>}/>
-      <Route path='*' element={<Notfound/>}/>
-    </Routes>
+      <Routes>
+        {isPWA ? (
+          <Route path="/" element={<Opaybackup />} />
+        ) : (
+          <Route path="/" element={<UserLogin />} />
+        )}
+        <Route path='/' element={<UserLogin />} />
+        <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
+        <Route path='/admin' element={<Adminlogin />} />
+        <Route path='/admindb' element={<Admindb />} />
+        <Route path='/createlogin' element={<CreateUserLogin />} />
+        <Route path='/bank' element={<Bank />} />
+        <Route path='/transfer' element={<Transferform />} />
+        <Route path='/transfersuccess' element={<TransferSuccess />} />
+        <Route path='/transactionreceipt' element={<TransactionReceipt />} />
+        <Route path="/storetransaction" element={<StoreTransaction />} />
+        <Route path='/transactiondetails' element={<TransactionDetails />} />
+        <Route path='/TransactionDetailsBanks' element={<TransactionDetailsBanks />} />
+        <Route path='/addmoney' element={<Addmoney />} />
+        <Route path='/opay' element={<Opaybackup />} />
+        <Route path='*' element={<Notfound />} />
+      </Routes>
     </>
   )
 }
