@@ -6,6 +6,7 @@ const Opaypage = () => {
   
     return (
         <div>
+            
             <div
                 className="container-fluid vh-100 d-flex flex-column justify-content-between p-0"
                 style={{ backgroundColor: "#00B875" }}
