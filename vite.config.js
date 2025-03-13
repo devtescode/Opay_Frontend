@@ -34,7 +34,7 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         sourcemap: true,
       },
-      devOptions: {
+       devOptions: {
         enabled: true, // ✅ Ensure PWA updates immediately in dev mode
       },
     }),
