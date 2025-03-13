@@ -1,10 +1,4 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
 
-// // https://vite.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-// })
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -42,7 +36,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // Custom naming for assets, chunks, and entry files
+      
         assetFileNames: 'assets/[name].[ext]',
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js',

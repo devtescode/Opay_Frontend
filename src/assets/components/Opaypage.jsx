@@ -3,16 +3,7 @@ import { Shield } from "lucide-react"
 import { useNavigate } from 'react-router-dom';
 
 const Opaypage = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        // Redirect to login page after 3 seconds
-        const timer = setTimeout(() => {
-            navigate("/"); // Redirect to login page
-        }, 3000);
-
-        return () => clearTimeout(timer); // Cleanup timer
-    }, [navigate]);
+  
     return (
         <div>
             <div
