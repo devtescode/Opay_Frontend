@@ -6,15 +6,21 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt', // Ensures the install prompt appears
       manifest: {
-        start_url: "/opaydb", 
+        name: "Opay",
+        short_name: "Opay",
+        start_url: "/opaydb",
         display: "standalone",
-        theme_color: "#ffffff", // Keep theme color but remove splash screen elements
+        theme_color: "#ffffff", 
       },
       workbox: {
         cleanupOutdatedCaches: true,
         sourcemap: true,
+      },
+      devOptions: {
+        enabled: true, // Allows PWA to work in development mode
+        type: 'module',
       },
     }),
   ],

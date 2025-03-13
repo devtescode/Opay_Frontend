@@ -3,17 +3,5 @@
     "short_name": "Opay",
     "start_url": "/opaydb",
     "display": "standalone",
-    "theme_color": "#ffffff",
-    "icons": [
-        {
-            "src": "/icons/opay.jpg",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/icons/opay.jpg",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+    "theme_color": "#ffffff"
 }
