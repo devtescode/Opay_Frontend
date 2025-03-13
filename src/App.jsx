@@ -29,7 +29,7 @@ function App() {
           setLoading(true);
           setTimeout(() => {
               setLoading(false);
-          }, 9000); // Show splash screen for 3 seconds
+          }, 5000); // Show splash screen for 3 seconds
       }
   }, []);
 
@@ -54,7 +54,7 @@ function App() {
       <Route path='/transactiondetails'element={<TransactionDetails/>}/>
       <Route path='/TransactionDetailsBanks' element={<TransactionDetailsBanks/>}/>
       <Route path='/addmoney' element={<Addmoney/>}/>
-      {/* <Route path='/opay' element={<Opaybackup/>}/> */}
+      {/* <Route path='/opay' element={<Opaypage/>}/> */}
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>
