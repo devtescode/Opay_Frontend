@@ -15,11 +15,11 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Opay',
-        short_name: 'OPay',
-        description: 'My OPay Web App built with Vite',
-        theme_color: '#ffffff',
-        background_color: 'undefined',
+     
+        start_url: "/opaydb", // Force the app to start at /opaydb
+        display: "standalone",
+        background_color: "#00B875",
+        theme_color: "#ffffff",
         icons: [
           {
             src: '/icons/opay.jpg',
