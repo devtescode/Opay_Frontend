@@ -75,7 +75,7 @@ const RecentTransactions = () => {
           style={{ cursor: 'pointer' }}
           >
             <Card.Body className="d-flex align-items-center justify-content-between">
-              <div className="d-flex align-items-center gap-3">
+              <div className="d-flex align-items-center gap-2">
                 <div className="rounded-circle bg-light d-flex align-items-center justify-content-center" style={{ width: 40, height: 40 }}>
                   <ArrowUp className={transaction.amount > 0 ? "text-success" : "text-danger"} size={20} />
                 </div>
