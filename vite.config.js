@@ -15,18 +15,7 @@ export default defineConfig({
         description: 'My OPay Web App built with Vite',
         theme_color: '#ffffff',
         background_color: '#00B875',
-        icons: [
-          // {
-          //   src: '/icons/second.png',
-          //   sizes: '192x192',
-          //   type: 'image/png',
-          // },
-          {
-            src: '/icons/opay.jpg',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-        ],
+        icons: [],
       },
       workbox: {
         cleanupOutdatedCaches: true,
