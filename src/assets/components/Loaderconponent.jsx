@@ -14,7 +14,7 @@ const Loaderconponent = ({children}) => {
 
   return (
     <>
-      {loading ? <Opaypage/> : createElement(children)}
+      {loading ? <Opaypage/> : (children)}
     </>
 
   );
