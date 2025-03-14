@@ -50,20 +50,20 @@ const Admindb = () => {
         console.log("Fetching users...");
         setLoading(true);
         setError(null);
-    
+
         const fetchUsers = async () => {
             try {
                 const response = await fetch(API_URLS.getallusers);
                 const data = await response.json();
-    
+
                 console.log("Fetched Users:", data); // Debug API response
-    
+
                 if (Array.isArray(data)) {
                     console.log("Users found, updating state:", data);
                     setUsers(data);  // Update state correctly
                 } else {
                     console.log("Invalid data format received.");
-                    setUsers([]);  
+                    setUsers([]);
                 }
             } catch (error) {
                 console.error("Failed to fetch users:", error);
@@ -73,15 +73,15 @@ const Admindb = () => {
                 setLoading(false);
             }
         };
-    
+
         fetchUsers();
     }, []);
-    
+
     // Debug when `users` state updates
     useEffect(() => {
         console.log("Updated Users State:", users);
     }, [users]);
-    
+
     useEffect(() => {
         console.log("Loading State:", loading);
     }, [loading]);
@@ -284,6 +284,15 @@ const Admindb = () => {
         console.log("Sessions:", sessions);
     }, [users, sessions]);
 
+    const userTransactions = transactions.reduce((acc, transaction) => {
+        const userId = transaction.userId; // Assuming each transaction has a userId
+        if (!acc[userId]) {
+            acc[userId] = { userId, totalAmount: 0 };
+        }
+        acc[userId].totalAmount += transaction.amount;
+        return acc;
+    }, {});
+
     return (
         <div>
             <Navbar />
@@ -450,7 +459,7 @@ const Admindb = () => {
                 )}
 
 
-
+{/* 271,230.00 */}
                 <div
                     className="modal fade"
                     id="transactionModal"
@@ -463,7 +472,13 @@ const Admindb = () => {
                             <div className="modal-header">
                                 <h5 className="modal-title" id="transactionModalLabel">
                                     Transaction History
-                                    <span className='text-danger'>{transactions.length}</span>
+                                    <span className='text-danger'> {transactions.length}</span>
+                                    {Object.values(userTransactions).map(user => (
+                                        <p key={user.userId}>
+                                            {/* User ID: {user.userId} -  */}
+                                            Total ₦{Math.abs(user.totalAmount).toLocaleString()}.00
+                                        </p>
+                                    ))}
                                 </h5>
                                 <button
                                     type="button"
@@ -499,6 +514,7 @@ const Admindb = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
+
                                                 {transactions.map((transaction, index) => (
                                                     <tr key={transaction._id}>
                                                         <td>{index + 1}</td>
