@@ -459,7 +459,6 @@ const Admindb = () => {
                 )}
 
 
-{/* 271,230.00 */}
                 <div
                     className="modal fade"
                     id="transactionModal"
