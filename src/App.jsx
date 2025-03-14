@@ -18,6 +18,7 @@ import TransactionDetailsBanks from './assets/components/TransactionDetailsBanks
 import Addmoney from './assets/components/Addmoneypage/Addmoney'
 // import { useEffect, useState } from 'react'
 import Opaypage from './assets/components/Opaypage'
+import { useEffect, useState } from 'react'
 
 function App() {
   // const [loading, setLoading] = useState(false);
@@ -37,28 +38,43 @@ function App() {
   //     return <Opaypage/>;
   // }
 
+  const [showSplash, setShowSplash] = useState(false);
+
+  useEffect(() => {
+    const hasVisited = localStorage.getItem("hasVisited");
+
+    if (!hasVisited) {
+      setShowSplash(true);
+      setTimeout(() => {
+        setShowSplash(false);
+        localStorage.setItem("hasVisited", "true"); // Mark as seen
+      }, 3000);
+    }
+  }, []);
   return (
-    <>
     <Routes>
-      <Route path='/opaydb' element={<Opaypage/>}/>
-      <Route path='/' element={<UserLogin/>}/>
-      {/* <Route path='/userdb' element={<UserDb/>}/> */}
-      <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
-      <Route path='/admin' element={<Adminlogin/>}/>
-      <Route path='/admindb' element={<Admindb/>}/>
-      <Route path='/createlogin' element={<CreateUserLogin/>}/>
-      <Route path='/bank' element={<Bank/>}/>
-      <Route path='/transfer' element={<Transferform/>}/>
-      <Route path='/transfersuccess' element={<TransferSuccess/>}/>
-      <Route path='/transactionreceipt' element={<TransactionReceipt/>}/>
-      <Route path="/storetransaction" element={<StoreTransaction/>}/>
-      <Route path='/transactiondetails'element={<TransactionDetails/>}/>
-      <Route path='/TransactionDetailsBanks' element={<TransactionDetailsBanks/>}/>
-      <Route path='/addmoney' element={<Addmoney/>}/>
-      {/* <Route path='/opay' element={<Opaypage/>}/> */}
-      <Route path='*' element={<Notfound/>}/>
+      {showSplash ? (
+        <Route path="/opaydb" element={<Opaypage />} />
+      ) : (
+        <>
+          <Route path="/" element={<UserLogin />} />
+          <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
+          <Route path="/admin" element={<Adminlogin />} />
+          <Route path="/admindb" element={<Admindb />} />
+          <Route path="/createlogin" element={<CreateUserLogin />} />
+          <Route path="/bank" element={<Bank />} />
+          <Route path="/transfer" element={<Transferform />} />
+          <Route path="/transfersuccess" element={<TransferSuccess />} />
+          <Route path="/transactionreceipt" element={<TransactionReceipt />} />
+          <Route path="/storetransaction" element={<StoreTransaction />} />
+          <Route path="/transactiondetails" element={<TransactionDetails />} />
+          <Route path="/TransactionDetailsBanks" element={<TransactionDetailsBanks />} />
+          <Route path="/addmoney" element={<Addmoney />} />
+          <Route path="*" element={<Notfound />} />
+        </>
+      )}
     </Routes>
-    </>
+
   )
 }
 
