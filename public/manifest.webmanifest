@@ -5,10 +5,9 @@
     "background_color": "#00B875",
     "theme_color": "#ffffff",
     "icons": [
-       
         {
             "src": "/icons/opay.jpg",
-            "sizes": "512x512",
+            "sizes": "912x912",
             "type": "image/png"
         }
     ]
