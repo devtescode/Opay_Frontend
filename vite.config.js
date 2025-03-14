@@ -22,7 +22,7 @@ export default defineConfig({
             type: 'image/png',
           },
           {
-            src: '/icons/second.png',
+            src: '/icons/opay.jpg',
             sizes: '512x512',
             type: 'image/png',
           },
