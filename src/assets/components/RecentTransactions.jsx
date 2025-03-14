@@ -81,7 +81,7 @@ const RecentTransactions = () => {
                 </div>
                 <div>
                   <div className="fw-medium" style={{fontSize:"13px"}}>Transfer to {transaction.accountName}</div>
-                  <div className="small text-muted" style={{fontSize:"10px"}}>{format(new Date(transaction.createdAt), "MMM do, hh:mm:ss")}</div>
+                  <div className="small text-muted" style={{fontSize:"11px"}}>{format(new Date(transaction.createdAt), "MMM do, hh:mm:ss")}</div>
                 </div>
               </div>
               <div className="text-end">
