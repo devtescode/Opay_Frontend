@@ -192,7 +192,7 @@ export default function Bank() {
                     <h4>Validated Account:</h4>
                     <p>{accountName}</p>
                 </div>
-            )} */}
+            // )} */}
       </div>
 
       {/* Success Rate Monitor */}

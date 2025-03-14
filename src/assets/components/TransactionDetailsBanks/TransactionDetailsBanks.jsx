@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Search } from "react-bootstrap-icons";
 import { API_URLS } from "../../../../utils/apiConfig";
+import { useNavigate } from "react-router-dom";
 
 export default function TransactionDetailsBanks({onTransactionSelect}) {
     const [transactions, setTransactions] = useState([]);  // Initializing as an empty array
@@ -54,13 +55,26 @@ export default function TransactionDetailsBanks({onTransactionSelect}) {
         }
     };
 
+    // const handleTransactionClick = (transaction) => {
+    //     console.log("Clicked transaction:", transaction); 
+    //     console.log("Transaction ID:", transaction?._id); 
+    //     if (onTransactionSelect) {
+    //         // Pass the bank name and account number to the parent
+    //         onTransactionSelect(transaction);
+    //     }
+    // };
+    const navigate = useNavigate();
     const handleTransactionClick = (transaction) => {
         console.log("Clicked transaction:", transaction); 
         console.log("Transaction ID:", transaction?._id); 
+    
         if (onTransactionSelect) {
             // Pass the bank name and account number to the parent
             onTransactionSelect(transaction);
         }
+    
+        // Navigate to the transfer page with transaction details
+        navigate("/transfer", { state: { transaction } });
     };
 
     return (
