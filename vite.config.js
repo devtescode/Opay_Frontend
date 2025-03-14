@@ -1,4 +1,3 @@
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -8,18 +7,9 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      manifest: {
-        name: 'Opay',
-        short_name: 'OPay',
-        start_url: '/',
-        description: 'My OPay Web App built with Vite',
-        theme_color: '#ffffff',
-        background_color: '#00B875',
-        icons: [],
-      },
+      manifest: '/manifest.webmanifest', // Load from public/manifest.json
       workbox: {
         cleanupOutdatedCaches: true,
-        // sourcemap: true,
         navigateFallback: "/index.html",
       },
     }),
@@ -27,7 +17,6 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-      
         assetFileNames: 'assets/[name].[ext]',
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js',
@@ -35,7 +24,7 @@ export default defineConfig({
         // Separate vendor code into its own chunk
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            return 'vendor'; // This creates a vendor chunk for all dependencies
+            return 'vendor'; // Creates a vendor chunk for dependencies
           }
         },
       },
