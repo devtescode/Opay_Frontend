@@ -63,8 +63,8 @@ const RecentTransactions = () => {
       {transactions.length === 0 ? (
         <p className="text-center text-muted">No recent transactions</p>
       ) : (
-        <Card className="mb-2" style={{ cursor: "pointer" }}>
-          <Card.Body>
+        <div className="mb-2 bg-white rounded-3 p-2" style={{ cursor: "pointer" }}>
+          {/* <Card.Body> */}
             {transactions.map((transaction) => (
               <div
                 key={transaction._id}
@@ -124,8 +124,8 @@ const RecentTransactions = () => {
                 </div>
               </div>
             ))}
-          </Card.Body>
-        </Card>
+          {/* </Card.Body> */}
+        </div>
       )}
     </div>
   );
