@@ -2,6 +2,13 @@
     "name": "Opay",
     "short_name": "Opay",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff"
+    "background_color": "#00B875",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/icons/opay.jpg",
+            "sizes": "912x912",
+            "type": "image/png"
+        }
+    ]
 }
