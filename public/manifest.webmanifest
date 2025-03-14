@@ -4,7 +4,6 @@
     "display": "standalone",
     "background_color": "#00B875",
     "theme_color": "#ffffff",
-    "start_url": "/opaydb?source=pwa",
     "icons": [
         {
             "src": "/icons/opay.jpg",
