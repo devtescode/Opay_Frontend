@@ -55,16 +55,15 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (window.location.pathname === "/") {
-      navigate("/opaydb", { replace: true }); // Ensure splash shows on first load
+    if (window.location.pathname === "/" || window.location.search.includes("source=pwa")) {
+      navigate("/opaydb", { replace: true });
     }
 
     setTimeout(() => {
       setShowSplash(false);
-      navigate("/", { replace: true }); // Redirect to main page after 3 sec
+      navigate("/", { replace: true }); // Redirect after 3 sec
     }, 3000);
   }, []);
-
   return (
     <Routes>
       {/* Show Splash Screen First */}
