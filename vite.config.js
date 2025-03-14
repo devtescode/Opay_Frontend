@@ -16,11 +16,11 @@ export default defineConfig({
         theme_color: '#ffffff',
         background_color: '#00B875',
         icons: [
-          {
-            src: '/icons/second.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
+          // {
+          //   src: '/icons/second.png',
+          //   sizes: '192x192',
+          //   type: 'image/png',
+          // },
           {
             src: '/icons/opay.jpg',
             sizes: '512x512',
