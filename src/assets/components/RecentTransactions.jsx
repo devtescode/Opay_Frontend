@@ -80,8 +80,8 @@ const RecentTransactions = () => {
                   <ArrowUp className={transaction.amount > 0 ? "text-success" : "text-danger"} size={20} />
                 </div>
                 <div>
-                  <div className="fw-medium">Transfer to {transaction.accountName}</div>
-                  <div className="small text-muted">{format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}</div>
+                  <div className="fw-medium" style={{fontSize:"13px"}}>Transfer to {transaction.accountName}</div>
+                  <div className="small text-muted" style={{fontSize:"10px"}}>{format(new Date(transaction.createdAt), "MMM do, hh:mm:ss")}</div>
                 </div>
               </div>
               <div className="text-end">
