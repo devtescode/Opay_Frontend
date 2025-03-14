@@ -2,6 +2,6 @@
     "name": "Opay",
     "short_name": "Opay",
     "display": "standalone",
-    "background_color": "#00B875",
+    "background_color": "#ffffff",
     "theme_color": "#ffffff"
 }
