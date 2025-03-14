@@ -83,7 +83,7 @@ const RecentTransactions = () => {
                       size={20}
                     />
                   </div>
-                  <div className="">
+                  <div>
                     <div className="fw-medium" style={{ fontSize: "13px" }}>
                       Transfer to {transaction.accountName}
                     </div>
