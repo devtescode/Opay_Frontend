@@ -38,43 +38,56 @@ function App() {
   //     return <Opaypage/>;
   // }
 
-  const [showSplash, setShowSplash] = useState(false);
+  // const [showSplash, setShowSplash] = useState(false);
+
+  // useEffect(() => {
+  //   const hasVisited = localStorage.getItem("hasVisited");
+
+  //   if (!hasVisited) {
+  //     setShowSplash(true);
+  //     setTimeout(() => {
+  //       setShowSplash(false);
+  //       localStorage.setItem("hasVisited", "true"); // Mark as seen
+  //     }, 3000);
+  //   }
+  // }, []);
+  const [showSplash, setShowSplash] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const hasVisited = localStorage.getItem("hasVisited");
-
-    if (!hasVisited) {
-      setShowSplash(true);
-      setTimeout(() => {
-        setShowSplash(false);
-        localStorage.setItem("hasVisited", "true"); // Mark as seen
-      }, 3000);
-    }
+    setTimeout(() => {
+      setShowSplash(false);
+      navigate("/"); // Redirect after 3 seconds
+    }, 3000);
   }, []);
+
   return (
     <Routes>
-      {showSplash ? (
-        <Route path="/opaydb" element={<Opaypage />} />
-      ) : (
-        <>
-          <Route path="/" element={<UserLogin />} />
-          <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
-          <Route path="/admin" element={<Adminlogin />} />
-          <Route path="/admindb" element={<Admindb />} />
-          <Route path="/createlogin" element={<CreateUserLogin />} />
-          <Route path="/bank" element={<Bank />} />
-          <Route path="/transfer" element={<Transferform />} />
-          <Route path="/transfersuccess" element={<TransferSuccess />} />
-          <Route path="/transactionreceipt" element={<TransactionReceipt />} />
-          <Route path="/storetransaction" element={<StoreTransaction />} />
-          <Route path="/transactiondetails" element={<TransactionDetails />} />
-          <Route path="/TransactionDetailsBanks" element={<TransactionDetailsBanks />} />
-          <Route path="/addmoney" element={<Addmoney />} />
-          <Route path="*" element={<Notfound />} />
-        </>
-      )}
-    </Routes>
+    {/* Always include the splash screen route */}
+    <Route path="/opaydb" element={<Opaypage />} />
 
+    {/* If showSplash is true, navigate to the splash screen */}
+    {showSplash ? (
+      <Route path="*" element={<Opaypage />} />
+    ) : (
+      <>
+        <Route path="/" element={<UserLogin />} />
+        <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} />
+        <Route path="/admin" element={<Adminlogin />} />
+        <Route path="/admindb" element={<Admindb />} />
+        <Route path="/createlogin" element={<CreateUserLogin />} />
+        <Route path="/bank" element={<Bank />} />
+        <Route path="/transfer" element={<Transferform />} />
+        <Route path="/transfersuccess" element={<TransferSuccess />} />
+        <Route path="/transactionreceipt" element={<TransactionReceipt />} />
+        <Route path="/storetransaction" element={<StoreTransaction />} />
+        <Route path="/transactiondetails" element={<TransactionDetails />} />
+        <Route path="/TransactionDetailsBanks" element={<TransactionDetailsBanks />} />
+        <Route path="/addmoney" element={<Addmoney />} />
+        <Route path="*" element={<Notfound />} />
+      </>
+    )}
+  </Routes>
   )
 }
 
