@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+// import React, { useEffect } from 'react'
 import { Shield } from "lucide-react"
-import { useNavigate } from 'react-router-dom';
 
 const Opaypage = () => {
   

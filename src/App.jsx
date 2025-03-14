@@ -1,9 +1,7 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import React, { Suspense, lazy } from 'react';
-
-// import UserLogin from './assets/components/UserLoginpage/UserLogin'
+import UserLogin from './assets/components/UserLoginpage/UserLogin'
 import UserDb from './assets/components/UserDbpage/UserDb'
 import Adminlogin from './assets/components/Adminloginpage/Adminlogin'
 import Admindb from './assets/components/Admindbpage/Admindb'
@@ -19,36 +17,23 @@ import TransactionDetails from './assets/components/TransactionDetailspage/Trans
 import TransactionDetailsBanks from './assets/components/TransactionDetailsBanks/TransactionDetailsBanks'
 import Addmoney from './assets/components/Addmoneypage/Addmoney'
 // import { useEffect, useState } from 'react'
-import Opaypage from './assets/components/Opaypage'
-const UserLogin = lazy(() => import('./assets/components/UserLoginpage/UserLogin'));
+// import Opaypage from './assets/components/Opaypage'
+import Loaderconponent from './assets/components/Loaderconponent'
+
 
 function App() {
-  // const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //     const isPWA =
-  //         window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
-  //     if (isPWA) {
-  //         setLoading(true);
-  //         setTimeout(() => {
-  //             setLoading(false);
-  //         }, 5000); 
-  //     }
-  // }, []);
-
-  // if (loading) {
-  //     return <Opaypage/>;
-  // }
 
   return (
-
     <>
       <Routes>
+
+        {/* <Route pa element={<Loaderconponent/>}/> */}
         {/* <Route path='/opaydb' element={<Opaypage />} /> */}
         <Route path='/' element={
-        <Suspense fallback={<div><Opaypage/></div>}>
-          <UserLogin/>
-        </Suspense>
+          <Loaderconponent>
+            <UserLogin />
+          </Loaderconponent>
+
         } />
         {/* <Route path='/userdb' element={<UserDb/>}/> */}
         <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
