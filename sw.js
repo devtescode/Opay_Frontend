@@ -1,12 +1,32 @@
-self.addEventListener('fetch',
-    function(event) {
+// self.addEventListener('fetch',
+//     function(event) {
  
-    }
- )
+//     }
+//  )
  
- self.addEventListener('install',function(event){
+//  self.addEventListener('install',function(event){
  
- })
+//  })
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open('opay-cache').then((cache) => {
+            return cache.addAll([
+                '/opaydb', // Force the splash screen to load first
+                '/'
+            ]);
+        })
+    );
+    self.skipWaiting();
+});
+
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+        })
+    );
+});
+
 // self.addEventListener('install', function(event) {
 //     event.waitUntil(
 //         caches.open('opay-cache').then(function(cache) {

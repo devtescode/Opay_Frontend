@@ -55,39 +55,42 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (window.location.pathname === "/") {
+      navigate("/opaydb", { replace: true }); // Ensure splash shows on first load
+    }
+
     setTimeout(() => {
       setShowSplash(false);
-      navigate("/"); // Redirect after 3 seconds
+      navigate("/", { replace: true }); // Redirect to main page after 3 sec
     }, 3000);
   }, []);
 
   return (
     <Routes>
-    {/* Always include the splash screen route */}
-    <Route path="/opaydb" element={<Opaypage />} />
+      {/* Show Splash Screen First */}
+      {showSplash ? (
+        <Route path="*" element={<Opaypage />} />
+      ) : (
+        <>
+          <Route path="/opaydb" element={<Opaypage />} />
+          <Route path="/" element={<UserLogin />} />
+          <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} />
+          <Route path="/admin" element={<Adminlogin />} />
+          <Route path="/admindb" element={<Admindb />} />
+          <Route path="/createlogin" element={<CreateUserLogin />} />
+          <Route path="/bank" element={<Bank />} />
+          <Route path="/transfer" element={<Transferform />} />
+          <Route path="/transfersuccess" element={<TransferSuccess />} />
+          <Route path="/transactionreceipt" element={<TransactionReceipt />} />
+          <Route path="/storetransaction" element={<StoreTransaction />} />
+          <Route path="/transactiondetails" element={<TransactionDetails />} />
+          <Route path="/TransactionDetailsBanks" element={<TransactionDetailsBanks />} />
+          <Route path="/addmoney" element={<Addmoney />} />
+          <Route path="*" element={<Notfound />} />
+        </>
+      )}
+    </Routes>
 
-    {/* If showSplash is true, navigate to the splash screen */}
-    {showSplash ? (
-      <Route path="*" element={<Opaypage />} />
-    ) : (
-      <>
-        <Route path="/" element={<UserLogin />} />
-        <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} />
-        <Route path="/admin" element={<Adminlogin />} />
-        <Route path="/admindb" element={<Admindb />} />
-        <Route path="/createlogin" element={<CreateUserLogin />} />
-        <Route path="/bank" element={<Bank />} />
-        <Route path="/transfer" element={<Transferform />} />
-        <Route path="/transfersuccess" element={<TransferSuccess />} />
-        <Route path="/transactionreceipt" element={<TransactionReceipt />} />
-        <Route path="/storetransaction" element={<StoreTransaction />} />
-        <Route path="/transactiondetails" element={<TransactionDetails />} />
-        <Route path="/TransactionDetailsBanks" element={<TransactionDetailsBanks />} />
-        <Route path="/addmoney" element={<Addmoney />} />
-        <Route path="*" element={<Notfound />} />
-      </>
-    )}
-  </Routes>
   )
 }
 
