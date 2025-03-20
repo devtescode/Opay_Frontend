@@ -69,7 +69,7 @@ const StoreTransaction = ({ transactionStatus }) => {
                   headers: { Authorization: `Bearer ${token}` }
               });
 
-              setMoneyOut(response.data.moneyOut || 0);
+              setMoneyOut(response.data.moneyOut ?? 0);
           } catch (error) {
               console.error('Error fetching money out:', error);
           }
@@ -139,7 +139,6 @@ const StoreTransaction = ({ transactionStatus }) => {
         <div className="text-muted small">
           <span>In: {`₦${(balance * 2).toLocaleString()}.00`}
           </span>
-          {/* <span className="ms-3">Out: ₦29,416.00</span> */}
           <span className="ms-3">Out: ₦{moneyOut.toLocaleString()}.00</span>
         </div>
       </div>
