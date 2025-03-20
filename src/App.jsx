@@ -16,6 +16,7 @@ import StoreTransaction from './assets/components/StoreTransactionpage/StoreTran
 import TransactionDetails from './assets/components/TransactionDetailspage/TransactionDetails'
 import TransactionDetailsBanks from './assets/components/TransactionDetailsBanks/TransactionDetailsBanks'
 import Addmoney from './assets/components/Addmoneypage/Addmoney'
+import Search from './assets/components/Searchpage/Search'
 // import { useEffect, useState } from 'react'
 // import Opaypage from './assets/components/Opaypage'
 
@@ -56,6 +57,7 @@ function App() {
       <Route path='/TransactionDetailsBanks' element={<TransactionDetailsBanks/>}/>
       <Route path='/addmoney' element={<Addmoney/>}/>
       {/* <Route path='/opay' element={<Opaypage/>}/> */}
+      <Route path='/search' element={<Search/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>
