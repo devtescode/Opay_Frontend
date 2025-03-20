@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Transfermodal from "../Transfermodalpage/Transfarmodal";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Transferform() {
     const [amount, setAmount] = useState(""); // Changed `amountenter` to `amount`
     const [remark, setRemark] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [accountDetails, setAccountDetails] = useState(null);
-     const [isLoading, setIsLoading] = useState(false); // Track loading state
-    
+    const [isLoading, setIsLoading] = useState(false); // Track loading state
+
 
     const handleAmountClick = (value) => {
         setAmount(value); // Set the selected amount directly
@@ -17,38 +18,60 @@ function Transferform() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true); // Disable button at the start of submission
-    
+
         // Validate the amount
         if (!amount || isNaN(amount) || amount < 100 || amount > 5000000) {
             alert("Please enter a valid amount between ₦100.00 and ₦5,000,000.00");
             setIsLoading(false); // Re-enable button after validation fails
             return;
         }
-    
+
         // Save the amount to localStorage
         localStorage.setItem("transferAmount", amount);
-    
+
         // Open the modal
         setShowModal(true);
-        
+
         // Re-enable the button after modal is set
         setIsLoading(false);
     };
-    
 
+
+    // const location = useLocation();
+    // useEffect(() => {
+    //     if (location.state?.transaction) {
+    //         setAccountDetails(location.state.transaction);
+    //     }
+    // }, [location.state]);
+
+
+    // useEffect(() => {
+    //     // Retrieve selected account details from localStorage
+    //     const storedAccount = localStorage.getItem("selectedAccount");
+    //     if (storedAccount) {
+    //         setAccountDetails(JSON.parse(storedAccount));
+    //     }
+    // }, []);
+
+
+    const location = useLocation();
     useEffect(() => {
-        // Retrieve selected account details from localStorage
-        const storedAccount = localStorage.getItem("selectedAccount");
-        if (storedAccount) {
-            setAccountDetails(JSON.parse(storedAccount));
+        if (location.state?.transaction) {
+            setAccountDetails(location.state.transaction);
+        } else {
+            // Fallback to localStorage if no transaction was passed
+            const storedAccount = localStorage.getItem("selectedAccount");
+            if (storedAccount) {
+                setAccountDetails(JSON.parse(storedAccount));
+            }
         }
-    }, []);
+    }, [location.state]);
 
     const closeModal = () => {
         setShowModal(false); // Close modal and reset its visibility state
     };
     const navigate = useNavigate()
-    const TransfarBtn=()=>{
+    const TransfarBtn = () => {
         navigate("/bank")
     }
     return (
@@ -114,10 +137,10 @@ function Transferform() {
                                 className="btn btn-success w-100 p-2"
                                 style={{ borderRadius: "20px" }}
                                 disabled={isLoading} // Disable when loading
-                                >
-                            
+                            >
+
                                 {isLoading ? "Confirm" : "Confirm"}
-                                
+
                             </button>
                         </div>
                     </form>

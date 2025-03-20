@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ChevronLeft, Search as SearchIcon } from 'lucide-react';
 import { API_URLS } from '../../../../utils/apiConfig';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
     const [transactions, setTransactions] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredTransactions, setFilteredTransactions] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -16,10 +19,10 @@ const Search = () => {
                     console.error("User ID not found in localStorage.");
                     return;
                 }
-    
+
                 const userId = userData.userId;
                 const response = await axios.get(API_URLS.getrecentransactionsearch(userId));
-                
+
                 if (Array.isArray(response.data)) {
                     setTransactions(response.data);
                 } else {
@@ -46,11 +49,17 @@ const Search = () => {
         }
     }, [searchQuery, transactions]);
 
+    const handleTransactionClick = (transaction) => {
+        localStorage.setItem("selectedAccount", JSON.stringify(transaction)); // Save for backup
+        navigate('/transfer', { state: { transaction } });
+    };
+
+
     return (
         <div className="container-sm bg-white min-vh-100 p-3" style={{ maxWidth: '500px' }}>
             {/* Header Section */}
             <div className="d-flex align-items-center mb-4">
-                <button className="btn btn-link p-0 me-2 text-dark border-0">
+                <button className="btn btn-link p-0 me-2 text-dark border-0" onClick={() => navigate("/bank")}>
                     <ChevronLeft size={24} />
                 </button>
                 <h1 className="fs-3 fw-medium text-dark mb-0">Search Beneficiaries</h1>
@@ -79,23 +88,27 @@ const Search = () => {
                         <p className="text-center p-3">No transactions found</p>
                     ) : (
                         filteredTransactions.map((transaction) => (
-                            <div key={transaction._id} className="p-2 border-bottom d-flex align-items-center">
+                            <div
+                                key={transaction._id}
+                                className="p-2 border-bottom d-flex align-items-center"
+                                onClick={() => handleTransactionClick(transaction)}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 {/* Icon with first letter of accountName */}
-                                <div 
+                                <div
                                     className="d-flex align-items-center justify-content-center rounded-circle text-white me-3 bg-primary"
                                     style={{
                                         width: '40px',
                                         height: '40px',
-                                        // backgroundColor: '#23527c',
                                         fontSize: '18px',
                                         fontWeight: 'bold',
                                     }}
                                 >
-                                    {transaction.accountName.charAt(0).toUpperCase()}
+                                    {transaction.accountName ? transaction.accountName.charAt(0).toUpperCase() : "?"}
                                 </div>
-                                
+
                                 <div className="ms-2 flex-grow-1">
-                                    <div className="fw-bold"> {transaction.accountName}</div>
+                                    <div className="fw-bold">{transaction.accountName}</div>
                                     <div className="text-muted small">
                                         {transaction.accountNumber} {transaction.bankName}
                                     </div>
