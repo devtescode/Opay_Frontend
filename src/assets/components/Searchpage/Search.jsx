@@ -16,10 +16,10 @@ const Search = () => {
                     console.error("User ID not found in localStorage.");
                     return;
                 }
-    
+
                 const userId = userData.userId; // Get userId
                 const response = await axios.get(API_URLS.getrecentransactionsearch(userId)); // Ensure correct endpoint
-                
+
                 if (Array.isArray(response.data)) {
                     setTransactions(response.data); // Store transactions
                 } else {
@@ -41,7 +41,7 @@ const Search = () => {
             setFilteredTransactions(
                 transactions.filter(transaction =>
                     transaction.accountNumber.includes(searchQuery) ||
-                    transaction.accountName.toLowerCase().includes(searchQuery.toLowerCase()) 
+                    transaction.accountName.toLowerCase().includes(searchQuery.toLowerCase())
                 )
             );
         }
@@ -81,9 +81,17 @@ const Search = () => {
                     ) : (
                         filteredTransactions.map((transaction) => (
                             <div key={transaction._id} className="p-2 border-bottom">
-                                <p className="mb-1"><strong>Account Name:</strong> {transaction.accountName}</p>
-                                <p className="mb-1"><strong>Account Owner:</strong> {transaction.bankName}</p>
-                                <p className="mb-1"><strong>Account Number:</strong> {transaction.accountNumber}</p>
+                                {/* <p className="mb-1"><strong>Account Name:</strong></p>
+                                <p className="mb-1"><strong>Account Owner:</strong> </p>
+                                <p className="mb-1"><strong>Account Number:</strong> {</p> */}
+
+
+                                <div className="ms-3 flex-grow-1">
+                                    <div className="fw-bold"> {transaction.accountName}</div>
+                                    <div className="text-muted small">
+                                    {transaction.accountNumber} {transaction.bankName}
+                                    </div>
+                                </div>
                             </div>
                         ))
                     )}
