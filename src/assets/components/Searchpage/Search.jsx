@@ -41,8 +41,7 @@ const Search = () => {
             setFilteredTransactions(
                 transactions.filter(transaction =>
                     transaction.accountNumber.includes(searchQuery) ||
-                    transaction.accountName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    transaction.bankName.toLowerCase().includes(searchQuery.toLowerCase())
+                    transaction.accountName.toLowerCase().includes(searchQuery.toLowerCase()) 
                 )
             );
         }
@@ -65,7 +64,7 @@ const Search = () => {
                 </div>
                 <input
                     type="text"
-                    placeholder="Enter account number, name, or bank name"
+                    placeholder="Account number or name"
                     className="form-control ps-5 py-2 border-1 rounded-3"
                     autoFocus
                     value={searchQuery}
