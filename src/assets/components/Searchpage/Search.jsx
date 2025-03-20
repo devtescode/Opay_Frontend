@@ -4,9 +4,9 @@ import { ChevronLeft, Search as SearchIcon } from 'lucide-react';
 import { API_URLS } from '../../../../utils/apiConfig';
 
 const Search = () => {
-    const [transactions, setTransactions] = useState([]); // Store all transactions
-    const [searchQuery, setSearchQuery] = useState('');   // Store user input for search
-    const [filteredTransactions, setFilteredTransactions] = useState([]); // Filtered transactions
+    const [transactions, setTransactions] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredTransactions, setFilteredTransactions] = useState([]);
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -16,12 +16,12 @@ const Search = () => {
                     console.error("User ID not found in localStorage.");
                     return;
                 }
-
-                const userId = userData.userId; // Get userId
-                const response = await axios.get(API_URLS.getrecentransactionsearch(userId)); // Ensure correct endpoint
-
+    
+                const userId = userData.userId;
+                const response = await axios.get(API_URLS.getrecentransactionsearch(userId));
+                
                 if (Array.isArray(response.data)) {
-                    setTransactions(response.data); // Store transactions
+                    setTransactions(response.data);
                 } else {
                     console.error("Response data is not an array", response.data);
                 }
@@ -33,10 +33,9 @@ const Search = () => {
         fetchTransactions();
     }, []);
 
-    // Update filtered transactions only when search query changes
     useEffect(() => {
         if (searchQuery.trim() === '') {
-            setFilteredTransactions([]); // Clear results if input is empty
+            setFilteredTransactions([]);
         } else {
             setFilteredTransactions(
                 transactions.filter(transaction =>
@@ -64,7 +63,7 @@ const Search = () => {
                 </div>
                 <input
                     type="text"
-                    placeholder="Account number or name"
+                    placeholder="Enter account number, name, or bank name"
                     className="form-control ps-5 py-2 border-1 rounded-3"
                     autoFocus
                     value={searchQuery}
@@ -80,16 +79,25 @@ const Search = () => {
                         <p className="text-center p-3">No transactions found</p>
                     ) : (
                         filteredTransactions.map((transaction) => (
-                            <div key={transaction._id} className="p-2 border-bottom">
-                                {/* <p className="mb-1"><strong>Account Name:</strong></p>
-                                <p className="mb-1"><strong>Account Owner:</strong> </p>
-                                <p className="mb-1"><strong>Account Number:</strong> {</p> */}
-
-
-                                <div className="ms-3 flex-grow-1">
+                            <div key={transaction._id} className="p-2 border-bottom d-flex align-items-center">
+                                {/* Icon with first letter of accountName */}
+                                <div 
+                                    className="d-flex align-items-center justify-content-center rounded-circle text-white me-3 bg-primary"
+                                    style={{
+                                        width: '40px',
+                                        height: '40px',
+                                        // backgroundColor: '#23527c',
+                                        fontSize: '18px',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    {transaction.accountName.charAt(0).toUpperCase()}
+                                </div>
+                                
+                                <div className="ms-2 flex-grow-1">
                                     <div className="fw-bold"> {transaction.accountName}</div>
                                     <div className="text-muted small">
-                                    {transaction.accountNumber} {transaction.bankName}
+                                        {transaction.accountNumber} {transaction.bankName}
                                     </div>
                                 </div>
                             </div>
