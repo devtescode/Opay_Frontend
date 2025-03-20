@@ -69,7 +69,7 @@ const StoreTransaction = ({ transactionStatus }) => {
                   headers: { Authorization: `Bearer ${token}` }
               });
 
-              setMoneyOut(response.data.moneyOut ?? 0);
+              setMoneyOut(response.data.moneyOut !== undefined ? response.data.moneyOut : 0);
           } catch (error) {
               console.error('Error fetching money out:', error);
           }
