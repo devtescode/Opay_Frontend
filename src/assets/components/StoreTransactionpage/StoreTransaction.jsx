@@ -164,7 +164,7 @@ const StoreTransaction = ({ transactionStatus }) => {
                 )}
               </div>
               <div className="flex-grow-1">
-                <div className="text-truncate" style={{ fontSize: "12px" }}>Transfer to {transaction.accountName}</div>
+                <div className="text-truncate" style={{ fontSize: "12px",  whiteSpace: "normal", wordBreak: "break-word" }}>Transfer to {transaction.accountName}</div>
                 <small className="text-muted">
                   {/* {new Date(transaction.createdAt).toLocaleString()} */}
                   {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
