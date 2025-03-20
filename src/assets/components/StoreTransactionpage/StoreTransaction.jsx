@@ -97,7 +97,7 @@ const StoreTransaction = ({ transactionStatus }) => {
   }
 
   return (
-    <div className="container-fluid bg-light d-flex flex-column vh-100">
+    <div className="container-fluid bg-light d-flex flex-column vh-100 ">
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center p-3 bg-white">
         <div className="d-flex align-items-center">
