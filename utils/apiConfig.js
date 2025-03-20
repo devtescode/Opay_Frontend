@@ -24,5 +24,7 @@ export const API_URLS = {
     getuserbalance : `${baseURL}/useropay/getuserbalance`,
     addmoney : `${baseURL}/useropay/addmoney`,
     updatebalance : `${baseURL}/useropay/updatebalance`,
-    getTotalBalance : `${baseURL}/useropay/getTotalBalance`
+    getTotalBalance : `${baseURL}/useropay/getTotalBalance`,
+    getMoneyOut: (userId)=>`${baseURL}/useropay/getMoneyOut/${userId}`,
+    updatemoneyout: `${baseURL}/useropay/updatemoneyout`
 };

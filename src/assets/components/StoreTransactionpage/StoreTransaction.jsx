@@ -37,6 +37,51 @@ const StoreTransaction = ({ transactionStatus }) => {
     navigate('/transactiondetails', { state: transaction });
   };
 
+
+  const [balance, setBalance] = useState(0);
+
+  const fetchUserBalance = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(API_URLS.getuserbalance, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setBalance(response.data.walletBalance); // Assuming your backend returns walletBalance
+    } catch (error) {
+      console.error('Failed to fetch balance:', error);
+      Swal.fire('Error', 'Failed to fetch balance', 'error');
+    }
+  };
+  useEffect(() => {
+    fetchUserBalance();
+  }, []);
+
+
+  const [moneyOut, setMoneyOut] = useState(0);
+  const token = localStorage.getItem('token');
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const userId = userData?.userId;
+
+  useEffect(() => {
+      const fetchMoneyOut = async () => {
+          try {
+              const response = await axios.get(API_URLS.getMoneyOut(userId), {
+                  headers: { Authorization: `Bearer ${token}` }
+              });
+
+              setMoneyOut(response.data.moneyOut || 0);
+          } catch (error) {
+              console.error('Error fetching money out:', error);
+          }
+      };
+
+      if (userId) {
+          fetchMoneyOut();
+      }
+  }, [userId, token]);
+
+
+
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
@@ -89,10 +134,13 @@ const StoreTransaction = ({ transactionStatus }) => {
 
       {/* Transaction Period */}
       <div className="p-3 bg-white">
-        <h6>Feb 2025</h6>
+        <h6>{new Date().toLocaleString('en-US', { month: 'short', year: 'numeric' })}</h6>
+
         <div className="text-muted small">
-          <span>In: ₦23,722.75</span>
-          <span className="ms-3">Out: ₦29,416.00</span>
+          <span>In: {`₦${(balance * 2).toLocaleString()}.00`}
+          </span>
+          {/* <span className="ms-3">Out: ₦29,416.00</span> */}
+          <span className="ms-3">Out: ₦{moneyOut.toLocaleString()}.00</span>
         </div>
       </div>
 
@@ -150,7 +198,7 @@ const StoreTransaction = ({ transactionStatus }) => {
           <div className="text-center text-success">
             {/* <ArrowDown size={24} /> */}
             {/* <div className='border'> */}
-              <i class="ri-arrow-left-right-line bg-success text-white p-1 rounded-2"></i>
+            <i class="ri-arrow-left-right-line bg-success text-white p-1 rounded-2"></i>
             {/* </div> */}
             <div className="small">Transactions</div>
           </div>

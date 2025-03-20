@@ -43,7 +43,7 @@ function App() {
       {/* <Route path='/opaydb' element={<Opaypage/>}/> */}
       <Route path='/' element={<UserLogin/>}/>
       {/* <Route path='/userdb' element={<UserDb/>}/> */}
-      <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> {/* Protect UserDb route */}
+      <Route path="/userdb" element={<ProtectedRoute element={<UserDb />} />} /> 
       <Route path='/admin' element={<Adminlogin/>}/>
       <Route path='/admindb' element={<Admindb/>}/>
       <Route path='/createlogin' element={<CreateUserLogin/>}/>

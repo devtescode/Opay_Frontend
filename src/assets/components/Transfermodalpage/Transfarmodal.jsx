@@ -17,113 +17,27 @@ const Transfermodal = ({ showModal, setShowModal }) => {
 
   const [balance, setBalance] = useState(0);
 
-    const fetchUserBalance = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await axios.get(API_URLS.getuserbalance, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setBalance(response.data.walletBalance); // Assuming your backend returns walletBalance
-        } catch (error) {
-            console.error('Failed to fetch balance:', error);
-            Swal.fire('Error', 'Failed to fetch balance', 'error');
-        }
-    };
+  const fetchUserBalance = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(API_URLS.getuserbalance, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setBalance(response.data.walletBalance); // Assuming your backend returns walletBalance
+    } catch (error) {
+      console.error('Failed to fetch balance:', error);
+      Swal.fire('Error', 'Failed to fetch balance', 'error');
+    }
+  };
 
-    useEffect(() => {
-        fetchUserBalance();
-    }, []);
-
-  // const PaymodelBtn = ()=>{
-  //   navigate("/transfersuccess")
-  // }
-  // const PaymodelBtn = async () => {
-  //   const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
-  //   const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
-  //   const userId = JSON.parse(localStorage.getItem('user')).userId;
-
-  //   // console.log('LocalStorage User userId:', userId);
-  //   //     const user = JSON.parse(localStorage.getItem('user'));
-  //   // console.log('LocalStorage User Data:', user);
-
-  //   const transactionData = {
-  //     userId,
-  //     bankName: savedAccount?.bankName,
-  //     accountNumber: savedAccount?.accountNumber,
-  //     accountName: savedAccount?.accountName,
-  //     amount: savedAmount,
-  //   };
-
-  //   console.log('Transaction Data:', transactionData); // Debugging
-  //   // try {
-  //   //   await axios.post(API_URLS.transactions, transactionData);
-  //   //   navigate('/transfersuccess');
-  //   // } catch (error) {
-  //   //   console.error('Failed to save transaction:', error.response?.data || error.message);
-  //   // }
-  //   try {
-  //     const response = await axios.post(API_URLS.transactions, transactionData);
-
-  //     if (response.data.transactionId) {
-  //       console.log("Transaction ID:", response.data.transactionId);
-
-  //       // Store transaction ID in localStorage
-  //       localStorage.setItem("transactionId", response.data.transactionId);
-
-  //       // Navigate to the success page
-  //       navigate('/transfersuccess');
-  //     } else {
-  //       console.error("Transaction ID not found in response:", response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error('Failed to save transaction:', error.response?.data || error.message);
-  //   }
-  // };
-
-
-  // const PaymodelBtn = async () => {
-  //   const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
-  //   const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
-  //   const userId = JSON.parse(localStorage.getItem('user')).userId; 
-    
-  //   const transactionData = {
-  //     userId,
-  //     bankName: savedAccount?.bankName,
-  //     accountNumber: savedAccount?.accountNumber,
-  //     accountName: savedAccount?.accountName,
-  //     amount: savedAmount,
-  //   };
-    
-  //   console.log('Transaction Data:', transactionData); // Debugging
-  //   try {
-  //     setIsLoading(true); // Disable button at the start of submission
-  //     const response = await axios.post(API_URLS.transactions, transactionData);
-      
-  //     if (response.data.transactionId) {
-  //       const transactionId = response.data.transactionId;
-  //       console.log("Transaction ID:", transactionId);
-  
-  //       // Store the transactionId in localStorage
-  //       localStorage.setItem("transactionId", transactionId);
-  
-  //       // Navigate to the success page
-  //       navigate('/transfersuccess');
-  //     } else {
-  //       console.error("Transaction ID not found in response:", response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error('Failed to save transaction:', error.response?.data || error.message);
-  //   }
-  //   finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
+  useEffect(() => {
+    fetchUserBalance();
+  }, []);
 
   const PaymodelBtn = async () => {
     const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
     const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
-    const token = localStorage.getItem('token');  // Get token for authorization
+    const token = localStorage.getItem('token');
 
     if (!token) {
         Swal.fire('Error', 'User not authenticated', 'error');
@@ -131,39 +45,40 @@ const Transfermodal = ({ showModal, setShowModal }) => {
     }
 
     try {
-        setIsLoading(true); // Disable button while processing
+        setIsLoading(true);
 
-        // Step 1: Fetch current wallet balance
+        // Step 1: Fetch Current Wallet Balance
         const balanceResponse = await axios.get(API_URLS.getuserbalance, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
         const currentBalance = balanceResponse.data.walletBalance;
-        // console.log(currentBalance)
+
         if (currentBalance < savedAmount) {
             Swal.fire('Error', 'Insufficient balance', 'error');
             setIsLoading(false);
-            return;  // Stop further processing
+            return;
         }
 
-        // Step 2: Subtract amount and update balance
-        const updateBalanceResponse = await axios.post(API_URLS.updatebalance, {
-            amount: savedAmount  // Amount to deduct
+        // Step 2: Subtract Amount and Update Balance
+        await axios.post(API_URLS.updatebalance, {
+            amount: savedAmount
         }, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
-        const userData = JSON.parse(localStorage.getItem("user"));  // Ensure you have the right key
-        const userId = userData?.userId;  // Adjust based on how your data is structured
-    
+        // Step 3: Get User ID
+        const userData = JSON.parse(localStorage.getItem("user"));
+        const userId = userData?.userId;
+
         if (!userId) {
             console.error('No userId found in localStorage');
-            return;  // Don't proceed if userId is missing
+            return;
         }
-    
-        // Step 3: Proceed to store transaction if balance update was successful
+
+        // Step 4: Store Transaction (Including Money Out)
         const transactionData = {
-            userId,                               // Are you sending this correctly?
+            userId,
             bankName: savedAccount?.bankName,
             accountNumber: savedAccount?.accountNumber,
             accountName: savedAccount?.accountName,
@@ -177,6 +92,15 @@ const Transfermodal = ({ showModal, setShowModal }) => {
         if (response.data.transactionId) {
             const transactionId = response.data.transactionId;
             localStorage.setItem("transactionId", transactionId);
+
+            // **Step 5: Update `moneyOut` in the Database**
+            await axios.post(API_URLS.updatemoneyout, {
+                userId,
+                amount: savedAmount
+            }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
             navigate('/transfersuccess');
         } else {
             Swal.fire('Error', 'Transaction failed', 'error');
@@ -190,7 +114,6 @@ const Transfermodal = ({ showModal, setShowModal }) => {
     }
 };
 
-  
   const [isLoading, setIsLoading] = useState(false); // Track loading stat
   useEffect(() => {
     const savedAccount = localStorage.getItem("selectedAccount");
@@ -309,10 +232,10 @@ const Transfermodal = ({ showModal, setShowModal }) => {
               </div>
             </div>
 
-            <Button 
+            <Button
               disabled={isLoading}
               variant="success"
-              className="w-75 py-2 mt-4 mx-auto rounded-5 fs-5" 
+              className="w-75 py-2 mt-4 mx-auto rounded-5 fs-5"
               onClick={PaymodelBtn}>
               {isLoading ? "Pay" : "Pay"}
             </Button>
