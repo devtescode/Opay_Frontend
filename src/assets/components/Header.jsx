@@ -27,11 +27,12 @@ const Header = () => {
           <span className="fw-medium">Hi, {username || 'User'}</span>
         </div>
         <div className="d-flex align-items-center gap-4">
-          <EyeFill size={24} />
+        <i class="ri-qr-scan-2-line fs-2"></i>
           <div className="position-relative">
-            <BellFill size={24} />
+            {/* <BellFill size={24} /> */}
+            <i class="ri-notification-line fs-2"></i>
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              2
+              9
             </span>
           </div>
         </div>
