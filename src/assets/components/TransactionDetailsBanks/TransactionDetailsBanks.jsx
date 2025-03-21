@@ -77,7 +77,7 @@ export default function TransactionDetailsBanks({ onTransactionSelect }) {
     }
 
     return (
-        <div className="bg-light">
+        <div className="shadow-sm rounded-3">
             <div className="p-3">
                 {/* <div className="position-relative">
                     <input
@@ -129,7 +129,7 @@ export default function TransactionDetailsBanks({ onTransactionSelect }) {
 
                 <div className="text-center mt-4">
                     <button
-                        className="btn btn-light rounded-pill px-4 py-2"
+                        className="btn btn-light rounded-pill px-3 py-1"
                         onClick={() => setShowAll(!showAll)}
                         style={{ boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}
                     >

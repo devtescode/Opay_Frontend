@@ -5,6 +5,7 @@ import Data from '../Data.json';
 import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
 import TransactionDetailsBanks from '../TransactionDetailsBanks/TransactionDetailsBanks';
+import Bet from '../../../../public/Image/betimage.png'
 import axios from 'axios';
 
 export default function Bank() {
@@ -25,23 +26,23 @@ export default function Bank() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Input Validation
     if (!accountNumber || !selectedBankCode) {
       alert('Please fill in all fields.');
       return;
     }
-    
+
     if (accountNumber.length !== 10) {
       alert('Account number must be 10 digits.');
       return;
     }
-    
+
     // const bankCode = selectedBank; 
-    
+
     const selectedBank = Data.banks.find((bank) => bank.code === selectedBankCode);
     // console.log(selectedBank);
-    
+
     if (!selectedBank) {
       alert(`Unknown bank code: ${selectedBankCode}`); // Alerting selected code for debugging
       return;
@@ -114,7 +115,7 @@ export default function Bank() {
   };
 
 
-  const BankBtn=()=>{
+  const BankBtn = () => {
     navigate("/userdb")
   }
   return (
@@ -181,7 +182,7 @@ export default function Bank() {
                 type="submit"
                 className="btn btn-success w-75 p-2 rounded-5"
                 disabled={isLoading} // Disable when loading
-                >
+              >
                 {isLoading ? "Next" : "Next"}
               </button>
             </div>
@@ -208,7 +209,79 @@ export default function Bank() {
       </div>
       <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect} />
       {/* <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect} /> */}
+      <div className="container py-4 shadow-sm rounded-3 mt-4">
+        <h3 className="display-5 fw-bold mb-4">More Events</h3>
 
+        <div className="d-flex flex-column gap-3">
+          {/* Bet9ja Card */}
+          <div className="">
+            <div className="card-body d-flex align-items-center gap-3">
+              <div>
+                <img
+                  src={Bet}
+                  alt="Bet9ja Logo"
+                  width={60}
+                  height={25}
+                  className="rounded"
+                />
+             
+              </div>
+              <div>
+                <h2 className="fs-5 fw-semibold">Register now and Win up to ₦1 Billion!</h2>
+                <p className="text-secondary">Get more explosive odds on Bet9ja!</p>
+              </div>
+            </div>
+          </div>
+
+          {/* iLOTBET Card */}
+          <div className="">
+            <div className="card-body d-flex align-items-center gap-3">
+              <div>
+                <div
+                  className="bg-dark rounded d-flex align-items-center justify-content-center"
+                  style={{ width: "60px", height: "60px" }}
+                >
+                  <span className="text-success fw-bold small">iLOTBET</span>
+                </div>
+              </div>
+              <div>
+                <h2 className="fs-5 fw-semibold">Predict & Win Up to ₦10,000,000!</h2>
+                <p className="text-secondary">Enjoy FREE predictions and unlock your chance to win up to ₦10,000,000!</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Vouchers Card */}
+          <div className="">
+            <div className="card-body d-flex align-items-center gap-3">
+              <div>
+                <div
+                  className="bg-light rounded d-flex align-items-center justify-content-center"
+                  style={{ width: "60px", height: "60px" }}
+                >
+                  <div className="position-relative" style={{ width: "32px", height: "32px" }}>
+                    <div
+                      className="position-absolute top-0 start-0 end-0 bottom-0 bg-danger bg-opacity-25 rounded-circle"
+                      style={{ transform: "translateX(-4px)" }}
+                    ></div>
+                    <div
+                      className="position-absolute top-0 start-0 end-0 bottom-0 bg-primary bg-opacity-25 rounded-circle"
+                      style={{ transform: "translateX(4px)" }}
+                    ></div>
+                    <div className="position-absolute top-0 start-0 end-0 bottom-0 d-flex align-items-center justify-content-center text-white fw-bold">
+                      %
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h5 className="fs-5 fw-semibold">Mega Savings with 15 Vouchers!</h5>
+                <p className="text-secondary">Unlock 15 vouchers for any bill with just ₦199</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
