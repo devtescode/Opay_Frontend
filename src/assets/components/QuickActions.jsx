@@ -19,7 +19,7 @@ const QuickActions = () => {
           className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3"
         >
           <div
-            className="rounded-circle d-flex border align-items-center justify-content-center"
+            className="rounded-circle d-flex border border-4 border-white align-items-center justify-content-center"
             style={{ width: 40, height: 40, backgroundColor:"#66CCAB" }}
           >
             <BsPersonFill className="text-white" size={20} />
@@ -34,7 +34,7 @@ const QuickActions = () => {
           onClick={ToBankBtn}
         >
           <div
-            className="rounded-circle d-flex align-items-center justify-content-center"
+            className="rounded-circle d-flex border border-4 border-white align-items-center justify-content-center"
             style={{ width: 40, height: 40,  backgroundColor:"#66CCAB"  }}
           >
             <BsBank className="text-white" size={20} />
@@ -48,7 +48,7 @@ const QuickActions = () => {
           className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3"
         >
           <div
-            className="rounded-circle d-flex align-items-center justify-content-center"
+            className="rounded-circle d-flex border border-4 border-white align-items-center justify-content-center"
             style={{ width: 40, height: 40,  backgroundColor:"#66CCAB"  }}
           >
             <BsCashStack className="text-white" size={20} />
