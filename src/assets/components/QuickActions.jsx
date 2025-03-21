@@ -17,10 +17,10 @@ const QuickActions = () => {
           className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3"
         >
           <div
-            className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-            style={{ width: 40, height: 40 }}
+            className="rounded-circle d-flex  align-items-center justify-content-center"
+            style={{ width: 40, height: 40, backgroundColor:"#66CCAB" }}
           >
-            <BsPersonFill className="text-success" size={20} />
+            <BsPersonFill className="text-white" size={20} />
           </div>
           <span className="small">To Opay</span>
         </Button>
@@ -32,10 +32,10 @@ const QuickActions = () => {
           onClick={ToBankBtn}
         >
           <div
-            className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-            style={{ width: 40, height: 40 }}
+            className="rounded-circle d-flex align-items-center justify-content-center"
+            style={{ width: 40, height: 40,  backgroundColor:"#66CCAB"  }}
           >
-            <BsBank className="text-success" size={20} />
+            <BsBank className="text-white" size={20} />
           </div>
           <span className="small" >To Bank</span>
         </Button>
@@ -46,10 +46,10 @@ const QuickActions = () => {
           className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3"
         >
           <div
-            className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-            style={{ width: 40, height: 40 }}
+            className="rounded-circle d-flex align-items-center justify-content-center"
+            style={{ width: 40, height: 40,  backgroundColor:"#66CCAB"  }}
           >
-            <BsCashStack className="text-success" size={20} />
+            <BsCashStack className="text-white" size={20} />
           </div>
           <span className="small">Withdraw</span>
         </Button>
