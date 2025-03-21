@@ -42,18 +42,18 @@ const UserDb= () => {
     });
 
     // Auto logout after a certain time (e.g., 15 minutes)
-    const logoutUser = () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      navigate("/"); // Redirect to login page
-    };
+    // const logoutUser = () => {
+    //   localStorage.removeItem("token");
+    //   localStorage.removeItem("user");
+    //   navigate("/"); // Redirect to login page
+    // };
     
-    // Set a timer for auto logout after 15 minutes (900000 ms)
-    const timer = setTimeout(logoutUser, 900000); 
+    // // Set a timer for auto logout after 15 minutes (900000 ms)
+    // const timer = setTimeout(logoutUser, 900000); 
 
     return () => {
       socket.off("sessionLoggedOut"); // Clean up the event listener when component unmounts
-      clearTimeout(timer); // Clear the logout timer
+      // clearTimeout(timer); // Clear the logout timer
     };
   }, [navigate, socket]);
 
