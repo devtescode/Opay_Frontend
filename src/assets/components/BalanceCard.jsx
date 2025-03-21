@@ -52,7 +52,7 @@ const BalanceCard = () => {
                 <span className="fs-4 fw-bold d-flex" style={{ alignItems: "center" }}>
                     {showBalance ? `₦${balance.toLocaleString()}.00` : "****"}<ChevronRight className='p-1'/>
                 </span>
-                <Button variant="light" className="text-success" onClick={AddMoneyBtn}>+ Add Money</Button>
+                <Button variant="light" className="text-success rounded-5" onClick={AddMoneyBtn}>+ Add Money</Button>
             </div>
         </Card>
     );
