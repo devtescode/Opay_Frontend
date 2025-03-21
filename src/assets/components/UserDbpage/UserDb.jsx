@@ -13,6 +13,7 @@ import Header from '../Header';
 import Services from '../services ';
 import { useNavigate } from 'react-router-dom';
 import { baseURL } from '../../../../config';
+import Takecontrol from '../Takecontrol';
 
 const UserDb= () => {
   const navigate = useNavigate();
@@ -63,6 +64,7 @@ const UserDb= () => {
       <BalanceCard />
       <RecentTransactions />
       <QuickActions />
+      <Takecontrol/>
       <Services/>
       <ReferralBanner />
       <BottomNavigation />

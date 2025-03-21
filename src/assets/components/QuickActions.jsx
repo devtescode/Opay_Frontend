@@ -10,7 +10,9 @@ const QuickActions = () => {
     navigate("/bank")
   }
   return (
-    <Row className="g-3 mb-4 bg-white">
+
+    
+    <Row className="g-3 mb-2 bg-white">
       <Col xs={4}>
         <Button
           variant="outline-light"
