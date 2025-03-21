@@ -25,13 +25,13 @@ const BottomNavigation = () => {
             {/* <img src={opaylogo} style={{width:"24px"}} alt="" /> */}
 
             <span className="fs-4">
-              <BsFill0CircleFill className='text-success' />
+              <BsFill0CircleFill className='text-success' size={24}/>
             </span>
           </div>
           <span className="small">Home</span>
         </Nav.Link>
         <Nav.Link className="d-flex flex-column align-items-center text-muted">
-          <span className="fs-4"><TbDiamond /></span>
+          <span className="fs-4"><TbDiamond  size={24}/></span>
           <span className="small">Rewards</span>
         </Nav.Link>
         <Nav.Link className="d-flex flex-column align-items-center text-muted">
