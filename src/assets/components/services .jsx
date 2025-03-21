@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 import { RiSmartphoneLine, RiBarChartLine, RiTvLine, RiMoneyDollarCircleLine, RiBankCardLine, RiGamepadLine, RiMore2Line, RiFootballLine } from 'react-icons/ri';
 
 const services = [
-  { icon: <RiSmartphoneLine />, label: 'Airtime' },
+  { icon: <RiSmartphoneLine />, label: 'Airtime', },
   { icon: <RiBarChartLine />, label: 'Data' },
   { icon: <RiFootballLine />, label: 'Betting' },
   { icon: <RiTvLine />, label: 'TV' },
@@ -20,7 +20,7 @@ const Services = () => {
         <Col key={index} xs={3}>
           <Button variant="outline-light" className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3">
             <div className="rounded-circle bg-light d-flex align-items-center justify-content-center" style={{ width: 40, height: 40 }}>
-              <span className="fs-5 p-2 text-white rounded-circle d-flex align-items-center justify-content-center" style={{ backgroundColor: "#66CCAB" }}>
+              <span className="fs-5 p-2  text-white rounded-circle d-flex align-items-center justify-content-center" style={{ backgroundColor: "#66CCAB" }}>
                 {service.icon}
               </span>
             </div>
