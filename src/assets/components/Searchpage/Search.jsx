@@ -72,7 +72,7 @@ const Search = () => {
                 </div>
                 <input
                     type="text"
-                    placeholder="Enter account number, name, or bank name"
+                    placeholder="Account number or name"
                     className="form-control ps-5 py-2 border-1 rounded-3"
                     autoFocus
                     value={searchQuery}
