@@ -16,7 +16,7 @@ const Header = () => {
   }, []);
   return (
     <Navbar bg="white" className="fixed-top">
-      <Container className="d-flex justify-content-between align-items-center">
+      <Container className="d-flex justify-content-between align-items-center my-2">
         <div className="d-flex align-items-center gap-2">
           <div className="rounded-circle overflow-hidden bg-secondary" style={{ width: 32, height: 32 }}>
             <img 
