@@ -36,7 +36,7 @@ const BalanceCard = () => {
     };
 
     return (
-        <Card className="styles bgEmerald text-white p-3 mb-2 rounded-3" style={{ marginTop: "57px" }}>
+        <Card className="styles bgEmerald text-white p-3 mb-2 rounded-3" style={{ marginTop: "73px" }}>
             <div className="d-flex justify-content-between align-items-center mb-2">
                 <div className="d-flex align-items-center gap-2">
                     <span className="small">Available Balance</span>
