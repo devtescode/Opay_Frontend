@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
 import TransactionDetailsBanks from '../TransactionDetailsBanks/TransactionDetailsBanks';
 import Bet from '../../../../public/Image/betimage.png'
+import imagebank from '../../../../public/Image/imagebank.jpg'
+
 import axios from 'axios';
 
 export default function Bank() {
@@ -134,11 +136,10 @@ export default function Bank() {
 
       {/* Promo Banner */}
       <div className="promo-banner mb-3">
-        {/* <img 
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-16%20at%2015.33.22_4062ae61.jpg-Tb0bl4oo1PobEngZ2vvZz04R74SJTF.jpeg" 
-          alt="Promo Banner" 
+        <img 
+          src={imagebank}
           className="w-100 rounded-3"
-        /> */}
+        />
       </div>
 
       {/* Free Transfers Notice */}
