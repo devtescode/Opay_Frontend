@@ -125,11 +125,11 @@ export default function Bank() {
       {/* Header */}
       <div className="header-section d-flex justify-content-between align-items-center mb-3">
         <div className="d-flex align-items-center gap-2">
-          <button className="btn btn-link text-dark p-0">
+          {/* <button className="btn btn-link text-dark p-0"> */}
             {/* <i className="bi bi-chevron-left fs-5"></i> */}
             <i class="ri-arrow-left-s-line" onClick={BankBtn}></i>
-          </button>
-          <h5 className="mb-0">Transfer to Bank Account</h5>
+          {/* </button> */}
+          <h5 className="mb-0" >Transfer to Bank Account</h5>
         </div>
         <button className="btn btn-link text-success p-0" onClick={HistroyBtn}>History </button>
       </div>
@@ -143,7 +143,7 @@ export default function Bank() {
       </div>
 
       {/* Free Transfers Notice */}
-      <div className="free-transfers-notice mb-4 p-2 rounded-3">
+      <div className="free-transfers-notice mb-4 p-2 rounded-3 " style={{marginTop:"30px"}}>
         <div className="d-flex align-items-center gap-2">
           <i className="bi bi-lightning-charge-fill text-primary"></i>
           <span className="text-primary ">Free transfers for the day: 3</span>
@@ -211,7 +211,7 @@ export default function Bank() {
       <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect} />
       {/* <TransactionDetailsBanks onTransactionSelect={handleTransactionSelect} /> */}
       <div className="container py-4 shadow-sm rounded-3 mt-4">
-        <h3 className="display-5 fw-bold mb-4">More Events</h3>
+        <h3 className="fw-bold mb-4">More Events</h3>
 
         <div className="d-flex flex-column gap-3">
           {/* Bet9ja Card */}
