@@ -10,7 +10,7 @@ const ReferralBanner = () => {
         </div>
         <div>
           <div className="fw-medium">Cash up for grabs!</div>
-          <div className="small text-muted">Invite friends and earn up to $ 42.00</div>
+          <div className="small text-muted">Invite friends and earn up to ₦4,600 Bonus</div>
         </div>
       </Card.Body>
     </Card>
