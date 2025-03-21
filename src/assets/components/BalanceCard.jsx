@@ -50,7 +50,7 @@ const BalanceCard = () => {
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <span className="fs-4 fw-bold d-flex" style={{ alignItems: "center" }}>
-                    {showBalance ? `₦${balance.toLocaleString()}.00` : "****"}<ChevronRight/>
+                    {showBalance ? `₦${balance.toLocaleString()}.00` : "****"}<ChevronRight style={{fontSize:"14px"}}/>
                 </span>
                 <Button variant="light" className="text-success rounded-5" onClick={AddMoneyBtn}>+ Add Money</Button>
             </div>
