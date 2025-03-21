@@ -126,8 +126,8 @@ export default function Bank() {
       <div className="header-section d-flex justify-content-between align-items-center mb-3">
         <div className="d-flex align-items-center gap-2">
           {/* <button className="btn btn-link text-dark p-0"> */}
-            {/* <i className="bi bi-chevron-left fs-5"></i> */}
-            <i class="ri-arrow-left-s-line" onClick={BankBtn}></i>
+          {/* <i className="bi bi-chevron-left fs-5"></i> */}
+          <i class="ri-arrow-left-s-line" onClick={BankBtn}></i>
           {/* </button> */}
           <h5 className="mb-0" >Transfer to Bank Account</h5>
         </div>
@@ -136,14 +136,14 @@ export default function Bank() {
 
       {/* Promo Banner */}
       <div className="promo-banner mb-3">
-        <img 
+        <img
           src={imagebank}
           className="w-100 rounded-3"
         />
       </div>
 
       {/* Free Transfers Notice */}
-      <div className="free-transfers-notice mb-4 p-2 rounded-3 " style={{marginTop:"30px"}}>
+      <div className="free-transfers-notice mb-4 p-2 rounded-3 " style={{ marginTop: "30px" }}>
         <div className="d-flex align-items-center gap-2">
           <i className="bi bi-lightning-charge-fill text-primary"></i>
           <span className="text-primary ">Free transfers for the day: 3</span>
@@ -161,14 +161,34 @@ export default function Bank() {
                 placeholder="Enter 10 digits Account Number"
                 value={accountNumber}
                 onChange={handleAccountNumberChange}
+                style={{
+                  border: "none",            // Removes all borders
+                  // borderBottom: "2px solid #000", // Adds only a bottom border
+                  backgroundColor: "transparent", // No background color
+                  outline: "none",            // Removes blue outline on focus
+                  boxShadow: "none",          // No Bootstrap shadow
+                  padding: "8px 8px",           // Adds space above text
+                  width: "100%",              // Ensures full width
+                }}
               />
+
             </div>
             <div className="mb-3">
               <select
                 className="form-select form-select-lg"
                 value={selectedBankCode}
                 onChange={(e) => setSelectedBankCode(e.target.value)}
-
+                style={{
+                  border: "none",            // Removes all borders
+                  // borderBottom: "2px solid #000", // Adds only a bottom border
+                  backgroundColor: "transparent", // No background color
+                  outline: "none",            // Removes blue outline on focus
+                  boxShadow: "none",          // No Bootstrap shadow
+                  padding: "8px 8px",           // Adds space above text
+                  width: "100%",              // Ensures full width
+                  appearance: "none",         // Removes default dropdown arrow (optional)
+                  cursor: "pointer",          // Makes it clear it's clickable
+                }}
               >
                 <option value="">Select Bank</option>
                 {Data.banks.map((bank) => (
@@ -177,6 +197,7 @@ export default function Bank() {
                   </option>
                 ))}
               </select>
+
             </div>
             <div className='text-center'>
               <button
@@ -225,7 +246,7 @@ export default function Bank() {
                   height={25}
                   className="rounded"
                 />
-             
+
               </div>
               <div>
                 <h2 className="fs-5 fw-semibold">Register now and Win up to ₦1 Billion!</h2>
