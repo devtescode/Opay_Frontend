@@ -114,7 +114,7 @@ export default function TransactionDetailsBanks({ onTransactionSelect }) {
                         <BeneficiaryItem
                             key={index}
                             icon={transaction.accountName ? transaction.accountName[0] : "?"} // Extract first letter of accountName
-                            iconBg="primary" // Example, you can dynamically change this based on the bank
+                            iconBg="primary " // Example, you can dynamically change this based on the bank
                             name={transaction.accountName}
                             account={transaction.accountNumber}
                             bank={transaction.bankName}
@@ -145,7 +145,8 @@ export default function TransactionDetailsBanks({ onTransactionSelect }) {
 function BeneficiaryItem({ icon, iconBg, name, account, bank, transactionId, handleDeleteTransaction, onClick }) {
     const [showDelete, setShowDelete] = useState(false);  // State to toggle the delete option
 
-    const handleDeleteClick = () => {
+    const handleDeleteClick = (e) => {
+        e.stopPropagation(); // Prevents triggering the parent onClick
         setShowDelete(!showDelete);  // Toggle the delete option visibility
     };
 
@@ -175,7 +176,12 @@ function BeneficiaryItem({ icon, iconBg, name, account, bank, transactionId, han
                     <div
                         className="position-absolute bg-white p-1"
                         style={{ top: '20px', left: '-10px', borderRadius: '5px', fontSize: '12px' }}
-                        onClick={() => handleDeleteTransaction(transactionId)}  // Call the delete function when clicked
+                        
+                        // onClick={(e) => handleDeleteTransaction(transactionId)}  // Call the delete function when clicked
+                        onClick={(e) => {
+                            e.stopPropagation(); // Prevents navigation
+                            handleDeleteTransaction(transactionId);
+                        }}
                     >
                         Delete
                     </div>

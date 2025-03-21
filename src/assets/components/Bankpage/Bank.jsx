@@ -180,7 +180,7 @@ export default function Bank() {
                 onChange={(e) => setSelectedBankCode(e.target.value)}
                 style={{
                   border: "none",            // Removes all borders
-                  // borderBottom: "2px solid #000", // Adds only a bottom border
+                  // borderBottom: "2px solid ", // Adds only a bottom border
                   backgroundColor: "transparent", // No background color
                   outline: "none",            // Removes blue outline on focus
                   boxShadow: "none",          // No Bootstrap shadow
