@@ -146,11 +146,11 @@ export default function Bank() {
       <div className="free-transfers-notice mb-4 p-2 rounded-3">
         <div className="d-flex align-items-center gap-2">
           <i className="bi bi-lightning-charge-fill text-primary"></i>
-          <span className="text-primary">Free transfers for the day: 3</span>
+          <span className="text-primary ">Free transfers for the day: 3</span>
         </div>
       </div>
 
-      <div className="transfer-form-section mb-4 border rounded-2 p-2">
+      <div className="transfer-form-section mb-4 shadow-sm rounded-3 p-2">
         <h5 className="mb-3">Recipient Account</h5>
         <form onSubmit={handleSubmit}>
           <div className=''>
