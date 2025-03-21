@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // import opaylogo from "../../../public/icons/opay.jpg"
 import { TbDiamond, } from "react-icons/tb";
 import { BsFill0CircleFill } from "react-icons/bs";
+import { LiaUserCircle } from "react-icons/lia";
 const BottomNavigation = () => {
   const navigate = useNavigate()
   const MeLogOutBtn = () => {
@@ -47,7 +48,8 @@ const BottomNavigation = () => {
         </Nav.Link>
         <Nav.Link className="d-flex flex-column align-items-center text-muted" onClick={MeLogOutBtn}>
         <span className="fs-4">
-          <PersonFill size={24} />
+          {/* <PersonFill size={24} /> */}
+          <LiaUserCircle size={24}/>
 
         </span>
           <span className="small">Me</span>
