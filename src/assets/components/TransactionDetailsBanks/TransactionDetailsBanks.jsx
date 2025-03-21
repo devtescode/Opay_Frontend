@@ -56,16 +56,23 @@ export default function TransactionDetailsBanks({ onTransactionSelect }) {
     };
 
     const handleTransactionClick = (transaction) => {
-        console.log("Clicked transaction:", transaction);
-        console.log("Transaction ID:", transaction?._id);
-        if (onTransactionSelect) {
-            // Pass the bank name and account number to the parent
-            onTransactionSelect(transaction);
-        }
+        // console.log("Clicked transaction:", transaction);
+        // console.log("Transaction ID:", transaction?._id);
+
+        // if (onTransactionSelect) {
+        //     onTransactionSelect(transaction); // Pass transaction to parent (if needed)
+        // }
+
+        // Store transaction in localStorage for backup
+        localStorage.setItem("selectedAccount", JSON.stringify(transaction));
+
+        // Navigate to Transfer page with transaction data
+        navigate("/transfer", { state: { transaction } });
     };
 
+
     const navigate = useNavigate()
-    const searchBtn = ()=>{
+    const searchBtn = () => {
         navigate("/search")
     }
 
