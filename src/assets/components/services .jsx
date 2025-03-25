@@ -26,7 +26,7 @@ const Services = () => {
               {service.badge && (
                 <span className="position-absolute" style={{ top: '-10px', right: '-10px', fontSize: '10px' }}>
                   <span className="badge rounded-pill bg-danger px-2 py-1">
-                    {service.badge}
+                    {/* {service.badge} */}
                   </span>
                 </span>
               )}
