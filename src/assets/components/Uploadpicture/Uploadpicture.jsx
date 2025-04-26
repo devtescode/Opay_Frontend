@@ -38,7 +38,7 @@ const Uploadpicture = () => {
 
         try {
             setLoading(true); // Start loading
-            const response = await axios.post(API_URLS.getuserprofile, formData, {
+            const response = await axios.post(API_URLS.uploadpicture, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 
