@@ -5,8 +5,8 @@ import { BellFill, EyeFill } from 'react-bootstrap-icons';
 
 const Header = () => {
   const [username, setUsername] = useState('');
-  // const userData = JSON.parse(localStorage.getItem('user'));
-  // const profilePicture = userData?.profilePicture;
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const profilePicture = userData?.profilePicture;
   useEffect(() => {
     // Retrieve the user object from localStorage and parse it
     const storedUser = localStorage.getItem('user');
@@ -26,7 +26,7 @@ const Header = () => {
             alt="Profile" className="w-100 h-100 object-fit-cover" /> */}
 
 
-            {/* <img
+            <img
               src={
                 profilePicture
                   ? profilePicture
@@ -36,7 +36,7 @@ const Header = () => {
               className="w-100 h-100 object-fit-cover" 
               roundedCircle
               // style={{ width: '80px', height: '80px', objectFit: 'cover' }}
-            /> */}
+            />
           </div>
           <span className="fw-medium">Hi, {username || 'User'}</span>
         </div>
