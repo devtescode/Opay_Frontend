@@ -16,6 +16,10 @@ const BottomNavigation = () => {
     localStorage.removeItem("selectedAccount");
     localStorage.removeItem("transferAmount");
   }
+
+  const uploadPicture =()=>{
+    navigate("/upload")
+  }
   return (
     <Navbar fixed="bottom" bg="white" className="border-top">
       <Nav className="w-100 justify-content-between">
@@ -40,7 +44,7 @@ const BottomNavigation = () => {
           </span>
           <span className="small">Finance</span>
         </Nav.Link>
-        <Nav.Link className="d-flex flex-column align-items-center text-muted">
+        <Nav.Link className="d-flex flex-column align-items-center text-muted" onClick={uploadPicture}>
           <span className="fs-4">
             <CreditCard size={24} />
           </span>

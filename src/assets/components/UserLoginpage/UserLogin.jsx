@@ -8,13 +8,15 @@ import image from "../../../../public/Image/image.jpg";
 import { API_URLS } from '../../../../utils/apiConfig';
 
 const UserLogin = () => {
-    const [password, setPassword] = useState(''); 
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState(''); // For error handling
     const [username, setUsername] = useState(''); // For storing username
     const [phoneNumber, setPhoneNumber] = useState(''); // For storing phone number
     const navigate = useNavigate();
 
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const profilePicture = userData?.profilePicture;
     useEffect(() => {
         // Retrieve the user data from localStorage
         const storedUser = localStorage.getItem('user');
@@ -28,47 +30,47 @@ const UserLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setIsLoading(true); // Disable button while loading
-    
-        const deviceInfo = navigator.userAgent; 
-        const existingSessionId = localStorage.getItem("sessionId") || null;   
-    
+
+        const deviceInfo = navigator.userAgent;
+        const existingSessionId = localStorage.getItem("sessionId") || null;
+
         try {
-            const response = await axios.post(API_URLS.userlogin, { 
-                password, 
-                deviceInfo, 
-                sessionId: existingSessionId 
+            const response = await axios.post(API_URLS.userlogin, {
+                password,
+                deviceInfo,
+                sessionId: existingSessionId
             });
             // console.log(response)
             if (response.status === 200) {
                 const { token, user } = response.data;
-    
+
                 // Save token and user data to localStorage
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(user));
-    
+
                 if (user.sessionId) {
                     localStorage.setItem("sessionId", user.sessionId); // Store sessionId
                 } else {
                     localStorage.removeItem("sessionId"); // Remove if session is invalid
                 }
-    
+
                 // Navigate to user dashboard
                 navigate('/userdb');
             }
         } catch (error) {
             console.error(error);
-    
+
             // Clear sessionId if login fails due to session issue
             if (error.response?.data?.message === "Your account is already logged in on another device. Please log out first.") {
                 localStorage.removeItem("sessionId");
             }
-    
+
             setErrorMessage(error.response?.data?.message || 'Network issue. Please try again.');
         } finally {
             setIsLoading(false);
         }
     };
-    
+
 
     return (
         <Container className="d-flex flex-column align-items-center py-5" style={{ maxWidth: '400px' }}>
@@ -80,12 +82,16 @@ const UserLogin = () => {
             <div className="text-center mb-4 mt-2">
                 <div className="position-relative d-inline-block mb-2">
                     <Image
-                        // src={LoginProfile}
-                        src='https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc'
+                        src={
+                            profilePicture
+                                ? profilePicture
+                                : "https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc"
+                        }
                         alt="Profile"
                         roundedCircle
                         style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                     />
+
                 </div>
                 <h6 className="mb-4 mt-2 fs-3">
                     {username ? username : 'Welcome'}
