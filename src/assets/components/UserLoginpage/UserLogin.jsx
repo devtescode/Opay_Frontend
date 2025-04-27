@@ -89,13 +89,15 @@ const UserLogin = () => {
             <div className="text-center mb-4 mt-2">
                 <div className="position-relative d-inline-block mb-2">
                     <Image
-                        src={Picture}
+                        src={Picture
+                             ? Picture
+                      : "https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc" 
+                        }
                         alt="Profile"
                         roundedCircle
                         style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                     />
-                      {/* ? Picture
-                      : "https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc" */}
+                     
 
                 </div>
                 <h6 className="mb-4 mt-2 fs-3">
