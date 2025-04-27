@@ -25,79 +25,79 @@ const UserLogin = () => {
             setProfilePicture(parsedUser.profilePicture); // Use profile picture from localStorage
         }
     }, []);
-    
-      
+
+
     const [isLoading, setIsLoading] = useState(false); // Track loading state
     const handleLogin = async (e) => {
         e.preventDefault();
         setIsLoading(true); // Disable button while loading
-    
+
         const deviceInfo = navigator.userAgent;
         const existingSessionId = localStorage.getItem("sessionId") || null;
-    
+
         try {
             const response = await axios.post(API_URLS.userlogin, {
                 password,
                 deviceInfo,
                 sessionId: existingSessionId
             });
-    
+
             if (response.status === 200) {
                 const { token, user } = response.data;
-    
+
                 // Check if the profilePicture exists and use it or fallback to a default one
                 const profilePicture = user.profilePicture || "https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc"; // Default image URL
-    
+
                 // Save token and user data to localStorage
                 localStorage.setItem('token', token);
-    
+
                 // Save user data with profile picture to localStorage
                 const updatedUser = { ...user, profilePicture };
                 localStorage.setItem('user', JSON.stringify(updatedUser));
-    
+
                 if (user.sessionId) {
                     localStorage.setItem("sessionId", user.sessionId); // Store sessionId
                 } else {
                     localStorage.removeItem("sessionId"); // Remove if session is invalid
                 }
-    
+
                 // Navigate to user dashboard
                 navigate('/userdb');
             }
         } catch (error) {
             console.error(error);
-    
+
             // Clear sessionId if login fails due to session issue
             if (error.response?.data?.message === "Your account is already logged in on another device. Please log out first.") {
                 localStorage.removeItem("sessionId");
             }
-    
+
             setErrorMessage(error.response?.data?.message || 'Network issue. Please try again.');
         } finally {
             setIsLoading(false);
         }
     };
-    
+
 
     return (
         <Container className="d-flex flex-column align-items-center py-5" style={{ maxWidth: '400px' }}>
             {/* Profile Section */}
             <Image
                 src={'https://cdn.brandfetch.io/id2zsUpkDc/w/820/h/386/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1740597917017'}
-                style={{ width: '100px', height: '60px', objectFit: 'contain' }}
+                style={{ width: '90px', height: '60px', objectFit: 'contain' }}
             />
             <div className="text-center mb-4 mt-2">
                 <div className="position-relative d-inline-block mb-2">
                     <Image
                         src={Picture
-                             ? Picture
-                      : "https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc" 
+                            ? Picture
+                            : "https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc"
                         }
                         alt="Profile"
                         roundedCircle
                         style={{ width: '80px', height: '80px', objectFit: 'cover' }}
                     />
-                     
+
 
                 </div>
                 <h6 className="mb-4 mt-2 fs-3">
