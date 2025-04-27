@@ -41,7 +41,6 @@ const Uploadpicture = () => {
             const response = await axios.post(API_URLS.uploadpicture, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-
             console.log('Uploaded image URL:', response.data.url);
 
             // Update localStorage
