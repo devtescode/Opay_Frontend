@@ -79,7 +79,7 @@ const Uploadpicture = () => {
 
                 <div style={{ marginTop: '25px' }}>
                     <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-                    <button className='mt-3 btn btn-success' onClick={handleUpload} disabled={loading}>
+                    <button className='mt-sm-0 mt-3 btn btn-success' onClick={handleUpload} disabled={loading}>
                         {loading ? 'Uploading...' : 'Upload Picture'}
                     </button>
                 </div>
