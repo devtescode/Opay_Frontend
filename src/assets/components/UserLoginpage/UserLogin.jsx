@@ -83,7 +83,7 @@ const UserLogin = () => {
         <Container className="d-flex flex-column align-items-center py-5" style={{ maxWidth: '400px' }}>
             {/* Profile Section */}
             <Image
-                src={image}
+                src={'https://cdn.brandfetch.io/id2zsUpkDc/w/820/h/386/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1740597917017'}
                 style={{ width: '100px', height: '60px', objectFit: 'contain' }}
             />
             <div className="text-center mb-4 mt-2">
