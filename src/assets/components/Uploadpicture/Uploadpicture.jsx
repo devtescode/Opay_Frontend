@@ -65,7 +65,7 @@ const Uploadpicture = () => {
 
     return (
         <>
-            <div className='border text-center col-md-6 col-sm-12 p-3 shadow mx-auto' >
+            <div className='border text-center col-md-6 col-sm-12 p-3 shadow mx-auto'>
                 <h2>Welcome, {username}</h2>
                 <p>Phone: {phoneNumber}</p>
                 {profilePicture && (
