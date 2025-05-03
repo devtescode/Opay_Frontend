@@ -23,6 +23,7 @@ import {
     Shop
 } from 'react-bootstrap-icons';
 import { API_URLS } from '../../../../utils/apiConfig';
+import { useNavigate } from 'react-router-dom';
 
 const Setting = () => {
     const [showBalance, setShowBalance] = useState(false);
@@ -67,6 +68,11 @@ const Setting = () => {
         fetchUserBalance();
     }, []);
 
+    const navigate = useNavigate()
+    const passwordBtn=()=>{
+        navigate("/passwordetails")
+    }
+
     return (
         <Container fluid className="p-0 bg-light" style={{ maxWidth: '480px', minHeight: '100vh', backgroundColor: '#f0f8f4' }}>
             <div className="p-3">
@@ -90,7 +96,7 @@ const Setting = () => {
                             </small>
                         </div>
                     </div>
-                    <div className="hexagon" style={{
+                    <div onClick={passwordBtn} className="hexagon" style={{
                         width: '40px',
                         height: '40px',
                         backgroundColor: 'white',
@@ -100,7 +106,7 @@ const Setting = () => {
                         justifyContent: 'center',
                         position: 'relative'
                     }}>
-                        <div style={{
+                        <div  style={{
                             width: '6px',
                             height: '6px',
                             backgroundColor: '#ff3366',
@@ -259,7 +265,7 @@ const Setting = () => {
                         </div>
                         <i class="ri-arrow-right-s-line"></i>
                     </ListGroup.Item>
-                    {/* </ListGroup> */}
+                    
                 </div>
             </div>
         </Container>

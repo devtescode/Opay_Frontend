@@ -19,6 +19,7 @@ import Addmoney from './assets/components/Addmoneypage/Addmoney'
 import Search from './assets/components/Searchpage/Search'
 import Uploadpicture from './assets/components/Uploadpicture/Uploadpicture'
 import Setting from './assets/components/Settingspage/Setting'
+import Passwordetails from './assets/components/Passwordetailspage/Passwordetails'
 // import { useEffect, useState } from 'react'
 // import Opaypage from './assets/components/Opaypage'
 
@@ -62,6 +63,7 @@ function App() {
       <Route path='/search' element={<Search/>}/>
       <Route path='/upload' element={<Uploadpicture/>}/>
       <Route path='/setting' element={<Setting/>}/>
+      <Route path='/passwordetails' element={<Passwordetails/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>
