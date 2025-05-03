@@ -59,6 +59,7 @@ const UserLogin = () => {
                     localStorage.setItem("sessionId", user.sessionId); // Store sessionId
                 } else {
                     localStorage.removeItem("sessionId"); // Remove if session is invalid
+                    
                 }
 
                 // Navigate to user dashboard
@@ -129,7 +130,6 @@ const UserLogin = () => {
                         {showPassword ? < EyeFill size={20} /> : <EyeSlashFill size={20} />}
                     </Button>
                 </div>
-
                 
 
                 <div className="text-end mb-4">

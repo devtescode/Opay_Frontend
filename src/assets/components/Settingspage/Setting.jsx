@@ -56,7 +56,6 @@ const Setting = () => {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setBalance(response.data.walletBalance);
-            console.log(response.data.walletBalance, "see balance");
 
         } catch (error) {
             console.error('Failed to fetch balance:', error);
@@ -72,6 +71,9 @@ const Setting = () => {
     const passwordBtn=()=>{
         navigate("/passwordetails")
     }
+
+
+    
 
     return (
         <Container fluid className="p-0 bg-light" style={{ maxWidth: '480px', minHeight: '100vh', backgroundColor: '#f0f8f4' }}>

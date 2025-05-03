@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Container,
     Row,
@@ -23,8 +23,19 @@ import {
 } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 const Passwordetails = () => {
+    
     const navigate = useNavigate()
-    const LogoutBtn = ()=>{
+    // If there's no token, redirect to the login page
+    
+    const token = localStorage.getItem('token'); // Check if token exists in localStorage
+    useEffect(() => {
+        if (!token) {
+             navigate("/")
+        }
+      
+    }, [])
+    
+    const LogoutBtn = () => {
         Swal.fire({
             text: "Are you sure you want to log out of Opay?",
             showCancelButton: true,
@@ -32,15 +43,16 @@ const Passwordetails = () => {
             cancelButtonText: "No",
             buttonsStyling: false, // disable SweetAlert2 styling
             customClass: {
-              confirmButton: 'btn btn-success px-5 rounded-5 border-none', // Bootstrap green
-              cancelButton: 'btn btn-light text-success px-5 mx-2 rounded-5 border-none' // Light bg with green text
+                confirmButton: 'btn btn-success px-5 rounded-5 border-none', // Bootstrap green
+                cancelButton: 'btn btn-light text-success px-5 mx-2 rounded-5 border-none' // Light bg with green text
             }
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              navigate("/");
+                navigate("/");
+                localStorage.removeItem("token");
             }
-          });
-          
+        });
+
     }
     return (
         <>
