@@ -32,8 +32,8 @@ const Passwordetails = () => {
             cancelButtonText: "No",
             buttonsStyling: false, // disable SweetAlert2 styling
             customClass: {
-              confirmButton: 'btn btn-success px-4', // Bootstrap green
-              cancelButton: 'btn btn-light text-success border px-4 mx-2' // Light bg with green text
+              confirmButton: 'btn btn-success px-5 rounded-5', // Bootstrap green
+              cancelButton: 'btn btn-light text-success px-5 mx-2 rounded-5' // Light bg with green text
             }
           }).then((result) => {
             if (result.isConfirmed) {
