@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar, Container } from 'react-bootstrap';
 import { BellFill, EyeFill } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 // import styles from '../App.css';
 
 const Header = () => {
@@ -15,6 +16,10 @@ const Header = () => {
       setUsername(parsedUser.username);
     }
   }, []);
+  const navigate = useNavigate()
+  const Uploadimage=()=>{
+    navigate("/upload")
+  }
   return (
     <Navbar bg="white" className="fixed-top">
       <Container className="d-flex justify-content-between align-items-center my-2">
@@ -36,6 +41,7 @@ const Header = () => {
               className="w-100 h-100 object-fit-cover" 
               roundedCircle
               // style={{ width: '80px', height: '80px', objectFit: 'cover' }}
+              onClick={Uploadimage}
             />
           </div>
           <span className="fw-medium">Hi, {username || 'User'}</span>
