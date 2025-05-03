@@ -134,13 +134,13 @@ const UserLogin = () => {
 
 
                     <div className="d-flex mb-4">
-                        <Button
+                        <div
                             variant="link"
                             className="text-decoration-none ms-auto translate-middle-y"
                             style={{ color: '#00B974' }}
                         >
                             Forgot Password?
-                        </Button>
+                        </div>
                     </div>
 
                 </div>
