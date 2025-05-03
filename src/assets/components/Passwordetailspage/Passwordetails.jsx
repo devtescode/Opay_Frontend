@@ -30,14 +30,14 @@ const Passwordetails = () => {
             showCancelButton: true,
             confirmButtonText: "Yes",
             cancelButtonText: "No",
-            buttonsStyling: false, // Disable default styling
+            buttonsStyling: false, // disable SweetAlert2 styling
             customClass: {
-              confirmButton: 'swal-confirm-btn',
-              cancelButton: 'swal-cancel-btn'
+              confirmButton: 'btn btn-success px-4', // Bootstrap green
+              cancelButton: 'btn btn-light text-success border px-4 mx-2' // Light bg with green text
             }
           }).then((result) => {
             if (result.isConfirmed) {
-              navigate("/"); // Navigate after confirmation
+              navigate("/");
             }
           });
           
