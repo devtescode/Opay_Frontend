@@ -172,7 +172,7 @@ const Setting = () => {
 
 
                     {/* Transaction History */}
-                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 border-bottom">
+                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
                         <div className="d-flex align-items-center">
                             <div className="me-3 p-2 rounded" style={{ backgroundColor: '#e6f7f1' }}>
                                 <ClockHistory size={24} color="#4cd4a1" />
@@ -184,7 +184,7 @@ const Setting = () => {
                     </ListGroup.Item>
 
                     {/* Account Limits */}
-                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 border-bottom">
+                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
                         <div className="d-flex align-items-center">
                             <div className="me-3 p-2 rounded" style={{ backgroundColor: '#e6f7f1' }}>
                                 <CurrencyDollar size={24} color="#4cd4a1" />
@@ -198,7 +198,7 @@ const Setting = () => {
                     </ListGroup.Item>
 
                     {/* Bank Card/Account */}
-                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 border-bottom">
+                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
                         <div className="d-flex align-items-center">
                             <div className="me-3 p-2 rounded" style={{ backgroundColor: '#e6f7f1' }}>
                                 <CreditCard size={24} color="#4cd4a1" />
@@ -212,7 +212,7 @@ const Setting = () => {
                     </ListGroup.Item>
 
                     {/* Transfer to Me */}
-                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 border-bottom">
+                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
                         <div className="d-flex align-items-center">
                             <div className="me-3 p-2 rounded" style={{ backgroundColor: '#e6f7f1' }}>
                                 <Shop size={24} color="#4cd4a1" />
@@ -228,7 +228,7 @@ const Setting = () => {
 
 
                 <div className='border-none p-2 rounded-3 bg-white mt-2 '>
-                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 border-bottom">
+                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
                         <div className="d-flex align-items-center">
                             <div className="me-3 p-2 rounded" style={{ backgroundColor: '#e6f7f1' }}>
                                 <ShieldCheck size={24} color="#4cd4a1" />
@@ -242,7 +242,7 @@ const Setting = () => {
                     </ListGroup.Item>
 
                     {/* Customer Service Center */}
-                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 border-bottom">
+                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
                         <div className="d-flex align-items-center">
                             <div className="me-3 p-2 rounded" style={{ backgroundColor: '#e6f7f1' }}>
                                 <Headset size={24} color="#4cd4a1" />
@@ -253,7 +253,7 @@ const Setting = () => {
                     </ListGroup.Item>
 
                     {/* Invitation */}
-                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 border-bottom">
+                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
                         <div className="d-flex align-items-center border-none">
                             <div className="me-3 p-2 rounded" style={{ backgroundColor: '#e6f7f1' }}>
                                 <Gift size={24} color="#4cd4a1" />
