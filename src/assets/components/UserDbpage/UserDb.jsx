@@ -14,6 +14,8 @@ import Services from '../services ';
 import { useNavigate } from 'react-router-dom';
 import { baseURL } from '../../../../config';
 import Takecontrol from '../Takecontrol';
+import { jwtDecode } from 'jwt-decode';
+// import jwt_decode from "jwt-decode";
 
 const UserDb= () => {
   const navigate = useNavigate();
@@ -28,6 +30,28 @@ const UserDb= () => {
       const user = JSON.parse(localStorage.getItem("user"));
       const token = localStorage.getItem("token");
       
+
+      if (token) {
+        try {
+          const decoded = jwtDecode(token);
+          const currentTime = Date.now();
+    
+          if (decoded.exp * 1000 < currentTime) {
+            alert("Your session has expired. Please log in again.");
+            localStorage.removeItem("token");
+            // localStorage.removeItem("user");
+            navigate("/");
+            return;
+          }
+        } catch (error) {
+          console.error("Error decoding token", error);
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          navigate("/");
+          return;
+        }
+      }
+    
       // console.log("Stored user:", user);
       
       // Check if session ID from backend matches session ID stored on client side
