@@ -10,11 +10,12 @@ import { LiaUserCircle } from "react-icons/lia";
 const BottomNavigation = () => {
   const navigate = useNavigate()
   const MeLogOutBtn = () => {
-    navigate("/")
-    localStorage.removeItem("token");
+    navigate("/setting")
+    // navigate("/")
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("selectedAccount");
+    // localStorage.removeItem("transferAmount");
     // localStorage.removeItem("user");
-    localStorage.removeItem("selectedAccount");
-    localStorage.removeItem("transferAmount");
   }
 
   const uploadPicture =()=>{
