@@ -25,36 +25,17 @@ import { useNavigate } from 'react-router-dom';
 const Passwordetails = () => {
     const navigate = useNavigate()
     const LogoutBtn = ()=>{
-        Swal.fire({
+          Swal.fire({
             text: "Are you sure you want to log out of Opay?",
             showCancelButton: true,
-            confirmButtonText: "Yes",
-            cancelButtonText: "No",
-            customClass: {
-              confirmButton: 'my-confirm-btn',
-              cancelButton: 'my-cancel-btn',
-            },
-            buttonsStyling: false, 
-            showClass: {
-              popup: `
-                animate__animated
-                animate__fadeInUp
-                animate__faster
-              `
-            },
-            hideClass: {
-              popup: `
-                animate__animated
-                animate__fadeOutDown
-                animate__faster
-              `
-            }
+            confirmButtonColor: "#00B875",
+            cancelButtonColor: "#E1F5EA",
+            confirmButtonText: "Yes"
           }).then((result) => {
             if (result.isConfirmed) {
-              navigate("/");
+                navigate("/"); // Navigate after the success message is closed
             }
           });
-          
     }
     return (
         <>
