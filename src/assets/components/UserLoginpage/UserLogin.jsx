@@ -80,7 +80,7 @@ const UserLogin = () => {
 
 
     return (
-        <Container className="d-flex flex-column align-items-center py-5" style={{ maxWidth: '400px' }}>
+        <Container className="d-flex flex-column align-items-center py-5 border" style={{ maxWidth: '400px' }}>
             {/* Profile Section */}
             <Image
                 src={'https://cdn.brandfetch.io/id2zsUpkDc/w/820/h/386/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1740597917017'}
@@ -108,40 +108,49 @@ const UserLogin = () => {
             </div>
 
             {/* Login Form */}
-            <Form className="w-100" onSubmit={handleLogin}>
-                <div className="position-relative mb-4">
-                    <Form.Control
-                        type={showPassword ? 'text' : 'password'}
-                        placeholder="Enter 6-digit Password"
-                        className="py-2 px-3 border-none fs-5 bg-light"
-                        // style={{ borderColor: '#00B974' }}
-                        maxLength={14}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+            <div className="w-100" onSubmit={handleLogin}>
+                <div className=''>
 
-                    <Button
-                        variant="link"
-                        className="position-absolute top-50 end-0 translate-middle-y text-muted"
-                        onClick={() => setShowPassword(!showPassword)}
-                        type="button"
-                    >
-                        {showPassword ? < EyeFill size={20} /> : <EyeSlashFill size={20} />}
-                    </Button>
+                    <div className="position-relative mb-4">
+                        <Form.Control
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder="Enter 6-digit Password"
+                            className="py-2 px-3 border-none fs-5 bg-light"
+                            // style={{ borderColor: '#00B974' }}
+                            maxLength={14}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <Button
+                            variant="link"
+                            className="position-absolute top-50 end-0 translate-middle-y text-muted"
+                            onClick={() => setShowPassword(!showPassword)}
+                            type="button"
+                        >
+                            {showPassword ? < EyeFill size={20} /> : <EyeSlashFill size={20} />}
+                        </Button>
+                    </div>
+
+
+                    <div className="d-flex mb-4">
+                        <Button
+                            variant="link"
+                            className="text-decoration-none ms-auto translate-middle-y"
+                            style={{ color: '#00B974' }}
+                        >
+                            Forgot Password?
+                        </Button>
+                    </div>
+
                 </div>
+
 
                 {errorMessage && (
                     <div className="text-danger text-center mb-4">
                         {errorMessage}
                     </div>
                 )}
-
-                <div className="text-end mb-4">
-                    <Button variant="link" className="text-decoration-none" style={{ color: '#00B974' }}>
-                        Forgot Password?
-                    </Button>
-                </div>
-
                 <div className="text-center">
                     <Button
                         type="submit"
@@ -176,7 +185,7 @@ const UserLogin = () => {
                         <strong>NDIC</strong>
                     </div>
                 </div>
-            </Form>
+            </div>
         </Container>
     );
 };
