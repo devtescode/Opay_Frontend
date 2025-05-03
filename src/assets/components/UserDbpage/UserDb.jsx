@@ -37,7 +37,6 @@ const UserDb= () => {
           const currentTime = Date.now();
     
           if (decoded.exp * 1000 < currentTime) {
-            alert("Your session has expired. Please log in again.");
             localStorage.removeItem("token");
             // localStorage.removeItem("user");
             navigate("/");
