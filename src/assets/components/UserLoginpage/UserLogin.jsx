@@ -113,8 +113,8 @@ const UserLogin = () => {
                     <Form.Control
                         type={showPassword ? 'text' : 'password'}
                         placeholder="Enter 6-digit Password"
-                        className="py-2 px-3 border-1 fs-5"
-                        style={{ borderColor: '#00B974' }}
+                        className="py-2 px-3 border-none fs-5 bg-light"
+                        // style={{ borderColor: '#00B974' }}
                         maxLength={14}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
