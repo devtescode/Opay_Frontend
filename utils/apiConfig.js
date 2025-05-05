@@ -28,7 +28,8 @@ export const API_URLS = {
     getMoneyOut: (userId)=>`${baseURL}/useropay/getMoneyOut/${userId}`,
     updatemoneyout: `${baseURL}/useropay/updatemoneyout`,
     getrecentransactionsearch: (userId)=>`${baseURL}/useropay/getrecentransactionsearch/${userId}`,
-    uploadpicture: `${baseURL}/useropay/uploadpicture`
+    uploadpicture: `${baseURL}/useropay/uploadpicture`,
+    changepassword: `${baseURL}/useropay/changepassword`
 
 
 };

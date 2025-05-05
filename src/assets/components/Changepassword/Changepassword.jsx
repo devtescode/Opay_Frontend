@@ -1,40 +1,43 @@
 import React, { useState } from 'react';
+import { API_URLS } from '../../../../utils/apiConfig';
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false); // for disabling the button
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
       const token = localStorage.getItem("token");
-      
 
-      const response = await fetch(`http://localhost:4000/useropay/changepassword`, {
+      if (!token) {
+        Swal.fire("Error", "User not logged in.", "error");
+        return;
+      }
+
+      const response = await fetch(API_URLS.changepassword, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          userId: user.userId,
-          oldPassword,
-          newPassword
+          token,
+          OldPassword: oldPassword,
+          NewPassword: newPassword,
         }),
       });
 
       const result = await response.json();
 
-      if (response.ok) {
-        Swal.fire("Success", "Password changed successfully!", "success");
+      if (result.status) {
+        Swal.fire("Success", result.message || "Password changed successfully!", "success");
         setOldPassword('');
         setNewPassword('');
       } else {
-        Swal.fire("Error", result.message || "Old password is incorrect.", "error");
+        Swal.fire("Error", result.message || "Failed to change password.", "error");
       }
     } catch (err) {
       console.error("Error changing password:", err);
