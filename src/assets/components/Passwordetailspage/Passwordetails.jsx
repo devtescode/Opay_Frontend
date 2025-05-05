@@ -52,7 +52,10 @@ const Passwordetails = () => {
                 localStorage.removeItem("token");
             }
         });
+    }
 
+    const Changepassword= ()=>{
+        navigate("/changepassword")
     }
     return (
         <>
@@ -62,7 +65,7 @@ const Passwordetails = () => {
                 </div>
                 <div className='mx-auto mx-3' style={{ marginTop: "70px" }}>
                     <div className=' p-2 rounded-3 bg-white rounded-3 mx-3'>
-                        <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
+                        <ListGroup.Item onClick={Changepassword} className="d-flex justify-content-between align-items-center px-0 py-3 ">
                             <div className="d-flex align-items-center">
                                 <span>Login Settings</span>
                             </div>
