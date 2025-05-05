@@ -236,22 +236,56 @@ const Admindb = () => {
 
 
     // const [sessions, setSessions] = useState([]);
-    const handleLogoutSession = async (sessionId) => {
-        try {
-            const response = await fetch(API_URLS.logoutsession(sessionId), {
-                method: "DELETE",
-            });
+    const handleLogoutSession = (sessionId, userObject) => {
+        const actualUserId = userObject._id;
+        const user = users.find((u) => u._id === actualUserId);
+        const username = user ? user.username : "Unknown";
 
-            if (response.ok) {
-                setSessions(sessions.filter(session => session._id !== sessionId));
-                alert("Session logged out successfully!");
-            } else {
-                alert("Failed to log out session");
+        Swal.fire({
+            title: "Are you sure?",
+            html: `Do you really want to log out <strong class="text-danger">${username}</strong>?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#00B875",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, log out",
+            cancelButtonText: "No"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await fetch(API_URLS.logoutsession(sessionId), {
+                        method: "DELETE",
+                    });
+
+                    if (response.ok) {
+                        setSessions(prev => prev.filter(session => session._id !== sessionId));
+                        Swal.fire({
+                            title: "Success!",
+                            html: `<strong class="text-success">${username}</strong> has been logged out successfully.`,
+                            icon: "success",
+                            confirmButtonColor: "#00B875",
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            html: `Failed to log out <strong class="text-danger">${username}</strong>`,
+                            icon: "error",
+                            confirmButtonColor: "#d33",
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        title: "Error!",
+                        html: `An error occurred while logging out <strong class="text-danger">${username}</strong>`,
+                        icon: "error",
+                        confirmButtonColor: "#d33",
+                    });
+                }
             }
-        } catch (error) {
-            console.error("Error logging out session:", error);
-        }
+        });
     };
+
 
 
 
@@ -301,6 +335,7 @@ const Admindb = () => {
                 <div class="container text-center">
                     <div class="row gap-2">
                         <div class="col-12 col-md bg-white">
+                           
                             <div>
                                 <h4>Amount</h4>
                             </div>
@@ -389,7 +424,7 @@ const Admindb = () => {
                                                                 <p
                                                                     style={{ cursor: "pointer" }}
                                                                     className="text-danger"
-                                                                    onClick={() => handleLogoutSession(session?._id)}
+                                                                    onClick={() => handleLogoutSession(session?._id, session.userId)}
                                                                 >
                                                                     Log Out
                                                                 </p>
