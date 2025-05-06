@@ -13,6 +13,9 @@ const Navbar = () => {
         navigate("/admin")
         localStorage.removeItem('adminToken');
     }
+    const DetailsBtn =()=>{
+        navigate("/details")
+    }
     return (
         <div>
             <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
@@ -28,6 +31,9 @@ const Navbar = () => {
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style={{cursor:"pointer"}} onClick={CreateBtn}>Create</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style={{cursor:"pointer"}} onClick={DetailsBtn}>Details</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style={{cursor:"pointer"}} onClick={logoutBtn}>Logout</a>
