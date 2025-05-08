@@ -1,5 +1,5 @@
 {
-    "banks" :[
+    "banks": [
         {
             "name": "Abbey Mortgage Bank",
             "code": "801",
@@ -365,6 +365,13 @@
             "country": "Nigeria"
         },
         {
+            "name": "SmartCash PSB",
+            "code": "120004",
+            "slug": "smartcash-psb",
+            "currency": "NGN",
+            "country": "Nigeria"
+        },
+        {
             "name": "Stanbic IBTC Bank",
             "code": "221",
             "slug": "stanbic-ibtc-bank",
@@ -470,6 +477,4 @@
             "country": "Nigeria"
         }
     ]
-    
-    
 }
