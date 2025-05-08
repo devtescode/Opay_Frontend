@@ -54,7 +54,6 @@ const AdminDetails = () => {
 
   return (
     <>
-
       <Navbar />
       <NavbarTop/>
       <div className="container col-md-4 bg-white p-4 rounded-3" style={{ marginTop: "60px" }}>
