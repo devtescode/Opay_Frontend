@@ -274,6 +274,20 @@
             "country": "Nigeria"
         },
         {
+            "name": "Moniepoint MFB",
+            "code": "50515",
+            "slug": "Moniepoint MFB",
+            "currency": "NGN",
+            "country": "Nigeria"
+        },
+        {
+            "name": "MTN MoMo PSB",
+            "code": "120003",
+            "slug": "mtn-momo-psb",
+            "currency": "NGN",
+            "country": "Nigeria"
+        },
+        {
             "name": "Paga",
             "code": "100002",
             "slug": "paga",
@@ -350,13 +364,7 @@
             "currency": "NGN",
             "country": "Nigeria"
         },
-        {
-            "name": "Moniepoint MFB",
-            "code": "50515",
-            "slug": "Moniepoint MFB",
-            "currency": "NGN",
-            "country": "Nigeria"
-        },
+       
         {
             "name": "Sparkle Microfinance Bank",
             "code": "51310",
