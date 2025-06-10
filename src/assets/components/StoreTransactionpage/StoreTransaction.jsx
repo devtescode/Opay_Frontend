@@ -249,9 +249,9 @@ const StoreTransaction = ({ transactionStatus }) => {
                 </div>
 
               </div> */}
-              <div key={transaction._id} className="text-end text-dark mb-3">
+              <div key={transaction._id} className="text-end text-dark mb-0">
                 <div
-                  className={`small mb-1 ${transaction.status === "pending"
+                  className={`small ${transaction.status === "pending"
                       ? "text-warning"
                       : transaction.status === "failed"
                         ? "text-danger"
