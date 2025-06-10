@@ -1,5 +1,5 @@
 import React from "react"
-import { ArrowLeft, CheckCircle, ChevronRight, Copy,  XCircle, Clock } from "react-bootstrap-icons"
+import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
@@ -7,9 +7,15 @@ import { format } from "date-fns";
 const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
-    const BankToBtn = () => {
-        navigate("/storetransaction")
+    const BankToBtn = (transaction) => {
+        // navigate("/storetransaction")
+        navigate('/storetransaction', { state: transaction });
     }
+
+    // const handleTransactionClick = (transaction) => {
+    //     navigate('/transactiondetails', { state: transaction });
+    // };
+
     if (!transaction) {
         return <p className="text-center text-danger">No transaction details available</p>;
     }
@@ -32,10 +38,10 @@ const TransactionDetails = () => {
                     <div className="card-body">
                         <div
                             className={`rounded-circle p-3 d-inline-flex mb-3 ${transaction.status === "pending"
-                                    ? "bg-warning bg-opacity-10"
-                                    : transaction.status === "failed"
-                                        ? "bg-danger bg-opacity-10"
-                                        : "bg-success bg-opacity-10"
+                                ? "bg-warning bg-opacity-10"
+                                : transaction.status === "failed"
+                                    ? "bg-danger bg-opacity-10"
+                                    : "bg-success bg-opacity-10"
                                 }`}
                         >
                             {transaction.status === "pending" ? (
@@ -67,9 +73,9 @@ const TransactionDetails = () => {
 
                             <span
                                 className={`${transaction.status === "pending"
-                                        ? "text-warning"
-                                        : transaction.status === "failed"
-                                            ? "text-danger"
+                                    ? "text-warning"
+                                    : transaction.status === "failed"
+                                        ? "text-danger"
                                         : transaction.status === "Reversed"
                                             ? "text-warning"
                                             : "text-success"
@@ -82,9 +88,9 @@ const TransactionDetails = () => {
                 </div>
 
                 {/* Transaction Details */}
-                <div className="card mx-3 mt-4" style={{fontSize:"12px"}}>
+                <div className="card mx-3 mt-4" style={{ fontSize: "12px" }}>
                     <div className="card-body ">
-                        <h6 className="mb-4 fw-bold" style={{fontSize:"20px"}}>Transaction Details</h6>
+                        <h6 className="mb-4 fw-bold" style={{ fontSize: "20px" }}>Transaction Details</h6>
 
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Recipient Details</div>

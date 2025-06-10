@@ -562,6 +562,8 @@ const Admindb = () => {
                                                                     ? "success"
                                                                     : transaction.status === "pending"
                                                                         ? "warning"
+                                                                    : transaction.status === "Reversed"
+                                                                        ? "warning"
                                                                         : "danger"
                                                                     }`}
                                                             >
