@@ -273,7 +273,6 @@ const StoreTransaction = ({ transactionStatus }) => {
           ))
         )}
       </div>
-
       {/* Bottom Navigation */}
       <Nav className="bg-white border-top">
         <div className="d-flex w-100 justify-content-around p-2">
