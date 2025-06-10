@@ -277,10 +277,7 @@ const StoreTransaction = ({ transactionStatus }) => {
       <Nav className="bg-white border-top">
         <div className="d-flex w-100 justify-content-around p-2">
           <div className="text-center text-success">
-            {/* <ArrowDown size={24} /> */}
-            {/* <div className='border'> */}
             <i class="ri-arrow-left-right-line bg-success text-white p-1 rounded-2"></i>
-            {/* </div> */}
             <div className="small">Transactions</div>
           </div>
           <div className="text-center text-muted">
