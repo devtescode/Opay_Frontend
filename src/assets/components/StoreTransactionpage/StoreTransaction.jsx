@@ -29,6 +29,71 @@ const StoreTransaction = ({ transactionStatus }) => {
     fetchTransactions();
   }, []);
 
+
+  useEffect(() => {
+    // Only run if transactions are loaded
+    transactions.forEach((transaction) => {
+      if (transaction.status === "pending") {
+        setTimeout(async () => {
+          try {
+            const res = await axios.put(
+              API_URLS.reverseTransaction(transaction._id)
+            );
+
+            setTransactions((prev) =>
+              prev.map((t) =>
+                t._id === transaction._id
+                  ? { ...t, status: "Reversed" }
+                  : t
+              )
+            );
+          } catch (err) {
+            console.error("Error reversing transaction:", err);
+          }
+        }, 20000);
+      }
+    });
+  }, [transactions]); // Run this effect when transactions change
+
+
+
+  // useEffect(() => {
+  //   const fetchTransactions = async () => {
+  //     try {
+  //       const user = JSON.parse(localStorage.getItem("user"));
+  //       const userId = user?.userId;
+  //       const response = await axios.get(API_URLS.getransactions(userId));
+  //       const fetchedTransactions = response.data;
+
+  //       // Handle failed → reversed after 20s in UI
+  //       const updatedTransactions = fetchedTransactions.map((transaction) => {
+  //         if (transaction.status === "failed") {
+  //           // Set a timer to change the status in UI
+  //           setTimeout(() => {
+  //             setTransactions((prev) =>
+  //               prev.map((t) =>
+  //                 t._id === transaction._id
+  //                   ? { ...t, status: "Reversed" }
+  //                   : t
+  //               )
+  //             );
+  //           }, 20000); // 20 seconds
+  //         }
+  //         return transaction;
+  //       });
+
+  //       setTransactions(updatedTransactions);
+  //       setLoading(false);
+  //     } catch (err) {
+  //       console.error("Error fetching transaction history:", err);
+  //       setError("Failed to fetch transactions");
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchTransactions();
+  // }, []);
+
   const TranferBtnBack = () => {
     navigate("/userdb")
   }
@@ -63,21 +128,21 @@ const StoreTransaction = ({ transactionStatus }) => {
   const userId = userData?.userId;
 
   useEffect(() => {
-      const fetchMoneyOut = async () => {
-          try {
-              const response = await axios.get(API_URLS.getMoneyOut(userId), {
-                  headers: { Authorization: `Bearer ${token}` }
-              });
+    const fetchMoneyOut = async () => {
+      try {
+        const response = await axios.get(API_URLS.getMoneyOut(userId), {
+          headers: { Authorization: `Bearer ${token}` }
+        });
 
-              setMoneyOut(response.data.moneyOut !== undefined ? response.data.moneyOut : 0);
-          } catch (error) {
-              console.error('Error fetching money out:', error);
-          }
-      };
-
-      if (userId) {
-          fetchMoneyOut();
+        setMoneyOut(response.data.moneyOut !== undefined ? response.data.moneyOut : 0);
+      } catch (error) {
+        console.error('Error fetching money out:', error);
       }
+    };
+
+    if (userId) {
+      fetchMoneyOut();
+    }
   }, [userId, token]);
 
 
@@ -164,13 +229,13 @@ const StoreTransaction = ({ transactionStatus }) => {
                 )}
               </div>
               <div className="flex-grow-1">
-                <div className="text-truncate" style={{ fontSize: "12px",  whiteSpace: "normal", wordBreak: "break-word" }}>Transfer to {transaction.accountName}</div>
+                <div className="text-truncate" style={{ fontSize: "12px", whiteSpace: "normal", wordBreak: "break-word" }}>Transfer to {transaction.accountName}</div>
                 <small className="text-muted">
                   {/* {new Date(transaction.createdAt).toLocaleString()} */}
                   {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
                 </small>
               </div>
-              <div className="text-end text-dark">
+              {/* <div className="text-end text-dark">
                 -₦{Math.abs(transaction.amount).toLocaleString()}.00
                 <div
                   className={`small ${transaction.status === "pending"
@@ -183,8 +248,26 @@ const StoreTransaction = ({ transactionStatus }) => {
                   {transaction.status}
                 </div>
 
+              </div> */}
+              <div key={transaction._id} className="text-end text-dark mb-3">
+                <div
+                  className={`small mb-1 ${transaction.status === "pending"
+                      ? "text-warning"
+                      : transaction.status === "failed"
+                        ? "text-danger"
+                        : transaction.status === "Reversed"
+                          ? "text-warning"
+                          : "text-success"
+                    }`}
+                >
+                  {transaction.status}
+                </div>
+                {transaction.status === "Reversed" ? (
+                  <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                ) : (
+                  <span>-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                )}
               </div>
-
 
             </div>
           ))

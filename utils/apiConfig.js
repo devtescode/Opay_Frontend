@@ -30,7 +30,8 @@ export const API_URLS = {
     getrecentransactionsearch: (userId)=>`${baseURL}/useropay/getrecentransactionsearch/${userId}`,
     uploadpicture: `${baseURL}/useropay/uploadpicture`,
     changepassword: `${baseURL}/useropay/changepassword`,
-    changeadminpassword: `${baseURL}/useropay/changeadminpassword`
+    changeadminpassword: `${baseURL}/useropay/changeadminpassword`,
+    reverseTransaction: (id)=>`${baseURL}/useropay/reverseTransaction/${id}`
 
 
 };

@@ -42,6 +42,10 @@ const TransactionDetails = () => {
                                 <Clock className="text-warning" size={32} /> // Pending icon
                             ) : transaction.status === "failed" ? (
                                 <XCircle className="text-danger" size={32} /> // Failed icon
+                            ) : transaction.status === "failed" ? (
+                                <XCircle className="text-danger" size={32} /> // Failed icon
+                            ) : transaction.status === "Reversed" ? (
+                                <Clock className="text-warning" size={32} />
                             ) : (
                                 <CheckCircle className="text-success" size={32} /> // Success icon
                             )}
@@ -55,6 +59,8 @@ const TransactionDetails = () => {
                                 <Clock className="text-warning" size={16} />
                             ) : transaction.status === "failed" ? (
                                 <XCircle className="text-danger" size={16} />
+                            ) : transaction.status === "Reversed" ? (
+                                <Clock className="text-warning" size={16} />
                             ) : (
                                 <CheckCircle className="text-success" size={16} />
                             )}
@@ -64,6 +70,8 @@ const TransactionDetails = () => {
                                         ? "text-warning"
                                         : transaction.status === "failed"
                                             ? "text-danger"
+                                        : transaction.status === "Reversed"
+                                            ? "text-warning"
                                             : "text-success"
                                     }`}
                             >

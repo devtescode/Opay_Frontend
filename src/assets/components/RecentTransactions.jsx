@@ -11,6 +11,31 @@ const RecentTransactions = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  useEffect(() => {
+    // Only run if transactions are loaded
+    transactions.forEach((transaction) => {
+      if (transaction.status === "pending") {
+        setTimeout(async () => {
+          try {
+            const res = await axios.put(
+              API_URLS.reverseTransaction(transaction._id)
+            );
+
+            setTransactions((prev) =>
+              prev.map((t) =>
+                t._id === transaction._id
+                  ? { ...t, status: "Reversed" }
+                  : t
+              )
+            );
+          } catch (err) {
+            console.error("Error reversing transaction:", err);
+          }
+        }, 20000);
+      }
+    });
+  }, [transactions]); // Run this effect when transactions change
+
 
   useEffect(() => {
     let isMounted = true;
@@ -40,6 +65,9 @@ const RecentTransactions = () => {
     };
   }, []);
 
+
+  
+
   const handleTransactionClick = (transaction) => {
     navigate("/transactiondetails", { state: transaction });
   };
@@ -60,75 +88,87 @@ const RecentTransactions = () => {
 
   return (
     <div className="mb-4">
-      {transactions.length === 0 ? (
-        <p className="text-center text-muted">No recent transactions</p>
-      ) : (
-        // Card
-        <div className="mb-2 bg-white rounded-3 p-2" style={{ cursor: "pointer" }}>
-          {/* <Card.Body> */}
-            {transactions.map((transaction) => (
+    {transactions.length === 0 ? (
+      <p className="text-center text-muted">No recent transactions</p>
+    ) : (
+      <div className="mb-2 bg-white rounded-3 p-2" style={{ cursor: "pointer" }}>
+        {transactions.map((transaction) => (
+          <div
+            key={transaction._id}
+            onClick={() => handleTransactionClick(transaction)}
+            className="d-flex align-items-center justify-content-between mb-2"
+          >
+            <div className="d-flex align-items-center gap-2">
               <div
-                key={transaction._id}
-                onClick={() => handleTransactionClick(transaction)}
-                className="d-flex align-items-center justify-content-between mb-2"
+                className="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                style={{ width: 40, height: 40 }}
               >
-                <div className="d-flex align-items-center gap-2">
-                  <div
-                    className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                    style={{ width: 40, height: 40 }}
-                  >
-                    <ArrowUp
-                      className={
-                        transaction.amount > 0 ? "text-success" : "text-danger"
-                      }
-                      size={20}
-                    />
-                  </div>
-                  <div>
-                    <div className="fw-medium" style={{ fontSize: "15px" }}>
-                      Transfer to {transaction.accountName}
-                    </div>
-                    <div
-                      className="small text-muted"
-                      style={{ fontSize: "11px" }}
-                    >
-                      {format(
-                        new Date(transaction.createdAt),
-                        "MMM do, hh:mm:ss"
-                      )}
-                    </div>
-                  </div>
+                <ArrowUp
+                  className={
+                    transaction.amount > 0 ? "text-success" : "text-danger"
+                  }
+                  size={20}
+                />
+              </div>
+              <div>
+                <div className="fw-medium" style={{ fontSize: "15px" }}>
+                  Transfer to {transaction.accountName}
                 </div>
-                <div className="text-end">
-                  <div
-                    className={
-                      transaction.amount > 0
-                        ? "text-success fw-medium"
-                        : "text-danger fw-medium"
-                    }
-                  >
-                    {transaction.amount > 0
-                      ? `-₦${transaction.amount.toLocaleString()}.00`
-                      : `₦${Math.abs(transaction.amount).toLocaleString()}`}
-                  </div>
-                  <Badge
-                    bg={
-                      transaction.status === "successful"
-                        ? "success"
-                        : transaction.status === "failed"
-                        ? "danger"
-                        : "warning"
-                    }
-                  >
-                    {transaction.status}
-                  </Badge>
+                <div
+                  className="small text-muted"
+                  style={{ fontSize: "11px" }}
+                >
+                  {format(
+                    new Date(transaction.createdAt),
+                    "MMM do, hh:mm:ss"
+                  )}
                 </div>
               </div>
-            ))}
-          {/* </Card.Body> */}
-        </div>
-      )}
-    </div>
+            </div>
+  
+            {/* Right side */}
+            
+
+
+            <div className="text-end">
+              <div
+                className={`fw-medium ${
+                  transaction.status === "Reversed"
+                    ? "" // No color class for Reversed = default black
+                    : transaction.amount > 0
+                    ? ""
+                    : ""
+                }`}
+              >
+                {transaction.status === "Reversed"
+                  ? `+₦${Math.abs(transaction.amount).toLocaleString()}.00`
+                  : transaction.amount > 0
+                  ? `-₦${transaction.amount.toLocaleString()}.00`
+                  : `₦${Math.abs(transaction.amount).toLocaleString()}.00`}
+              </div>
+  
+              <Badge
+                bg={
+                  transaction.status === "successful"
+                    ? "success"
+                    : transaction.status === "failed"
+                    ? "danger"
+                    : transaction.status === "Reversed"
+                    ? "warning"
+                    : "warning"
+                }
+              >
+                {transaction.status}
+              </Badge>
+
+              
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+  
   );
 };
 
