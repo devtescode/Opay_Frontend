@@ -1,5 +1,5 @@
 import React from "react"
-import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock } from "react-bootstrap-icons"
+import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircleFill } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
@@ -11,6 +11,9 @@ const TransactionDetails = () => {
         // navigate("/storetransaction")
         navigate('/storetransaction', { state: transaction });
     }
+    const date = new Date(transaction.createdAt);
+    const formattedDate = `${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+
 
     // const handleTransactionClick = (transaction) => {
     //     navigate('/transactiondetails', { state: transaction });
@@ -21,6 +24,7 @@ const TransactionDetails = () => {
     }
     return (
         <div className="">
+
             <div className="bg-light pb-5 mb-5 mx-auto col-md-6 col-sm-12">
                 {/* Header */}
                 <div className="d-flex justify-content-between align-items-center p-3 bg-white">
@@ -61,7 +65,7 @@ const TransactionDetails = () => {
                         <h2 className="mb-1">₦{transaction.amount.toLocaleString()}.00</h2>
 
                         <div className="d-flex align-items-center justify-content-center gap-2">
-                            {transaction.status === "pending" ? (
+                            {/* {transaction.status === "pending" ? (
                                 <Clock className="text-warning" size={16} />
                             ) : transaction.status === "failed" ? (
                                 <XCircle className="text-danger" size={16} />
@@ -69,7 +73,7 @@ const TransactionDetails = () => {
                                 <Clock className="text-warning" size={16} />
                             ) : (
                                 <CheckCircle className="text-success" size={16} />
-                            )}
+                            )} */}
 
                             <span
                                 className={`${transaction.status === "pending"
@@ -85,10 +89,146 @@ const TransactionDetails = () => {
                             </span>
                         </div>
                     </div>
-                </div>
+
+                    <div className="mb-4">
+                        <div>
+                            <div>
+                                <div>
+                                    <div className="position-relative d-flex justify-content-between align-items-center mb-4" style={{ padding: "0 10px" }}>
+                                        {/* Horizontal Line Behind Circles */}
+                                        <div
+                                            className="position-absolute bg-success w-75 mx-auto"
+                                            style={{
+                                                top: "12px", // Half of circle height to center line
+                                                left: "0",
+                                                right: "0",
+                                                height: "2px",
+                                                zIndex: 0
+                                            }}
+                                        ></div>
+
+                                        {/* Step 1 */}
+                                        <div className="text-center position-relative  " style={{ zIndex: 1 }}>
+                                            <div
+                                                className=" rounded-circle d-inline-flex align-items-center justify-content-center mb-2 mx-auto"
+                                                style={{ width: "24px", height: "24px" }}
+                                            >
+                                                {/* <i className="text-white" style={{ fontSize: "12px" }}>
+                                                    {transaction.status === "pending" ? (
+                                                        <Clock className="text-warning" size={16} />
+                                                    ) : transaction.status === "failed" ? (
+                                                        <XCircle className="text-danger" size={16} />
+                                                    ) : transaction.status === "Reversed" ? (
+                                                        <Clock className="text-warning" size={16} />
+                                                    ) : (
+                                                        )}
+                                                        </i> */}
+                                                <CheckCircleFill className="text-success" size={18} />
+                                            </div>
+                                            <div style={{ fontSize: "12px", color: "#6c757d" }}>
+                                                Payment<br />successful
+                                            </div>
+                                            <div style={{ fontSize: "11px", color: "#adb5bd" }}>
+                                                <span>{formattedDate}</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Step 2 */}
+                                        <div className="text-center position-relative" style={{ zIndex: 1 }}>
+                                            <div
+                                                className="rounded-circle d-inline-flex align-items-center justify-content-center mb-2 mx-auto"
+                                                style={{ width: "24px", height: "24px" }}
+                                            >
+                                                <i className="text-white" style={{ fontSize: "12px" }}>
+                                                    {transaction.status === "pending" ? (
+                                                        <Clock className="text-warning" size={18} />
+                                                    ) : transaction.status === "failed" ? (
+                                                        <XCircle className="text-danger" size={18} />
+                                                    ) : transaction.status === "Reversed" ? (
+                                                        <Clock className="text-warning" size={18} />
+                                                    ) : (
+                                                        <CheckCircleFill className="text-success" size={18} />
+                                                    )}
+                                                </i>
+                                            </div>
+                                            <div style={{ fontSize: "12px", color: "#6c757d" }}>
+                                                Processing<br />by bank
+                                            </div>
+                                            <div style={{ fontSize: "11px", color: "#adb5bd" }}>
+                                                <span>{formattedDate}</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Step 3 */}
+                                        <div className="text-center position-relative" style={{ zIndex: 1 }}>
+                                            <div
+                                                className=" rounded-circle d-inline-flex align-items-center justify-content-center mb-2 mx-auto"
+                                                style={{ width: "24px", height: "24px" }}
+                                            >
+                                                <i className="text-white" style={{ fontSize: "12px" }}>
+                                                    {transaction.status === "pending" ? (
+                                                        <Clock className="text-warning" size={18} />
+                                                    ) : transaction.status === "failed" ? (
+                                                        <XCircle className="text-danger" size={18} />
+                                                    ) : transaction.status === "Reversed" ? (
+                                                        <Clock className="text-warning" size={18} />
+                                                    ) : (
+                                                        <CheckCircleFill className="text-success" size={18} />
+                                                    )}
+                                                </i>
+                                            </div>
+                                            <div style={{ fontSize: "12px", color: "#6c757d" }}>
+                                                Received<br />by bank
+                                            </div>
+                                            <div style={{ fontSize: "11px", color: "#adb5bd" }}>
+                                                <span>{formattedDate}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Timestamps */}
+
+                                </div>
+
+                                {/* Notice */}
+                                <div className="mx-3">
+
+
+                                    <div className="mb-1 mx-0 mx-sm-5 bg-light rounded-2 p-1" style={{ fontSize: "10px", color: "#6c757d", lineHeight: "1.4" }}>
+                                        <span> The recipient account is expected to be credited within 5 minutes, subject to notification by the bank. If
+                                            you have any questions, you can also{" "}
+                                            <span className="text-success text-decoration-none" style={{ fontSize: "10px" }}>
+                                                contact the recipient bank 📞
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                    {/* Amount Breakdown */}
+                                    <div className=" pt-3">
+                                        <div className="d-flex justify-content-between mb-2">
+                                            <span style={{ color: "#6c757d" }}>Amount</span>
+                                            <span className="text-dark fw-medium">₦{transaction.amount.toLocaleString()}.00</span>
+                                        </div>
+                                        <div className="d-flex justify-content-between mb-2">
+                                            <span style={{ color: "#6c757d" }}>Fee</span>
+                                            <div>
+                                                <span style={{ color: "#adb5bd", textDecoration: "line-through" }}>₦10.00</span>
+                                                <span className="text-dark fw-medium ms-2">₦0.00</span>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <span style={{ color: "#6c757d" }}>Amount Paid</span>
+                                            <span className="text-dark fw-medium">₦{transaction.amount.toLocaleString()}.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div >
 
                 {/* Transaction Details */}
-                <div className="card mx-3 mt-4" style={{ fontSize: "12px" }}>
+                < div className="card mx-3 mt-4" style={{ fontSize: "12px" }}>
                     <div className="card-body ">
                         <h6 className="mb-4 fw-bold" style={{ fontSize: "20px" }}>Transaction Details</h6>
 
@@ -122,7 +262,6 @@ const TransactionDetails = () => {
                             <div className="col-6 text-secondary">Payment Method</div>
                             <div className="col-6 text-end">
                                 <div className="text-muted">Wallet -₦{transaction.amount.toLocaleString()}.00</div>
-
                             </div>
                         </div>
 
@@ -143,10 +282,10 @@ const TransactionDetails = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
 
                 {/* More Actions */}
-                <div className="card mx-3 mt-4 mb-5">
+                < div className="card mx-3 mt-4 mb-5" >
                     <div className="card-body">
                         <h6 className="mb-3 fw-bold">More Actions</h6>
                         <button className="btn btn-link text-dark text-decoration-none d-flex justify-content-between align-items-center w-100 p-0">
@@ -157,17 +296,17 @@ const TransactionDetails = () => {
                             </div>
                         </button>
                     </div>
-                </div>
+                </div >
 
                 {/* Bottom Buttons */}
-                <div className="fixed-bottom p-4 bg-white shadow-lg">
+                < div className="fixed-bottom p-4 bg-white shadow-lg" >
                     <div className="d-flex gap-3">
                         <button className="btn btn-outline-success flex-grow-1 rounded-pill">Report an issue</button>
                         <button className="btn btn-success flex-grow-1 rounded-pill">Share Receipt</button>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div >
+            </div >
+        </div >
     )
 }
 
