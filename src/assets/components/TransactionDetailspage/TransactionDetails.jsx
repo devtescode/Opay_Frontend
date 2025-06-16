@@ -183,7 +183,7 @@ const TransactionDetails = () => {
                                 <div className="mx-3">
 
 
-                                    <div className="mb-1 mx-0 mx-sm-5 bg-light rounded-2 p-1" style={{ fontSize: "10px", color: "#6c757d", lineHeight: "1.4" }}>
+                                    <div className="mb-1 mx-3 mx-sm-5 bg-light rounded-2 p-1" style={{ fontSize: "10px", color: "#6c757d", lineHeight: "1.4" }}>
                                         <span> The recipient account is expected to be credited within 5 minutes, subject to notification by the bank. If
                                             you have any questions, you can also{" "}
                                             <span className="text-success text-decoration-none" style={{ fontSize: "10px" }}>
