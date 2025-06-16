@@ -95,7 +95,7 @@ const TransactionDetails = () => {
                             <div>
                                 <div className="mb-4" style={{ padding: "0 10px" }}>
                                     {/* === Icon and Line Row === */}
-                                    <div className="mx-4 d-flex align-items-center justify-content-between position-relative mb-2" style={{ marginBottom: "1rem" }}>
+                                    <div className="w-75 mx-auto d-flex align-items-center justify-content-between position-relative mb-2" style={{ marginBottom: "1rem" }}>
                                         {/* Step 1 icon */}
                                         <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
                                             <CheckCircleFill className="text-success" size={18} />
@@ -147,9 +147,9 @@ const TransactionDetails = () => {
                                     </div>
 
                                     {/* === Label and Date Row === */}
-                                    <div className="d-flex justify-content-between text-center">
+                                    <div className="d-flex justify-content-between text-center mx-3">
                                         {/* Step 1 text */}
-                                        <div style={{ width: "70px" }}>
+                                        <div className=" w-25" style={{ width: "70px" }}>
                                             <div style={{ fontSize: "12px", color: "#6c757d" }}>
                                                 Payment<br />successful
                                             </div>
@@ -159,7 +159,7 @@ const TransactionDetails = () => {
                                         </div>
 
                                         {/* Step 2 text */}
-                                        <div style={{ width: "70px" }}>
+                                        <div className=" w-25" style={{ width: "70px" }}>
                                             <div style={{ fontSize: "12px", color: "#6c757d" }}>
                                                 Processing<br />by bank
                                             </div>
@@ -169,7 +169,7 @@ const TransactionDetails = () => {
                                         </div>
 
                                         {/* Step 3 text */}
-                                        <div style={{ width: "70px" }}>
+                                        <div className=" w-25" style={{ width: "70px" }}>
                                             <div style={{ fontSize: "12px", color: "#6c757d" }}>
                                                 Received<br />by bank
                                             </div>
