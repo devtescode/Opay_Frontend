@@ -1,5 +1,5 @@
 import React from "react"
-import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircleFill } from "react-bootstrap-icons"
+import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircleFill, ChevronLeft } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
@@ -28,10 +28,13 @@ const TransactionDetails = () => {
             <div className="bg-light pb-5 mb-5 mx-auto col-md-6 col-sm-12">
                 {/* Header */}
                 <div className="fixed-top d-flex justify-content-between align-items-center p-3 bg-white">
-                    <button className="btn btn-link text-dark" onClick={() => navigate(-1)}>
-                        <ArrowLeft size={24} onClick={BankToBtn} />
-                    </button>
-                    <h5 className="mb-0">Transaction Details</h5>
+                    <div className="d-flex align-items-center">
+
+                        <div className="" onClick={() => navigate(-1)}>
+                            <ChevronLeft size={18} onClick={BankToBtn} />
+                        </div>
+                        <h5 className="mb-0 mx-3">Transaction Details</h5>
+                    </div>
                     <button className="btn btn-link text-success">
                         {/* <User size={24} /> */}
                     </button>
