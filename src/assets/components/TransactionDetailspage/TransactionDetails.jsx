@@ -38,7 +38,7 @@ const TransactionDetails = () => {
                 </div>
 
                 {/* Transaction Card */}
-                <div className="card mx-3 border-0 text-center" style={{marginTop:"60px"}}>
+                <div className="card mx-3 border-0 text-center" style={{ marginTop: "60px" }}>
                     <div className="card-body">
                         <div
                             className={`rounded-circle p-3 d-inline-flex mb-3 ${transaction.status === "pending"
@@ -217,14 +217,16 @@ const TransactionDetails = () => {
                 </div >
 
                 {/* Transaction Details */}
-                < div className="bg-white p-2 rounded-3 shadow-md mx-3 mt-4" style={{ fontSize: "14px" }}>
+                < div className="bg-white p-2 rounded-3 shadow-md mx-3 mt-4" style={{ fontSize: "15px" }}>
                     <div className="card-body ">
-                        <h6 className="mb-4 fw-bold" style={{ fontSize: "20px" }}>Transaction Details</h6>
+                        <h6 className="mb-4 fw-medium" style={{ fontSize: "20px" }}>Transaction Details</h6>
 
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Recipient Details</div>
                             <div className="col-6 text-end text-muted">
-                                {transaction.accountName}
+                                <div className="small">
+                                    {transaction.accountName}
+                                </div>
                                 <div className="text-secondary small">{transaction.bankName} | {transaction.accountNumber}</div>
                             </div>
                         </div>
@@ -251,7 +253,7 @@ const TransactionDetails = () => {
                             <div className="col-6 text-secondary">Payment Method</div>
                             <div className="col-6 text-end">
                                 <div className="text-muted">Wallet
-                                     {/* -₦{transaction.amount.toLocaleString()}.00 */}
+                                    {/* -₦{transaction.amount.toLocaleString()}.00 */}
 
                                 </div>
                             </div>
@@ -262,7 +264,7 @@ const TransactionDetails = () => {
                             <div className="col-6 text-end text-muted">
                                 {/* {new Date(transaction.createdAt).toLocaleString()} */}
                                 {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss ")}
-                               {/* the a is at the back of the data and time a */}
+                                {/* the a is at the back of the data and time a */}
                             </div>
                         </div>
 
@@ -278,11 +280,11 @@ const TransactionDetails = () => {
                 </div >
 
                 {/* More Actions */}
-                < div className="card mx-3 mt-4 mb-5" >
+                < div className="bg-white p-2 rounded-3 shadow-md py-4 mx-3 mt-4 mb-5" >
                     <div className="card-body">
                         <h6 className="mb-3 fw-bold">More Actions</h6>
                         <button className="btn btn-link text-dark text-decoration-none d-flex justify-content-between align-items-center w-100 p-0">
-                            <span>Choose Category</span>
+                            <span>Category</span>
                             <div className="d-flex align-items-center gap-2">
                                 <span>Transfer</span>
                                 <ChevronRight />
