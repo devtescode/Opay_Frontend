@@ -7,6 +7,7 @@ import { format } from "date-fns";
 const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
+    console.log("Received transaction:", transaction); // ✅ Must not be null
     const BankToBtn = (transaction) => {
         // navigate("/storetransaction")
         navigate('/storetransaction', { state: transaction });
@@ -15,13 +16,13 @@ const TransactionDetails = () => {
     const formattedDate = `${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 
 
-    // const handleTransactionClick = (transaction) => {
-    //     navigate('/transactiondetails', { state: transaction });
-    // };
-
+    
     if (!transaction) {
         return <p className="text-center text-danger">No transaction details available</p>;
     }
+    // const handleTransactionClick = (transaction) => {
+    //     navigate('/transactiondetails', { state: transaction });
+    // };
     return (
         <div className="">
 

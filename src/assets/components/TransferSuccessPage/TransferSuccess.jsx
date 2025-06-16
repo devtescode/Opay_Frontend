@@ -46,7 +46,7 @@ const TransferSuccess = () => {
             </div>
 
             {/* Action Buttons */}
-            <Row className="text-center mb-4 g-2">
+            <Row className="text-center mb-4 g-2 justify-content-center">
                 <Col xs={4}>
                     <Button variant="light " className="w-100 py-2" onClick={shareBtn} style={{height:"90px"}}>
                         <Share className="mb-2 text-success" size={20} />
