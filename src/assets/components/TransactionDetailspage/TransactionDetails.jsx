@@ -27,7 +27,7 @@ const TransactionDetails = () => {
 
             <div className="bg-light pb-5 mb-5 mx-auto col-md-6 col-sm-12">
                 {/* Header */}
-                <div className="d-flex justify-content-between align-items-center p-3 bg-white">
+                <div className="fixed-top d-flex justify-content-between align-items-center p-3 bg-white">
                     <button className="btn btn-link text-dark" onClick={() => navigate(-1)}>
                         <ArrowLeft size={24} onClick={BankToBtn} />
                     </button>
@@ -38,7 +38,7 @@ const TransactionDetails = () => {
                 </div>
 
                 {/* Transaction Card */}
-                <div className="card mx-3 mt-4 border-0 text-center">
+                <div className="card mx-3 border-0 text-center" style={{marginTop:"60px"}}>
                     <div className="card-body">
                         <div
                             className={`rounded-circle p-3 d-inline-flex mb-3 ${transaction.status === "pending"
@@ -61,7 +61,7 @@ const TransactionDetails = () => {
                             )}
                         </div>
 
-                        <p className="text-secondary mb-1">Transfer to {transaction.accountName}</p>
+                        <p className="text-secondary mb-1 fw-medium">Transfer to {transaction.accountName}</p>
                         <h2 className="mb-1">₦{transaction.amount.toLocaleString()}.00</h2>
 
                         <div className="d-flex align-items-center justify-content-center gap-2">
