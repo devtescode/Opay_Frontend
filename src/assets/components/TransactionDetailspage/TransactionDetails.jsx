@@ -93,104 +93,93 @@ const TransactionDetails = () => {
                     <div className="mb-4">
                         <div>
                             <div>
-                                <div>
-                                    <div className="position-relative d-flex justify-content-between align-items-center mb-4" style={{ padding: "0 10px" }}>
-                                        {/* Horizontal Line Behind Circles */}
-                                        <div
-                                            className="position-absolute bg-success w-75 mx-auto"
-                                            style={{
-                                                top: "12px", // Half of circle height to center line
-                                                left: "0",
-                                                right: "0",
-                                                height: "2px",
-                                                zIndex: 0
-                                            }}
-                                        ></div>
+                                <div className="mb-4" style={{ padding: "0 10px" }}>
+                                    {/* === Icon and Line Row === */}
+                                    <div className="mx-4 d-flex align-items-center justify-content-between position-relative mb-2" style={{ marginBottom: "1rem" }}>
+                                        {/* Step 1 icon */}
+                                        <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
+                                            <CheckCircleFill className="text-success" size={18} />
+                                        </div>
 
-                                        {/* Step 1 */}
-                                        <div className="text-center position-relative  " style={{ zIndex: 1 }}>
-                                            <div
-                                                className=" rounded-circle d-inline-flex align-items-center justify-content-center mb-2 mx-auto"
-                                                style={{ width: "24px", height: "24px" }}
-                                            >
-                                                {/* <i className="text-white" style={{ fontSize: "12px" }}>
-                                                    {transaction.status === "pending" ? (
-                                                        <Clock className="text-warning" size={16} />
-                                                    ) : transaction.status === "failed" ? (
-                                                        <XCircle className="text-danger" size={16} />
-                                                    ) : transaction.status === "Reversed" ? (
-                                                        <Clock className="text-warning" size={16} />
-                                                    ) : (
-                                                        )}
-                                                        </i> */}
+                                        {/* Line 1 */}
+                                        <div style={{
+                                            flex: 1,
+                                            height: "2px",
+                                            backgroundColor: "#198754",
+                                            margin: "0 5px",
+                                            zIndex: 0
+                                        }}></div>
+
+                                        {/* Step 2 icon */}
+                                        <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
+                                            {transaction.status === "pending" ? (
+                                                <Clock className="text-warning" size={18} />
+                                            ) : transaction.status === "failed" ? (
+                                                <XCircle className="text-danger" size={18} />
+                                            ) : transaction.status === "Reversed" ? (
+                                                <Clock className="text-warning" size={18} />
+                                            ) : (
                                                 <CheckCircleFill className="text-success" size={18} />
-                                            </div>
+                                            )}
+                                        </div>
+
+                                        {/* Line 2 */}
+                                        <div style={{
+                                            flex: 1,
+                                            height: "2px",
+                                            backgroundColor: "#198754",
+                                            margin: "0 5px",
+                                            zIndex: 0
+                                        }}></div>
+
+                                        {/* Step 3 icon */}
+                                        <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
+                                            {transaction.status === "pending" ? (
+                                                <Clock className="text-warning" size={18} />
+                                            ) : transaction.status === "failed" ? (
+                                                <XCircle className="text-danger" size={18} />
+                                            ) : transaction.status === "Reversed" ? (
+                                                <Clock className="text-warning" size={18} />
+                                            ) : (
+                                                <CheckCircleFill className="text-success" size={18} />
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* === Label and Date Row === */}
+                                    <div className="d-flex justify-content-between text-center">
+                                        {/* Step 1 text */}
+                                        <div style={{ width: "70px" }}>
                                             <div style={{ fontSize: "12px", color: "#6c757d" }}>
                                                 Payment<br />successful
                                             </div>
                                             <div style={{ fontSize: "11px", color: "#adb5bd" }}>
-                                                <span>{formattedDate}</span>
+                                                {formattedDate}
                                             </div>
                                         </div>
 
-                                        {/* Step 2 */}
-                                        <div className="text-center position-relative" style={{ zIndex: 1 }}>
-                                            <div
-                                                className="rounded-circle d-inline-flex align-items-center justify-content-center mb-2 mx-auto"
-                                                style={{ width: "24px", height: "24px" }}
-                                            >
-                                                <i className="text-white" style={{ fontSize: "12px" }}>
-                                                    {transaction.status === "pending" ? (
-                                                        <Clock className="text-warning" size={18} />
-                                                    ) : transaction.status === "failed" ? (
-                                                        <XCircle className="text-danger" size={18} />
-                                                    ) : transaction.status === "Reversed" ? (
-                                                        <Clock className="text-warning" size={18} />
-                                                    ) : (
-                                                        <CheckCircleFill className="text-success" size={18} />
-                                                    )}
-                                                </i>
-                                            </div>
+                                        {/* Step 2 text */}
+                                        <div style={{ width: "70px" }}>
                                             <div style={{ fontSize: "12px", color: "#6c757d" }}>
                                                 Processing<br />by bank
                                             </div>
                                             <div style={{ fontSize: "11px", color: "#adb5bd" }}>
-                                                <span>{formattedDate}</span>
+                                                {formattedDate}
                                             </div>
                                         </div>
 
-                                        {/* Step 3 */}
-                                        <div className="text-center position-relative" style={{ zIndex: 1 }}>
-                                            <div
-                                                className=" rounded-circle d-inline-flex align-items-center justify-content-center mb-2 mx-auto"
-                                                style={{ width: "24px", height: "24px" }}
-                                            >
-                                                <i className="text-white" style={{ fontSize: "12px" }}>
-                                                    {transaction.status === "pending" ? (
-                                                        <Clock className="text-warning" size={18} />
-                                                    ) : transaction.status === "failed" ? (
-                                                        <XCircle className="text-danger" size={18} />
-                                                    ) : transaction.status === "Reversed" ? (
-                                                        <Clock className="text-warning" size={18} />
-                                                    ) : (
-                                                        <CheckCircleFill className="text-success" size={18} />
-                                                    )}
-                                                </i>
-                                            </div>
+                                        {/* Step 3 text */}
+                                        <div style={{ width: "70px" }}>
                                             <div style={{ fontSize: "12px", color: "#6c757d" }}>
                                                 Received<br />by bank
                                             </div>
                                             <div style={{ fontSize: "11px", color: "#adb5bd" }}>
-                                                <span>{formattedDate}</span>
+                                                {formattedDate}
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* Timestamps */}
-
                                 </div>
 
-                                {/* Notice */}
                                 <div className="mx-3">
 
 
