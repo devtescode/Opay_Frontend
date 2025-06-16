@@ -217,7 +217,7 @@ const TransactionDetails = () => {
                 </div >
 
                 {/* Transaction Details */}
-                < div className="card mx-3 mt-4" style={{ fontSize: "12px" }}>
+                < div className="bg-white p-2 rounded-3 shadow-md mx-3 mt-4" style={{ fontSize: "14px" }}>
                     <div className="card-body ">
                         <h6 className="mb-4 fw-bold" style={{ fontSize: "20px" }}>Transaction Details</h6>
 
@@ -250,7 +250,10 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Payment Method</div>
                             <div className="col-6 text-end">
-                                <div className="text-muted">Wallet -₦{transaction.amount.toLocaleString()}.00</div>
+                                <div className="text-muted">Wallet
+                                     {/* -₦{transaction.amount.toLocaleString()}.00 */}
+
+                                </div>
                             </div>
                         </div>
 
@@ -258,7 +261,8 @@ const TransactionDetails = () => {
                             <div className="col-6 text-secondary">Transaction Date</div>
                             <div className="col-6 text-end text-muted">
                                 {/* {new Date(transaction.createdAt).toLocaleString()} */}
-                                {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
+                                {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss ")}
+                               {/* the a is at the back of the data and time a */}
                             </div>
                         </div>
 
