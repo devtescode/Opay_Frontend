@@ -249,9 +249,9 @@ function TransactionReceipt({ initialStatus }) {
 
               <div className='d-flex mx-2' style={{ alignItems: "center" }}>
                 <div className=''>
-                  <i class="ri-image-2-line fs-1 "></i>
+                  <i class="ri-image-2-line fs-5"></i>
                 </div>
-                <div>
+                <div className='mx-1'>
                   Share as image
                 </div>
               </div>
@@ -273,9 +273,9 @@ function TransactionReceipt({ initialStatus }) {
 
               <div className='d-flex' style={{ alignItems: "center" }}>
                 <div className=''>
-                  <i class="ri-file-pdf-2-line fs-1"></i>
+                  <i class="ri-file-pdf-2-line fs-5"></i>
                 </div>
-                <div>
+                <div className='mx-1'>
                   Share as PDF
 
                 </div>
