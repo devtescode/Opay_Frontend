@@ -241,13 +241,13 @@ function TransactionReceipt({ initialStatus }) {
 
           </div>
         </div>
-        <div className="row g-2 mt-3 fixed-bottom shadow-lg" style={{ alignItems: "center" }}>
+        <div className="row g-2 mt-3 fixed-bottom shadow-lg " style={{ alignItems: "center" }}>
           <div className='d-flex justify-content-between p-2' style={{ alignItems: "center" }}>
 
 
-            <div className=" text-success text-center" style={{ alignItems: "center" }}>
+            <div lassName="text-center" style={{ alignItems: "center", color: "#01B575" }}>
 
-              <div className='d-flex' style={{ alignItems: "center" }}>
+              <div className='d-flex mx-2' style={{ alignItems: "center" }}>
                 <div className=''>
                   <i class="ri-image-2-line fs-1 "></i>
                 </div>
@@ -269,7 +269,7 @@ function TransactionReceipt({ initialStatus }) {
               </div>
             </div>
 
-            <div className=" text-success text-center" style={{ alignItems: "center" }}>
+            <div className="text-center mx-3" style={{ alignItems: "center", color: "#01B575" }}>
 
               <div className='d-flex' style={{ alignItems: "center" }}>
                 <div className=''>
