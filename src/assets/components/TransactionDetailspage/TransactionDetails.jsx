@@ -301,8 +301,8 @@ const TransactionDetails = () => {
                 {/* Bottom Buttons */}
                 < div className="fixed-bottom p-4 bg-white shadow-lg" >
                     <div className="d-flex gap-3">
-                        <button className="btn btn-outline-success flex-grow-1 rounded-pill">Report an issue</button>
-                        <button className="btn btn-success flex-grow-1 rounded-pill">Share Receipt</button>
+                        <button style={{background:"#E1F4E9", color:"#2EAB7F"}} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
+                        <button style={{backgroundColor:"#01B575"}} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
                     </div>
                 </div >
             </div >
