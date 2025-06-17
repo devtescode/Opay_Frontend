@@ -114,8 +114,8 @@ function TransactionReceipt({ initialStatus }) {
     <>
       <div className="py-3 d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto p-2" >
         {/* <ArrowLeft className="me-2" size={24} /> */}
-        <p className=" mb-0 d-flex text-muted" style={{ alignItems: "center" }}>
-          <ChevronLeft className='mx-2' size={15} onClick={BackBtn} />
+        <p className=" mb-0 d-flex text-muted d-flex align-items-center" style={{ alignItems: "center" }}>
+          <ChevronLeft className='mx-2 ' size={15} onClick={BackBtn} />
           Share Receipt
         </p>
       </div>
@@ -150,7 +150,7 @@ function TransactionReceipt({ initialStatus }) {
 
               <h5
                 onClick={handleDoubleTap}
-                className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "dark"} mb-1`}
+                className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "dark"} mb-0`}
                 style={{ fontWeight: "normal", cursor: "pointer" }}
               >
                 {status
