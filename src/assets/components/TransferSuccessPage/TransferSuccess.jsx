@@ -31,12 +31,12 @@ const TransferSuccess = () => {
             {/* Success Header */}
             <div className="text-center mb-4">
                 <div className='text-end text-success' style={{ fontSize: "18px" }}>
-                    <p className=''>
+                    <p className='fw-bold' style={{color:"#01B575"}}>
                         Done
                     </p>
                 </div>
-                <div className="bg-success text-white rounded-circle d-inline-flex p-3 mb-3 mt-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24">
+                <div style={{backgroundColor:"#01B575"}} className=" text-white rounded-circle d-inline-flex p-3 mb-3 mt-2">
+                    <svg width="15" height="15" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                     </svg>
                 </div>
@@ -91,7 +91,7 @@ const TransferSuccess = () => {
                                 <small className="text-muted">Earn more interest everyday!</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5">Go</Button>
+                        <Button variant="success px-4 rounded-5" style={{backgroundColor:"#01B575"}}>GO</Button>
                     </div>
 
                     <div className="mb-3 d-flex align-items-center justify-content-between">
@@ -104,7 +104,7 @@ const TransferSuccess = () => {
                                 <small className="text-muted">Using OPay Verve Card now</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5">Go</Button>
+                        <Button variant="success px-4 rounded-5" style={{backgroundColor:"#01B575"}}>GO</Button>
                     </div>
 
                     <div className="mb-3 d-flex align-items-center justify-content-between">
@@ -117,7 +117,7 @@ const TransferSuccess = () => {
                                 <small className="text-muted">Get Discounts That Wow😎!</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5">GO</Button>
+                        <Button variant="success px-4 rounded-5" style={{backgroundColor:"#01B575"}}>GO</Button>
                     </div>
 
                     <div className="d-flex align-items-center justify-content-between">
@@ -130,7 +130,7 @@ const TransferSuccess = () => {
                                 <small className="text-muted">Fast&Easy Electricity Bill Pay</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5">GO</Button>
+                        <Button variant="success px-4 rounded-5" style={{backgroundColor:"#01B575"}}>GO</Button>
                     </div>
                 </Card.Body>
             </Card>
