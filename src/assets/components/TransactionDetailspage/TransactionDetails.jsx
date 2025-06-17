@@ -2,7 +2,7 @@ import React from "react"
 import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircleFill, ChevronLeft } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-
+import profileimage from "../../../../public/Image/image.png"
 
 const TransactionDetails = () => {
     const navigate = useNavigate();
@@ -37,6 +37,7 @@ const TransactionDetails = () => {
                     </div>
                     <button className="btn btn-link text-success">
                         {/* <User size={24} /> */}
+                        <img src={profileimage} style={{height:"33px", width:"29px"}} alt="" />
                     </button>
                 </div>
 
