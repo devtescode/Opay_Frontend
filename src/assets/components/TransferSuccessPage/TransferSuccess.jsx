@@ -79,7 +79,7 @@ const TransferSuccess = () => {
             {/* Rewards Section */}
             <Card className="border-0 bg-light">
                 <Card.Body>
-                    <h5 className="mb-4">Get Your Rewards!</h5>
+                    <h5 className="mb-4">Special Bonus For Your</h5>
 
                     <div className="mb-3 d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center gap-3">
@@ -87,11 +87,11 @@ const TransferSuccess = () => {
                                 <span className="h5 mb-0">💰</span>
                             </div>
                             <div>
-                                <div className="fw-medium">Spend&Save</div>
-                                <small className="text-muted">Save when you spend</small>
+                                <div className="fw-medium">Save easily</div>
+                                <small className="text-muted">Earn more interest everyday!</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5">Start</Button>
+                        <Button variant="success px-4 rounded-5">Go</Button>
                     </div>
 
                     <div className="mb-3 d-flex align-items-center justify-content-between">
@@ -113,8 +113,8 @@ const TransferSuccess = () => {
                                 <span className="h5 mb-0">⚙️</span>
                             </div>
                             <div>
-                                <div className="fw-medium">Bet now and win Big!</div>
-                                <small className="text-muted">Enjoy great Discounts!</small>
+                                <div className="fw-medium">Bet big, win Bigger!</div>
+                                <small className="text-muted">Get Discounts That Wow😎!</small>
                             </div>
                         </div>
                         <Button variant="success px-4 rounded-5">GO</Button>
@@ -123,11 +123,11 @@ const TransferSuccess = () => {
                     <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center gap-3">
                             <div className="bg-white p-2 rounded">
-                                <span className="h5 mb-0">📢</span>
+                                <span className="h5 mb-0">💡</span>
                             </div>
                             <div>
-                                <div className="fw-medium">Up to ₦4200</div>
-                                <small className="text-muted">Invite friends and earn cash</small>
+                                <div className="fw-medium">Electricity Payment</div>
+                                <small className="text-muted">Fast&Easy Electricity Bill Pay</small>
                             </div>
                         </div>
                         <Button variant="success px-4 rounded-5">GO</Button>
