@@ -51,33 +51,30 @@ const TransferSuccess = () => {
                 </p>
             </div>
 
-            {/* Action Buttons */}
-            <Row className="text-center mb-4 g-2 justify-content-center">
-                <Col xs={4}>
-                    <Button variant="light " className="w-100 py-2" onClick={shareBtn} style={{ height: "90px" }}>
-                        <Share className="mb-2 text-success" size={20} />
-                        <div className="small">Share Receipt</div>
-                    </Button>
+            <Row className="mb-3 justify-content-center text-center">
+                <Col xs={6} md="auto" className="mb-3 mb-md-0">
+                    <div
+                        className="py-2 rounded-3 px-3 d-flex justify-content-center align-items-center gap-3 shadow-sm"
+                        onClick={shareBtn}
+                        style={{ height: "65px", cursor: "pointer" }}
+                    >
+                        <Share className="mb-1 text-success mt-1" size={20} />
+                        <div className="small" style={{fontSize:"16px"}}>Share Receipt</div>
+                    </div>
                 </Col>
-                <Col xs={4}>
-                    <Button variant="light" className="w-100 py-2" style={{ height: "90px" }}>
-                        <PersonPlusFill className="mb-2 text-success" size={20} />
-                        <div className="small">Add to favourites</div>
-                    </Button>
-                </Col>
-                <Col xs={4}>
-                    <Button
-                        variant="light"
-                        className="w-100 py-2"
-                        style={{ height: "90px" }}
+                <Col xs={6} md="auto">
+                    <div
+                        className="py-2 px-3 rounded-3 d-flex justify-content-center align-items-center gap-3 shadow-sm"
+                        style={{ height: "65px", cursor: "pointer" }}
                         onClick={() => navigate("/transactiondetails", { state: transaction })}
                     >
-                        <List className="mb-2 text-success" size={20} />
-                        <div className="small">View Details</div>
-                    </Button>
-
+                        <List className="mb-0 text-success" size={20} />
+                        <div className="small" style={{fontSize:"16px"}}>View Details</div>
+                    </div>
                 </Col>
             </Row>
+
+
 
             {/* Rewards Section */}
             <Card className="border-0 bg-light">
