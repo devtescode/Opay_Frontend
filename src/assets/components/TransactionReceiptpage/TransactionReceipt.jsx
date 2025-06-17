@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
+import { ChevronLeft } from 'react-bootstrap-icons';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { ArrowLeft } from 'react-bootstrap-icons';
 
@@ -111,15 +112,18 @@ function TransactionReceipt({ initialStatus }) {
 
   return (
     <>
-      <div className="d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto" >
+      <div className="py-3 d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto p-2" >
         {/* <ArrowLeft className="me-2" size={24} /> */}
-        <h5 className="mb-0 d-flex text-muted" style={{ alignItems: "center" }}><i class="ri-arrow-drop-left-line text-muted" onClick={BackBtn} style={{ fontSize: "40px" }} ></i> Share Receipt</h5>
+        <p className=" mb-0 d-flex text-muted" style={{ alignItems: "center" }}>
+          <ChevronLeft className='mx-2' size={15} onClick={BackBtn} />
+          Share Receipt
+        </p>
       </div>
       <div className="col-md-6 mx-auto col-sm-12 mt-2" style={{ maxWidth: "580px" }}>
         {/* Header */}
 
         {/* Receipt Card */}
-        <div className="card">
+        <div className="card border-0">
           <div className="card-body">
             {/* Logo and Title */}
             <div className="text-center mb-4 d-flex justify-content-between" style={{ alignItems: "center" }}>
@@ -135,7 +139,7 @@ function TransactionReceipt({ initialStatus }) {
 
             {/* Amount and Status */}
             <div className="text-center mb-4">
-              <h2 className="text-success"> {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}</h2>
+              <h2 className="" style={{ color: "#01B575" }}> {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}</h2>
               {/* <h5 className="" style={{ fontWeight: "normal" }}>Successful</h5> */}
               {/* <h5
                 onClick={handleDoubleTap}
@@ -145,7 +149,7 @@ function TransactionReceipt({ initialStatus }) {
               </h5> */}
               <h5
                 onClick={handleDoubleTap}
-                className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "success"}`}
+                className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "dark"}`}
                 style={{ fontWeight: "normal", cursor: "pointer" }}
               >
                 {status ? status.charAt(0).toUpperCase() + status.slice(1) : "Loading..."}
@@ -202,14 +206,14 @@ function TransactionReceipt({ initialStatus }) {
                   )} */}
                 </div>
               </div>
-              <div className="row mb-2">
+              {/* <div className="row mb-2">
                 <div className="col-5">
                   <span className="text-muted">Transaction Type</span>
                 </div>
                 <div className="col-7 text-end">
                   <span className="text-muted">Transfer to Bank Account</span>
                 </div>
-              </div>
+              </div> */}
 
               <div className="row mb-2">
                 <div className="col-5">
