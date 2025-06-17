@@ -27,7 +27,7 @@ const TransactionDetails = () => {
 
             <div className="bg-light pb-5 mb-5 mx-auto col-md-6 col-sm-12">
                 {/* Header */}
-                <div className="fixed-top d-flex justify-content-between align-items-center p-3 bg-white shadow-sm">
+                <div className=" fixed-top d-flex justify-content-between align-items-center p-3 bg-white shadow-sm">
                     <div className="d-flex align-items-center">
 
                         <div className="" onClick={() => navigate(-1)}>
