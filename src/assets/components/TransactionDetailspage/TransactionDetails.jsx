@@ -37,7 +37,7 @@ const TransactionDetails = () => {
                     </div>
                     <button className="btn btn-link text-success">
                         {/* <User size={24} /> */}
-                        <img src={profileimage} style={{height:"33px", width:"29px"}} alt="" />
+                        <img src={profileimage}  style={{height:"29px", width:"24px"}} alt="" />
                     </button>
                 </div>
 
