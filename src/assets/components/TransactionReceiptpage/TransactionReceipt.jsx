@@ -234,7 +234,7 @@ function TransactionReceipt({ initialStatus }) {
               </div>
             </div>
 
-            <div className="text-center text-muted small " style={{ fontSize: "8px", marginTop: "50px" }}>
+            <div className="text-center text-muted small " style={{ fontSize: "9px", marginTop: "50px" }}>
               <p style={{ textAlign: "justify" }}>Enjoy a better life with OPay. Get free transfers, withdrawals, bill payments, instant loans, and good annual interest on your savings. OPay is licensed by the Central Bank of Nigeria and insured by the NDIC.</p>
             </div>
 
