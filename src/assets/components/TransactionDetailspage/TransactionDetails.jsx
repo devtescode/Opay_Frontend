@@ -35,9 +35,9 @@ const TransactionDetails = () => {
                         </div>
                         <h5 className="mb-0 mx-2">Transaction Details</h5>
                     </div>
-                    <button className="btn btn-link text-success">
+                    <button className="btn btn-link text-success mx-2">
                         {/* <User size={24} /> */}
-                        <img src={profileimage}  style={{height:"29px", width:"24px"}} alt="" />
+                        <img src={profileimage} className="" style={{height:"29px", width:"24px"}} alt="" />
                     </button>
                 </div>
 
