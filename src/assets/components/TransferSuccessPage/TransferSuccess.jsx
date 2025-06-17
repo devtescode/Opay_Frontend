@@ -51,7 +51,7 @@ const TransferSuccess = () => {
                 </p>
             </div>
 
-            <Row className="mb-3 justify-content-center text-center">
+            <Row className="mb-1 justify-content-center text-center">
                 <Col xs={6} md="auto" className="mb-3 mb-md-0">
                     <div
                         className="py-2 rounded-3 px-3 d-flex justify-content-center align-items-center gap-3 shadow-sm"
@@ -79,7 +79,7 @@ const TransferSuccess = () => {
             {/* Rewards Section */}
             <Card className="border-0 bg-light">
                 <Card.Body>
-                    <h5 className="mb-4">Special Bonus For Your</h5>
+                    <h5 className="mb-3">Special Bonus For Your</h5>
 
                     <div className="mb-3 d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center gap-3">
