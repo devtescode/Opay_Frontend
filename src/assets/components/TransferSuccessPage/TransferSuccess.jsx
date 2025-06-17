@@ -31,7 +31,7 @@ const TransferSuccess = () => {
             {/* Success Header */}
             <div className="text-center mb-4">
                 <div className='text-end text-success' style={{ fontSize: "18px" }}>
-                    <p>
+                    <p className=''>
                         Done
                     </p>
                 </div>
