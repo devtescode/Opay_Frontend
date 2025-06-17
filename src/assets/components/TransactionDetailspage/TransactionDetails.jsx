@@ -15,7 +15,6 @@ const TransactionDetails = () => {
     const date = new Date(transaction.createdAt);
     const formattedDate = `${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 
-
     
     if (!transaction) {
         return <p className="text-center text-danger">No transaction details available</p>;
@@ -266,9 +265,11 @@ const TransactionDetails = () => {
                         <div className="row">
                             <div className="col-6 text-secondary">Transaction Date</div>
                             <div className="col-6 text-end text-muted">
-                                {/* {new Date(transaction.createdAt).toLocaleString()} */}
-                                {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss ")}
+                              
                                 {/* the a is at the back of the data and time a */}
+                                {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss ")}
+
+                                
                             </div>
                         </div>
 

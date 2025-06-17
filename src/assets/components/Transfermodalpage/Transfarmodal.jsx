@@ -40,79 +40,84 @@ const Transfermodal = ({ showModal, setShowModal }) => {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        Swal.fire('Error', 'User not authenticated', 'error');
-        return;
+      Swal.fire('Error', 'User not authenticated', 'error');
+      return;
     }
 
     try {
-        setIsLoading(true);
+      setIsLoading(true);
 
-        // Step 1: Fetch Current Wallet Balance
-        const balanceResponse = await axios.get(API_URLS.getuserbalance, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+      // Step 1: Fetch Current Wallet Balance
+      const balanceResponse = await axios.get(API_URLS.getuserbalance, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-        const currentBalance = balanceResponse.data.walletBalance;
+      const currentBalance = balanceResponse.data.walletBalance;
 
-        if (currentBalance < savedAmount) {
-            Swal.fire('Error', 'Insufficient balance', 'error');
-            setIsLoading(false);
-            return;
-        }
+      if (currentBalance < savedAmount) {
+        Swal.fire('Error', 'Insufficient balance', 'error');
+        setIsLoading(false);
+        return;
+      }
 
-        // Step 2: Subtract Amount and Update Balance
-        await axios.post(API_URLS.updatebalance, {
-            amount: savedAmount
+      // Step 2: Subtract Amount and Update Balance
+      await axios.post(API_URLS.updatebalance, {
+        amount: savedAmount
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // Step 3: Get User ID
+      const userData = JSON.parse(localStorage.getItem("user"));
+      const userId = userData?.userId;
+
+      if (!userId) {
+        console.error('No userId found in localStorage');
+        return;
+      }
+
+      // Step 4: Store Transaction (Including Money Out)
+      const transactionData = {
+        userId,
+        bankName: savedAccount?.bankName,
+        accountNumber: savedAccount?.accountNumber,
+        accountName: savedAccount?.accountName,
+        amount: savedAmount,
+      };
+
+      const response = await axios.post(API_URLS.transactions, transactionData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (response.data.transactionId) {
+        const transaction = response.data; // or construct it manually if needed
+        localStorage.setItem("transactionId", transaction.transactionId);
+
+        await axios.post(API_URLS.updatemoneyout, {
+          userId,
+          amount: savedAmount
         }, {
-            headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` }
         });
 
-        // Step 3: Get User ID
-        const userData = JSON.parse(localStorage.getItem("user"));
-        const userId = userData?.userId;
-
-        if (!userId) {
-            console.error('No userId found in localStorage');
-            return;
-        }
-
-        // Step 4: Store Transaction (Including Money Out)
-        const transactionData = {
-            userId,
-            bankName: savedAccount?.bankName,
-            accountNumber: savedAccount?.accountNumber,
-            accountName: savedAccount?.accountName,
-            amount: savedAmount,
-        };
-
-        const response = await axios.post(API_URLS.transactions, transactionData, {
-            headers: { Authorization: `Bearer ${token}` }
+        // navigate('/transfersuccess', { state: transaction }); // ✅ Pass transaction here
+        navigate('/transfersuccess', {
+          state: response.data.transaction,
         });
 
-        if (response.data.transactionId) {
-            const transactionId = response.data.transactionId;
-            localStorage.setItem("transactionId", transactionId);
 
-            // **Step 5: Update `moneyOut` in the Database**
-            await axios.post(API_URLS.updatemoneyout, {
-                userId,
-                amount: savedAmount
-            }, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+      } else {
+        Swal.fire('Error', 'Transaction failed', 'error');
+      }
 
-            navigate('/transfersuccess');
-        } else {
-            Swal.fire('Error', 'Transaction failed', 'error');
-        }
 
     } catch (error) {
-        console.error('Error processing payment:', error);
-        Swal.fire('Error', 'Failed to complete payment', 'error');
+      console.error('Error processing payment:', error);
+      Swal.fire('Error', 'Failed to complete payment', 'error');
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
-};
+  };
 
   const [isLoading, setIsLoading] = useState(false); // Track loading stat
   useEffect(() => {

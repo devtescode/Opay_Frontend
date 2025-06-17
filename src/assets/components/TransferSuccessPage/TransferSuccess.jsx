@@ -5,10 +5,12 @@ import {
     PersonPlusFill,
     List
 } from 'react-bootstrap-icons';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const TransferSuccess = () => {
     const navigate = useNavigate()
+    const { state: transaction } = useLocation();
+    console.log("Received transaction in TransferSuccess:", transaction); // MUST NOT be null
     const [amount, setAmount] = useState(null);
     useEffect(() => {
         const savedAmount = localStorage.getItem("transferAmount");
@@ -17,9 +19,13 @@ const TransferSuccess = () => {
         }
     }, []);
 
-    const shareBtn =()=>{
+    const shareBtn = () => {
         navigate('/transactionreceipt')
     }
+    // if (!transaction) {
+    //     return <p className="text-center text-danger">No transaction available</p>;
+    // }
+
     return (
         <Container className="py-4 px-3 max-width-500">
             {/* Success Header */}
@@ -48,22 +54,28 @@ const TransferSuccess = () => {
             {/* Action Buttons */}
             <Row className="text-center mb-4 g-2 justify-content-center">
                 <Col xs={4}>
-                    <Button variant="light " className="w-100 py-2" onClick={shareBtn} style={{height:"90px"}}>
+                    <Button variant="light " className="w-100 py-2" onClick={shareBtn} style={{ height: "90px" }}>
                         <Share className="mb-2 text-success" size={20} />
                         <div className="small">Share Receipt</div>
                     </Button>
                 </Col>
                 <Col xs={4}>
-                    <Button variant="light" className="w-100 py-2"  style={{height:"90px"}}>
+                    <Button variant="light" className="w-100 py-2" style={{ height: "90px" }}>
                         <PersonPlusFill className="mb-2 text-success" size={20} />
                         <div className="small">Add to favourites</div>
                     </Button>
                 </Col>
                 <Col xs={4}>
-                    <Button variant="light" className="w-100 py-2"  style={{height:"90px"}}>
+                    <Button
+                        variant="light"
+                        className="w-100 py-2"
+                        style={{ height: "90px" }}
+                        onClick={() => navigate("/transactiondetails", { state: transaction })}
+                    >
                         <List className="mb-2 text-success" size={20} />
                         <div className="small">View Details</div>
                     </Button>
+
                 </Col>
             </Row>
 
