@@ -139,30 +139,30 @@ function TransactionReceipt({ initialStatus }) {
 
             {/* Amount and Status */}
             <div className="text-center mb-4">
-              <h2 className="" style={{ color: "#01B575" }}> {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}</h2>
-              {/* <h5 className="" style={{ fontWeight: "normal" }}>Successful</h5> */}
-              {/* <h5
-                onClick={handleDoubleTap}
-                style={{ fontWeight: "normal", cursor: "pointer" }}
+              <h2
+                className="mb-1"
+                style={{ color: "#01B575" }}
               >
-                {status ? status.charAt(0).toUpperCase() + status.slice(1)  : "Loading..."}
-              </h5> */}
+                {amount !== null
+                  ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+                  : "Loading..."}
+              </h2>
+
               <h5
                 onClick={handleDoubleTap}
-                className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "dark"}`}
+                className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "dark"} mb-1`}
                 style={{ fontWeight: "normal", cursor: "pointer" }}
               >
-                {status ? status.charAt(0).toUpperCase() + status.slice(1) : "Loading..."}
+                {status
+                  ? status.charAt(0).toUpperCase() + status.slice(1)
+                  : "Loading..."}
               </h5>
 
-
-
-
               <small className="text-muted">{formatDate()}</small>
-
-              {/* {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")} */}
-
             </div>
+
+
+            {/* {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")} */}
             {/* + "ful" */}
             <hr />
 
