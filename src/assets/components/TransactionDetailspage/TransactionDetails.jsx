@@ -33,7 +33,7 @@ const TransactionDetails = () => {
                         <div className="" onClick={() => navigate(-1)}>
                             <ChevronLeft size={18} onClick={BankToBtn} />
                         </div>
-                        <h5 className="mb-0 mx-3">Transaction Details</h5>
+                        <h5 className="mb-0 mx-2">Transaction Details</h5>
                     </div>
                     <button className="btn btn-link text-success">
                         {/* <User size={24} /> */}
