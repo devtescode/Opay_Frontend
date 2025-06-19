@@ -3,19 +3,20 @@ import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircle
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import profileimage from "../../../../public/Image/image.png"
+import { getBankLogoByName } from '../BankUtils'
 
 const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
     console.log("Received transaction:", transaction); // ✅ Must not be null
     const BankToBtn = (transaction) => {
-        // navigate("/storetransaction")
         navigate('/storetransaction', { state: transaction });
     }
     const date = new Date(transaction.createdAt);
     const formattedDate = `${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 
-    
+    const logo = getBankLogoByName(transaction.bankName);
+    const showLogo = Boolean(logo);
     if (!transaction) {
         return <p className="text-center text-danger">No transaction details available</p>;
     }
@@ -37,14 +38,14 @@ const TransactionDetails = () => {
                     </div>
                     <button className="btn btn-link text-success mx-2">
                         {/* <User size={24} /> */}
-                        <img src={profileimage} className="" style={{height:"29px", width:"24px"}} alt="" />
+                        <img src={profileimage} className="" style={{ height: "29px", width: "24px" }} alt="" />
                     </button>
                 </div>
 
                 {/* Transaction Card */}
                 <div className="card mx-3 border-0 text-center" style={{ marginTop: "60px" }}>
                     <div className="card-body">
-                        <div
+                        {/* <div
                             className={`rounded-circle p-3 d-inline-flex mb-3 ${transaction.status === "pending"
                                 ? "bg-warning bg-opacity-10"
                                 : transaction.status === "failed"
@@ -62,6 +63,38 @@ const TransactionDetails = () => {
                                 <Clock className="text-warning" size={32} />
                             ) : (
                                 <CheckCircle className="text-success" size={32} /> // Success icon
+                            )}
+                        </div> */}
+
+                        <div
+                            className={`rounded-circle p-3 d-inline-flex mb-0 ${showLogo
+                                    ? "" // No background color if logo exists
+                                    : transaction.status === "pending" || transaction.status === "Reversed"
+                                        ? "bg-warning bg-opacity-10"
+                                        : transaction.status === "failed"
+                                            ? "bg-danger bg-opacity-10"
+                                            : "bg-success bg-opacity-10"
+                                }`}
+                        >
+                            {showLogo ? (
+                                <img
+                                    src={logo}
+                                    alt={transaction.bankName}
+                                    style={{
+                                        width: 52,
+                                        height: 52,
+                                        objectFit: "contain",
+                                        borderRadius: "50%",
+                                        backgroundColor: "#f0f0f0", // Initial color before failure
+                                    }}
+                                    className="border"
+                                />
+                            ) : transaction.status === "pending" || transaction.status === "Reversed" ? (
+                                <Clock className="text-warning" size={32} />
+                            ) : transaction.status === "failed" ? (
+                                <XCircle className="text-danger" size={32} />
+                            ) : (
+                                <CheckCircle className="text-success" size={32} />
                             )}
                         </div>
 
@@ -266,11 +299,11 @@ const TransactionDetails = () => {
                         <div className="row">
                             <div className="col-6 text-secondary">Transaction Date</div>
                             <div className="col-6 text-end text-muted">
-                              
+
                                 {/* the a is at the back of the data and time a */}
                                 {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss ")}
 
-                                
+
                             </div>
                         </div>
 
@@ -302,8 +335,8 @@ const TransactionDetails = () => {
                 {/* Bottom Buttons */}
                 < div className="fixed-bottom p-4 bg-white shadow-lg" >
                     <div className="d-flex gap-3">
-                        <button style={{background:"#E1F4E9", color:"#2EAB7F"}} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
-                        <button style={{backgroundColor:"#01B575"}} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
+                        <button style={{ background: "#E1F4E9", color: "#2EAB7F" }} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
+                        <button style={{ backgroundColor: "#01B575" }} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
                     </div>
                 </div >
             </div >

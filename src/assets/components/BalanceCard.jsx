@@ -10,23 +10,55 @@ const BalanceCard = () => {
     const [showBalance, setShowBalance] = useState(true);
     const [balance, setBalance] = useState(0);
 
+    // const fetchUserBalance = async () => {
+    //     try {
+    //         const token = localStorage.getItem('token');
+    //         const response = await axios.get(API_URLS.getuserbalance, {
+    //             headers: { Authorization: `Bearer ${token}` }
+    //         });
+    //         setBalance(response.data.walletBalance); // Assuming your backend returns walletBalance
+    //     } catch (error) {
+    //         console.error('Failed to fetch balance:', error);
+    //         Swal.fire('Error', 'Failed to fetch balance', 'error');
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     fetchUserBalance();
+    // }, []);
+
+
+
     const fetchUserBalance = async () => {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.get(API_URLS.getuserbalance, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            setBalance(response.data.walletBalance); // Assuming your backend returns walletBalance
+            setBalance(response.data.walletBalance);
         } catch (error) {
             console.error('Failed to fetch balance:', error);
-            Swal.fire('Error', 'Failed to fetch balance', 'error');
+
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                // Token is expired or invalid — log the user out
+                localStorage.removeItem("token"); // Or just remove specific items
+                Swal.fire({
+                    title: 'Session Expired',
+                    text: 'Your session has expired. Please log in again.',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    navigate('/'); // Navigate to login page
+                });
+            } else {
+                Swal.fire('Error', 'Failed to fetch balance', 'error');
+            }
         }
     };
 
     useEffect(() => {
         fetchUserBalance();
     }, []);
-
     const TransactionBtn = () => {
         navigate("/storetransaction");
     };

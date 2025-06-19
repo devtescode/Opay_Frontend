@@ -19,7 +19,8 @@
             "code": "044",
             "slug": "access-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://images.seeklogo.com/logo-png/49/1/access-bank-plc-logo-png_seeklogo-492413.png"
         },
         {
             "name": "Access Bank (Diamond)",
@@ -120,6 +121,13 @@
             "country": "Nigeria"
         },
         {
+            "name": "Fairmoney Microfinance Bank",
+            "code": "51318",
+            "slug": "fairmoney-microfinance-bank-ng",
+            "currency": "NGN",
+            "country": "Nigeria"
+        },
+        {
             "name": "Firmus MFB",
             "code": "51314",
             "slug": "firmus-mfb",
@@ -151,6 +159,13 @@
             "name": "Globus Bank",
             "code": "00103",
             "slug": "globus-bank",
+            "currency": "NGN",
+            "country": "Nigeria"
+        },
+        {
+            "name": "Gateway Mortgage Bank LTD",
+            "code": "812",
+            "slug": "gateway-mortgage-bank",
             "currency": "NGN",
             "country": "Nigeria"
         },
@@ -344,6 +359,13 @@
             "country": "Nigeria"
         },
         {
+            "name": "Paystack-Titan",
+            "code": "100039",
+            "slug": "titan-paystack",
+            "currency": "NGN",
+            "country": "Nigeria"
+        },
+        {
             "name": "QuickFund MFB",
             "code": "51293",
             "slug": "quickfund-mfb",
@@ -358,13 +380,19 @@
             "country": "Nigeria"
         },
         {
+            "name": "REHOBOTH MICROFINANCE BANK",
+            "code": "50761",
+            "slug": "rehoboth-microfinance-bank-ng",
+            "currency": "NGN",
+            "country": "Nigeria"
+        },
+        {
             "name": "Rubies MFB",
             "code": "125",
             "slug": "rubies-mfb",
             "currency": "NGN",
             "country": "Nigeria"
         },
-       
         {
             "name": "Sparkle Microfinance Bank",
             "code": "51310",
@@ -404,6 +432,13 @@
             "name": "Suntrust Bank",
             "code": "100",
             "slug": "suntrust-bank",
+            "currency": "NGN",
+            "country": "Nigeria"
+        },
+        {
+            "name": "Safe Haven MFB",
+            "code": "51113",
+            "slug": "safe-haven-mfb-ng",
             "currency": "NGN",
             "country": "Nigeria"
         },
@@ -454,7 +489,8 @@
             "code": "033",
             "slug": "united-bank-for-africa",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo" : "https://images.seeklogo.com/logo-png/19/1/uba-logo-png_seeklogo-198222.png"
         },
         {
             "name": "Unity Bank",

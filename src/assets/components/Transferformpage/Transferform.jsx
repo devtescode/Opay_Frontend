@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Transfermodal from "../Transfermodalpage/Transfarmodal";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { getBankLogoByName } from '../BankUtils'
 
 function Transferform() {
     const [amount, setAmount] = useState(""); // Changed `amountenter` to `amount`
@@ -86,17 +87,43 @@ function Transferform() {
                     </h6>
                 </div>
                 <div className="card-body p-2">
-                    <div className="d-flex align-items-center py-4">
-                        {accountDetails ? (
-                            <div>
-                                <h6 className="mb-1">{accountDetails.accountName}</h6>
-                                <p className="mb-0 text-muted">
-                                    {accountDetails.accountNumber} {accountDetails.bankName}
-                                </p>
-                            </div>
-                        ) : (
-                            <p>No account details found. Please go back and select an account.</p>
-                        )}
+                    <div className="align-items-center d-flex">
+                        <div>
+                            <img
+                                src={accountDetails ? getBankLogoByName(accountDetails.bankName) : ""}
+                                onError={(e) => {
+                                    e.target.onerror = null; // Prevent infinite loop in case fallback also fails
+                                    e.target.src = "";        // Optional: Clear the src so no broken icon shows
+                                    e.target.style.backgroundColor = "#f8f9fa"; // Bootstrap's `bg-light` color
+                                    e.target.style.objectFit = "cover";
+                                    e.target.alt = "Bank logo not available";
+                                }}
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                    objectFit: "contain",
+                                    borderRadius: "50%",
+                                    backgroundColor: "#f0f0f0", // Initial color before failure
+                                    padding: 1
+                                }}
+                                className="me-2"
+                            />
+
+                        </div>
+                        <div className="d-flex align-items-center py-4">
+                            {accountDetails ? (
+                                <div>
+                                    <h6 className="mb-1">{accountDetails.accountName}</h6>
+                                    <p className="mb-0 text-muted">
+                                        {accountDetails.accountNumber} {accountDetails.bankName}
+                                    </p>
+                                </div>
+                            ) : (
+                                <p>No account details found. Please go back and select an account.</p>
+                            )}
+                        </div>
+
+
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4 bg-white p-2 rounded-3">
