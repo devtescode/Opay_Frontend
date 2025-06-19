@@ -66,7 +66,7 @@ const RecentTransactions = () => {
   }, []);
 
 
-  
+
 
   const handleTransactionClick = (transaction) => {
     navigate("/transactiondetails", { state: transaction });
@@ -88,87 +88,97 @@ const RecentTransactions = () => {
 
   return (
     <div className="mb-4">
-    {transactions.length === 0 ? (
-      <p className="text-center text-muted">No recent transactions</p>
-    ) : (
-      <div className="mb-2 bg-white rounded-3 p-2" style={{ cursor: "pointer" }}>
-        {transactions.map((transaction) => (
-          <div
-            key={transaction._id}
-            onClick={() => handleTransactionClick(transaction)}
-            className="d-flex align-items-center justify-content-between mb-2"
-          >
-            <div className="d-flex align-items-center gap-2">
-              <div
-                className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-                style={{ width: 40, height: 40 }}
-              >
-                <ArrowUp
-                  className={
-                    transaction.amount > 0 ? "text-success" : "text-danger"
-                  }
-                  size={20}
-                />
-              </div>
-              <div>
-                <div className="fw-medium" style={{ fontSize: "15px" }}>
-                  Transfer to {transaction.accountName}
-                </div>
+      {transactions.length === 0 ? (
+        <p className="text-center text-muted">No recent transactions</p>
+      ) : (
+        <div className="mb-2 bg-white rounded-3 p-2" style={{ cursor: "pointer" }}>
+          {transactions.map((transaction) => (
+            <div
+              key={transaction._id}
+              onClick={() => handleTransactionClick(transaction)}
+              className="d-flex align-items-center justify-content-between mb-2"
+            >
+              <div className="d-flex align-items-center gap-2">
                 <div
-                  className="small text-muted"
-                  style={{ fontSize: "11px" }}
+                  className="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                  style={{ width: 40, height: 40 }}
                 >
-                  {format(
-                    new Date(transaction.createdAt),
-                    "MMM do, hh:mm:ss"
-                  )}
+                  <ArrowUp
+                    className={
+                      transaction.amount > 0 ? "text-success" : "text-danger"
+                    }
+                    size={20}
+                  />
+                </div>
+                <div>
+                  <div className="fw-medium" style={{ fontSize: "15px" }}>
+                    Transfer to {transaction.accountName}
+                  </div>
+                  <div
+                    className="small text-muted"
+                    style={{ fontSize: "11px" }}
+                  >
+                    {format(
+                      new Date(transaction.createdAt),
+                      "MMM do, hh:mm:ss"
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-  
-            {/* Right side */}
-            
+
+              {/* Right side */}
 
 
-            <div className="text-end">
-              <div
-                className={`fw-medium ${
-                  transaction.status === "Reversed"
+
+              <div className="text-end">
+                <div
+                  className={`fw-medium ${transaction.status === "Reversed"
                     ? "" // No color class for Reversed = default black
                     : transaction.amount > 0
-                    ? ""
-                    : ""
-                }`}
-              >
-                {transaction.status === "Reversed"
-                  ? `+₦${Math.abs(transaction.amount).toLocaleString()}.00`
-                  : transaction.amount > 0
-                  ? `-₦${transaction.amount.toLocaleString()}.00`
-                  : `₦${Math.abs(transaction.amount).toLocaleString()}.00`}
-              </div>
-  
-              <Badge
-                bg={
-                  transaction.status === "successful"
-                    ? "success"
-                    : transaction.status === "failed"
-                    ? "danger"
-                    : transaction.status === "Reversed"
-                    ? "warning"
-                    : "warning"
-                }
-              >
-                {transaction.status}
-              </Badge>
+                      ? ""
+                      : ""
+                    }`}
+                >
+                  {transaction.status === "Reversed"
+                    ? `+₦${Math.abs(transaction.amount).toLocaleString()}.00`
+                    : transaction.amount > 0
+                      ? `-₦${transaction.amount.toLocaleString()}.00`
+                      : `₦${Math.abs(transaction.amount).toLocaleString()}.00`}
+                </div>
 
-              
+                <div
+                className="rounded-1 px-1"
+                  style={
+                    transaction.status === "successful"
+                      ? {
+                        backgroundColor: "#CAFBF0",
+                        color: "#52C59D",
+    
+                      }
+                      : {}
+                  }
+                  bg={
+                    transaction.status === "successful"
+                      ? undefined
+                      : transaction.status === "failed"
+                        ? "danger"
+                        : transaction.status === "Reversed"
+                          ? "warning"
+                          : "warning"
+                  }
+                >
+                  {transaction.status}
+                </div>
+
+
+
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    )}
-  </div>
-  
+          ))}
+        </div>
+      )}
+    </div>
+
   );
 };
 

@@ -81,7 +81,7 @@ const BalanceCard = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-between align-items-center">
-                <span className="fs-4 fw-bold d-flex " style={{ alignItems: "center" }}>
+                <span className="fs-3 fw-bold d-flex " style={{ alignItems: "center" }}>
                     {showBalance ? `₦${balance.toLocaleString()}.00` : "****"}
                     {/* <ChevronRight style={{fontSize:"14px"}}/> */}
                 </span>
