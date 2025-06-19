@@ -83,7 +83,7 @@ const TransactionDetails = () => {
                                     style={{
                                         width: 52,
                                         height: 52,
-                                        objectFit: "contain",
+                                        objectFit: "cover",
                                         borderRadius: "50%",
                                         backgroundColor: "#f0f0f0", // Initial color before failure
                                     }}
