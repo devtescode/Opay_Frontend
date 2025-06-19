@@ -174,8 +174,8 @@ function Transferform() {
                         <div className="w-75 mx-auto mt-5">
                             <button
                                 type="submit"
-                                className="btn btn-success w-100 p-2"
-                                style={{ borderRadius: "20px" }}
+                               
+                                  style={{ backgroundColor: "#01B575", borderRadius: "20px" }} className="w-100 btn text-white py-2 flex-grow-1 rounded-pill"
                                 disabled={isLoading} // Disable when loading
                             >
 

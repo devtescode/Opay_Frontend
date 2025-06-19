@@ -202,11 +202,14 @@ export default function Bank() {
             <div className='text-center'>
               <button
                 type="submit"
-                className="btn btn-success w-75 p-2 rounded-5"
+                style={{ backgroundColor: "#01B575" }} className="w-75 btn text-white py-2 flex-grow-1 rounded-pill"
                 disabled={isLoading} // Disable when loading
               >
                 {isLoading ? "Next" : "Next"}
               </button>
+
+
+
             </div>
           </div>
         </form>
@@ -249,7 +252,7 @@ export default function Bank() {
 
               </div>
               <div>
-                <h2 className="fw-bold" style={{fontSize:"16px"}}>Register now and Win up to ₦1 Billion!</h2>
+                <h2 className="fw-bold" style={{ fontSize: "16px" }}>Register now and Win up to ₦1 Billion!</h2>
                 <p className="text-secondary">Get more explosive odds on Bet9ja!</p>
               </div>
             </div>
@@ -267,7 +270,7 @@ export default function Bank() {
                 </div>
               </div>
               <div>
-                <h2 className="fw-bold" style={{fontSize:"16px"}}>Predict & Win Up to ₦10,000,000!</h2>
+                <h2 className="fw-bold" style={{ fontSize: "16px" }}>Predict & Win Up to ₦10,000,000!</h2>
                 <p className="text-secondary">Enjoy FREE predictions and unlock your chance to win up to ₦10,000,000!</p>
               </div>
             </div>
@@ -297,7 +300,7 @@ export default function Bank() {
                 </div>
               </div>
               <div>
-                <h5 className="fw-bold" style={{fontSize:"16px"}}>Mega Savings with 15 Vouchers!</h5>
+                <h5 className="fw-bold" style={{ fontSize: "16px" }}>Mega Savings with 15 Vouchers!</h5>
                 <p className="text-secondary">Unlock 15 vouchers for any bill with just ₦199</p>
               </div>
             </div>
