@@ -147,28 +147,29 @@ const RecentTransactions = () => {
                 </div>
 
                 <div
-                className="rounded-1 px-1"
-                  style={
-                    transaction.status === "successful"
-                      ? {
-                        backgroundColor: "#CAFBF0",
-                        color: "#52C59D",
-    
-                      }
-                      : {}
-                  }
-                  bg={
-                    transaction.status === "successful"
-                      ? undefined
-                      : transaction.status === "failed"
-                        ? "danger"
-                        : transaction.status === "Reversed"
-                          ? "warning"
-                          : "warning"
-                  }
+                  className="rounded-1 px-1 text-center"
+                  style={{
+                    backgroundColor:
+                      transaction.status === "successful"
+                        ? "#CAFBF0"
+                        : transaction.status === "failed"
+                          ? "#F8D7DA" // Light red for failed
+                          : transaction.status === "Reversed"
+                            ? "#FFF3CD" // Light yellow for reversed
+                            : "#FFF3CD", // Default fallback (same as warning)
+                    color:
+                      transaction.status === "successful"
+                        ? "#52C59D"
+                        : transaction.status === "failed"
+                          ? "#842029" // Dark red text for failed
+                          : transaction.status === "Reversed"
+                            ? "#664d03" // Dark yellow text for reversed
+                            : "#664d03", // Default fallback
+                  }}
                 >
                   {transaction.status}
                 </div>
+
 
 
 
