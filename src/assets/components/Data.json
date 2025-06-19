@@ -34,7 +34,8 @@
             "code": "035A",
             "slug": "alat-by-wema",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/S9TTB154p4woDj7m4HsFleLq-HPJl0OjRavoFF-LEW4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zZWVr/bG9nby5jb20vaW1h/Z2VzL0EvYWxhdC1i/eS13ZW1hLWxvZ28t/MURFOEU0M0JBRC1z/ZWVrbG9nby5jb20u/cG5n"
         },
         {
             "name": "Amju Unique MFB",
@@ -118,7 +119,8 @@
             "code": "070",
             "slug": "fidelity-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/ZpMte6FeU6RlXw9LvIjlicl2IzFZzA7OjcoY06_T7MY/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzQ4LzEvZmlkZWxp/dHktYmFuay1uaWdl/cmlhLWxvZ28tcG5n/X3NlZWtsb2dvLTQ4/NzExOS5wbmc"
         },
         {
             "name": "Fairmoney Microfinance Bank",
@@ -139,14 +141,16 @@
             "code": "011",
             "slug": "first-bank-of-nigeria",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/UOJurb369ggh6XLMf5pDaAqPPKgdH1oa2h0Ux4hVWGQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzQ4LzIvZmlyc3Qt/YmFuay1uaWdlcmlh/LWxvZ28tcG5nX3Nl/ZWtsb2dvLTQ4Mjkz/NS5wbmc"
         },
         {
             "name": "First City Monument Bank",
             "code": "214",
             "slug": "first-city-monument-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://images.seeklogo.com/logo-png/35/1/fcmb-first-city-monument-bank-logo-png_seeklogo-355124.png"
         },
         {
             "name": "FSDH Merchant Bank Limited",
@@ -181,7 +185,8 @@
             "code": "058",
             "slug": "guaranty-trust-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/apx9x9ceJks2Qb_obKQRwj45TGkNns96LFVudUjeHL4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9sb2dv/ZGl4LmNvbS9sb2dv/LzE3NzgwMzguanBn"
         },
         {
             "name": "Hackman Microfinance Bank",
@@ -251,7 +256,8 @@
             "code": "50211",
             "slug": "kuda-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/CnQRo4GmCCBNcbW4pNcNcNIfTMN1gLDx4LtCAsZwn2A/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zMy11/cy13ZXN0LTIuYW1h/em9uYXdzLmNvbS9j/YmktaW1hZ2Utc2Vy/dmljZS1wcmQvb3Jp/Z2luYWwvNGI0NmI3/ZTMtOTRjNi00NmY2/LWFlZWEtNjExMmYx/ZGNmMmM3LnBuZw"
         },
         {
             "name": "Lagos Building Investment Company Plc.",
@@ -293,7 +299,8 @@
             "code": "50515",
             "slug": "Moniepoint MFB",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo":"https://imgs.search.brave.com/p3Qwly_xF_aAv95XvWrgKpbJBE73SF2MhV3t5o7WMUk/rs:fit:200:200:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY3J1bmNoYmFz/ZS5jb20vaW1hZ2Uv/dXBsb2FkL2NfcGFk/LGhfMjU2LHdfMjU2/LGZfYXV0byxxX2F1/dG86ZWNvLGRwcl8x/L3p4N2lwOHp2NGln/ZHI5aXplYjkw"
         },
         {
             "name": "MoMo PSB",
@@ -314,7 +321,8 @@
             "code": "999991",
             "slug": "palmpay",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/lfsMFQtCTizcNhfeP6cpUnaN7yPYkUPqeSXEI_2y-lE/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG42/LmFwdG9pZGUuY29t/L2ltZ3MvZC8wLzEv/ZDAxNTQ3MzhlMzU5/NTA5MDIyOTExYTky/ZTg0Y2Q2ZTBfaWNv/bi5wbmc_dz0xMjg"
         },
         {
             "name": "Parallex Bank",
@@ -335,7 +343,8 @@
             "code": "999992",
             "slug": "paycom",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo":"https://imgs.search.brave.com/00r3t3deNTB7Gy3AfKJvhYGYUvdVNLFCBPxuhZUP0Qo/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvY2RjNjY1ODc5/NTA2OTMzZjQxNmRi/NTQ5NzNjZTliYTgx/NjI3Nzc2Y2RmODU3/YTUwNTRhYmRmNjZh/ZWQ3NDYxOC9vcGF5/YnVzaW5lc3Mub3Bh/eXdlYi5jb20v"
         },
         {
             "name": "Petra Mircofinance Bank Plc",
@@ -349,14 +358,16 @@
             "code": "076",
             "slug": "polaris-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/86T-CQ4rePT-6MRKq49GJQcT2HG-9uTibHFxsPu1NHQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9sb2dv/cy1kb3dubG9hZC5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjQvMTAvUG9sYXJp/c19CYW5rX0xvZ28t/MzAwMHgzMDAwLnBu/Zw"
         },
         {
             "name": "Providus Bank",
             "code": "101",
             "slug": "providus-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo":"https://imgs.search.brave.com/nTNsdjX7nOp9Kqy7U_l4ON831Hl5vHQQ1n3nk0GKQSU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9kbWFy/a2V0Zm9yY2VzLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/NS8wNC9Qcm92aWR1/cy1CYW5rLU9wZW5z/LU41MGJuLUNvbW1l/cmNpYWwtUGFwZXJz/LWZvci1TdWJzY3Jp/cHRpb24tNjk2eDM5/Mi5qcGc"
         },
         {
             "name": "Paystack-Titan",
@@ -384,7 +395,8 @@
             "code": "50761",
             "slug": "rehoboth-microfinance-bank-ng",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/xjq-GyG6zKInS8buOuKCwCYgk05pu5RuUgE_y2FJaz4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y2xvdWRpbmFyeS5j/b20vem9vbWluZm8t/Y29tL2ltYWdlL3Vw/bG9hZC93XzcwLGhf/NzAsY19maXQvcmVo/b2JvdGhtZmIuY29t"
         },
         {
             "name": "Rubies MFB",
@@ -405,14 +417,16 @@
             "code": "120004",
             "slug": "smartcash-psb",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo":"https://imgs.search.brave.com/dGuHsirq2iLb2j-XDY39rCC4CtfjbBk8VByhJZT0qi0/rs:fit:200:200:1:0/g:ce/aHR0cHM6Ly9wbGF5/LWxoLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9vZkd2Q2hHRXRX/U25ldXVQenJMYWM4/Vk1wVloycFNzQ09P/YnlhRW5mM3NYcm4z/Q284ZXFsMkhCSlIw/ZjZuVEYzcU52OQ"
         },
         {
             "name": "Stanbic IBTC Bank",
             "code": "221",
             "slug": "stanbic-ibtc-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo":"https://imgs.search.brave.com/sXpEFKGPu-xwHp8_IOhYpZR1gUxfKqX9nOD8CgJlnu0/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvNTdjMWY3NDc0/Y2VhN2U4YjY5MTIy/ZmRjYjVhY2Y3NTQx/OTcxMDlhMWE1Mjgy/NjQ5NjUyYmM4NGY0/YzBmY2UwYi93d3cu/c3RhbmJpY2lidGNi/YW5rLmNvbS8"
         },
         {
             "name": "Standard Chartered Bank",
@@ -426,7 +440,8 @@
             "code": "232",
             "slug": "sterling-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo":"https://imgs.search.brave.com/ib7QAUHNhU9_HjV_SvYrG-jM20qV7L-555gtPU4MjjU/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvY2QwNjhmMmE2/MGIzYmY3ZTlhMDFh/ZmIwMDdlMTFkYWU1/NGFiNDNjZGVjNDZj/NTk0OGEzYjY1MTlh/ODAwYmY5NC9zdGVy/bGluZy5uZy8"
         },
         {
             "name": "Suntrust Bank",
@@ -440,7 +455,8 @@
             "code": "51113",
             "slug": "safe-haven-mfb-ng",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo":"https://safehavenmfb.com/assets/images/logo1.svg"
         },
         {
             "name": "TAJ Bank",
@@ -482,7 +498,8 @@
             "code": "032",
             "slug": "union-bank-of-nigeria",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/W6Kr5Fs2KTZeiC5S4g2Ls57X1l6WSAasUesdxdmhxLQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YnJhbmRmZXRjaC5p/by91bmlvbmJhbmtu/Zy5jb20vZmFsbGJh/Y2svbGV0dGVybWFy/ay90aGVtZS9kYXJr/L2gvMjU2L3cvMjU2/L2ljb24_Yz0xYmZ3/c21FSDIwenpFZlNO/VGVk.jpeg"
         },
         {
             "name": "United Bank For Africa",
@@ -490,35 +507,39 @@
             "slug": "united-bank-for-africa",
             "currency": "NGN",
             "country": "Nigeria",
-            "logo" : "https://images.seeklogo.com/logo-png/19/1/uba-logo-png_seeklogo-198222.png"
+            "logo": "https://images.seeklogo.com/logo-png/19/1/uba-logo-png_seeklogo-198222.png"
         },
         {
             "name": "Unity Bank",
             "code": "215",
             "slug": "unity-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo":"https://imgs.search.brave.com/crKyFdmSfh6OwtHyG9_X2_00LgnWLkWsOnc9vYwID8Y/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YnJhbmRmZXRjaC5p/by9pZGhZLWI1Y2pC/L3cvNDAwL2gvNDAw/L3RoZW1lL2Rhcmsv/aWNvbi5qcGVnP2M9/MWJ4aWQ2NE11cDdh/Y3pld1NBWU1YJnQ9/MTc0MzI3NDc5ODI2/NA"
         },
         {
             "name": "VFD Microfinance Bank Limited",
             "code": "566",
             "slug": "vfd",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/6VKZe6VJNXGcoyLxJ4bDuBmtTi5LgAEOf8xBqiWUf90/rs:fit:32:32:1:0/g:ce/aHR0cDovL2Zhdmlj/b25zLnNlYXJjaC5i/cmF2ZS5jb20vaWNv/bnMvZGU2ZjE3NDM5/YzhhYTg1MGNlMWQ5/ZDJlYmIyYWUyNWNl/ZjJhOTM5MGE0ZTcz/NTExMzk3ZGE5YzM4/ZWI1ZTk3Mi92YmFu/ay5uZy8"
         },
         {
             "name": "Wema Bank",
             "code": "035",
             "slug": "wema-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/FdQv9_W8o74uLVmCWs-j0smTZZZm2TnEmMH1dWlW2dc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bWFya2V0aW5nc3Bh/Y2UuY29tLm5nL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIxLzEx/L1dlbWEtQmFuay1s/b2dvLmpwZw"
         },
         {
             "name": "Zenith Bank",
             "code": "057",
             "slug": "zenith-bank",
             "currency": "NGN",
-            "country": "Nigeria"
+            "country": "Nigeria",
+            "logo": "https://imgs.search.brave.com/-St2g9VqZ71OWp6L-dXPAw80LQCWY-J96gSOSBeYYYg/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/YnJhbmRmZXRjaC5p/by9pZEk4SHFVNHI2/L3cvMTQzNC9oLzE0/MzQvdGhlbWUvZGFy/ay9pY29uLnBuZz9j/PTFieGlkNjRNdXA3/YWN6ZXdTQVlNWCZ0/PTE2Njg1MTg3MjMy/NzU"
         }
     ]
 }
