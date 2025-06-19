@@ -127,32 +127,45 @@ function Transferform() {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4 bg-white p-2 rounded-3">
-                            <label className="form-label text-muted">Amount</label>
+                            <label className="form-label mx-2">Amount</label>
                             <input
                                 type="text"
-                                className="form-control"
+                                className="form-control border-0 border-bottom rounded-0 shadow-none border-success"
                                 placeholder="₦100.00 - ₦5,000,000.00"
-                                value={amount} // Use the `amount` state
-                                onChange={(e) => setAmount(e.target.value)} // Update the `amount` state
+                                value={amount}
+                                onChange={(e) => setAmount(e.target.value)}
+                                style={{
+                                    borderColor: "#ccc",       // You can change this to your preferred border color
+                                    backgroundColor: "transparent",
+                                }}
                             />
-                            <div className="d-flex mt-2 gap-2">
-                                {[500, 1000, 2000, 3000, 4000, 5000].map((val) => (
-                                    <button
-                                        type="button"
-                                        key={val}
-                                        className="btn btn-outline-secondary btn-sm"
-                                        onClick={() => handleAmountClick(val)} // Set amount on click
-                                    >
-                                        ₦{val.toLocaleString()}
-                                    </button>
+
+                            <div className="row row-cols-3 g-2 mt-2 mx-3">
+                                {[500, 1000, 2000, 5000, 10000, 20000].map((val) => (
+                                    <div className="col" key={val}>
+                                        <button
+                                            type="button"
+                                            className="btn btn-sm w-100 py-2"
+                                            onClick={() => handleAmountClick(val)}
+                                            style={{
+                                                backgroundColor: "#F8F8FA",
+                                                border: "none",
+                                                boxShadow: "none"
+                                            }}
+                                        >
+                                            ₦{val.toLocaleString()}
+                                        </button>
+
+                                    </div>
                                 ))}
                             </div>
+
                         </div>
                         <div className="mb-4 bg-white p-2 rounded-3 py-3">
                             <label className="form-label text-muted">Remark</label>
                             <input
                                 type="text"
-                                className="form-control"
+                                className="form-control border-0 border-bottom rounded-0 shadow-none"
                                 placeholder="What's this for? (Optional)"
                                 value={remark}
                                 onChange={(e) => setRemark(e.target.value)} // Update the `remark` state
