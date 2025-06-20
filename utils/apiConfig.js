@@ -31,7 +31,7 @@ export const API_URLS = {
     uploadpicture: `${baseURL}/useropay/uploadpicture`,
     changepassword: `${baseURL}/useropay/changepassword`,
     changeadminpassword: `${baseURL}/useropay/changeadminpassword`,
-    reverseTransaction: (id)=>`${baseURL}/useropay/reverseTransaction/${id}`
-
-
+    reverseTransaction: (id)=>`${baseURL}/useropay/reverseTransaction/${id}`,
+    checkTransactionLimit: `${baseURL}/useropay/checkTransactionLimit`,
+    setUnlimited: `${baseURL}/useropay/setUnlimited`,
 };

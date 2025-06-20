@@ -22,6 +22,7 @@ import Setting from './assets/components/Settingspage/Setting'
 import Passwordetails from './assets/components/Passwordetailspage/Passwordetails'
 import Changepassword from './assets/components/Changepassword/Changepassword'
 import AdminDetails from './assets/components/AdminDetails/AdminDetails'
+import Makepayment from './assets/components/Makepaymentpage/Makepayment'
 // import { useEffect, useState } from 'react'
 // import Opaypage from './assets/components/Opaypage'
 
@@ -68,6 +69,7 @@ function App() {
       <Route path='/passwordetails' element={<Passwordetails/>}/>
       <Route path='/changepassword' element={<Changepassword/>}/>
       <Route path='/details' element={<AdminDetails/>}/>
+      <Route path='/makepayment' element={<Makepayment/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>

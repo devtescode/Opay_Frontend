@@ -3,6 +3,8 @@ import Transfermodal from "../Transfermodalpage/Transfarmodal";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { getBankLogoByName } from '../BankUtils'
+import axios from "axios";
+import { API_URLS } from "../../../../utils/apiConfig";
 
 function Transferform() {
     const [amount, setAmount] = useState(""); // Changed `amountenter` to `amount`
@@ -13,29 +15,66 @@ function Transferform() {
 
 
     const handleAmountClick = (value) => {
-        setAmount(value); // Set the selected amount directly
+        setAmount(value);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setIsLoading(true); // Disable button at the start of submission
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     setIsLoading(true); 
+    //     if (!amount || isNaN(amount) || amount < 100 || amount > 5000000) {
+    //         alert("Please enter a valid amount between ₦100.00 and ₦5,000,000.00");
+    //         setIsLoading(false); // Re-enable button after validation fails
+    //         return;
+    //     }
+    //     localStorage.setItem("transferAmount", amount);
+    //     setShowModal(true);
+    //     setIsLoading(false);
+    // };
 
-        // Validate the amount
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
         if (!amount || isNaN(amount) || amount < 100 || amount > 5000000) {
             alert("Please enter a valid amount between ₦100.00 and ₦5,000,000.00");
-            setIsLoading(false); // Re-enable button after validation fails
+            setIsLoading(false);
+            return;
+        }
+        const token = localStorage.getItem("token"); // ✅ No JSON.parse
+        // console.log(token, "token");
+
+
+
+        if (!token) {
+            alert("You are not logged in. Please log in again.");
+            setIsLoading(false);
             return;
         }
 
-        // Save the amount to localStorage
-        localStorage.setItem("transferAmount", amount);
+        try {
+            const res = await axios.post(API_URLS.checkTransactionLimit, {
+                token
+            })
 
-        // Open the modal
-        setShowModal(true);
-
-        // Re-enable the button after modal is set
-        setIsLoading(false);
+            if (res.data.status) {
+                localStorage.setItem("transferAmount", amount);
+                setShowModal(true); // ✅ Now allow the user to go to the next page/modal
+            } else {
+                alert(res.data.message);
+            }
+        } catch (err) {
+            if (err.response?.status === 403) {
+                alert("You have reached your daily transaction limit (2 per day).");
+                navigate("/makepayment"); // 👈 Redirect
+            } else {
+                alert("Could not check transaction limit. Try again.");
+            }
+        } finally {
+            setIsLoading(false);
+        }
     };
+
 
 
     // const location = useLocation();
@@ -174,8 +213,8 @@ function Transferform() {
                         <div className="w-75 mx-auto mt-5">
                             <button
                                 type="submit"
-                               
-                                  style={{ backgroundColor: "#01B575", borderRadius: "20px" }} className="w-100 btn text-white py-2 flex-grow-1 rounded-pill"
+
+                                style={{ backgroundColor: "#01B575", borderRadius: "20px" }} className="w-100 btn text-white py-2 flex-grow-1 rounded-pill"
                                 disabled={isLoading} // Disable when loading
                             >
 

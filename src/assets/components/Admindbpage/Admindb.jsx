@@ -46,36 +46,43 @@ const Admindb = () => {
     //     fetchUsers();
     // }, []);
     const [error, setError] = useState(null);
-    useEffect(() => {
+
+    const fetchUsers = async () => {
         console.log("Fetching users...");
         setLoading(true);
         setError(null);
 
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch(API_URLS.getallusers);
-                const data = await response.json();
+        try {
+            const response = await fetch(API_URLS.getallusers);
+            const data = await response.json();
 
-                console.log("Fetched Users:", data); // Debug API response
+            console.log("Fetched Users:", data); // Debug API response
 
-                if (Array.isArray(data)) {
-                    console.log("Users found, updating state:", data);
-                    setUsers(data);  // Update state correctly
-                } else {
-                    console.log("Invalid data format received.");
-                    setUsers([]);
-                }
-            } catch (error) {
-                console.error("Failed to fetch users:", error);
-                setError(error.message);
+            if (Array.isArray(data)) {
+                console.log("Users found, updating state:", data);
+                setUsers(data);
+            } else {
+                console.log("Invalid data format received.");
                 setUsers([]);
-            } finally {
-                setLoading(false);
             }
-        };
+        } catch (error) {
+            console.error("Failed to fetch users:", error);
+            setError(error.message);
+            setUsers([]);
+        } finally {
+            setLoading(false);
+        }
 
-        fetchUsers();
+    };
+
+    useEffect(() => {
+        fetchUsers(); // now this works as it's declared above
     }, []);
+
+
+
+
+
 
     // Debug when `users` state updates
     useEffect(() => {
@@ -312,7 +319,6 @@ const Admindb = () => {
     //     setUsers([]);
     // }
 
-
     useEffect(() => {
         console.log("Users:", users);
         console.log("Sessions:", sessions);
@@ -327,6 +333,57 @@ const Admindb = () => {
         return acc;
     }, {});
 
+
+    // const toggleUnlimited = async (userId, status) => {
+    //     try {
+    //         await axios.post(API_URLS.setUnlimited, { userId, unlimited: status });
+    //         alert(`User has been set to ${status ? "unlimited" : "limited"}`);
+    //         fetchUsers(); // ✅ Refresh the list here
+    //     } catch (err) {
+    //         alert("Error updating user access");
+    //     }
+    // };
+
+
+    // const toggleUnlimited = async (userId, isCurrentlyUnlimited) => {
+    //     const newStatus = !isCurrentlyUnlimited; // ✅ Flip the value
+    //     try {
+    //         const response = await axios.post(API_URLS.setUnlimited, {
+    //             userId,
+    //             unlimited: newStatus,
+    //         });
+
+    //         console.log(`User (${userId}) access set to: ${newStatus ? "unlimited" : "limited"}`);
+    //         alert(response.data.message);
+    //         fetchUsers(); // Refresh the user list
+    //     } catch (err) {
+    //         console.error("Failed to toggle user access:", err);
+    //         alert("Error updating user access");
+    //     }
+    // };
+
+
+    const toggleUnlimited = async (userId, isCurrentlyUnlimited) => {
+        const newStatus = !isCurrentlyUnlimited; // ✅ flip the value
+        console.log(`Sending newStatus: ${newStatus}`);
+
+        try {
+            const res = await axios.post(API_URLS.setUnlimited, {
+                userId,
+                unlimited: newStatus,
+            });
+
+            alert(res.data.message);
+            fetchUsers();
+        } catch (err) {
+            console.error(err);
+            alert("Error updating user access");
+        }
+    };
+
+
+
+
     return (
         <div>
             <Navbar />
@@ -335,7 +392,7 @@ const Admindb = () => {
                 <div class="container text-center">
                     <div class="row gap-2">
                         <div class="col-12 col-md bg-white">
-                           
+
                             <div>
                                 <h4>Amount</h4>
                             </div>
@@ -394,6 +451,7 @@ const Admindb = () => {
                                     <th>Expires At</th>
                                     <th>History</th>
                                     <th>Block/Unblock</th>
+                                    <th>Limit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -448,6 +506,14 @@ const Admindb = () => {
                                                                             <button className="btn btn-warning btn-sm" onClick={() => blockUser(user?._id)}>Block</button>
                                                                         )}
                                                                     </td>
+                                                                    <td rowSpan={userSessions.length}>
+                                                                        <button
+                                                                            className={`btn btn-sm ${user.isUnlimited ? "btn-success" : "btn-danger"}`}
+                                                                            onClick={() => toggleUnlimited(user._id, user.isUnlimited)}
+                                                                        >
+                                                                            {user.isUnlimited ? "Unlimited" : " Limited"}
+                                                                        </button>
+                                                                    </td>
                                                                 </>
                                                             )}
                                                         </tr>
@@ -476,6 +542,16 @@ const Admindb = () => {
                                                             ) : (
                                                                 <button className="btn btn-warning btn-sm" onClick={() => blockUser(user?._id)}>Block</button>
                                                             )}
+                                                        </td>
+                                                        <td>
+                                                            <td rowSpan={userSessions.length}>
+                                                                <button
+                                                                    className={`btn btn-sm ${user.isUnlimited ? "btn-success" : "btn-danger"}`}
+                                                                    onClick={() => toggleUnlimited(user._id, user.isUnlimited)}
+                                                                >
+                                                                    {user.isUnlimited ? "Unlimited" : " Limited"}
+                                                                </button>
+                                                            </td>
                                                         </td>
                                                     </tr>
                                                 )}
@@ -562,9 +638,9 @@ const Admindb = () => {
                                                                     ? "success"
                                                                     : transaction.status === "pending"
                                                                         ? "warning"
-                                                                    : transaction.status === "Reversed"
-                                                                        ? "warning"
-                                                                        : "danger"
+                                                                        : transaction.status === "Reversed"
+                                                                            ? "warning"
+                                                                            : "danger"
                                                                     }`}
                                                             >
                                                                 {transaction.status}

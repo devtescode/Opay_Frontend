@@ -70,6 +70,10 @@ const Setting = () => {
     const navigate = useNavigate()
     const passwordBtn=()=>{
         navigate("/passwordetails")
+    } 
+
+    const makepaymentBtn =()=>{
+        navigate("/makepayment")
     }
 
 
@@ -186,7 +190,7 @@ const Setting = () => {
                     </ListGroup.Item>
 
                     {/* Account Limits */}
-                    <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
+                    <ListGroup.Item onClick={makepaymentBtn} className="d-flex justify-content-between align-items-center px-0 py-3 ">
                         <div className="d-flex align-items-center">
                             <div className="me-3 p-2 rounded" style={{ backgroundColor: '#e6f7f1' }}>
                                 <CurrencyDollar size={24} color="#4cd4a1" />
