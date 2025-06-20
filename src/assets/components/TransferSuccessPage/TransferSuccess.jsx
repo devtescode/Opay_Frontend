@@ -42,8 +42,8 @@ const TransferSuccess = () => {
                     </svg>
 
                 </div> */}
-                <div className='mb-4'>
-                    <CheckCircleFill style={{ color: "#01B575" }} size={40} />
+                <div className='mb-3'>
+                    <CheckCircleFill style={{ color: "#01B575" }} size={38} />
                 </div>
                 <h4 className="mb-2">Transfer successful</h4>
                 <h3 className="mb-3">
