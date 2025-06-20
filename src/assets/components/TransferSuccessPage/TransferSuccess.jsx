@@ -3,7 +3,8 @@ import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import {
     Share,
     PersonPlusFill,
-    List
+    List,
+    CheckCircleFill
 } from 'react-bootstrap-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -31,14 +32,18 @@ const TransferSuccess = () => {
             {/* Success Header */}
             <div className="text-center mb-4">
                 <div className='text-end text-success' style={{ fontSize: "18px" }}>
-                    <p className='fw-bold' style={{color:"#01B575"}}>
+                    <p className='fw-bold' style={{ color: "#01B575" }}>
                         Done
                     </p>
                 </div>
-                <div style={{backgroundColor:"#01B575"}} className=" text-white rounded-circle d-inline-flex p-3 mb-3 mt-2">
+                {/* <div style={{backgroundColor:"#01B575"}} className=" text-white rounded-circle d-inline-flex p-3 mb-3 mt-2">
                     <svg width="15" height="15" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                     </svg>
+
+                </div> */}
+                <div className='mb-3'>
+                    <CheckCircleFill style={{ color: "#01B575" }} size={40} />
                 </div>
                 <h4 className="mb-2">Transfer successful</h4>
                 <h3 className="mb-3">
@@ -59,7 +64,7 @@ const TransferSuccess = () => {
                         style={{ height: "65px", cursor: "pointer" }}
                     >
                         <Share className="mb-1 text-success mt-1" size={20} />
-                        <div className="small" style={{fontSize:"16px"}}>Share Receipt</div>
+                        <div className="small" style={{ fontSize: "16px" }}>Share Receipt</div>
                     </div>
                 </Col>
                 <Col xs={6} md="auto">
@@ -69,7 +74,7 @@ const TransferSuccess = () => {
                         onClick={() => navigate("/transactiondetails", { state: transaction })}
                     >
                         <List className="mb-0 text-success" size={20} />
-                        <div className="small" style={{fontSize:"16px"}}>View Details</div>
+                        <div className="small" style={{ fontSize: "16px" }}>View Details</div>
                     </div>
                 </Col>
             </Row>
@@ -91,7 +96,7 @@ const TransferSuccess = () => {
                                 <small className="text-muted">Earn more interest everyday!</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5" style={{backgroundColor:"#01B575"}}>GO</Button>
+                        <Button variant="success px-4 rounded-5" style={{ backgroundColor: "#01B575", border: "0" }}>GO</Button>
                     </div>
 
                     <div className="mb-3 d-flex align-items-center justify-content-between">
@@ -104,7 +109,7 @@ const TransferSuccess = () => {
                                 <small className="text-muted">Using OPay Verve Card now</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5" style={{backgroundColor:"#01B575"}}>GO</Button>
+                        <Button variant="success px-4 rounded-5" style={{ backgroundColor: "#01B575", border: "0" }}>GO</Button>
                     </div>
 
                     <div className="mb-3 d-flex align-items-center justify-content-between">
@@ -117,7 +122,7 @@ const TransferSuccess = () => {
                                 <small className="text-muted">Get Discounts That Wow😎!</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5" style={{backgroundColor:"#01B575"}}>GO</Button>
+                        <Button variant="success px-4 rounded-5" style={{ backgroundColor: "#01B575", border: "0" }}>GO</Button>
                     </div>
 
                     <div className="d-flex align-items-center justify-content-between">
@@ -130,7 +135,7 @@ const TransferSuccess = () => {
                                 <small className="text-muted">Fast&Easy Electricity Bill Pay</small>
                             </div>
                         </div>
-                        <Button variant="success px-4 rounded-5" style={{backgroundColor:"#01B575"}}>GO</Button>
+                        <Button variant="success px-4 rounded-5" style={{ backgroundColor: "#01B575", border: "0" }}>GO</Button>
                     </div>
                 </Card.Body>
             </Card>

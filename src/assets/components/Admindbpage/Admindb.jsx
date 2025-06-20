@@ -373,7 +373,7 @@ const Admindb = () => {
                 unlimited: newStatus,
             });
 
-            alert(res.data.message);
+            // alert(res.data.message);
             fetchUsers();
         } catch (err) {
             console.error(err);
