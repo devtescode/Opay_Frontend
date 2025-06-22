@@ -34,4 +34,5 @@ export const API_URLS = {
     reverseTransaction: (id)=>`${baseURL}/useropay/reverseTransaction/${id}`,
     checkTransactionLimit: `${baseURL}/useropay/checkTransactionLimit`,
     setUnlimited: `${baseURL}/useropay/setUnlimited`,
+    fundaccount: `${baseURL}/useropay/fundaccount`,
 };
