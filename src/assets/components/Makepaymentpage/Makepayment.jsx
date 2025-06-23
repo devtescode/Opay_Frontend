@@ -49,7 +49,7 @@ const Makepayment = () => {
 
     return (
         <div className="container">
-            <div className="col-md-6 mx-auto p-4 shadow mt-5 border rounded-3">
+            <div className="col-md-6 mx-auto p-4 shadow mt-5 rounded-3">
                 <form onSubmit={handlePayment}>
                     <label className="mb-2 d-block fw-bold">Make Payment</label>
                     <input
@@ -72,6 +72,11 @@ const Makepayment = () => {
                     {message && (
                         <p className="mt-3 text-danger text-center fw-semibold">{message}</p>
                     )}
+                    <div className=' mt-4'>
+                    <p>
+                    Make amount of 300Naira to have access to unlimited transaction for the day
+                    </p>
+                    </div>
                 </form>
             </div>
         </div>
