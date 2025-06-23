@@ -73,7 +73,7 @@ const Makepayment = () => {
       <div className="text-center">
         <button
           type="submit"
-          className="btn text-white py-2 rounded-5 fw-semibold"
+          className="btn text-white py-2 rounded-3 fw-semibold"
           style={{ backgroundColor: "#01B575", border: "none" }}
           disabled={isLoading}
         >
