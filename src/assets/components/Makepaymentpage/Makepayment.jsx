@@ -48,45 +48,45 @@ const Makepayment = () => {
     };
 
     return (
-   <div className="container fixed-top">
-  <div className="col-md-6 mx-auto p-4 shadow-lg mt-5 rounded-4 bg-white">
-    <form onSubmit={handlePayment}>
-      <div className="text-center mb-4">
-        <h5 className="fw-bold text-success">Make Payment</h5>
-        <p className="text-muted small">
-          Pay ₦300 to gain unlimited transaction access for the day.
-        </p>
-      </div>
-
-      <div className="mb-3">
-        <label className="form-label fw-semibold">Amount</label>
-        <input
-          type="number"
-          className="form-control border rounded-3 px-3 py-2"
-          placeholder="₦300"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          required
-        />
-      </div>
-
-      <div className="text-center">
-        <button
-          type="submit"
-          className="btn text-white py-2 rounded-5 fw-semibold"
-          style={{ backgroundColor: "#01B575", border: "none" }}
-          disabled={isLoading}
-        >
-          {isLoading ? "Processing..." : "Make Payment"}
-        </button>
-      </div>
-
-      {message && (
-        <p className="mt-3 text-danger text-center fw-semibold">{message}</p>
-      )}
-    </form>
-  </div>
-</div>
+     <div className="container fixed-top">
+       <div className="col-md-6 mx-auto p-4 shadow-lg mt-5 rounded-4 bg-white">
+         <form onSubmit={handlePayment}>
+           <div className="text-center mb-4">
+             <h5 className="fw-bold text-success">Make Payment</h5>
+             <p className="text-muted small">
+               Pay ₦300 to gain unlimited transaction access for the day.
+             </p>
+           </div>
+     
+           <div className="mb-3">
+             <label className="form-label fw-semibold">Amount</label>
+             <input
+               type="number"
+               className="form-control border rounded-3 px-3 py-2"
+               placeholder="₦300"
+               value={amount}
+               onChange={(e) => setAmount(e.target.value)}
+               required
+             />
+           </div>
+     
+           <div className="text-center">
+             <button
+               type="submit"
+               className="btn text-white py-2 rounded-5 fw-semibold"
+               style={{ backgroundColor: "#01B575", border: "none" }}
+               disabled={isLoading}
+             >
+               {isLoading ? "Processing..." : "Make Payment"}
+             </button>
+           </div>
+     
+           {message && (
+             <p className="mt-3 text-danger text-center fw-semibold">{message}</p>
+           )}
+         </form>
+       </div>
+     </div>
 
     );
 };
