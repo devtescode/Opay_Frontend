@@ -130,7 +130,7 @@ function TransactionReceipt({ initialStatus }) {
               <img
                 src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
                 alt="Image description"
-                height="95"
+                height="90"
                 className=""
               />
 
