@@ -48,7 +48,7 @@ const Makepayment = () => {
     };
 
     return (
-   <div className="container fixed-top" style={{height:"100vh"}}>
+   <div className="container fixed-top">
   <div className="col-md-6 mx-auto p-4 shadow-lg mt-5 rounded-4 bg-white">
     <form onSubmit={handlePayment}>
       <div className="text-center mb-4">
@@ -73,7 +73,7 @@ const Makepayment = () => {
       <div className="text-center">
         <button
           type="submit"
-          className="btn text-white py-2 rounded-3 fw-semibold"
+          className="btn text-white py-2 rounded-5 fw-semibold"
           style={{ backgroundColor: "#01B575", border: "none" }}
           disabled={isLoading}
         >
