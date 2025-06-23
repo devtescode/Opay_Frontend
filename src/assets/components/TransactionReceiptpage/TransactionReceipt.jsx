@@ -112,7 +112,7 @@ function TransactionReceipt({ initialStatus }) {
 
   return (
     <>
-      <div className="py-3 d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto p-2" >
+      <div className=" py-3 d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto p-2" >
         {/* <ArrowLeft className="me-2" size={24} /> */}
         <p className=" mb-0 d-flex text-muted d-flex align-items-center" style={{ alignItems: "center" }}>
           <ChevronLeft className='mx-2 ' size={15} onClick={BackBtn} />
@@ -138,7 +138,7 @@ function TransactionReceipt({ initialStatus }) {
             </div>
 
             {/* Amount and Status */}
-            <div className="text-center mb-4">
+            <div className="text-center mb-0">
               <h2
                 className="mb-1"
                 style={{ color: "#01B575" }}
@@ -164,7 +164,7 @@ function TransactionReceipt({ initialStatus }) {
 
             {/* {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")} */}
             {/* + "ful" */}
-            <hr />
+            <hr  />
 
             {/* Transaction Details */}
             <div className="mb-3">
