@@ -16,6 +16,9 @@ const Navbar = () => {
     const DetailsBtn =()=>{
         navigate("/details")
     }
+    const HistoyBtn = ()=>{
+        navigate("/historyadmin")
+    }
     return (
         <div>
             <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
@@ -34,6 +37,9 @@ const Navbar = () => {
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style={{cursor:"pointer"}} onClick={DetailsBtn}>Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style={{cursor:"pointer"}} onClick={HistoyBtn}>Histoy</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style={{cursor:"pointer"}} onClick={logoutBtn}>Logout</a>

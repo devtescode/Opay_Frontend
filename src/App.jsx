@@ -23,6 +23,7 @@ import Passwordetails from './assets/components/Passwordetailspage/Passwordetail
 import Changepassword from './assets/components/Changepassword/Changepassword'
 import AdminDetails from './assets/components/AdminDetails/AdminDetails'
 import Makepayment from './assets/components/Makepaymentpage/Makepayment'
+import Historyadmin from './assets/components/HistoryAdmin/Historyadmin'
 // import { useEffect, useState } from 'react'
 // import Opaypage from './assets/components/Opaypage'
 
@@ -70,6 +71,7 @@ function App() {
       <Route path='/changepassword' element={<Changepassword/>}/>
       <Route path='/details' element={<AdminDetails/>}/>
       <Route path='/makepayment' element={<Makepayment/>}/>
+      <Route path='/historyadmin' element={<Historyadmin/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>

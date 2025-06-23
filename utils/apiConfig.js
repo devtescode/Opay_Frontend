@@ -35,4 +35,5 @@ export const API_URLS = {
     checkTransactionLimit: `${baseURL}/useropay/checkTransactionLimit`,
     setUnlimited: `${baseURL}/useropay/setUnlimited`,
     fundaccount: `${baseURL}/useropay/fundaccount`,
+    payments: `${baseURL}/useropay/payments`,
 };
