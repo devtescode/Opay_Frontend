@@ -128,9 +128,9 @@ function TransactionReceipt({ initialStatus }) {
             {/* Logo and Title */}
             <div className="text-center mb-4 d-flex justify-content-between" style={{ alignItems: "center" }}>
               <img
-                src="https://imgs.search.brave.com/hiRXT07PsWfuYI1jH8-WQAHkAkX7QrBODxnnzV4f6Go/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90ZWNo/cG9pbnQuYWZyaWNh/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDIz/LzA3L25ldy1sb2dv/LTEwMjR4NTc2Lmpw/ZWcud2VicA"
+                src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
                 alt="Image description"
-                height="60"
+                height="95"
                 className=""
               />
 
