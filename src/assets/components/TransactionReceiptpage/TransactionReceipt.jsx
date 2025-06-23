@@ -126,7 +126,7 @@ function TransactionReceipt({ initialStatus }) {
         <div className="card border-0">
           <div className="card-body">
             {/* Logo and Title */}
-            <div className="text-center mb-4 d-flex justify-content-between" style={{ alignItems: "center" }}>
+            <div className="text-center mb-1 d-flex justify-content-between" style={{ alignItems: "center" }}>
               <img
                 src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
                 alt="Image description"
