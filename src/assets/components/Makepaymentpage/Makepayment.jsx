@@ -48,7 +48,7 @@ const Makepayment = () => {
     };
 
     return (
-   <div className="container">
+   <div className="container fixed-top" style={{height:"100vh"}}>
   <div className="col-md-6 mx-auto p-4 shadow-lg mt-5 rounded-4 bg-white">
     <form onSubmit={handlePayment}>
       <div className="text-center mb-4">
