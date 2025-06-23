@@ -51,11 +51,11 @@ const Makepayment = () => {
         <div className="container">
             <div className="col-md-6 mx-auto p-4 shadow mt-5 border rounded-3">
                 <form onSubmit={handlePayment}>
-                    <label className="fs-4 mb-2 d-block">Fund Wallet</label>
+                    <label className="mb-2 d-block fw-bold">Make Payment</label>
                     <input
                         type="number"
                         className="form-control mb-3"
-                        placeholder="Enter amount"
+                        placeholder="Fund 300"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                         required
