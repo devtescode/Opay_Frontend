@@ -99,10 +99,10 @@ const Historyadmin = () => {
 
                 {/* Modal */}
                 <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton className='shadow-lg'>
                         <Modal.Title>User Transactions</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
+                    <Modal.Body className='bg-light'> 
                         {selectedUser && selectedUser.length > 0 ? (
                             <table className="table table-dark">
                                 <thead>
@@ -144,7 +144,7 @@ const Historyadmin = () => {
                             <p>No transactions found for this user.</p>
                         )}
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className='shadow-lg'>
                         <Button variant="secondary" onClick={() => setShowModal(false)}>
                             Close
                         </Button>
