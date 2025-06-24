@@ -104,7 +104,7 @@ const Historyadmin = () => {
                     </Modal.Header>
                     <Modal.Body>
                         {selectedUser && selectedUser.length > 0 ? (
-                            <table className="table">
+                            <table className="table table-dark">
                                 <thead>
                                     <tr>
                                         <th>Amount</th>
@@ -117,7 +117,7 @@ const Historyadmin = () => {
                                 <tbody>
                                     {selectedUser.map((txn) => {
                                         const isToday = new Date(txn.paidAt).toISOString().slice(0, 10) === todayDate;
-                                        const rowClass = isToday ? 'table-success' : 'bg-light';
+                                        const rowClass = isToday ? 'table-success' : 'table-dark';
 
                                         return (
                                             <tr key={txn._id} className={rowClass}>
