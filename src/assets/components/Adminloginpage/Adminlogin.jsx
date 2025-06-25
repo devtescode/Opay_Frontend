@@ -42,10 +42,10 @@ const Adminlogin = () => {
                 background: "linear-gradient(to right, #141e30, #243b55)",
             }}
         >
-            <div className="card p-4 rounded shadow-lg"
+            <div className="card p-4 rounded shadow-lg "
                 style={{
                     maxWidth: "400px",
-                    width: "100%",
+                    width: "95%",
                     borderRadius: "15px",
                     backdropFilter: "blur(10px)",
                     background: "rgba(255, 255, 255, 0.1)",
