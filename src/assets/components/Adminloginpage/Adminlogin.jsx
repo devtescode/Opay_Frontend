@@ -67,7 +67,7 @@ const Adminlogin = () => {
                             style={{
                                 background: "rgba(255, 255, 255, 0.2)",
                                 border: "none",
-                                borderRadius: "10px",
+                                // borderRadius: "10px",
                                 padding: "12px",
                             }}
                             placeholder="Email"
@@ -87,7 +87,7 @@ const Adminlogin = () => {
                             style={{
                                 background: "rgba(255, 255, 255, 0.2)",
                                 border: "none",
-                                borderRadius: "10px",
+                                // borderRadius: "10px",
                                 padding: "12px",
                             }}
                             placeholder="Password"
