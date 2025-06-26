@@ -65,7 +65,24 @@ function Transferform() {
             }
         } catch (err) {
             if (err.response?.status === 403) {
-                alert("You have reached your daily transaction limit (2 per day).");
+                // alert("You have reached your daily transaction limit (1 per day).");
+                Swal.fire({
+                    text: "You have reached your daily transaction limit (1 per day).",
+                    showClass: {
+                        popup: `
+                               animate__animated
+                               animate__fadeInUp
+                               animate__faster
+    `                         
+                                             },
+                                             hideClass: {
+                                                 popup: `
+                               animate__animated
+                               animate__fadeOutDown
+                               animate__faster
+    `                         
+                    }
+                });
                 navigate("/makepayment"); // 👈 Redirect
             } else {
                 alert("Could not check transaction limit. Try again.");
