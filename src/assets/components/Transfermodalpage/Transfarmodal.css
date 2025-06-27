@@ -5,7 +5,7 @@
 
 
 /* This makes the modal stick to the bottom */
-.bottom-modal-dialog {
+/* .bottom-modal-dialog {
   position: fixed;
   bottom: 0;
   margin: 0;
@@ -33,4 +33,4 @@
     bottom: 0;
     width: 100%;
   }
-}
+} */

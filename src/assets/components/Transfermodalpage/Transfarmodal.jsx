@@ -1,10 +1,9 @@
 import axios from "axios";
-import { X, Wallet, Check, ChevronRight, AlertCircle } from "lucide-react";
+import { X, Wallet, Check, AlertCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { API_URLS } from "../../../../utils/apiConfig";
-import "./Transfarmodal.css"
 
 const Transfermodal = ({ showModal, setShowModal }) => {
   const navigate = useNavigate()
@@ -151,18 +150,22 @@ const Transfermodal = ({ showModal, setShowModal }) => {
   }
 
   return (
-    <Container>
+    <Container fluid>
       <Modal
         show={showModal}
         onHide={handleClose}
+        centered
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          margin: 0,
+          zIndex: 1050, // Ensure it's on top of other elements
+        }}
         backdrop="static"
-        dialogClassName="bottom-modal-dialog"
-        contentClassName="bottom-modal-content"
-        // fullscreen="sm-down"
         className="custom-modal"
       >
-
-
         <Modal.Header className="border-bottom">
           <Button variant="link" className="position-absolute me-2 p-0" onClick={handleClose}>
             <X size={18} />
@@ -200,11 +203,14 @@ const Transfermodal = ({ showModal, setShowModal }) => {
 
             <div className="pt-4 border-top">
               <div className="d-flex justify-content-between mb-4">
-                <span className="fw-medium">Payment Method</span>
-                <span className="text-secondary d-flex">All <ChevronRight /></span>
-                {/* <ChevronRight /> */}
+                <span className="fw-medium">Payment method</span>
+                <span className="text-secondary">All</span>
               </div>
-              <div className="d-flex flex-column gap-2 bg-light p-3 rounded-3">
+
+              <div className="d-flex flex-column gap-3">
+               
+
+               <div className="d-flex flex-column gap-2 bg-light p-3 rounded-3">
                 <div className="rounded d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center gap-2">
                     <div>
@@ -234,7 +240,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                   </div>
                 </div>
               </div>
-
+              </div>
             </div>
 
             <Button
