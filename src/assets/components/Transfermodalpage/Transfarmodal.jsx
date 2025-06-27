@@ -151,7 +151,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
   }
 
   return (
-    <Container fluid>
+    <Container>
       <Modal
         show={showModal}
         onHide={handleClose}
