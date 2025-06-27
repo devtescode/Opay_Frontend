@@ -168,6 +168,8 @@ const Transfermodal = ({ showModal, setShowModal }) => {
           right: 0,
           margin: 0,
           zIndex: 1050, // Ensure it's on top of other elements
+          borderTopLeftRadius:"10px",
+          borderTopRightRadius:"10px",
         }}
         >
 
