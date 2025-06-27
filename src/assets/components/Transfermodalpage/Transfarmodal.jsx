@@ -136,7 +136,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
   if (!accountData) {
     return (
       <Container fluid>
-        <Modal show={showModal} onHide={handleClose} centered style={{ bottom: 0 }}>
+        <Modal className="border border-danger" show={showModal} onHide={handleClose} centered style={{ bottom: 0 }}>
           <Modal.Header className="border-bottom">
             <Button variant="link" className="position-absolute end-0 me-3 p-0" onClick={handleClose}>
               <X size={24} />
@@ -155,7 +155,13 @@ const Transfermodal = ({ showModal, setShowModal }) => {
         show={showModal}
         onHide={handleClose}
         centered
-        style={{
+        clas
+       
+        backdrop="static"
+        className="custom-modal"
+      >
+        <div className="bg-white"
+         style={{
           position: "fixed",
           bottom: 0,
           left: 0,
@@ -163,109 +169,110 @@ const Transfermodal = ({ showModal, setShowModal }) => {
           margin: 0,
           zIndex: 1050, // Ensure it's on top of other elements
         }}
-        backdrop="static"
-        className="custom-modal"
-      >
-        <Modal.Header className="border-bottom">
-          <Button variant="link" className="position-absolute me-2 p-0" onClick={handleClose}>
-            <X size={18} />
-          </Button>
-          <Modal.Title className="w-100 text-center h4 mb-0">
-            ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-          </Modal.Title>
-        </Modal.Header>
+        >
 
-        <Modal.Body className="p-4">
-          <div className="d-flex flex-column gap-3">
-            <div className="d-flex justify-content-between">
-              <span className="text-secondary">Bank</span>
-              <span className="fw-medium">{accountData.bankName}</span>
-            </div>
-            <div className="d-flex justify-content-between">
-              <span className="text-secondary">Account Number</span>
-              <span className="fw-medium">{accountData.accountNumber}</span>
-            </div>
-            <div className="d-flex justify-content-between">
-              <span className="text-secondary">Name</span>
-              <span className="fw-medium">{accountData.accountName}</span>
-            </div>
-            <div className="d-flex justify-content-between">
-              <span className="text-secondary">Amount</span>
-              <span className="fw-medium">  ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
-            </div>
-            <div className="d-flex justify-content-between">
-              <span className="text-secondary">Transaction Fee</span>
-              <span className="fw-medium">
-                <s className="text-secondary me-2">₦10.00</s>
-                ₦0.00
-              </span>
-            </div>
 
-            <div className="pt-4 border-top">
-              <div className="d-flex justify-content-between mb-4">
-                <span className="fw-medium">Payment method</span>
-                <span className="text-secondary">All</span>
-              </div>
-
-              <div className="d-flex flex-column gap-3">
-                <div className="p-3 bg-light rounded d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center gap-3">
-                    <Wallet size={24} className="text-secondary" />
-                    <div>
-                      <p className="fw-medium mb-0">Wallet (₦0.00)</p>
-                      <p className="text-secondary small mb-0">Insufficient balance</p>
-                    </div>
-                  </div>
-                  <Button variant="link" className="text-success p-0">
-                    Add Money
-                  </Button>
-                </div>
-
-               <div className="d-flex flex-column gap-2 bg-light p-3 rounded-3">
-                <div className="rounded d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center gap-2">
-                    <div>
-                      {/* <p >Available Balance </p> */}
-
-                      <span className="fw-medium mb-1">
-                        Available Balance
-                      </span>
-                      <span className="text-muted mx-1 mb-1 align-items-center">
-                        (₦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15} />
-                      </span>
-                    </div>
-                  </div>
-                  <Check size={20} className="text-success" />
-                </div>
-
-                <hr className="dotted-hr my-1" />
-
-                <div className="rounded d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center gap-2">
-                    <div>
-                      <p className="fw-medium mb-1 text-muted">Wallet (₦{balance.toLocaleString()}.00)</p>
-                    </div>
-                  </div>
-                  <div className="p-0 text-muted">
-                    -₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-
-            <Button
-              disabled={isLoading}
-              variant="success"
-              style={{ backgroundColor: "#01B575" }}
-              className="w-75 py-2 mt-4 mx-auto rounded-5 fs-5 border-0"
-              onClick={PaymodelBtn}
-            >
-              {isLoading ? "Pay" : "Pay"}
+          <Modal.Header className="border-bottom ">
+            <Button variant="link" className="position-absolute me-2 p-0" onClick={handleClose}>
+              <X size={18} />
             </Button>
+            <Modal.Title className="w-100 text-center h4 mb-0">
+              ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+            </Modal.Title>
+          </Modal.Header>
 
-          </div>
-        </Modal.Body>
+          <Modal.Body className="p-4  ">
+            <div className="d-flex flex-column gap-3">
+              <div className="d-flex justify-content-between">
+                <span className="text-secondary">Bank</span>
+                <span className="fw-medium">{accountData.bankName}</span>
+              </div>
+              <div className="d-flex justify-content-between">
+                <span className="text-secondary">Account Number</span>
+                <span className="fw-medium">{accountData.accountNumber}</span>
+              </div>
+              <div className="d-flex justify-content-between">
+                <span className="text-secondary">Name</span>
+                <span className="fw-medium">{accountData.accountName}</span>
+              </div>
+              <div className="d-flex justify-content-between">
+                <span className="text-secondary">Amount</span>
+                <span className="fw-medium">  ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              </div>
+              <div className="d-flex justify-content-between">
+                <span className="text-secondary">Transaction Fee</span>
+                <span className="fw-medium">
+                  <s className="text-secondary me-2">₦10.00</s>
+                  ₦0.00
+                </span>
+              </div>
+
+              <div className="pt-4 border-top">
+                <div className="d-flex justify-content-between mb-4">
+                  <span className="fw-medium">Payment method</span>
+                  <span className="text-secondary">All</span>
+                </div>
+
+                <div className="d-flex flex-column gap-3">
+                  <div className="p-3 bg-light rounded d-flex justify-content-between align-items-center">
+                    <div className="d-flex align-items-center gap-3">
+                      <Wallet size={24} className="text-secondary" />
+                      <div>
+                        <p className="fw-medium mb-0">Wallet (₦0.00)</p>
+                        <p className="text-secondary small mb-0">Insufficient balance</p>
+                      </div>
+                    </div>
+                    <Button variant="link" className="text-success p-0">
+                      Add Money
+                    </Button>
+                  </div>
+
+                  <div className="d-flex flex-column gap-2 bg-light p-3 rounded-3">
+                    <div className="rounded d-flex justify-content-between align-items-center">
+                      <div className="d-flex align-items-center gap-2">
+                        <div>
+                          {/* <p >Available Balance </p> */}
+
+                          <span className="fw-medium mb-1">
+                            Available Balance
+                          </span>
+                          <span className="text-muted mx-1 mb-1 align-items-center">
+                            (₦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15} />
+                          </span>
+                        </div>
+                      </div>
+                      <Check size={20} className="text-success" />
+                    </div>
+
+                    <hr className="dotted-hr my-1" />
+
+                    <div className="rounded d-flex justify-content-between align-items-center">
+                      <div className="d-flex align-items-center gap-2">
+                        <div>
+                          <p className="fw-medium mb-1 text-muted">Wallet (₦{balance.toLocaleString()}.00)</p>
+                        </div>
+                      </div>
+                      <div className="p-0 text-muted">
+                        -₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Button
+                disabled={isLoading}
+                variant="success"
+                style={{ backgroundColor: "#01B575" }}
+                className="w-75 py-2 mt-4 mx-auto rounded-5 fs-5 border-0"
+                onClick={PaymodelBtn}
+              >
+                {isLoading ? "Pay" : "Pay"}
+              </Button>
+
+            </div>
+          </Modal.Body>
+        </div>
       </Modal>
     </Container>
   );
