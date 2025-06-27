@@ -153,13 +153,15 @@ const Transfermodal = ({ showModal, setShowModal }) => {
   return (
     <Container fluid>
       <Modal
-        show={showModal}
-        onHide={handleClose}
-        backdrop="static"
-        dialogClassName="bottom-modal-dialog"
-        contentClassName="bottom-modal-content"
-        className="custom-modal"
-      >
+  show={showModal}
+  onHide={handleClose}
+  backdrop="static"
+  dialogClassName="bottom-modal-dialog"
+  contentClassName="bottom-modal-content"
+  fullscreen="sm-down"
+  className="custom-modal"
+>
+
 
         <Modal.Header className="border-bottom">
           <Button variant="link" className="position-absolute me-2 p-0" onClick={handleClose}>
