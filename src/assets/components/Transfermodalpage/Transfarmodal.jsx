@@ -156,21 +156,21 @@ const Transfermodal = ({ showModal, setShowModal }) => {
         onHide={handleClose}
         centered
         clas
-       
+
         backdrop="static"
         className="custom-modal"
       >
         <div className="bg-white"
-         style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          margin: 0,
-          zIndex: 1050, // Ensure it's on top of other elements
-          borderTopLeftRadius:"10px",
-          borderTopRightRadius:"10px",
-        }}
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            margin: 0,
+            zIndex: 1050, // Ensure it's on top of other elements
+            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "10px",
+          }}
         >
 
 
@@ -216,19 +216,6 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                 </div>
 
                 <div className="d-flex flex-column gap-3">
-                  <div className="p-3 bg-light rounded d-flex justify-content-between align-items-center">
-                    <div className="d-flex align-items-center gap-3">
-                      <Wallet size={24} className="text-secondary" />
-                      <div>
-                        <p className="fw-medium mb-0">Wallet (₦0.00)</p>
-                        <p className="text-secondary small mb-0">Insufficient balance</p>
-                      </div>
-                    </div>
-                    <Button variant="link" className="text-success p-0">
-                      Add Money
-                    </Button>
-                  </div>
-
                   <div className="d-flex flex-column gap-2 bg-light p-3 rounded-3">
                     <div className="rounded d-flex justify-content-between align-items-center">
                       <div className="d-flex align-items-center gap-2">
@@ -246,7 +233,15 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                       <Check size={20} className="text-success" />
                     </div>
 
-                    <hr className="dotted-hr my-1" />
+                    <hr
+                      style={{
+                        border: "none",
+                        borderTop: "2px dotted #ccc",
+                        marginTop: "0.25rem",  // equivalent to Bootstrap's `my-1`
+                        marginBottom: "0.25rem"
+                      }}
+                    />
+
 
                     <div className="rounded d-flex justify-content-between align-items-center">
                       <div className="d-flex align-items-center gap-2">
