@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { API_URLS } from "../../../../utils/apiConfig";
+import "./Transfarmodal.css"
 
 const Transfermodal = ({ showModal, setShowModal }) => {
   const navigate = useNavigate()
