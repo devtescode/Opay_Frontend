@@ -14,37 +14,40 @@ function Transferform() {
     const [isLoading, setIsLoading] = useState(false); // Track loading state
 
 
-    const handleAmountClick = (value) => {
-        setAmount(value);
+    // const handleAmountClick = (value) => {
+    //     setAmount(value);
+    // };
+
+    const handleAmountChange = (e) => {
+        const rawValue = e.target.value.replace(/[^0-9]/g, ''); // Remove non-digits
+        if (!rawValue) {
+            setAmount('');
+            return;
+        }
+        const numericValue = parseInt(rawValue, 10);
+        setAmount(numericValue.toLocaleString());
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     setIsLoading(true); 
-    //     if (!amount || isNaN(amount) || amount < 100 || amount > 5000000) {
-    //         alert("Please enter a valid amount between ₦100.00 and ₦5,000,000.00");
-    //         setIsLoading(false); // Re-enable button after validation fails
-    //         return;
-    //     }
-    //     localStorage.setItem("transferAmount", amount);
-    //     setShowModal(true);
-    //     setIsLoading(false);
-    // };
+    const handleAmountClick = (value) => {
+        setAmount(value.toLocaleString());
+    };
+
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
 
-        if (!amount || isNaN(amount) || amount < 100 || amount > 5000000) {
+        // Remove ₦ and commas
+        const rawAmount = amount.replace(/[₦,]/g, '');
+
+        if (!rawAmount || isNaN(rawAmount) || rawAmount < 100 || rawAmount > 5000000) {
             alert("Please enter a valid amount between ₦100.00 and ₦5,000,000.00");
             setIsLoading(false);
             return;
         }
-        const token = localStorage.getItem("token"); // ✅ No JSON.parse
-        // console.log(token, "token");
 
-
+        const token = localStorage.getItem("token");
 
         if (!token) {
             alert("You are not logged in. Please log in again.");
@@ -53,37 +56,26 @@ function Transferform() {
         }
 
         try {
-            const res = await axios.post(API_URLS.checkTransactionLimit, {
-                token
-            })
+            const res = await axios.post(API_URLS.checkTransactionLimit, { token });
 
             if (res.data.status) {
-                localStorage.setItem("transferAmount", amount);
-                setShowModal(true); // ✅ Now allow the user to go to the next page/modal
+                localStorage.setItem("transferAmount", rawAmount); // Save as plain number
+                setShowModal(true);
             } else {
                 alert(res.data.message);
             }
         } catch (err) {
             if (err.response?.status === 403) {
-                // alert("You have reached your daily transaction limit (1 per day).");
                 Swal.fire({
                     text: "You have reached your daily transaction limit (1 per day).",
                     showClass: {
-                        popup: `
-                               animate__animated
-                               animate__fadeInUp
-                               animate__faster
-    `                         
-                                             },
-                                             hideClass: {
-                                                 popup: `
-                               animate__animated
-                               animate__fadeOutDown
-                               animate__faster
-    `                         
-                    }
+                        popup: `animate__animated animate__fadeInUp animate__faster`,
+                    },
+                    hideClass: {
+                        popup: `animate__animated animate__fadeOutDown animate__faster`,
+                    },
                 });
-                navigate("/makepayment"); // 👈 Redirect
+                navigate("/makepayment");
             } else {
                 alert("Could not check transaction limit. Try again.");
             }
@@ -91,6 +83,7 @@ function Transferform() {
             setIsLoading(false);
         }
     };
+
 
 
 
@@ -188,13 +181,14 @@ function Transferform() {
                                 type="text"
                                 className="form-control border-0 border-bottom rounded-0 shadow-none border-success"
                                 placeholder="₦100.00 - ₦5,000,000.00"
-                                value={amount}
-                                onChange={(e) => setAmount(e.target.value)}
+                                value={amount ? `₦${amount}` : ''}
+                                onChange={handleAmountChange}
                                 style={{
-                                    borderColor: "#ccc",       // You can change this to your preferred border color
+                                    borderColor: "#ccc",
                                     backgroundColor: "transparent",
                                 }}
                             />
+
 
                             <div className="row row-cols-3 g-2 mt-2 mx-3">
                                 {[500, 1000, 2000, 5000, 10000, 20000].map((val) => (
