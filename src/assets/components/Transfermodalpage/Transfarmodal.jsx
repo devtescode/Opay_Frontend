@@ -261,7 +261,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                 disabled={isLoading}
                 variant="success"
                 style={{ backgroundColor: "#01B575" }}
-                className="w-75 py-2 mt-4 mx-auto rounded-5 fs-5 border-0"
+                className="w-75 py-2 mt-2 mx-auto rounded-5 fs-5 border-0"
                 onClick={PaymodelBtn}
               >
                 {isLoading ? "Pay" : "Pay"}
