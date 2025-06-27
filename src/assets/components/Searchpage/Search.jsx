@@ -3,6 +3,7 @@ import axios from 'axios';
 import { ChevronLeft, Search as SearchIcon } from 'lucide-react';
 import { API_URLS } from '../../../../utils/apiConfig';
 import { useNavigate } from 'react-router-dom';
+import { getBankLogoByName } from '../BankUtils';
 
 const Search = () => {
     const [transactions, setTransactions] = useState([]);
@@ -93,19 +94,26 @@ const Search = () => {
                                 className="p-2 border-bottom d-flex align-items-center"
                                 onClick={() => handleTransactionClick(transaction)}
                                 style={{ cursor: 'pointer' }}
-                            >
-                                {/* Icon with first letter of accountName */}
-                                <div
-                                    className="d-flex align-items-center justify-content-center rounded-circle text-white me-3 bg-primary"
-                                    style={{
-                                        width: '40px',
-                                        height: '40px',
-                                        fontSize: '18px',
-                                        fontWeight: 'bold',
+                            >                               
+                                <img
+                                    src={transaction ? getBankLogoByName(transaction.bankName) : ""}
+                                    onError={(e) => {
+                                        e.target.onerror = null; // Prevent infinite loop in case fallback also fails
+                                        e.target.src = "";        // Optional: Clear the src so no broken icon shows
+                                        e.target.style.backgroundColor = "#f8f9fa"; // Bootstrap's `bg-light` color
+                                        e.target.style.objectFit = "cover";
+                                        e.target.alt = "Bank logo not available";
                                     }}
-                                >
-                                    {transaction.accountName ? transaction.accountName.charAt(0).toUpperCase() : "?"}
-                                </div>
+                                    style={{
+                                        width: 40,
+                                        height: 40,
+                                        objectFit: "contain",
+                                        borderRadius: "50%",
+                                        backgroundColor: "#f0f0f0", // Initial color before failure
+                                        // padding: 1
+                                    }}
+                                    className="me-1 mb-1"
+                                />
 
                                 <div className="ms-2 flex-grow-1">
                                     <div className="fw-bold">{transaction.accountName}</div>
