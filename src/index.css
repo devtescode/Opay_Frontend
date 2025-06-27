@@ -37,21 +37,21 @@
   }
    */
 
-   .bottom-modal-dialog {
-  position: fixed;
-  bottom: 0;
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
-  left: 0;
-  right: 0;
+.bottom-modal-dialog {
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+    right: 0;
 }
 
 .bottom-modal-content {
-  border-radius: 1rem 1rem 0 0;
+    border-radius: 1rem 1rem 0 0;
 }
 
 .dotted-hr {
-  border: none;
-  border-top: 1px dotted #ccc;
+    border: none;
+    border-top: 1px dotted #ccc;
 }
