@@ -154,18 +154,12 @@ const Transfermodal = ({ showModal, setShowModal }) => {
       <Modal
         show={showModal}
         onHide={handleClose}
-        centered
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          margin: 0,
-          zIndex: 1050, // Ensure it's on top of other elements
-        }}
         backdrop="static"
+        dialogClassName="bottom-modal-dialog"
+        contentClassName="bottom-modal-content"
         className="custom-modal"
       >
+
         <Modal.Header className="border-bottom">
           <Button variant="link" className="position-absolute me-2 p-0" onClick={handleClose}>
             <X size={18} />
