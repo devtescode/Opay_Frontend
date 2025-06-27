@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { API_URLS } from "../../../../utils/apiConfig";
+import { getBankLogoByName } from '../BankUtils'
 
 const Transfermodal = ({ showModal, setShowModal }) => {
   const navigate = useNavigate()
@@ -187,7 +188,28 @@ const Transfermodal = ({ showModal, setShowModal }) => {
             <div className="d-flex flex-column gap-3">
               <div className="d-flex justify-content-between">
                 <span className="text-secondary">Bank</span>
-                <span className="fw-medium">{accountData.bankName}</span>
+                <div>
+                  <img
+                    src={accountData ? getBankLogoByName(accountData.bankName) : ""}
+                    onError={(e) => {
+                      e.target.onerror = null; // Prevent infinite loop in case fallback also fails
+                      e.target.src = "";        // Optional: Clear the src so no broken icon shows
+                      e.target.style.backgroundColor = "#f8f9fa"; // Bootstrap's `bg-light` color
+                      e.target.style.objectFit = "cover";
+                      e.target.alt = "Bank logo not available";
+                    }}
+                    style={{
+                      width: 15,
+                      height: 15,
+                      objectFit: "contain",
+                      borderRadius: "50%",
+                      backgroundColor: "#f0f0f0", // Initial color before failure
+                      // padding: 1
+                    }}
+                    className="me-1 mb-1"
+                  />
+                <span className="fw-medium"> {accountData.bankName}</span>
+                </div>
               </div>
               <div className="d-flex justify-content-between">
                 <span className="text-secondary">Account Number</span>
