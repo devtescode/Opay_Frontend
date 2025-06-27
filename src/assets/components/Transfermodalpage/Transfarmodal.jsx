@@ -153,14 +153,14 @@ const Transfermodal = ({ showModal, setShowModal }) => {
   return (
     <Container fluid>
       <Modal
-  show={showModal}
-  onHide={handleClose}
-  backdrop="static"
-  dialogClassName="bottom-modal-dialog"
-  contentClassName="bottom-modal-content"
-  fullscreen="sm-down"
-  className="custom-modal"
->
+        show={showModal}
+        onHide={handleClose}
+        backdrop="static"
+        dialogClassName="bottom-modal-dialog"
+        contentClassName="bottom-modal-content"
+        // fullscreen="sm-down"
+        className="custom-modal"
+      >
 
 
         <Modal.Header className="border-bottom">
@@ -214,7 +214,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                         Available Balance
                       </span>
                       <span className="text-muted mx-1 mb-1 align-items-center">
-                        (₦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15}/>
+                        (₦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15} />
                       </span>
                     </div>
                   </div>
