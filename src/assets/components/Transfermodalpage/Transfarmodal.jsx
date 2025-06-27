@@ -1,5 +1,5 @@
 import axios from "axios";
-import { X, Wallet, Check } from "lucide-react";
+import { X, Wallet, Check, ChevronRight, AlertCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -197,38 +197,41 @@ const Transfermodal = ({ showModal, setShowModal }) => {
 
             <div className="pt-4 border-top">
               <div className="d-flex justify-content-between mb-4">
-                <span className="fw-medium">Payment method</span>
-                <span className="text-secondary">All</span>
+                <span className="fw-medium">Payment Method</span>
+                <span className="text-secondary d-flex">All <ChevronRight /></span>
+                {/* <ChevronRight /> */}
               </div>
-
-              <div className="d-flex flex-column gap-3">
-                <div className="p-3 bg-light rounded d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center gap-3">
-                    <Wallet size={24} className="text-secondary" />
+              <div className="d-flex flex-column gap-2 bg-light p-3 rounded-3">
+                <div className="rounded d-flex justify-content-between align-items-center">
+                  <div className="d-flex align-items-center gap-2">
                     <div>
-                      <p className="fw-medium mb-0">Wallet (₦0.00)</p>
-                      <p className="text-secondary small mb-0">Insufficient balance</p>
+                      {/* <p >Available Balance </p> */}
+
+                      <span className="fw-medium mb-1">
+                        Available Balance
+                      </span>
+                      <span className="text-muted mx-1 mb-1 align-items-center">
+                        (₦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15}/>
+                      </span>
                     </div>
                   </div>
-                  <Button variant="link" className="text-success p-0">
-                    Add Money
-                  </Button>
+                  <Check size={20} className="text-success" />
                 </div>
 
-                <div className="p-3 bg-light rounded d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center gap-3">
-                    <div
-                      className="rounded-circle bg-success-subtle"
-                      style={{ width: "24px", height: "24px" }}
-                    />
+                <hr className="dotted-hr my-1" />
+
+                <div className="rounded d-flex justify-content-between align-items-center">
+                  <div className="d-flex align-items-center gap-2">
                     <div>
-                      <p className="fw-medium mb-0">OWealth</p>
-                      <p className="text-secondary mb-0">₦{balance.toLocaleString()}.00</p>
+                      <p className="fw-medium mb-1 text-muted">Wallet (₦{balance.toLocaleString()}.00)</p>
                     </div>
                   </div>
-                  <Check size={24} className="text-success" />
+                  <div className="p-0 text-muted">
+                    -₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  </div>
                 </div>
               </div>
+
             </div>
 
             <Button

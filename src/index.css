@@ -50,3 +50,8 @@
 .bottom-modal-content {
   border-radius: 1rem 1rem 0 0;
 }
+
+.dotted-hr {
+  border: none;
+  border-top: 1px dotted #ccc;
+}
