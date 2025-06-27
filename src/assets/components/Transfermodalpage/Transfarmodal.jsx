@@ -208,7 +208,18 @@ const Transfermodal = ({ showModal, setShowModal }) => {
               </div>
 
               <div className="d-flex flex-column gap-3">
-               
+                <div className="p-3 bg-light rounded d-flex justify-content-between align-items-center">
+                  <div className="d-flex align-items-center gap-3">
+                    <Wallet size={24} className="text-secondary" />
+                    <div>
+                      <p className="fw-medium mb-0">Wallet (₦0.00)</p>
+                      <p className="text-secondary small mb-0">Insufficient balance</p>
+                    </div>
+                  </div>
+                  <Button variant="link" className="text-success p-0">
+                    Add Money
+                  </Button>
+                </div>
 
                <div className="d-flex flex-column gap-2 bg-light p-3 rounded-3">
                 <div className="rounded d-flex justify-content-between align-items-center">
