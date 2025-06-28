@@ -401,9 +401,26 @@ const Admindb = () => {
     // };
 
 
+    // const toggleUnlimited = async (userId, isCurrentlyUnlimited) => {
+    //     const newStatus = !isCurrentlyUnlimited; // ✅ flip the value
+    //     console.log(`Sending newStatus: ${newStatus}`);
+
+    //     try {
+    //         const res = await axios.post(API_URLS.setUnlimited, {
+    //             userId,
+    //             unlimited: newStatus,
+    //         });
+
+    //         // alert(res.data.message);
+    //         fetchUsers();
+    //     } catch (err) {
+    //         console.error(err);
+    //         alert("Error updating user access");
+    //     }
+    // };
+
     const toggleUnlimited = async (userId, isCurrentlyUnlimited) => {
-        const newStatus = !isCurrentlyUnlimited; // ✅ flip the value
-        console.log(`Sending newStatus: ${newStatus}`);
+        const newStatus = !isCurrentlyUnlimited;
 
         try {
             const res = await axios.post(API_URLS.setUnlimited, {
@@ -411,8 +428,12 @@ const Admindb = () => {
                 unlimited: newStatus,
             });
 
-            // alert(res.data.message);
-            fetchUsers();
+            // ✅ Only update the toggled user
+            setUsers(prevUsers =>
+                prevUsers.map(user =>
+                    user._id === userId ? { ...user, isUnlimited: newStatus } : user
+                )
+            );
         } catch (err) {
             console.error(err);
             alert("Error updating user access");
