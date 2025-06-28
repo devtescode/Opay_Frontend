@@ -114,7 +114,7 @@ const Search = () => {
                                     }}
                                     className="me-1 mb-1"
                                 />
-
+                                
                                 <div className="ms-2 flex-grow-1">
                                     <div className="fw-bold">{transaction.accountName}</div>
                                     <div className="text-muted small">

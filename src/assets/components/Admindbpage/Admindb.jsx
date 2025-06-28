@@ -178,18 +178,56 @@ const Admindb = () => {
         }
     };
 
-    const blockUser = async (userId) => {
-        try {
-            await axios.put(API_URLS.blockUser(userId), { blocked: true });
-            setUsers(prevUsers =>
-                prevUsers.map(user =>
-                    user._id === userId ? { ...user, blocked: true } : user
-                )
-            );
-        } catch (error) {
-            console.error("Error blocking user:", error);
+    // const blockUser = async (userId) => {
+    //     try {
+    //         await axios.put(API_URLS.blockUser(userId), { blocked: true });
+    //         setUsers(prevUsers =>
+    //             prevUsers.map(user =>
+    //                 user._id === userId ? { ...user, blocked: true } : user
+    //             )
+    //         );
+    //     } catch (error) {
+    //         console.error("Error blocking user:", error);
+    //     }
+    // };
+
+    const blockUser = async (userId, username) => {
+        // console.log(, "userId");
+
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            html: `<strong class="text-danger">${username}</strong> will be blocked and won't be able to access the platform.`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, block!",
+            cancelButtonText: "No, cancel"
+        });
+
+
+        if (result.isConfirmed) {
+            try {
+                await axios.put(API_URLS.blockUser(userId), { blocked: true });
+
+                setUsers(prevUsers =>
+                    prevUsers.map(user =>
+                        user._id === userId ? { ...user, blocked: true } : user
+                    )
+                );
+
+                Swal.fire({
+                    title: "Blocked!",
+                    html: `<strong class="text-danger">${username}</strong> has been blocked.`,
+                    icon: "success"
+                });
+            } catch (error) {
+                console.error("Error blocking user:", error);
+                Swal.fire("Error", "An error occurred while blocking the user.", "error");
+            }
         }
     };
+
 
     const unblockUser = async (userId) => {
         try {
@@ -501,9 +539,9 @@ const Admindb = () => {
                                                                     </td>
                                                                     <td rowSpan={userSessions.length}>
                                                                         {user?.blocked ? (
-                                                                            <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user?._id)}>Unblock</button>
+                                                                            <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user?._id)}>Blocked</button>
                                                                         ) : (
-                                                                            <button className="btn btn-warning btn-sm" onClick={() => blockUser(user?._id)}>Block</button>
+                                                                            <button className="btn btn-success btn-sm" onClick={() => blockUser(user?._id, user.username)}>UnBlock</button>
                                                                         )}
                                                                     </td>
                                                                     <td rowSpan={userSessions.length}>
@@ -538,9 +576,9 @@ const Admindb = () => {
                                                         </td>
                                                         <td>
                                                             {user?.blocked ? (
-                                                                <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user?._id)}>Unblock</button>
+                                                                <button className="btn btn-danger btn-sm" onClick={() => unblockUser(user?._id)}>Blocked</button>
                                                             ) : (
-                                                                <button className="btn btn-warning btn-sm" onClick={() => blockUser(user?._id)}>Block</button>
+                                                                <button className="btn btn-success btn-sm" onClick={() => blockUser(user?._id, user.username)}>UnBlock</button>
                                                             )}
                                                         </td>
                                                         <td>
