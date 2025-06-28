@@ -419,24 +419,65 @@ const Admindb = () => {
     //     }
     // };
 
-    const toggleUnlimited = async (userId, isCurrentlyUnlimited) => {
+    // const toggleUnlimited = async (userId, isCurrentlyUnlimited) => {
+    //     const newStatus = !isCurrentlyUnlimited;
+
+    //     try {
+    //         const res = await axios.post(API_URLS.setUnlimited, {
+    //             userId,
+    //             unlimited: newStatus,
+    //         });
+
+    //         // ✅ Only update the toggled user
+    //         setUsers(prevUsers =>
+    //             prevUsers.map(user =>
+    //                 user._id === userId ? { ...user, isUnlimited: newStatus } : user
+    //             )
+    //         );
+    //     } catch (err) {
+    //         console.error(err);
+    //         alert("Error updating user access");
+    //     }
+    // };
+
+    const toggleUnlimited = async (userId, isCurrentlyUnlimited, username) => {
         const newStatus = !isCurrentlyUnlimited;
 
-        try {
-            const res = await axios.post(API_URLS.setUnlimited, {
-                userId,
-                unlimited: newStatus,
-            });
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            html: `<strong class="text-danger">${username}</strong> is about to be  <strong class="text-dark">${newStatus ? "unlimited" : "limit"}</strong>.`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: `Yes, ${newStatus ? "unlimited" : "limit"}!`,
+            cancelButtonText: "No, cancel"
+        });
 
-            // ✅ Only update the toggled user
-            setUsers(prevUsers =>
-                prevUsers.map(user =>
-                    user._id === userId ? { ...user, isUnlimited: newStatus } : user
-                )
-            );
-        } catch (err) {
-            console.error(err);
-            alert("Error updating user access");
+        if (result.isConfirmed) {
+            try {
+                const res = await axios.post(API_URLS.setUnlimited, {
+                    userId,
+                    unlimited: newStatus,
+                });
+
+                // ✅ Only update the toggled user locally
+                setUsers(prevUsers =>
+                    prevUsers.map(user =>
+                        user._id === userId ? { ...user, isUnlimited: newStatus } : user
+                    )
+                );
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Updated!",
+                    html: `<strong class="text-danger">${username}</strong> is now <strong> ${newStatus ? "Unlimited" : "Limited"}</strong> `,
+                });
+
+            } catch (err) {
+                console.error(err);
+                Swal.fire("Error", "An error occurred while updating access.", "error");
+            }
         }
     };
 
@@ -568,7 +609,7 @@ const Admindb = () => {
                                                                     <td rowSpan={userSessions.length}>
                                                                         <button
                                                                             className={`btn btn-sm ${user.isUnlimited ? "btn-success" : "btn-danger"}`}
-                                                                            onClick={() => toggleUnlimited(user._id, user.isUnlimited)}
+                                                                            onClick={() => toggleUnlimited(user._id, user.isUnlimited, user.username)}
                                                                         >
                                                                             {user.isUnlimited ? "Unlimited" : " Limited"}
                                                                         </button>
@@ -606,7 +647,7 @@ const Admindb = () => {
                                                             <td rowSpan={userSessions.length}>
                                                                 <button
                                                                     className={`btn btn-sm ${user.isUnlimited ? "btn-success" : "btn-danger"}`}
-                                                                    onClick={() => toggleUnlimited(user._id, user.isUnlimited)}
+                                                                    onClick={() => toggleUnlimited(user._id, user.isUnlimited, user.username)}
                                                                 >
                                                                     {user.isUnlimited ? "Unlimited" : " Limited"}
                                                                 </button>
