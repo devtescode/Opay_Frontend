@@ -317,7 +317,7 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Session ID</div>
                             <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
-                                1000001971262850939751880
+                                {transaction._id}
                                 <Copy size={14} className="text-secondary" />
                             </div>
                         </div>
