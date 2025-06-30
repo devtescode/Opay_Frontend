@@ -5,7 +5,7 @@ import message from '../../../public/Image/message.png'
 const Takecontrol = () => {
   return (
     <div className="mb-4 bg-white p-3">
-    <Card.Body className="d-flex align-items-center gap-3 border-none justify-content-end mx-3">
+    <Card.Body className="d-flex align-items-center gap-3 border-none mx-3">
       <div className="rounded-circle bg-light d-flex align-items-center justify-content-center" style={{ width: 40, height: 40 }}>
         <span className="fs-5" >
             <img src={message} alt="" />
