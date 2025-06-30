@@ -8,7 +8,7 @@ import { getBankLogoByName } from '../BankUtils'
 const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
-    console.log("Received transaction:", transaction); // ✅ Must not be null
+    // console.log("Received transaction:", transaction); // ✅ Must not be null
     const BankToBtn = (transaction) => {
         navigate('/storetransaction', { state: transaction });
     }
@@ -19,6 +19,11 @@ const TransactionDetails = () => {
     const showLogo = Boolean(logo);
     if (!transaction) {
         return <p className="text-center text-danger">No transaction details available</p>;
+    }
+
+    const shareReceipt =(transaction)=>{
+         navigate("/transactionreceipt", { state: transaction });
+        //  console.log(transaction, "transactionsssssssssssss"); 
     }
     // const handleTransactionClick = (transaction) => {
     //     navigate('/transactiondetails', { state: transaction });
@@ -38,7 +43,7 @@ const TransactionDetails = () => {
                     </div>
                     <button className="btn btn-link text-success mx-2">
                         {/* <User size={24} /> */}
-                        
+
                         <img src={profileimage} className="" style={{ height: "29px", width: "24px" }} alt="" />
                     </button>
                 </div>
@@ -337,7 +342,10 @@ const TransactionDetails = () => {
                 < div className="fixed-bottom p-4 bg-white shadow-lg" >
                     <div className="d-flex gap-3">
                         <button style={{ background: "#E1F4E9", color: "#2EAB7F" }} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
-                        <button style={{ backgroundColor: "#01B575" }} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
+                        <button
+                        // onClick={shareReceipt} 
+                         onClick={() => shareReceipt(transaction)}
+                        style={{ backgroundColor: "#01B575" }} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
                     </div>
                 </div >
             </div >

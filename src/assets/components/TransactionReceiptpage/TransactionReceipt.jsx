@@ -1,38 +1,96 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
 import { ChevronLeft } from 'react-bootstrap-icons';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { ArrowLeft } from 'react-bootstrap-icons';
 
 function TransactionReceipt({ initialStatus }) {
-
+  const location = useLocation();
+  const passedTransaction = location.state;
   // console.log("Transaction ID received as prop:", transactionId);
   const [amount, setAmount] = useState(null);
   const [accountDetails, setAccountDetails] = useState(null);
   const [userfullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(''); // For storing phone number
+  const { state: transaction } = useLocation();
+  console.log("Received transaction:", transaction); // ✅ Must not be null
   const navigate = useNavigate()
+
+
+
+  // useEffect(() => {
+  //   const savedAmount = localStorage.getItem("transferAmount");
+  //   if (savedAmount) {
+  //     setAmount(parseFloat(savedAmount));
+  //   }
+  //   // Retrieve selected account details from localStorage
+  //   const storedAccount = localStorage.getItem("selectedAccount");
+  //   if (storedAccount) {
+  //     setAccountDetails(JSON.parse(storedAccount));
+  //   }
+  //   console.log(storedAccount);
+
+
+  //   // Retrieve the user data from localStorage
+  //   const userData = localStorage.getItem("user");
+  //   if (userData) {
+  //     const user = JSON.parse(userData); // Parse the JSON string
+  //     setFullName(user.fullname); // Set the fullname in state
+  //     setPhoneNumber(user.phoneNumber);
+  //   }
+  // }, []);
   useEffect(() => {
     const savedAmount = localStorage.getItem("transferAmount");
     if (savedAmount) {
       setAmount(parseFloat(savedAmount));
     }
-    // Retrieve selected account details from localStorage
+
     const storedAccount = localStorage.getItem("selectedAccount");
     if (storedAccount) {
       setAccountDetails(JSON.parse(storedAccount));
     }
 
-    // Retrieve the user data from localStorage
     const userData = localStorage.getItem("user");
     if (userData) {
-      const user = JSON.parse(userData); // Parse the JSON string
-      setFullName(user.fullname); // Set the fullname in state
+      const user = JSON.parse(userData);
+      setFullName(user.fullname); // ✅ correct key
       setPhoneNumber(user.phoneNumber);
     }
   }, []);
+
+
+
+  useEffect(() => {
+    if (passedTransaction) {
+      setAccountDetails({
+        accountName: passedTransaction.accountName,
+        accountNumber: passedTransaction.accountNumber,
+        bankName: passedTransaction.bankName,
+      });
+      setAmount(passedTransaction.amount);
+      setStatus(passedTransaction.status); // ✅ Set the status here
+    } else {
+      const savedAmount = localStorage.getItem("transferAmount");
+      if (savedAmount) {
+        setAmount(parseFloat(savedAmount));
+      }
+
+      const storedAccount = localStorage.getItem("selectedAccount");
+      if (storedAccount) {
+        setAccountDetails(JSON.parse(storedAccount));
+      }
+
+      const userData = localStorage.getItem("user");
+      if (userData) {
+        const user = JSON.parse(userData);
+        setFullName(user.fullname);
+        setPhoneNumber(user.phoneNumber);
+      }
+    }
+  }, [passedTransaction]);
+
 
   const getOrdinal = (day) => {
     const suffix = ["th", "st", "nd", "rd"];
@@ -62,9 +120,10 @@ function TransactionReceipt({ initialStatus }) {
   }
 
   // const [status, setStatus] = useState(initialStatus); // Set initial status from backend
-  const [status, setStatus] = useState(initialStatus || "successful"); // Default to "pending" if undefined
 
   // Function to handle double-tap
+  const [status, setStatus] = useState(initialStatus || "successful"); 
+
   const handleDoubleTap = async () => {
     let newStatus;
     if (status === 'successful') {
@@ -164,7 +223,7 @@ function TransactionReceipt({ initialStatus }) {
 
             {/* {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")} */}
             {/* + "ful" */}
-            <hr  />
+            <hr />
 
             {/* Transaction Details */}
             <div className="mb-3">
@@ -200,6 +259,8 @@ function TransactionReceipt({ initialStatus }) {
                     <p className="mb-0 text-muted">
                       Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)}`}
                     </p>
+
+                    {/* {userfullName ? userfullName : "No user data found"} */}
                   </div>
                   {/* ) : (
                     <p>No account details found. Please go back and select an account.</p>
