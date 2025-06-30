@@ -15,7 +15,7 @@ function TransactionReceipt({ initialStatus }) {
   const [userfullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(''); // For storing phone number
   const { state: transaction } = useLocation();
-  // console.log("Received transaction:", transaction); // ✅ Must not be null
+  console.log("Received transaction:", transaction); // ✅ Must not be null
   const navigate = useNavigate()
 
 
@@ -63,8 +63,6 @@ function TransactionReceipt({ initialStatus }) {
 
 
   useEffect(() => {
-    console.log(passedTransaction._id, "passedTransaction");
-    
     if (passedTransaction) {
       setAccountDetails({
         accountName: passedTransaction.accountName,
@@ -152,7 +150,7 @@ function TransactionReceipt({ initialStatus }) {
       // http://localhost:4000/useropay/changetransactions/${transactionId}
       await axios.put(API_URLS.changetransactions(transactionId), { status: newStatus });
       setStatus(newStatus); // Update status locally after the request succeeds
-      // console.log("✅ Status updated for:", transactionId);
+      console.log("✅ Status updated for:", transactionId);
     } catch (error) {
       console.error('Error updating transaction status:', error);
     }
