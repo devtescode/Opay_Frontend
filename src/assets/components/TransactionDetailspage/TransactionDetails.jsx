@@ -8,7 +8,7 @@ import { getBankLogoByName } from '../BankUtils'
 const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
-    console.log("Received transaction:", transaction); // ✅ Must not be null
+    // console.log("Received transaction:", transaction); // ✅ Must not be null
     const BankToBtn = (transaction) => {
         navigate('/storetransaction', { state: transaction });
     }
