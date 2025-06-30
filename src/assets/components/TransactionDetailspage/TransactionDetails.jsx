@@ -38,6 +38,7 @@ const TransactionDetails = () => {
                     </div>
                     <button className="btn btn-link text-success mx-2">
                         {/* <User size={24} /> */}
+                        
                         <img src={profileimage} className="" style={{ height: "29px", width: "24px" }} alt="" />
                     </button>
                 </div>
