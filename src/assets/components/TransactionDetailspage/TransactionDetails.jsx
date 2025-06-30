@@ -117,7 +117,6 @@ const TransactionDetails = () => {
                             ) : (
                                 <CheckCircle className="text-success" size={16} />
                             )} */}
-
                             <span
                                 className={`${transaction.status === "pending"
                                     ? "text-warning"
