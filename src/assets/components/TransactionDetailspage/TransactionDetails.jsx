@@ -8,7 +8,7 @@ import { getBankLogoByName } from '../BankUtils'
 const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
-    // console.log("Received transaction:", transaction); // ✅ Must not be null
+    console.log("Received transaction:", transaction); // ✅ Must not be null
     const BankToBtn = (transaction) => {
         navigate('/storetransaction', { state: transaction });
     }
@@ -343,7 +343,6 @@ const TransactionDetails = () => {
                     <div className="d-flex gap-3">
                         <button style={{ background: "#E1F4E9", color: "#2EAB7F" }} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
                         <button
-                        // onClick={shareReceipt} 
                          onClick={() => shareReceipt(transaction)}
                         style={{ backgroundColor: "#01B575" }} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
                     </div>
