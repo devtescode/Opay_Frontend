@@ -4,7 +4,7 @@ import axios from 'axios'; // For API requests
 import { Container, Form, Button, Image } from 'react-bootstrap';
 import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 // import LoginProfile from "../../../../public/Image/Profile.jpg";
-import image from "../../../../public/Image/image.jpg";
+// import image from "../../Image/image.jpg";
 import { API_URLS } from '../../../../utils/apiConfig';
 
 const UserLogin = () => {

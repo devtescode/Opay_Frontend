@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-import message from '../../../public/Image/message.png'
+import message from '../Image/message.png'
 
 const Takecontrol = () => {
   return (

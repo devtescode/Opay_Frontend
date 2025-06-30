@@ -5,8 +5,8 @@ import Data from '../Data.json';
 import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
 import TransactionDetailsBanks from '../TransactionDetailsBanks/TransactionDetailsBanks';
-import Bet from '../../../../public/Image/betimage.png'
-import imagebank from '../../../../public/Image/imagebank.jpg'
+import Bet from '../../Image/betimage.png'
+import imagebank from '../../Image/imagebank.jpg'
 
 import axios from 'axios';
 

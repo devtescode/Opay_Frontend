@@ -2,7 +2,7 @@ import React from "react"
 import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircleFill, ChevronLeft } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-// import profileimage from "../../../../public/Image/image.png"
+import profileimage from "../../Image/image.png"
 import { getBankLogoByName } from '../BankUtils'
 
 const TransactionDetails = () => {
@@ -44,7 +44,7 @@ const TransactionDetails = () => {
                     <button className="btn btn-link text-success mx-2">
                         {/* <User size={24} /> */}
 
-                        {/* <img src={profileimage} className="" style={{ height: "29px", width: "24px" }} alt="" /> */}
+                        <img src={profileimage} className="" style={{ height: "29px", width: "24px" }} alt="" />
                     </button>
                 </div>
 
