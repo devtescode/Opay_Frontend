@@ -8,7 +8,7 @@ import { API_URLS } from '../../../utils/apiConfig';
 const BalanceCard = () => {
     const navigate = useNavigate();
     const [showBalance, setShowBalance] = useState(true);
-    const [balance, setBalance] = useState(0);
+    const [balance, setBalance] = useState(null);
 
     // const fetchUserBalance = async () => {
     //     try {
@@ -68,7 +68,7 @@ const BalanceCard = () => {
     };
 
     return (
-        <Card className="styles bgEmerald text-white p-3 mb-2 rounded-3" style={{ marginTop: "73px", border:"none" }}>
+        <Card className="styles bgEmerald text-white p-3 mb-2 rounded-3" style={{ marginTop: "73px", border: "none" }}>
             <div className="d-flex justify-content-between align-items-center mb-2">
                 <div className="d-flex align-items-center gap-2">
                     <span className="small">Available Balance</span>
@@ -81,10 +81,15 @@ const BalanceCard = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-between align-items-center">
-                <span className="fs-3 fw-bold d-flex " style={{ alignItems: "center" }}>
-                    {showBalance ? `₦${balance.toLocaleString()}.00` : "****"}
-                    {/* <ChevronRight style={{fontSize:"14px"}}/> */}
+                <span className="fs-3 fw-bold d-flex" style={{ alignItems: "center" }}>
+                    {balance === null
+                        ? "****"
+                        : showBalance
+                            ? `₦${balance.toLocaleString()}.00`
+                            : "****"}
                 </span>
+
+                {/* <ChevronRight style={{fontSize:"14px"}}/> */}
                 <Button variant="light" className="text-success rounded-5" onClick={AddMoneyBtn}>+ Add Money</Button>
             </div>
         </Card>
