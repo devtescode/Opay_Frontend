@@ -37,7 +37,8 @@ function TransactionReceipt({ initialStatus }) {
     }
   }, []);
 
-
+  const [transactionTime, setTransactionTime] = useState("");
+  // This creates a state variable to store the formatted time
 
   useEffect(() => {
     if (passedTransaction) {
@@ -49,8 +50,21 @@ function TransactionReceipt({ initialStatus }) {
       setAmount(passedTransaction.amount);
       setStatus(passedTransaction.status); // ✅ Set the status here
       setTransactionId(passedTransaction._id);
-      console.log("Using NAVIGATION transaction ID:", passedTransaction._id );
-      
+      if (passedTransaction.createdAt) {
+        const formattedTime = new Date(passedTransaction.createdAt)
+          .toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          });
+        setTransactionTime(formattedTime); // Update the state
+      }
+      console.log("Using NAVIGATION transaction ID:", passedTransaction._id);
+      console.log("Raw createdAt:", passedTransaction?.createdAt);
+
     } else {
       const savedAmount = localStorage.getItem("transferAmount");
       if (savedAmount) {
@@ -78,20 +92,21 @@ function TransactionReceipt({ initialStatus }) {
     return day + (suffix[(value - 20) % 10] || suffix[value] || suffix[0]);
   };
 
-  const formatDate = () => {
-    const now = new Date();
+  const formatDate = (customDate) => {
+    const date = customDate ? new Date(customDate) : new Date(); // Use transaction time if provided, else current time
+
     const options = {
       year: "numeric",
       month: "short",
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit",
-      hour12: false, // Use 24-hour format
+      second: "2-digit", // Optional: Remove if not needed
+      hour12: false,
     };
-    let formattedDate = now.toLocaleString("en-US", options);
-    let day = now.getDate();
-    formattedDate = formattedDate.replace(day, getOrdinal(day));
+
+    let formattedDate = date.toLocaleString("en-US", options);
+    formattedDate = formattedDate.replace(date.getDate(), getOrdinal(date.getDate()));
     return formattedDate;
   };
 
@@ -138,7 +153,7 @@ function TransactionReceipt({ initialStatus }) {
     if (storedTransactionId) {
       setTransactionId(storedTransactionId);
     }
-  }, []); 
+  }, []);
   if (transactionId === null) {
     return <p>Loading...</p>; // Optional: Show loading if transactionId isn't available yet
   }
@@ -191,7 +206,12 @@ function TransactionReceipt({ initialStatus }) {
                   : "Loading..."}
               </h5>
 
-              <small className="text-muted">{formatDate()}</small>
+              <small className="text-muted">
+                {passedTransaction
+                  ? formatDate(passedTransaction.createdAt) // Transaction time
+                  : formatDate() // Current time (fallback)
+                }
+              </small>
             </div>
 
 
