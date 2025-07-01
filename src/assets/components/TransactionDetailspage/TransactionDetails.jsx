@@ -275,9 +275,7 @@ const TransactionDetails = () => {
                                     {transaction.accountName}
                                 </div>
                                 <div className="text-secondary small"
-
                                 >
-
                                     <span>{transaction.bankName}</span> |  <span
                                         style={{ userSelect: "text" }}
                                         onClick={() => {

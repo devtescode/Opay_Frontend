@@ -229,7 +229,6 @@ function TransactionReceipt({ initialStatus }) {
                     <div>
                       <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>{accountDetails.accountName}</p>
                       <p className="mb-0 text-muted">
-
                         <span>{accountDetails.bankName}</span> | <span
                           style={{ userSelect: "text" }}
                           onClick={() => {
