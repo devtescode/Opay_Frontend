@@ -81,7 +81,7 @@ const BalanceCard = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-between align-items-center">
-                <span className="fs-3 fw-bold d-flex" style={{ alignItems: "center" }}>
+                <span className="fs-2 fw-bold d-flex" style={{ alignItems: "center" }}>
                     {balance === null
                         ? "****"
                         : showBalance
