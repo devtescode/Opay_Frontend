@@ -15,7 +15,7 @@ function TransactionReceipt({ initialStatus }) {
   const [userfullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(''); // For storing phone number
   const { state: transaction } = useLocation();
-  console.log("Received transaction:", transaction); // ✅ Must not be null
+  // console.log("Received transaction:", transaction); // ✅ Must not be null
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -62,8 +62,8 @@ function TransactionReceipt({ initialStatus }) {
           });
         setTransactionTime(formattedTime); // Update the state
       }
-      console.log("Using NAVIGATION transaction ID:", passedTransaction._id);
-      console.log("Raw createdAt:", passedTransaction?.createdAt);
+      // console.log("Using NAVIGATION transaction ID:", passedTransaction._id);
+      // console.log("Raw createdAt:", passedTransaction?.createdAt);
 
     } else {
       const savedAmount = localStorage.getItem("transferAmount");
@@ -93,7 +93,7 @@ function TransactionReceipt({ initialStatus }) {
   };
 
   const formatDate = (customDate) => {
-    const date = customDate ? new Date(customDate) : new Date(); // Use transaction time if provided, else current time
+    const date = customDate ? new Date(customDate) : new Date(); 
 
     const options = {
       year: "numeric",
@@ -101,7 +101,7 @@ function TransactionReceipt({ initialStatus }) {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit", // Optional: Remove if not needed
+      second: "2-digit", 
       hour12: false,
     };
 
@@ -114,9 +114,7 @@ function TransactionReceipt({ initialStatus }) {
     navigate("/transfersuccess")
   }
 
-  // const [status, setStatus] = useState(initialStatus); // Set initial status from backend
 
-  // Function to handle double-tap
   const [status, setStatus] = useState(initialStatus || "successful");
 
   const handleDoubleTap = async () => {
@@ -139,7 +137,7 @@ function TransactionReceipt({ initialStatus }) {
       // http://localhost:4000/useropay/changetransactions/${transactionId}
       await axios.put(API_URLS.changetransactions(transactionId), { status: newStatus });
       setStatus(newStatus); // Update status locally after the request succeeds
-      console.log("✅ Status updated for:", transactionId);
+      // console.log("✅ Status updated for:", transactionId);
     } catch (error) {
       console.error('Error updating transaction status:', error);
     }
@@ -155,7 +153,7 @@ function TransactionReceipt({ initialStatus }) {
     }
   }, []);
   if (transactionId === null) {
-    return <p>Loading...</p>; // Optional: Show loading if transactionId isn't available yet
+    return <p>Loading...</p>; 
   }
 
   return (

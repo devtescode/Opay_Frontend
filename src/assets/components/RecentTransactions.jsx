@@ -72,14 +72,17 @@ const RecentTransactions = () => {
     navigate("/transactiondetails", { state: transaction });
   };
 
+  // if (loading) {
+  //   return (
+  //     <div className="d-flex justify-content-center align-items-center p-3">
+  //       <Spinner animation="border" role="status" variant="primary">
+  //         <span className="visually-hidden">Loading...</span>
+  //       </Spinner>
+  //     </div>
+  //   );
+  // }
   if (loading) {
-    return (
-      <div className="d-flex justify-content-center align-items-center p-3">
-        <Spinner animation="border" role="status" variant="primary">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+    return null; // Don't show anything while loading
   }
 
   if (error) {
