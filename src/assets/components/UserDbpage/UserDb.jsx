@@ -66,37 +66,54 @@ const UserDb = () => {
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x: null, y: null });
 
+  const stopDrag = () => {
+    setDragging(false);
+
+    // Snap to left or right edge
+    if (position.x !== null && position.y !== null) {
+      const screenWidth = window.innerWidth;
+
+      // If dropped on the left half, snap to left
+      const snapToLeft = position.x < screenWidth / 2;
+
+      setPosition((prev) => ({
+        x: snapToLeft ? 10 : screenWidth - 90, // 10px from edge, assuming image is ~80px
+        y: prev.y,
+      }));
+    }
+  };
+
+
   useEffect(() => {
     const handleMove = (e) => {
       if (dragging) {
-          e.preventDefault(); // ✅ Stop scroll behavior on touch/mouse drag
+        e.preventDefault();
         const clientX = e.clientX ?? e.touches?.[0]?.clientX;
         const clientY = e.clientY ?? e.touches?.[0]?.clientY;
 
         if (clientX && clientY) {
           setPosition({
-            x: clientX - 100, // Adjust for half image width
-            y: clientY - 100,
+            x: clientX - 35, // adjust based on image size (e.g. 70px / 2)
+            y: clientY - 35,
           });
         }
       }
     };
 
-    const stopDrag = () => setDragging(false);
-
     window.addEventListener("mousemove", handleMove);
     window.addEventListener("mouseup", stopDrag);
-     window.addEventListener("touchmove", handleMove, { passive: false });
+    window.addEventListener("touchmove", handleMove, { passive: false });
     window.addEventListener("touchend", stopDrag);
 
     return () => {
       window.removeEventListener("mousemove", handleMove);
       window.removeEventListener("mouseup", stopDrag);
-      window.removeEventListener("touchmove", handleMove, { passive: false });
+      window.removeEventListener("touchmove", handleMove);
       window.removeEventListener("touchend", stopDrag);
     };
-  }, [dragging]);
-  
+  }, [dragging, position]);
+
+
 
   return (
     <Container className="appContainer bg-light min-vh-100">
