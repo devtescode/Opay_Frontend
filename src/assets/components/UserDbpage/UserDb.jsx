@@ -119,9 +119,9 @@ const UserDb = () => {
           top: position.y !== null ? `${position.y}px` : "auto",
           left: position.x !== null ? `${position.x}px` : "auto",
           bottom: position.y === null ? "50px" : "auto",
-          right: position.x === null ? "-150px" : "auto",
-          width: 200,
-          height: 80,
+          right: position.x === null ? "-200px" : "auto",
+          width: 250,
+          height: 110,
           cursor: "grab",
           zIndex: 9999,
         }}
