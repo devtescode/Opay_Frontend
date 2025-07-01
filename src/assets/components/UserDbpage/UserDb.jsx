@@ -69,6 +69,7 @@ const UserDb = () => {
   useEffect(() => {
     const handleMove = (e) => {
       if (dragging) {
+          e.preventDefault(); // ✅ Stop scroll behavior on touch/mouse drag
         const clientX = e.clientX ?? e.touches?.[0]?.clientX;
         const clientY = e.clientY ?? e.touches?.[0]?.clientY;
 
@@ -85,16 +86,17 @@ const UserDb = () => {
 
     window.addEventListener("mousemove", handleMove);
     window.addEventListener("mouseup", stopDrag);
-    window.addEventListener("touchmove", handleMove);
+     window.addEventListener("touchmove", handleMove, { passive: false });
     window.addEventListener("touchend", stopDrag);
 
     return () => {
       window.removeEventListener("mousemove", handleMove);
       window.removeEventListener("mouseup", stopDrag);
-      window.removeEventListener("touchmove", handleMove);
+      window.removeEventListener("touchmove", handleMove, { passive: false });
       window.removeEventListener("touchend", stopDrag);
     };
   }, [dragging]);
+  
 
   return (
     <Container className="appContainer bg-light min-vh-100">
@@ -106,10 +108,6 @@ const UserDb = () => {
       <Takecontrol />
       <Services />
       <ReferralBanner />
-
-      <BottomNavigation />
-
-
       <img
         ref={dragRef}
         src={Drag}// ✅ Make sure this path is correct
@@ -128,6 +126,10 @@ const UserDb = () => {
           zIndex: 9999,
         }}
       />
+
+      <BottomNavigation />
+
+
 
 
     </Container>
