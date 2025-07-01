@@ -17,6 +17,7 @@ const QuickActions = () => {
         <Button
           variant="outline-light"
           className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3"
+          style={{border:"0"}}
         >
           <div
             className="rounded-circle d-flex border border-4 border-white align-items-center justify-content-center"
@@ -32,6 +33,7 @@ const QuickActions = () => {
           variant="outline-light"
           className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3 "
           onClick={ToBankBtn}
+           style={{border:"0"}}
         >
           <div
             className="rounded-circle d-flex border border-4 border-white align-items-center justify-content-center"
@@ -46,6 +48,7 @@ const QuickActions = () => {
         <Button
           variant="outline-light"
           className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3"
+           style={{border:"0"}}
         >
           <div
             className="rounded-circle d-flex border border-4 border-white align-items-center justify-content-center"

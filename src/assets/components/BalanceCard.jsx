@@ -87,9 +87,9 @@ const BalanceCard = () => {
                         : showBalance
                             ? `₦${balance.toLocaleString()}.00`
                             : "****"}
+                    {/* <ChevronRight className='fw-bold' style={{ fontSize: "12px" }} /> */}
                 </span>
 
-                {/* <ChevronRight style={{fontSize:"14px"}}/> */}
                 <Button variant="light" className="text-success rounded-5" onClick={AddMoneyBtn}>+ Add Money</Button>
             </div>
         </Card>
