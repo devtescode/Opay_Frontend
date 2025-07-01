@@ -274,7 +274,19 @@ const TransactionDetails = () => {
                                 <div className="small">
                                     {transaction.accountName}
                                 </div>
-                                <div className="text-secondary small">{transaction.bankName} | {transaction.accountNumber}</div>
+                                <div className="text-secondary small"
+
+                                >
+
+                                    <span>{transaction.bankName}</span> |  <span
+                                        style={{ userSelect: "text" }}
+                                        onClick={() => {
+                                            setTimeout(() => {
+                                                window.getSelection()?.removeAllRanges(); // clears the highlight
+                                            }, 5000); // wait a bit so user can copy
+                                        }}
+                                    >{transaction.accountNumber}</span>
+                                </div>
                             </div>
                         </div>
 

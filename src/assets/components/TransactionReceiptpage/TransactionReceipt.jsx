@@ -93,7 +93,7 @@ function TransactionReceipt({ initialStatus }) {
   };
 
   const formatDate = (customDate) => {
-    const date = customDate ? new Date(customDate) : new Date(); 
+    const date = customDate ? new Date(customDate) : new Date();
 
     const options = {
       year: "numeric",
@@ -101,7 +101,7 @@ function TransactionReceipt({ initialStatus }) {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit", 
+      second: "2-digit",
       hour12: false,
     };
 
@@ -153,7 +153,7 @@ function TransactionReceipt({ initialStatus }) {
     }
   }, []);
   if (transactionId === null) {
-    return <p>Loading...</p>; 
+    return <p>Loading...</p>;
   }
 
   return (
@@ -229,7 +229,15 @@ function TransactionReceipt({ initialStatus }) {
                     <div>
                       <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>{accountDetails.accountName}</p>
                       <p className="mb-0 text-muted">
-                        {accountDetails.bankName} | {accountDetails.accountNumber}
+
+                        <span>{accountDetails.bankName}</span> | <span
+                          style={{ userSelect: "text" }}
+                          onClick={() => {
+                            setTimeout(() => {
+                              window.getSelection()?.removeAllRanges(); // clears the highlight
+                            }, 5000); // wait a bit so user can copy
+                          }}
+                        >{accountDetails.accountNumber}</span>
                       </p>
                     </div>
                   ) : (
