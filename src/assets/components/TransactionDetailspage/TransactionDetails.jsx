@@ -21,10 +21,15 @@ const TransactionDetails = () => {
         return <p className="text-center text-danger">No transaction details available</p>;
     }
 
-    const shareReceipt =(transaction)=>{
-         navigate("/transactionreceipt", { state: transaction });
-        //  console.log(transaction, "transactionsssssssssssss"); 
+    const shareReceipt = (transaction) => {
+        localStorage.removeItem("transactionId"); // Clear old ID
+        navigate("/transactionreceipt", { state: transaction });
+        // Explicit ID
+        // navigate("/transactionreceipt", {
+        //     state: { ...transaction, _id: transaction._id } // Explicit ID
+        // });
     }
+    //  console.log(transaction, "transactionsssssssssssss"); 
     // const handleTransactionClick = (transaction) => {
     //     navigate('/transactiondetails', { state: transaction });
     // };
@@ -74,12 +79,12 @@ const TransactionDetails = () => {
 
                         <div
                             className={`rounded-circle p-3 d-inline-flex mb-0 ${showLogo
-                                    ? "" // No background color if logo exists
-                                    : transaction.status === "pending" || transaction.status === "Reversed"
-                                        ? "bg-warning bg-opacity-10"
-                                        : transaction.status === "failed"
-                                            ? "bg-danger bg-opacity-10"
-                                            : "bg-success bg-opacity-10"
+                                ? "" // No background color if logo exists
+                                : transaction.status === "pending" || transaction.status === "Reversed"
+                                    ? "bg-warning bg-opacity-10"
+                                    : transaction.status === "failed"
+                                        ? "bg-danger bg-opacity-10"
+                                        : "bg-success bg-opacity-10"
                                 }`}
                         >
                             {showLogo ? (
@@ -342,8 +347,8 @@ const TransactionDetails = () => {
                     <div className="d-flex gap-3">
                         <button style={{ background: "#E1F4E9", color: "#2EAB7F" }} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
                         <button
-                         onClick={() => shareReceipt(transaction)}
-                        style={{ backgroundColor: "#01B575" }} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
+                            onClick={() => shareReceipt(transaction)}
+                            style={{ backgroundColor: "#01B575" }} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
                     </div>
                 </div >
             </div >

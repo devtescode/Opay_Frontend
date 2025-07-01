@@ -18,29 +18,6 @@ function TransactionReceipt({ initialStatus }) {
   console.log("Received transaction:", transaction); // ✅ Must not be null
   const navigate = useNavigate()
 
-
-
-  // useEffect(() => {
-  //   const savedAmount = localStorage.getItem("transferAmount");
-  //   if (savedAmount) {
-  //     setAmount(parseFloat(savedAmount));
-  //   }
-  //   // Retrieve selected account details from localStorage
-  //   const storedAccount = localStorage.getItem("selectedAccount");
-  //   if (storedAccount) {
-  //     setAccountDetails(JSON.parse(storedAccount));
-  //   }
-  //   console.log(storedAccount);
-
-
-  //   // Retrieve the user data from localStorage
-  //   const userData = localStorage.getItem("user");
-  //   if (userData) {
-  //     const user = JSON.parse(userData); // Parse the JSON string
-  //     setFullName(user.fullname); // Set the fullname in state
-  //     setPhoneNumber(user.phoneNumber);
-  //   }
-  // }, []);
   useEffect(() => {
     const savedAmount = localStorage.getItem("transferAmount");
     if (savedAmount) {
@@ -72,6 +49,8 @@ function TransactionReceipt({ initialStatus }) {
       setAmount(passedTransaction.amount);
       setStatus(passedTransaction.status); // ✅ Set the status here
       setTransactionId(passedTransaction._id);
+      console.log("Using NAVIGATION transaction ID:", passedTransaction._id );
+      
     } else {
       const savedAmount = localStorage.getItem("transferAmount");
       if (savedAmount) {
@@ -135,11 +114,6 @@ function TransactionReceipt({ initialStatus }) {
       newStatus = 'successful';
     }
 
-    // if (!transactionId) {
-    //   console.error("Transaction ID is missing!");
-    //   return;
-    // }
-
     if (!transactionId || transactionId === "undefined") {
       console.error("Invalid transaction ID:", transactionId);
       return;
@@ -164,8 +138,7 @@ function TransactionReceipt({ initialStatus }) {
     if (storedTransactionId) {
       setTransactionId(storedTransactionId);
     }
-  }, []); // Empty dependency array means this runs only once when the component mounts
-
+  }, []); 
   if (transactionId === null) {
     return <p>Loading...</p>; // Optional: Show loading if transactionId isn't available yet
   }
