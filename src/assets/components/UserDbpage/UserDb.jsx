@@ -123,7 +123,7 @@ const UserDb = () => {
           bottom: position.y === null ? "50px" : "auto",
           right: position.x === null ? "-150px" : "auto",
           width: 200,
-          height: 100,
+          height: 80,
           cursor: "grab",
           zIndex: 9999,
         }}
