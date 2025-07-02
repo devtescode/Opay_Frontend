@@ -351,8 +351,8 @@ const StoreTransaction = () => {
                   width: "100%",
                   maxWidth: "500px",
                   backgroundColor: "#fff",
-                  borderTopLeftRadius: "1.5rem",
-                  borderTopRightRadius: "1.5rem",
+                  borderTopLeftRadius: "1.2rem",
+                  borderTopRightRadius: "1.2rem",
                   padding: "20px",
                   boxShadow: "0 -4px 12px rgba(0,0,0,0.2)",
                 }}
