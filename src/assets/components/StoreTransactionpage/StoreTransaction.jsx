@@ -258,8 +258,8 @@ const StoreTransaction = () => {
     right: 0,
     height: "40px",
     marginTop: "-20px",
-    borderTop: "1px solid #000",
-    borderBottom: "1px solid #000",
+    borderTop: "1px solid #E2E2E2",
+    borderBottom: "1px solid #E2E2E2",
     pointerEvents: "none",
     zIndex: 1,
   };
