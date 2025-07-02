@@ -39,6 +39,8 @@ const Historyadmin = () => {
         setSelectedUser(groupedPayments[email]);
         setShowModal(true);
     };
+    const totalAmount = selectedUser?.reduce((sum, txn) => sum + txn.amount, 0);
+    
 
     return (
         <>
@@ -100,13 +102,14 @@ const Historyadmin = () => {
                 {/* Modal */}
                 <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
                     <Modal.Header closeButton className='shadow-lg'>
-                        <Modal.Title>User Transactions</Modal.Title>
+                        <Modal.Title>Amout:  ₦{totalAmount.toLocaleString()}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className='bg-light'> 
                         {selectedUser && selectedUser.length > 0 ? (
                             <table className="table table-dark">
                                 <thead>
                                     <tr>
+                                        <th>S/N</th>
                                         <th>Amount</th>
                                         <th>Status</th>
                                         <th>Reference</th>
@@ -115,12 +118,13 @@ const Historyadmin = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {selectedUser.map((txn) => {
+                                    {selectedUser.map((txn, index) => {
                                         const isToday = new Date(txn.paidAt).toISOString().slice(0, 10) === todayDate;
                                         const rowClass = isToday ? 'table-success' : 'table-dark';
 
                                         return (
                                             <tr key={txn._id} className={rowClass}>
+                                                <td>{index + 1}</td> {/* 👈 Index here */}
                                                 <td>₦{(txn.amount).toLocaleString()}</td>
                                                 <td>
                                                     <span className={`badge ${txn.status === "success"
