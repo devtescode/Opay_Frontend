@@ -106,6 +106,36 @@ const StoreTransaction = () => {
       fetchMoneyOut();
     }
   }, [userId, token]);
+
+  // useEffect(() => {
+  //   const fetchTransactions = async () => {
+  //     try {
+  //       const res = await axios.get(API_URLS.getransactions(userId)); // Replace with your actual API
+  //       setAllTransactions(res.data);
+  //       setFilteredTransactions(res.data); // show all by default
+  //     } catch (error) {
+  //       console.error("Error fetching transactions", error);
+  //     }
+  //   };
+
+  //   fetchTransactions();
+  // }, []);
+  const [load, setLoad] = useState(true);
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const res = await axios.get(API_URLS.getransactions(userId));
+        setAllTransactions(res.data);
+        setFilteredTransactions(res.data);
+      } catch (error) {
+        console.error("Error fetching transactions", error);
+      } finally {
+        setLoad(false); // stop loading after fetch
+      }
+    };
+
+    fetchTransactions();
+  }, []);
   const [showModal, setShowModal] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // 1-12
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -131,23 +161,9 @@ const StoreTransaction = () => {
     elYear?.scrollIntoView({ behavior: "instant", block: "center" });
   }, [showModal]);
 
-
-  // const handleConfirm = () => {
-  //   setShowModal(false);
-
-  //   const selectedMonthYear = format(new Date(selectedYear, selectedMonth - 1), "MMM yyyy");
-
-  //   const filtered = allTransactions.filter((tx) => {
-  //     const txMonthYear = format(new Date(tx.createdAt), "MMM yyyy");
-  //     return txMonthYear === selectedMonthYear;
-  //   });
-
-  //   setFilteredTransactions(filtered);
-  // };
   const now = new Date();
   const currentMonth = now.getMonth() + 1; // JS months are 0-indexed
   const currentYear = now.getFullYear();
-
   const [tempMonth, setTempMonth] = useState(currentMonth); // for scrolling
   const [tempYear, setTempYear] = useState(currentYear);
   const handleConfirm = () => {
@@ -166,46 +182,8 @@ const StoreTransaction = () => {
   };
 
 
-  // useEffect(() => {
-  //   const fetchTransactions = async () => {
-  //     try {
-  //       const res = await axios.get(API_URLS.getransactions(userId)); // Replace with your actual API
-  //       setAllTransactions(res.data);
-  //       setFilteredTransactions(res.data); // show all by default
-  //     } catch (error) {
-  //       console.error("Error fetching transactions", error);
-  //     }
-  //   };
-
-  //   fetchTransactions();
-  // }, []);
-
-  const [load, setLoad] = useState(true);
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      try {
-        const res = await axios.get(API_URLS.getransactions(userId));
-        setAllTransactions(res.data);
-        setFilteredTransactions(res.data);
-      } catch (error) {
-        console.error("Error fetching transactions", error);
-      } finally {
-        setLoad(false); // stop loading after fetch
-      }
-    };
-
-    fetchTransactions();
-  }, []);
-
   const months = [...Array(12)].map((_, i) => i + 1); // [1..12]
   const years = [2023, 2024, 2025, 2026];
-
-
-  // const months = Array.from({ length: 12 }, (_, i) => i + 1);
-  // const years = [2023, 2024, 2025, 2026];
-
-  // const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-  // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const monthRef = useRef(null);
   const yearRef = useRef(null);
   const monthItemRefs = useRef([]);
@@ -241,8 +219,10 @@ const StoreTransaction = () => {
       };
     };
 
-    const cleanupMonth = observeItems(monthItemRefs, monthRef, setSelectedMonth);
-    const cleanupYear = observeItems(yearItemRefs, yearRef, setSelectedYear);
+
+    const cleanupMonth = observeItems(monthItemRefs, monthRef, setTempMonth);
+    const cleanupYear = observeItems(yearItemRefs, yearRef, setTempYear);
+
 
     const scrollToSelected = () => {
       const elMonth = monthRef.current?.querySelector(`[data-value="${selectedMonth}"]`);
@@ -389,31 +369,6 @@ const StoreTransaction = () => {
                 <div style={{ display: "flex", gap: "1rem", marginBottom: "20px", position: "relative" }}>
                   <div style={highlightOverlay} />
 
-                  {/* Month Picker */}
-                  {/* <div style={pickerStyles} ref={monthRef}>
-                    {months.map((month, index) => (
-                      <div
-                        key={month}
-                        data-value={month}
-                        ref={(el) => (monthItemRefs.current[index] = el)}
-                        style={{
-                          scrollSnapAlign: "center",
-                          padding: "12px 0",
-                          fontSize: "20px",
-                          fontWeight: selectedMonth === month ? "bold" : "normal",
-                          color: selectedMonth === month ? "#000" : "#aaa",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => {
-                          setSelectedMonth(month);
-                          monthItemRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
-                        }}
-                      >
-                        {month.toString().padStart(2, "0")}
-                      </div>
-                    ))}
-                  </div> */}
-                  {/* Month Picker */}
                   <div style={pickerStyles} ref={monthRef}>
                     {months.map((month, index) => (
                       <div
@@ -438,7 +393,6 @@ const StoreTransaction = () => {
                     ))}
                   </div>
 
-                  {/* Year Picker */}
                   <div style={pickerStyles} ref={yearRef}>
                     {years.map((year, index) => (
                       <div
@@ -464,7 +418,6 @@ const StoreTransaction = () => {
                   </div>
                 </div>
 
-                {/* Confirm Button */}
                 <button
                   onClick={handleConfirm}
                   style={{
