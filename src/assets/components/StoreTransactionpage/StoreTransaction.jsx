@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Dropdown, Nav, Spinner } from 'react-bootstrap';
+import React, { useEffect, useRef, useState } from 'react';
+import { Dropdown, DropdownMenu, Nav, Spinner } from 'react-bootstrap';
 import { ArrowLeft, ArrowDown, ArrowUp, Download } from 'react-bootstrap-icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
 import { format } from "date-fns";
 
-const StoreTransaction = ({ transactionStatus }) => {
+const StoreTransaction = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -55,44 +55,6 @@ const StoreTransaction = ({ transactionStatus }) => {
     });
   }, [transactions]); // Run this effect when transactions change
 
-
-
-  // useEffect(() => {
-  //   const fetchTransactions = async () => {
-  //     try {
-  //       const user = JSON.parse(localStorage.getItem("user"));
-  //       const userId = user?.userId;
-  //       const response = await axios.get(API_URLS.getransactions(userId));
-  //       const fetchedTransactions = response.data;
-
-  //       // Handle failed → reversed after 20s in UI
-  //       const updatedTransactions = fetchedTransactions.map((transaction) => {
-  //         if (transaction.status === "failed") {
-  //           // Set a timer to change the status in UI
-  //           setTimeout(() => {
-  //             setTransactions((prev) =>
-  //               prev.map((t) =>
-  //                 t._id === transaction._id
-  //                   ? { ...t, status: "Reversed" }
-  //                   : t
-  //               )
-  //             );
-  //           }, 20000); // 20 seconds
-  //         }
-  //         return transaction;
-  //       });
-
-  //       setTransactions(updatedTransactions);
-  //       setLoading(false);
-  //     } catch (err) {
-  //       console.error("Error fetching transaction history:", err);
-  //       setError("Failed to fetch transactions");
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchTransactions();
-  // }, []);
 
   const TranferBtnBack = () => {
     navigate("/userdb")
@@ -144,7 +106,183 @@ const StoreTransaction = ({ transactionStatus }) => {
       fetchMoneyOut();
     }
   }, [userId, token]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // 1-12
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [allTransactions, setAllTransactions] = useState([]);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
 
+  // const toggleModal = () => setShowModal(!showModal);
+  const toggleModal = () => {
+    if (showModal) {
+      // modal closing → revert to actual selected values
+      setTempMonth(selectedMonth);
+      setTempYear(selectedYear);
+    }
+    setShowModal(!showModal);
+  };
+
+  useEffect(() => {
+    if (!showModal) return;
+
+    const elMonth = monthRef.current?.querySelector(`[data-value="${tempMonth}"]`);
+    const elYear = yearRef.current?.querySelector(`[data-value="${tempYear}"]`);
+    elMonth?.scrollIntoView({ behavior: "instant", block: "center" });
+    elYear?.scrollIntoView({ behavior: "instant", block: "center" });
+  }, [showModal]);
+
+
+  // const handleConfirm = () => {
+  //   setShowModal(false);
+
+  //   const selectedMonthYear = format(new Date(selectedYear, selectedMonth - 1), "MMM yyyy");
+
+  //   const filtered = allTransactions.filter((tx) => {
+  //     const txMonthYear = format(new Date(tx.createdAt), "MMM yyyy");
+  //     return txMonthYear === selectedMonthYear;
+  //   });
+
+  //   setFilteredTransactions(filtered);
+  // };
+  const now = new Date();
+  const currentMonth = now.getMonth() + 1; // JS months are 0-indexed
+  const currentYear = now.getFullYear();
+
+  const [tempMonth, setTempMonth] = useState(currentMonth); // for scrolling
+  const [tempYear, setTempYear] = useState(currentYear);
+  const handleConfirm = () => {
+    setSelectedMonth(tempMonth); // apply temp selected values
+    setSelectedYear(tempYear);
+    setShowModal(false);
+
+    const selectedMonthYear = format(new Date(tempYear, tempMonth - 1), "MMM yyyy");
+
+    const filtered = allTransactions.filter((tx) => {
+      const txMonthYear = format(new Date(tx.createdAt), "MMM yyyy");
+      return txMonthYear === selectedMonthYear;
+    });
+
+    setFilteredTransactions(filtered);
+  };
+
+
+  // useEffect(() => {
+  //   const fetchTransactions = async () => {
+  //     try {
+  //       const res = await axios.get(API_URLS.getransactions(userId)); // Replace with your actual API
+  //       setAllTransactions(res.data);
+  //       setFilteredTransactions(res.data); // show all by default
+  //     } catch (error) {
+  //       console.error("Error fetching transactions", error);
+  //     }
+  //   };
+
+  //   fetchTransactions();
+  // }, []);
+
+  const [load, setLoad] = useState(true);
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const res = await axios.get(API_URLS.getransactions(userId));
+        setAllTransactions(res.data);
+        setFilteredTransactions(res.data);
+      } catch (error) {
+        console.error("Error fetching transactions", error);
+      } finally {
+        setLoad(false); // stop loading after fetch
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+  const months = [...Array(12)].map((_, i) => i + 1); // [1..12]
+  const years = [2023, 2024, 2025, 2026];
+
+
+  // const months = Array.from({ length: 12 }, (_, i) => i + 1);
+  // const years = [2023, 2024, 2025, 2026];
+
+  // const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const monthRef = useRef(null);
+  const yearRef = useRef(null);
+  const monthItemRefs = useRef([]);
+  const yearItemRefs = useRef([]);
+
+  useEffect(() => {
+    if (!showModal) return;
+
+    const observeItems = (refsArray, containerRef, setSelected) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+              const value = Number(entry.target.getAttribute("data-value"));
+              if (value) setSelected(value);
+            }
+          });
+        },
+        {
+          root: containerRef.current,
+          threshold: [0.9],
+        }
+      );
+
+      refsArray.current.forEach((ref) => {
+        if (ref) observer.observe(ref);
+      });
+
+      return () => {
+        refsArray.current.forEach((ref) => {
+          if (ref) observer.unobserve(ref);
+        });
+      };
+    };
+
+    const cleanupMonth = observeItems(monthItemRefs, monthRef, setSelectedMonth);
+    const cleanupYear = observeItems(yearItemRefs, yearRef, setSelectedYear);
+
+    const scrollToSelected = () => {
+      const elMonth = monthRef.current?.querySelector(`[data-value="${selectedMonth}"]`);
+      const elYear = yearRef.current?.querySelector(`[data-value="${selectedYear}"]`);
+      elMonth?.scrollIntoView({ behavior: "instant", block: "center" });
+      elYear?.scrollIntoView({ behavior: "instant", block: "center" });
+    };
+
+    scrollToSelected();
+
+    return () => {
+      cleanupMonth();
+      cleanupYear();
+    };
+  }, [showModal]);
+
+  const pickerStyles = {
+    flex: 1,
+    height: "120px",
+    overflowY: "scroll",
+    scrollSnapType: "y mandatory",
+    scrollBehavior: "smooth",
+    textAlign: "center",
+    position: "relative",
+    scrollbarWidth: "none", // Firefox
+    msOverflowStyle: "none", // IE
+  };
+
+  const highlightOverlay = {
+    position: "absolute",
+    top: "50%",
+    left: 0,
+    right: 0,
+    height: "40px",
+    marginTop: "-20px",
+    borderTop: "1px solid #000",
+    borderBottom: "1px solid #000",
+    pointerEvents: "none",
+    zIndex: 1,
+  };
 
 
   if (loading) {
@@ -197,9 +335,156 @@ const StoreTransaction = ({ transactionStatus }) => {
         </Dropdown>
       </div>
 
-      {/* Transaction Period */}
       <div className="p-3 bg-white">
-        <h6>{new Date().toLocaleString('en-US', { month: 'short', year: 'numeric' })}</h6>
+        <div>
+          <div>
+            <span>
+              {new Date(selectedYear, selectedMonth - 1).toLocaleString("en-US", {
+                month: "short",
+                year: "numeric",
+              })}
+            </span>
+            <span onClick={toggleModal}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+            </svg></span>
+          </div>
+
+          {/* Modal */}
+          {showModal && (
+            <div
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                zIndex: 999,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end",
+              }}
+              onClick={toggleModal}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: "500px",
+                  backgroundColor: "#fff",
+                  borderTopLeftRadius: "1.5rem",
+                  borderTopRightRadius: "1.5rem",
+                  padding: "20px",
+                  boxShadow: "0 -4px 12px rgba(0,0,0,0.2)",
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Tabs */}
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
+                  <span style={{ fontWeight: "bold", borderBottom: "2px solid #00c853", paddingBottom: "5px" }}>Month</span>
+                  <span style={{ color: "#aaa" }}>Time Frame</span>
+                  <span onClick={toggleModal} style={{ fontWeight: "bold", cursor: "pointer" }}>✕</span>
+                </div>
+
+                {/* Scroll Pickers */}
+                <div style={{ display: "flex", gap: "1rem", marginBottom: "20px", position: "relative" }}>
+                  <div style={highlightOverlay} />
+
+                  {/* Month Picker */}
+                  {/* <div style={pickerStyles} ref={monthRef}>
+                    {months.map((month, index) => (
+                      <div
+                        key={month}
+                        data-value={month}
+                        ref={(el) => (monthItemRefs.current[index] = el)}
+                        style={{
+                          scrollSnapAlign: "center",
+                          padding: "12px 0",
+                          fontSize: "20px",
+                          fontWeight: selectedMonth === month ? "bold" : "normal",
+                          color: selectedMonth === month ? "#000" : "#aaa",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setSelectedMonth(month);
+                          monthItemRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
+                        }}
+                      >
+                        {month.toString().padStart(2, "0")}
+                      </div>
+                    ))}
+                  </div> */}
+                  {/* Month Picker */}
+                  <div style={pickerStyles} ref={monthRef}>
+                    {months.map((month, index) => (
+                      <div
+                        key={month}
+                        data-value={month}
+                        ref={(el) => (monthItemRefs.current[index] = el)}
+                        style={{
+                          scrollSnapAlign: "center",
+                          padding: "12px 0",
+                          fontSize: "20px",
+                          fontWeight: tempMonth === month ? "bold" : "normal",
+                          color: tempMonth === month ? "#000" : "#aaa",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setTempMonth(month);
+                          monthItemRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
+                        }}
+                      >
+                        {month.toString().padStart(2, "0")}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Year Picker */}
+                  <div style={pickerStyles} ref={yearRef}>
+                    {years.map((year, index) => (
+                      <div
+                        key={year}
+                        data-value={year}
+                        ref={(el) => (yearItemRefs.current[index] = el)}
+                        style={{
+                          scrollSnapAlign: "center",
+                          padding: "12px 0",
+                          fontSize: "20px",
+                          fontWeight: selectedYear === year ? "bold" : "normal",
+                          color: selectedYear === year ? "#000" : "#aaa",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setSelectedYear(year);
+                          yearItemRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
+                        }}
+                      >
+                        {year}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Confirm Button */}
+                <button
+                  onClick={handleConfirm}
+                  style={{
+                    width: "100%",
+                    padding: "15px",
+                    backgroundColor: "#00c853",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "50px",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
 
         <div className="text-muted small">
           <span>In: {`₦${(balance * 2).toLocaleString()}.00`}
@@ -208,18 +493,21 @@ const StoreTransaction = ({ transactionStatus }) => {
         </div>
       </div>
 
-      {/* Transactions List */}
       <div className="flex-grow-1 overflow-auto bg-white mt-2">
-        {transactions.length === 0 ? (
+        {load ? (
+          <p className="text-center p-3">Loading transactions...</p>
+        ) : filteredTransactions.length === 0 ? (
           <p className="text-center p-3">No transactions available</p>
         ) : (
-          transactions.map((transaction) => (
-            <div className="d-flex align-items-center p-3 border-bottom" key={transaction._id}
+          filteredTransactions.map((transaction) => (
+            <div
+              className="d-flex align-items-center p-3 border-bottom"
+              key={transaction._id}
               onClick={() => handleTransactionClick(transaction)}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
             >
               <div
-                className={`rounded-circle p-2 me-3 ${transaction.amount > 0 ? 'bg-light-green' : 'bg-light-red'
+                className={`rounded-circle p-2 me-3 ${transaction.amount > 0 ? "bg-light-green" : "bg-light-red"
                   }`}
               >
                 {transaction.amount > 0 ? (
@@ -228,36 +516,32 @@ const StoreTransaction = ({ transactionStatus }) => {
                   <ArrowDown className="text-danger" />
                 )}
               </div>
+
               <div className="flex-grow-1">
-                <div className="text-truncate" style={{ fontSize: "12px", whiteSpace: "normal", wordBreak: "break-word" }}>Transfer to {transaction.accountName}</div>
+                <div
+                  className="text-truncate"
+                  style={{
+                    fontSize: "12px",
+                    whiteSpace: "normal",
+                    wordBreak: "break-word",
+                  }}
+                >
+                  Transfer to {transaction.accountName}
+                </div>
                 <small className="text-muted">
-                  {/* {new Date(transaction.createdAt).toLocaleString()} */}
                   {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
                 </small>
               </div>
-              {/* <div className="text-end text-dark">
-                -₦{Math.abs(transaction.amount).toLocaleString()}.00
+
+              <div className="text-end text-dark mb-0">
                 <div
                   className={`small ${transaction.status === "pending"
                     ? "text-warning"
                     : transaction.status === "failed"
                       ? "text-danger"
-                      : "text-success"
-                    }`}
-                >
-                  {transaction.status}
-                </div>
-
-              </div> */}
-              <div key={transaction._id} className="text-end text-dark mb-0">
-                <div
-                  className={`small ${transaction.status === "pending"
-                      ? "text-warning"
-                      : transaction.status === "failed"
-                        ? "text-danger"
-                        : transaction.status === "Reversed"
-                          ? "text-warning"
-                          : "text-success"
+                      : transaction.status === "Reversed"
+                        ? "text-warning"
+                        : "text-success"
                     }`}
                 >
                   {transaction.status}
@@ -268,12 +552,11 @@ const StoreTransaction = ({ transactionStatus }) => {
                   <span>-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                 )}
               </div>
-
             </div>
           ))
         )}
       </div>
-      {/* Bottom Navigation */}
+
       <Nav className="bg-white border-top">
         <div className="d-flex w-100 justify-content-around p-2">
           <div className="text-center text-success">
@@ -287,7 +570,7 @@ const StoreTransaction = ({ transactionStatus }) => {
           </div>
         </div>
       </Nav>
-    </div>
+    </div >
   );
 };
 
