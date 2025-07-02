@@ -109,11 +109,18 @@ const Historyadmin = () => {
                         {selectedUser && selectedUser.length > 0 ? (
                             <div
                                 style={{
-                                    maxHeight: "60vh",          
-                                    overflowY: "auto",         
-                                    overflowX: "auto",            
-                                    width: "100%",  
-                                    // height:"100vh"              
+                                    // maxHeight: "60vh",          
+                                    // overflowY: "auto",         
+                                    // overflowX: "auto",            
+                                    // width: "100%",  
+                                    // height:"100vh"  
+                                    
+                                    maxHeight: "60vh",
+                                    overflowY: "auto",
+                                    overflowX: "auto",
+                                    width: "100%",
+                                    scrollbarWidth: "none", // Firefox
+                                    msOverflowStyle: "none", // IE 10+
                                 }}
                                 // className='border border-danger'
                             >
