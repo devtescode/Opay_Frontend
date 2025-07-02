@@ -423,7 +423,7 @@ const StoreTransaction = () => {
                   style={{
                     width: "100%",
                     padding: "15px",
-                    backgroundColor: "#00c853",
+                    backgroundColor: "#01B575",
                     color: "#fff",
                     border: "none",
                     borderRadius: "50px",
