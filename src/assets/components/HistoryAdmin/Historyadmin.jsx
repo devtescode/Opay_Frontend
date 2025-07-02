@@ -109,11 +109,13 @@ const Historyadmin = () => {
                         {selectedUser && selectedUser.length > 0 ? (
                             <div
                                 style={{
-                                    maxHeight: "60vh",            // 👈 limits height so it scrolls vertically if long
-                                    overflowY: "auto",            // 👈 vertical scroll
-                                    overflowX: "auto",            // 👈 horizontal scroll
-                                    width: "100%",                // 👈 make sure it stretches fully
+                                    maxHeight: "60vh",          
+                                    overflowY: "auto",         
+                                    overflowX: "auto",            
+                                    width: "100%",  
+                                    // height:"100vh"              
                                 }}
+                                // className='border border-danger'
                             >
                                 <table
                                     className="table table-dark table-bordered"
