@@ -311,9 +311,9 @@ const RecentTransactions = () => {
                 {transaction.status === "Reversed" ? (
                   <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                 ) : isIncoming ? (
-                  <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                  <span className="fw-medium" style={{color: "#1FAB7C"}}>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                 ) : (
-                  <span>-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                  <span className="fw-medium">-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                 )}
                 <div
                   className="rounded-1 px-1 text-center"
