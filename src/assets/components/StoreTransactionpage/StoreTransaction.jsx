@@ -452,63 +452,70 @@ const StoreTransaction = () => {
         ) : filteredTransactions.length === 0 ? (
           <p className="text-center p-3">No transactions available</p>
         ) : (
-          filteredTransactions.map((transaction) => (
-            <div
-              className="d-flex align-items-center p-3 border-bottom"
-              key={transaction._id}
-              onClick={() => handleTransactionClick(transaction)}
-              style={{ cursor: "pointer" }}
-            >
+          filteredTransactions.map((transaction) => {
+            const isIncoming = transaction.type === 'incoming';
+
+            return (
               <div
-                className={`rounded-circle p-2 me-3 ${transaction.amount > 0 ? "bg-light-green" : "bg-light-red"
-                  }`}
+                className="d-flex align-items-center p-3 border-bottom"
+                key={transaction._id}
+                onClick={() => handleTransactionClick(transaction)}
+                style={{ cursor: "pointer" }}
               >
-                {transaction.amount > 0 ? (
-                  <ArrowUp className="text-success" />
-                ) : (
-                  <ArrowDown className="text-danger" />
-                )}
-              </div>
-
-              <div className="flex-grow-1">
                 <div
-                  className="text-truncate"
-                  style={{
-                    fontSize: "12px",
-                    whiteSpace: "normal",
-                    wordBreak: "break-word",
-                  }}
-                >
-                  Transfer to {transaction.accountName}
-                </div>
-                <small className="text-muted">
-                  {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
-                </small>
-              </div>
-
-              <div className="text-end text-dark mb-0">
-                <div
-                  className={`small ${transaction.status === "pending"
-                    ? "text-warning"
-                    : transaction.status === "failed"
-                      ? "text-danger"
-                      : transaction.status === "Reversed"
-                        ? "text-warning"
-                        : "text-success"
+                  className={`rounded-circle p-2 me-3 ${isIncoming ? "bg-light-red" : "bg-light-green"
                     }`}
                 >
-                  {transaction.status}
+                  {isIncoming ? (
+                    <ArrowDown className="text-success" />
+                  ) : (
+                    <ArrowUp className="text-success" />
+                  )}
                 </div>
-                {transaction.status === "Reversed" ? (
-                  <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
-                ) : (
-                  <span>-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
-                )}
+                <div className="flex-grow-1">
+                  <div
+                    className="text-truncate"
+                    style={{
+                      fontSize: "12px",
+                      whiteSpace: "normal",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    Transfer to {transaction.accountName}
+                  </div>
+                  <small className="text-muted">
+                    {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
+                  </small>
+                </div>
+
+                <div className="text-end text-dark mb-0">
+                  <div
+                    className={`small ${transaction.status === "pending"
+                      ? "text-warning"
+                      : transaction.status === "failed"
+                        ? "text-danger"
+                        : transaction.status === "Reversed"
+                          ? "text-warning"
+                          : "text-success"
+                      }`}
+                  >
+                    {transaction.status}
+                  </div>
+
+                  {transaction.status === "Reversed" ? (
+                    <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                  ) : isIncoming ? (
+                    <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                  ) : (
+                    <span>-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                  )}
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
+
 
       <Nav className="bg-white border-top">
         <div className="d-flex w-100 justify-content-around p-2">
