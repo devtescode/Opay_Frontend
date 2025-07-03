@@ -278,8 +278,8 @@ const RecentTransactions = () => {
               style={{ cursor: "pointer" }}
             >
               <div
-                className={`rounded-circle p-2 me-3 ${isIncoming ? "bg-light-red" : "bg-light-green"
-                  }`}
+                className={`p-2 me-2 d-flex mx-auto justify-content-center text-center align-items-center`}
+                style={{backgroundColor:"#ECFBF6", borderRadius:"1000px", height:"35px", width:"35px"}}
               >
                 {isIncoming ? (
                   <ArrowDown className="text-success" />
