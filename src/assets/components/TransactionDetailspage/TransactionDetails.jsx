@@ -123,7 +123,9 @@ const TransactionDetails = () => {
                             )}
                         </div>
 
-                        <p className="text-secondary mb-1 fw-medium">Transfer to {transaction.accountName}</p>
+                        <p className="text-secondary mb-1 fw-medium">{isIncoming ? "Transfer from" : "Transfer to"} {transaction.accountName}</p>
+                        
+
                         <h2 className="mb-1">₦{transaction.amount.toLocaleString()}.00</h2>
 
                         <div className="d-flex align-items-center justify-content-center gap-2">
