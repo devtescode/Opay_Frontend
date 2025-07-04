@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dropdown, DropdownMenu, Nav, Spinner } from 'react-bootstrap';
+import { Button, Dropdown, DropdownMenu, Nav, Spinner } from 'react-bootstrap';
 import { ArrowLeft, ArrowDown, ArrowUp, Download } from 'react-bootstrap-icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -320,16 +320,22 @@ const StoreTransaction = () => {
 
       <div className="p-3 bg-white mt-3 mx-3">
         <div>
-          <div>
-            <span>
-              {new Date(selectedYear, selectedMonth - 1).toLocaleString("en-US", {
-                month: "short",
-                year: "numeric",
-              })}
-            </span>
-            <span onClick={toggleModal}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-            </svg></span>
+          <div className='d-flex justify-content-between'>
+            <div>
+              <span>
+                {new Date(selectedYear, selectedMonth - 1).toLocaleString("en-US", {
+                  month: "short",
+                  year: "numeric",
+                })}
+              </span>
+              <span onClick={toggleModal}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+              </svg></span>
+            </div>
+            <div>
+              <Button variant="success px-2 rounded-4 py-0" style={{ backgroundColor: "#01B575", border: "0", color:"#BBEFE4" }}>Analysis</Button>
+            </div>
+
           </div>
 
           {/* Modal */}
