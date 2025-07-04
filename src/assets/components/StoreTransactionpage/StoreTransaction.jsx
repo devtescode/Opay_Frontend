@@ -280,11 +280,11 @@ const StoreTransaction = () => {
   }
 
   return (
-    <div className="container-fluid bg-light d-flex flex-column vh-100 ">
-      <div className='full-width-sm bg-white'>
+    <div className="bg-light d-flex flex-column vh-100 ">
+      <div className='bg-white'>
         <div className="d-flex justify-content-between align-items-center p-3">
           <div className="d-flex align-items-center">
-            <i class="ri-arrow-left-s-line me-2 mt-1"  onClick={TranferBtnBack}></i>
+            <i class="ri-arrow-left-s-line me-2 mt-1" onClick={TranferBtnBack}></i>
             <h5 className="mb-0">Transactions</h5>
           </div>
           <div style={{ color: "#01B575" }}>
@@ -305,7 +305,7 @@ const StoreTransaction = () => {
           </Dropdown>
           <Dropdown className="flex-grow-1">
             <Dropdown.Toggle variant="light" className="w-100 text-start mx-auto text-center">
-            All Status
+              All Status
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>All Status</Dropdown.Item>
@@ -314,11 +314,11 @@ const StoreTransaction = () => {
             </Dropdown.Menu>
           </Dropdown>
 
-        
+
         </div>
       </div>
 
-      <div className="p-3 bg-white mt-3">
+      <div className="p-3 bg-white mt-3 mx-3">
         <div>
           <div>
             <span>
@@ -449,7 +449,7 @@ const StoreTransaction = () => {
         </div>
       </div>
 
-      <div className="flex-grow-1 overflow-auto bg-white">
+      <div className="flex-grow-1 overflow-auto bg-white mx-3">
         {load ? (
           <p className="text-center p-3"></p>
         ) : filteredTransactions.length === 0 ? (
@@ -485,7 +485,7 @@ const StoreTransaction = () => {
                     }}
                   >
                     {isIncoming ? "Transfer from" : "Transfer to"} {transaction.accountName}
-                    
+
                   </div>
                   <small className="text-muted">
                     {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
@@ -494,44 +494,44 @@ const StoreTransaction = () => {
 
 
                 <div
-                className="d-flex flex-column justify-content-center align-items-end"
-                style={{ minWidth: "100px", minHeight: "100%" }}
-              >
-                <span
-                  className="fw-medium"
-                  style={{
-                    color:
-                      transaction.status === "Reversed" || isIncoming
-                        ? "#1FAB7C"
-                        : "#000",
-                    verticalAlign: "middle",
-                  }}
+                  className="d-flex flex-column justify-content-center align-items-end"
+                  style={{ minWidth: "100px", minHeight: "100%" }}
                 >
-                  {transaction.status === "Reversed" || isIncoming
-                    ? `+₦${Math.abs(transaction.amount).toLocaleString()}.00`
-                    : `-₦${Math.abs(transaction.amount).toLocaleString()}.00`}
-                </span>
-                <div
-                  className="rounded-1 px-1 text-center"
-                  style={{
-                    fontSize: "12px",
-                    backgroundColor:
-                      transaction.status === "successful"
-                        ? "#CAFBF0"
-                        : transaction.status === "failed"
-                          ? "#F8D7DA"
-                          : "#FFF3CD",
-                    color:
-                      transaction.status === "successful"
-                        ? "#52C59D"
-                        : transaction.status === "failed"
-                          ? "#842029"
-                          : "#664d03",
-                  }}
-                >
-                  {transaction.status}
+                  <span
+                    className="fw-medium"
+                    style={{
+                      color:
+                        transaction.status === "Reversed" || isIncoming
+                          ? "#1FAB7C"
+                          : "#000",
+                      verticalAlign: "middle",
+                    }}
+                  >
+                    {transaction.status === "Reversed" || isIncoming
+                      ? `+₦${Math.abs(transaction.amount).toLocaleString()}.00`
+                      : `-₦${Math.abs(transaction.amount).toLocaleString()}.00`}
+                  </span>
+                  <div
+                    className="rounded-1 px-1 text-center"
+                    style={{
+                      fontSize: "12px",
+                      backgroundColor:
+                        transaction.status === "successful"
+                          ? "#CAFBF0"
+                          : transaction.status === "failed"
+                            ? "#F8D7DA"
+                            : "#FFF3CD",
+                      color:
+                        transaction.status === "successful"
+                          ? "#52C59D"
+                          : transaction.status === "failed"
+                            ? "#842029"
+                            : "#664d03",
+                    }}
+                  >
+                    {transaction.status}
+                  </div>
                 </div>
-              </div>
               </div>
             );
           })

@@ -4,29 +4,3 @@
     /* user-select: none; */
 }
 
-@media (max-width: 576px) {
-    .full-width-sm {
-        width: 100vw;
-        margin-left: calc(-50vw + 50%);
-        margin-right: calc(-50vw + 50%);
-    }
-    .transaction-name {
-        max-width: 70%;
-    }
-}
-
-
-.transaction-name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-}
-
-
-
-@media (min-width: 768px) {
-    .transaction-name {
-        max-width: 60%;
-    }
-}
