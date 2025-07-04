@@ -38,9 +38,10 @@ const TransactionDetails = () => {
     const [generatedNumber, setGeneratedNumber] = useState("");
 
     useEffect(() => {
-      const newNumber = generateSimilarNumber();
-      setGeneratedNumber(newNumber);
+        const newNumber = generateSimilarNumber();
+        setGeneratedNumber(newNumber);
     }, []);
+    const isIncoming = transaction.type === "incoming"; // or however you identify incoming
 
     //  console.log(transaction, "transactionsssssssssssss"); 
     // const handleTransactionClick = (transaction) => {
@@ -153,106 +154,106 @@ const TransactionDetails = () => {
                     <div className="mb-4">
                         <div>
                             <div>
-                                <div className="mb-4" style={{ padding: "0 10px" }}>
-                                    {/* === Icon and Line Row === */}
-                                    <div className="w-75 mx-auto d-flex align-items-center justify-content-between position-relative mb-2" style={{ marginBottom: "1rem" }}>
-                                        {/* Step 1 icon */}
-                                        <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
-                                            <CheckCircleFill className="text-success" size={18} />
-                                        </div>
-
-                                        {/* Line 1 */}
-                                        <div style={{
-                                            flex: 1,
-                                            height: "2px",
-                                            backgroundColor: "#198754",
-                                            margin: "0 5px",
-                                            zIndex: 0
-                                        }}></div>
-
-                                        {/* Step 2 icon */}
-                                        <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
-                                            {transaction.status === "pending" ? (
-                                                <Clock className="text-warning" size={18} />
-                                            ) : transaction.status === "failed" ? (
-                                                <XCircle className="text-danger" size={18} />
-                                            ) : transaction.status === "Reversed" ? (
-                                                <Clock className="text-warning" size={18} />
-                                            ) : (
+                                {!isIncoming && (
+                                    <div className="mb-4" style={{ padding: "0 10px" }}>
+                                        {/* === Icon and Line Row === */}
+                                        <div className="w-75 mx-auto d-flex align-items-center justify-content-between position-relative mb-2">
+                                            {/* Step 1 icon */}
+                                            <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
                                                 <CheckCircleFill className="text-success" size={18} />
-                                            )}
-                                        </div>
-
-                                        {/* Line 2 */}
-                                        <div style={{
-                                            flex: 1,
-                                            height: "2px",
-                                            backgroundColor: "#198754",
-                                            margin: "0 5px",
-                                            zIndex: 0
-                                        }}></div>
-
-                                        {/* Step 3 icon */}
-                                        <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
-                                            {transaction.status === "pending" ? (
-                                                <Clock className="text-warning" size={18} />
-                                            ) : transaction.status === "failed" ? (
-                                                <XCircle className="text-danger" size={18} />
-                                            ) : transaction.status === "Reversed" ? (
-                                                <Clock className="text-warning" size={18} />
-                                            ) : (
-                                                <CheckCircleFill className="text-success" size={18} />
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    {/* === Label and Date Row === */}
-                                    <div className="d-flex justify-content-between text-center mx-3">
-                                        {/* Step 1 text */}
-                                        <div className=" w-25" style={{ width: "70px" }}>
-                                            <div style={{ fontSize: "12px", color: "#6c757d" }}>
-                                                Payment<br />successful
                                             </div>
-                                            <div style={{ fontSize: "11px", color: "#adb5bd" }}>
-                                                {formattedDate}
-                                            </div>
-                                        </div>
 
-                                        {/* Step 2 text */}
-                                        <div className=" w-25" style={{ width: "70px" }}>
-                                            <div style={{ fontSize: "12px", color: "#6c757d" }}>
-                                                Processing<br />by bank
+                                            {/* Line 1 */}
+                                            <div style={{
+                                                flex: 1,
+                                                height: "2px",
+                                                backgroundColor: "#198754",
+                                                margin: "0 5px",
+                                                zIndex: 0
+                                            }}></div>
+
+                                            {/* Step 2 icon */}
+                                            <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
+                                                {transaction.status === "pending" || transaction.status === "Reversed" ? (
+                                                    <Clock className="text-warning" size={18} />
+                                                ) : transaction.status === "failed" ? (
+                                                    <XCircle className="text-danger" size={18} />
+                                                ) : (
+                                                    <CheckCircleFill className="text-success" size={18} />
+                                                )}
                                             </div>
-                                            <div style={{ fontSize: "11px", color: "#adb5bd" }}>
-                                                {formattedDate}
+
+                                            {/* Line 2 */}
+                                            <div style={{
+                                                flex: 1,
+                                                height: "2px",
+                                                backgroundColor: "#198754",
+                                                margin: "0 5px",
+                                                zIndex: 0
+                                            }}></div>
+
+                                            {/* Step 3 icon */}
+                                            <div className="d-flex justify-content-center" style={{ width: "24px", height: "24px", zIndex: 1 }}>
+                                                {transaction.status === "pending" || transaction.status === "Reversed" ? (
+                                                    <Clock className="text-warning" size={18} />
+                                                ) : transaction.status === "failed" ? (
+                                                    <XCircle className="text-danger" size={18} />
+                                                ) : (
+                                                    <CheckCircleFill className="text-success" size={18} />
+                                                )}
                                             </div>
                                         </div>
 
-                                        {/* Step 3 text */}
-                                        <div className=" w-25" style={{ width: "70px" }}>
-                                            <div style={{ fontSize: "12px", color: "#6c757d" }}>
-                                                Received<br />by bank
+                                        {/* === Label and Date Row === */}
+                                        <div className="d-flex justify-content-between text-center mx-3">
+                                            {/* Step 1 text */}
+                                            <div className="w-25" style={{ width: "70px" }}>
+                                                <div style={{ fontSize: "12px", color: "#6c757d" }}>
+                                                    Payment<br />successful
+                                                </div>
+                                                <div style={{ fontSize: "11px", color: "#adb5bd" }}>
+                                                    {formattedDate}
+                                                </div>
                                             </div>
-                                            <div style={{ fontSize: "11px", color: "#adb5bd" }}>
-                                                {formattedDate}
+
+                                            {/* Step 2 text */}
+                                            <div className="w-25" style={{ width: "70px" }}>
+                                                <div style={{ fontSize: "12px", color: "#6c757d" }}>
+                                                    Processing<br />by bank
+                                                </div>
+                                                <div style={{ fontSize: "11px", color: "#adb5bd" }}>
+                                                    {formattedDate}
+                                                </div>
+                                            </div>
+
+                                            {/* Step 3 text */}
+                                            <div className="w-25" style={{ width: "70px" }}>
+                                                <div style={{ fontSize: "12px", color: "#6c757d" }}>
+                                                    Received<br />by bank
+                                                </div>
+                                                <div style={{ fontSize: "11px", color: "#adb5bd" }}>
+                                                    {formattedDate}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                )}
 
                                 <div className="mx-3">
-
-
-                                    <div className="mb-1 mx-3 mx-sm-5 bg-light rounded-2 p-1" style={{ fontSize: "10px", color: "#6c757d", lineHeight: "1.4" }}>
-                                        <span> The recipient account is expected to be credited within 5 minutes, subject to notification by the bank. If
-                                            you have any questions, you can also{" "}
-                                            <span className="text-success text-decoration-none" style={{ fontSize: "10px" }}>
-                                                contact the recipient bank 📞
+                                    {!isIncoming && (
+                                        <div className="mb-1 mx-3 mx-sm-5 bg-light rounded-2 p-1" style={{ fontSize: "10px", color: "#6c757d", lineHeight: "1.4" }}>
+                                            <span> The recipient account is expected to be credited within 5 minutes, subject to notification by the bank. If
+                                                you have any questions, you can also{" "}
+                                                <span className="text-success text-decoration-none" style={{ fontSize: "10px" }}>
+                                                    contact the recipient bank 📞
+                                                </span>
                                             </span>
-                                        </span>
-                                    </div>
+                                        </div>
+                                    )}
+
 
                                     {/* Amount Breakdown */}
+                                    {!isIncoming && (
                                     <div className=" pt-3">
                                         <div className="d-flex justify-content-between mb-2">
                                             <span style={{ color: "#6c757d" }}>Amount</span>
@@ -270,6 +271,7 @@ const TransactionDetails = () => {
                                             <span className="text-dark fw-medium">₦{transaction.amount.toLocaleString()}.00</span>
                                         </div>
                                     </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -282,7 +284,11 @@ const TransactionDetails = () => {
                         <h6 className="mb-4 fw-medium" style={{ fontSize: "20px" }}>Transaction Details</h6>
 
                         <div className="row mb-3">
-                            <div className="col-6 text-secondary">Recipient Details</div>
+                            <div className="col-6 text-secondary">
+                                {isIncoming ? "Sender Details" : "Recipient Details"}
+                            </div>
+
+                            {/* <div className="col-6 text-secondary">Recipient Details</div> */}
                             <div className="col-6 text-end text-muted">
                                 <div className="small">
                                     {transaction.accountName}
@@ -341,8 +347,9 @@ const TransactionDetails = () => {
                             </div>
                         </div>
 
-
+                        {!isIncoming && (
                         <div className="row mb-3">
+                            
                             <div className="col-6 text-secondary">Session ID</div>
                             <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
                                 <span>
@@ -355,6 +362,7 @@ const TransactionDetails = () => {
                                 </span>
                             </div>
                         </div>
+                        )}
                     </div>
                 </div >
 
@@ -375,7 +383,9 @@ const TransactionDetails = () => {
                 {/* Bottom Buttons */}
                 < div className="fixed-bottom p-4 bg-white shadow-lg" >
                     <div className="d-flex gap-3">
+                    {!isIncoming && (
                         <button style={{ background: "#E1F4E9", color: "#2EAB7F" }} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
+                    )}
                         <button
                             onClick={() => shareReceipt(transaction)}
                             style={{ backgroundColor: "#01B575" }} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
