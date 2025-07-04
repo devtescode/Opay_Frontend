@@ -493,39 +493,45 @@ const StoreTransaction = () => {
                 </div>
 
 
-                <div className="text-end text-dark mb-0">
-
-                  {transaction.status === "Reversed" ? (
-                    <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
-                  ) : isIncoming ? (
-                    <span className="fw-medium" style={{ color: "#1FAB7C" }}>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
-                  ) : (
-                    <span className="fw-medium">-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
-                  )}
-                  <div
-                    className="rounded-1 px-1 text-center"
-                    style={{
-                      backgroundColor:
-                        transaction.status === "successful"
-                          ? "#CAFBF0"
-                          : transaction.status === "failed"
-                            ? "#F8D7DA" // Light red for failed
-                            : transaction.status === "Reversed"
-                              ? "#FFF3CD" // Light yellow for reversed
-                              : "#FFF3CD", // Default fallback (same as warning)
-                      color:
-                        transaction.status === "successful"
-                          ? "#52C59D"
-                          : transaction.status === "failed"
-                            ? "#842029" // Dark red text for failed
-                            : transaction.status === "Reversed"
-                              ? "#664d03" // Dark yellow text for reversed
-                              : "#664d03", // Default fallback
-                    }}
-                  >
-                    {transaction.status}
-                  </div>
+                <div
+                className="d-flex flex-column justify-content-center align-items-end"
+                style={{ minWidth: "100px", minHeight: "100%" }}
+              >
+                <span
+                  className="fw-medium"
+                  style={{
+                    color:
+                      transaction.status === "Reversed" || isIncoming
+                        ? "#1FAB7C"
+                        : "#000",
+                    verticalAlign: "middle",
+                  }}
+                >
+                  {transaction.status === "Reversed" || isIncoming
+                    ? `+₦${Math.abs(transaction.amount).toLocaleString()}.00`
+                    : `-₦${Math.abs(transaction.amount).toLocaleString()}.00`}
+                </span>
+                <div
+                  className="rounded-1 px-1 text-center"
+                  style={{
+                    fontSize: "12px",
+                    backgroundColor:
+                      transaction.status === "successful"
+                        ? "#CAFBF0"
+                        : transaction.status === "failed"
+                          ? "#F8D7DA"
+                          : "#FFF3CD",
+                    color:
+                      transaction.status === "successful"
+                        ? "#52C59D"
+                        : transaction.status === "failed"
+                          ? "#842029"
+                          : "#664d03",
+                  }}
+                >
+                  {transaction.status}
                 </div>
+              </div>
               </div>
             );
           })
