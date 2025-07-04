@@ -140,7 +140,7 @@ const TransactionDetails = () => {
                                                 : "text-success"
                                     }`}
                             >
-                                {isIncoming && <CheckCircleFill className="mx-1" size={18} style={{color: "#01B575" }}/>}
+                                {isIncoming && <CheckCircleFill size={18} style={{color: "#01B575" }}/>}
                                 {transaction.status}
                             </span>
 
