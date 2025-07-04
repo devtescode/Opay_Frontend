@@ -2,17 +2,6 @@
     padding: 0;
     margin: 0;
     user-select: none !important;
-}
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #fff; /* or your desired color */
-}
 
-#root, .App {
-    height: 100%;
-    width: 100%;
 }
 
