@@ -324,7 +324,7 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Payment Method</div>
                             <div className="col-6 text-end">
-                                <div className="text-muted">Wallet<ChevronRight />
+                                <div className="text-muted">Wallet
 
                                     {/* -₦{transaction.amount.toLocaleString()}.00 */}
 
