@@ -285,7 +285,6 @@ const StoreTransaction = () => {
         <div className="d-flex justify-content-between align-items-center p-3">
           <div className="d-flex align-items-center">
             <i class="ri-arrow-left-s-line me-2" onClick={TranferBtnBack}></i>Transactions
-            {/* <h5 className="mb-0">Transactions</h5> */}
           </div>
           <div style={{ color: "#01B575" }}>
             Download
