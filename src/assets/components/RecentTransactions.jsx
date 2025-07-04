@@ -296,10 +296,7 @@ const RecentTransactions = () => {
                     wordBreak: "break-word",
                   }}
                 >
-                  {/* Transfer to {transaction.accountName} */}
-                  {/* <div className="fw-medium" style={{ fontSize: "14.4px" }}>
-                    Transfer to {transaction.accountName}
-                  </div> */}
+             
                   <div className="fw-medium" style={{ fontSize: "14.4px" }}>
                     {isIncoming ? "Transfer from" : "Transfer to"} {transaction.accountName}
                   </div>

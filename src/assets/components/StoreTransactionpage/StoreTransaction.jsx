@@ -484,7 +484,6 @@ const StoreTransaction = () => {
                       wordBreak: "break-word",
                     }}
                   >
-                    {/* Transfer to {transaction.accountName} */}
                     {isIncoming ? "Transfer from" : "Transfer to"} {transaction.accountName}
                     
                   </div>
