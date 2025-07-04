@@ -281,21 +281,17 @@ const StoreTransaction = () => {
 
   return (
     <div className="container-fluid bg-light d-flex flex-column vh-100 ">
-    {/* Header */}
       <div className='full-width-sm bg-white'>
         <div className="d-flex justify-content-between align-items-center p-3">
           <div className="d-flex align-items-center">
-            {/* <ArrowLeft className="me-2" size={20} onClick={TranferBtnBack} /> */}
             <i class="ri-arrow-left-s-line me-2 mt-1"  onClick={TranferBtnBack}></i>
             <h5 className="mb-0">Transactions</h5>
           </div>
-          {/* <Download className="text-success" size={20} /> */}
           <div style={{ color: "#01B575" }}>
             Download
           </div>
         </div>
 
-        {/* Filters */}
         <div className="d-flex gap-2 py-3 mx-2">
           <Dropdown className="flex-grow-1">
             <Dropdown.Toggle variant="light" className="w-100 text-start mx-auto text-center">
