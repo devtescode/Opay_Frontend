@@ -218,7 +218,7 @@ function Transferform() {
                                 className="form-control border-0 border-bottom rounded-0 shadow-none"
                                 placeholder="What's this for? (Optional)"
                                 value={remark}
-                                onChange={(e) => setRemark(e.target.value)} // Update the `remark` state
+                                onChange={(e) => setRemark(e.target.value)}
                             />
                         </div>
                         <div className="w-75 mx-auto mt-5">
