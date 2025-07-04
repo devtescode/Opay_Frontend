@@ -318,7 +318,7 @@ const StoreTransaction = () => {
         </div>
       </div>
 
-      <div className="p-3 bg-white mt-3 mx-3">
+      <div className="p-3 bg-white mt-3 mx-2">
         <div>
           <div className='d-flex justify-content-between'>
             <div>
@@ -455,7 +455,7 @@ const StoreTransaction = () => {
         </div>
       </div>
 
-      <div className="flex-grow-1 overflow-auto bg-white mx-3">
+      <div className="flex-grow-1 overflow-auto bg-white mx-2">
         {load ? (
           <p className="text-center p-3"></p>
         ) : filteredTransactions.length === 0 ? (
