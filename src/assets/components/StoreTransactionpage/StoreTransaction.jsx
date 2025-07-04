@@ -285,7 +285,8 @@ const StoreTransaction = () => {
       <div className='full-width-sm bg-white'>
         <div className="d-flex justify-content-between align-items-center p-3">
           <div className="d-flex align-items-center">
-            <ArrowLeft className="me-2" size={20} onClick={TranferBtnBack} />
+            {/* <ArrowLeft className="me-2" size={20} onClick={TranferBtnBack} /> */}
+            <i class="ri-arrow-left-s-line me-2 mt-1"  onClick={TranferBtnBack}></i>
             <h5 className="mb-0">Transactions</h5>
           </div>
           {/* <Download className="text-success" size={20} /> */}
@@ -456,7 +457,7 @@ const StoreTransaction = () => {
         {load ? (
           <p className="text-center p-3"></p>
         ) : filteredTransactions.length === 0 ? (
-          <p className="text-center p-3">No transactions available</p>
+          <p className="text-center p-3">No transactions found</p>
         ) : (
           filteredTransactions.map((transaction) => {
             const isIncoming = transaction.type === 'incoming';
