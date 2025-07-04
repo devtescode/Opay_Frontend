@@ -281,41 +281,47 @@ const StoreTransaction = () => {
 
   return (
     <div className="container-fluid bg-light d-flex flex-column vh-100 ">
-      {/* Header */}
-      <div className="d-flex justify-content-between align-items-center p-3 bg-white">
-        <div className="d-flex align-items-center">
-          <ArrowLeft className="me-3" size={20} onClick={TranferBtnBack} />
-          <h5 className="mb-0">Transactions</h5>
+    {/* Header */}
+      <div className='full-width-sm bg-white'>
+        <div className="d-flex justify-content-between align-items-center p-3">
+          <div className="d-flex align-items-center">
+            <ArrowLeft className="me-2" size={20} onClick={TranferBtnBack} />
+            <h5 className="mb-0">Transactions</h5>
+          </div>
+          {/* <Download className="text-success" size={20} /> */}
+          <div style={{ color: "#01B575" }}>
+            Download
+          </div>
         </div>
-        <Download className="text-success" size={20} />
-      </div>
 
-      {/* Filters */}
-      <div className="d-flex gap-2 p-3">
-        <Dropdown className="flex-grow-1">
-          <Dropdown.Toggle variant="light" className="w-100 text-start bg-white">
-            All Categories
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item>All Categories</Dropdown.Item>
-            <Dropdown.Item>Transfers</Dropdown.Item>
-            <Dropdown.Item>Interest</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-
-        <Dropdown className="flex-grow-1">
-          <Dropdown.Toggle variant="light" className="w-100 text-start bg-white">
+        {/* Filters */}
+        <div className="d-flex gap-2 py-3 mx-2">
+          <Dropdown className="flex-grow-1">
+            <Dropdown.Toggle variant="light" className="w-100 text-start mx-auto text-center">
+              All Categories
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item>All Categories</Dropdown.Item>
+              <Dropdown.Item>Transfers</Dropdown.Item>
+              <Dropdown.Item>Interest</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown className="flex-grow-1">
+            <Dropdown.Toggle variant="light" className="w-100 text-start mx-auto text-center">
             All Status
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item>All Status</Dropdown.Item>
-            <Dropdown.Item>Successful</Dropdown.Item>
-            <Dropdown.Item>Failed</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item>All Status</Dropdown.Item>
+              <Dropdown.Item>Successful</Dropdown.Item>
+              <Dropdown.Item>Failed</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+        
+        </div>
       </div>
 
-      <div className="p-3 bg-white">
+      <div className="p-3 bg-white mt-3">
         <div>
           <div>
             <span>
@@ -446,9 +452,9 @@ const StoreTransaction = () => {
         </div>
       </div>
 
-      <div className="flex-grow-1 overflow-auto bg-white mt-2">
+      <div className="flex-grow-1 overflow-auto bg-white">
         {load ? (
-          <p className="text-center p-3">Loading transactions...</p>
+          <p className="text-center p-3"></p>
         ) : filteredTransactions.length === 0 ? (
           <p className="text-center p-3">No transactions available</p>
         ) : (

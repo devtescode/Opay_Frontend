@@ -3,3 +3,12 @@
     margin: 0;
     /* user-select: none; */
 }
+
+@media (max-width: 576px) {
+    .full-width-sm {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+  }
+  
