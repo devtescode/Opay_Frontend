@@ -544,19 +544,18 @@ const StoreTransaction = () => {
       </div>
 
 
-      <Nav className="bg-white ">
+      {/* <Nav className="bg-white ">
         <div className="d-flex w-100 justify-content-around p-2">
           <div className="text-center text-success">
             <i class="ri-arrow-left-right-line bg-success text-white p-1 rounded-2"></i>
             <div className="small">Transactions</div>
           </div>
           <div className="text-center text-muted">
-            {/* <BarChart2 size={24} /> */}
             <i class="ri-pie-chart-line"></i>
             <div className="small text-muted">Statistics</div>
           </div>
         </div>
-      </Nav>
+      </Nav> */}
     </div >
   );
 };
