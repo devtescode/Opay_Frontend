@@ -545,7 +545,7 @@ const StoreTransaction = () => {
       </div>
 
 
-      <Nav className="bg-white border-top">
+      <Nav className="bg-white ">
         <div className="d-flex w-100 justify-content-around p-2">
           <div className="text-center text-success">
             <i class="ri-arrow-left-right-line bg-success text-white p-1 rounded-2"></i>
