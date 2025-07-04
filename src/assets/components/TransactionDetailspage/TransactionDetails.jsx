@@ -124,32 +124,26 @@ const TransactionDetails = () => {
                         </div>
 
                         <p className="text-secondary mb-1 fw-medium">{isIncoming ? "Transfer from" : "Transfer to"} {transaction.accountName}</p>
-                        
+
 
                         <h2 className="mb-1">₦{transaction.amount.toLocaleString()}.00</h2>
 
                         <div className="d-flex align-items-center justify-content-center gap-2">
-                            {/* {transaction.status === "pending" ? (
-                                <Clock className="text-warning" size={16} />
-                            ) : transaction.status === "failed" ? (
-                                <XCircle className="text-danger" size={16} />
-                            ) : transaction.status === "Reversed" ? (
-                                <Clock className="text-warning" size={16} />
-                            ) : (
-                                <CheckCircle className="text-success" size={16} />
-                            )} */}
+
                             <span
-                                className={`${transaction.status === "pending"
-                                    ? "text-warning"
-                                    : transaction.status === "failed"
-                                        ? "text-danger"
-                                        : transaction.status === "Reversed"
-                                            ? "text-warning"
-                                            : "text-success"
+                                className={`d-flex align-items-center gap-1 ${transaction.status === "pending"
+                                        ? "text-warning"
+                                        : transaction.status === "failed"
+                                            ? "text-danger"
+                                            : transaction.status === "Reversed"
+                                                ? "text-warning"
+                                                : "text-success"
                                     }`}
                             >
+                                {isIncoming && <CheckCircleFill className="mx-1" size={18} style={{color: "#01B575" }}/>}
                                 {transaction.status}
                             </span>
+
                         </div>
                     </div>
 
@@ -256,23 +250,23 @@ const TransactionDetails = () => {
 
                                     {/* Amount Breakdown */}
                                     {!isIncoming && (
-                                    <div className=" pt-3">
-                                        <div className="d-flex justify-content-between mb-2">
-                                            <span style={{ color: "#6c757d" }}>Amount</span>
-                                            <span className="text-dark fw-medium">₦{transaction.amount.toLocaleString()}.00</span>
-                                        </div>
-                                        <div className="d-flex justify-content-between mb-2">
-                                            <span style={{ color: "#6c757d" }}>Fee</span>
-                                            <div>
-                                                <span style={{ color: "#adb5bd", textDecoration: "line-through" }}>₦10.00</span>
-                                                <span className="text-dark fw-medium ms-2">₦0.00</span>
+                                        <div className=" pt-3">
+                                            <div className="d-flex justify-content-between mb-2">
+                                                <span style={{ color: "#6c757d" }}>Amount</span>
+                                                <span className="text-dark fw-medium">₦{transaction.amount.toLocaleString()}.00</span>
+                                            </div>
+                                            <div className="d-flex justify-content-between mb-2">
+                                                <span style={{ color: "#6c757d" }}>Fee</span>
+                                                <div>
+                                                    <span style={{ color: "#adb5bd", textDecoration: "line-through" }}>₦10.00</span>
+                                                    <span className="text-dark fw-medium ms-2">₦0.00</span>
+                                                </div>
+                                            </div>
+                                            <div className="d-flex justify-content-between">
+                                                <span style={{ color: "#6c757d" }}>Amount Paid</span>
+                                                <span className="text-dark fw-medium">₦{transaction.amount.toLocaleString()}.00</span>
                                             </div>
                                         </div>
-                                        <div className="d-flex justify-content-between">
-                                            <span style={{ color: "#6c757d" }}>Amount Paid</span>
-                                            <span className="text-dark fw-medium">₦{transaction.amount.toLocaleString()}.00</span>
-                                        </div>
-                                    </div>
                                     )}
                                 </div>
                             </div>
@@ -350,20 +344,20 @@ const TransactionDetails = () => {
                         </div>
 
                         {!isIncoming && (
-                        <div className="row mb-3">
-                            
-                            <div className="col-6 text-secondary">Session ID</div>
-                            <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
-                                <span>
-                                    {transaction._id}
+                            <div className="row mb-3">
 
-                                </span>
-                                <span>
+                                <div className="col-6 text-secondary">Session ID</div>
+                                <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
+                                    <span>
+                                        {transaction._id}
 
-                                    <Copy size={14} className="text-secondary" />
-                                </span>
+                                    </span>
+                                    <span>
+
+                                        <Copy size={14} className="text-secondary" />
+                                    </span>
+                                </div>
                             </div>
-                        </div>
                         )}
                     </div>
                 </div >
@@ -385,9 +379,9 @@ const TransactionDetails = () => {
                 {/* Bottom Buttons */}
                 < div className="fixed-bottom p-4 bg-white shadow-lg" >
                     <div className="d-flex gap-3">
-                    {!isIncoming && (
-                        <button style={{ background: "#E1F4E9", color: "#2EAB7F" }} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
-                    )}
+                        {!isIncoming && (
+                            <button style={{ background: "#E1F4E9", color: "#2EAB7F" }} className="btn py-2 flex-grow-1 rounded-pill">Report Issue</button>
+                        )}
                         <button
                             onClick={() => shareReceipt(transaction)}
                             style={{ backgroundColor: "#01B575" }} className="btn text-white py-2 flex-grow-1 rounded-pill">Share Receipt</button>
