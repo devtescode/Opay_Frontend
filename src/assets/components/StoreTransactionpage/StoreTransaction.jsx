@@ -457,14 +457,14 @@ const StoreTransaction = () => {
 
             return (
               <div
-                className="d-flex align-items-center p-3 border-bottom"
+                className="d-flex align-items-center p-2"
                 key={transaction._id}
                 onClick={() => handleTransactionClick(transaction)}
                 style={{ cursor: "pointer" }}
               >
                 <div
-                  className={`rounded-circle p-2 me-3 ${isIncoming ? "bg-light-red" : "bg-light-green"
-                    }`}
+                  className={`p-2 me-2 d-flex mx-auto justify-content-center text-center align-items-center`}
+                  style={{ backgroundColor: "#ECFBF6", borderRadius: "1000px", height: "35px", width: "35px" }}
                 >
                   {isIncoming ? (
                     <ArrowDown className="text-success" />
@@ -488,27 +488,39 @@ const StoreTransaction = () => {
                   </small>
                 </div>
 
+
                 <div className="text-end text-dark mb-0">
-                  <div
-                    className={`small ${transaction.status === "pending"
-                      ? "text-warning"
-                      : transaction.status === "failed"
-                        ? "text-danger"
-                        : transaction.status === "Reversed"
-                          ? "text-warning"
-                          : "text-success"
-                      }`}
-                  >
-                    {transaction.status}
-                  </div>
 
                   {transaction.status === "Reversed" ? (
                     <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                   ) : isIncoming ? (
-                    <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                    <span className="fw-medium" style={{ color: "#1FAB7C" }}>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                   ) : (
-                    <span>-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                    <span className="fw-medium">-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                   )}
+                  <div
+                    className="rounded-1 px-1 text-center"
+                    style={{
+                      backgroundColor:
+                        transaction.status === "successful"
+                          ? "#CAFBF0"
+                          : transaction.status === "failed"
+                            ? "#F8D7DA" // Light red for failed
+                            : transaction.status === "Reversed"
+                              ? "#FFF3CD" // Light yellow for reversed
+                              : "#FFF3CD", // Default fallback (same as warning)
+                      color:
+                        transaction.status === "successful"
+                          ? "#52C59D"
+                          : transaction.status === "failed"
+                            ? "#842029" // Dark red text for failed
+                            : transaction.status === "Reversed"
+                              ? "#664d03" // Dark yellow text for reversed
+                              : "#664d03", // Default fallback
+                    }}
+                  >
+                    {transaction.status}
+                  </div>
                 </div>
               </div>
             );
