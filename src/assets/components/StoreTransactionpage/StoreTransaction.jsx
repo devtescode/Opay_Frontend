@@ -484,7 +484,9 @@ const StoreTransaction = () => {
                       wordBreak: "break-word",
                     }}
                   >
-                    Transfer to {transaction.accountName}
+                    {/* Transfer to {transaction.accountName} */}
+                    {isIncoming ? "Transfer from" : "Transfer to"} {transaction.accountName}
+                    
                   </div>
                   <small className="text-muted">
                     {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}

@@ -279,7 +279,7 @@ const RecentTransactions = () => {
             >
               <div
                 className={`p-2 me-2 d-flex mx-auto justify-content-center text-center align-items-center`}
-                style={{backgroundColor:"#ECFBF6", borderRadius:"1000px", height:"35px", width:"35px"}}
+                style={{ backgroundColor: "#ECFBF6", borderRadius: "1000px", height: "35px", width: "35px" }}
               >
                 {isIncoming ? (
                   <ArrowDown className="text-success" />
@@ -297,9 +297,13 @@ const RecentTransactions = () => {
                   }}
                 >
                   {/* Transfer to {transaction.accountName} */}
+                  {/* <div className="fw-medium" style={{ fontSize: "14.4px" }}>
+                    Transfer to {transaction.accountName}
+                  </div> */}
                   <div className="fw-medium" style={{ fontSize: "14.4px" }}>
-                   Transfer to {transaction.accountName}
-                   </div>
+                    {isIncoming ? "Transfer from" : "Transfer to"} {transaction.accountName}
+                  </div>
+
                 </div>
                 <small className="text-muted">
                   {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
@@ -307,11 +311,11 @@ const RecentTransactions = () => {
               </div>
 
               <div className="text-end text-dark mb-0">
-                
+
                 {transaction.status === "Reversed" ? (
                   <span>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                 ) : isIncoming ? (
-                  <span className="fw-medium" style={{color: "#1FAB7C"}}>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
+                  <span className="fw-medium" style={{ color: "#1FAB7C" }}>+₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                 ) : (
                   <span className="fw-medium">-₦{Math.abs(transaction.amount).toLocaleString()}.00</span>
                 )}
