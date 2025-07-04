@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircleFill, ChevronLeft } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
@@ -29,6 +29,19 @@ const TransactionDetails = () => {
         //     state: { ...transaction, _id: transaction._id } // Explicit ID
         // });
     }
+
+    const generateSimilarNumber = () => {
+        const prefix = "25012201"; // Keep fixed part
+        const randomPart = Math.floor(Math.random() * 1e14).toString().padStart(14, '0');
+        return prefix + randomPart; // Always 22 digits
+    }
+    const [generatedNumber, setGeneratedNumber] = useState("");
+
+    useEffect(() => {
+      const newNumber = generateSimilarNumber();
+      setGeneratedNumber(newNumber);
+    }, []);
+
     //  console.log(transaction, "transactionsssssssssssss"); 
     // const handleTransactionClick = (transaction) => {
     //     navigate('/transactiondetails', { state: transaction });
@@ -293,15 +306,15 @@ const TransactionDetails = () => {
                             <div className="col-6 text-end">Nepa bills</div>
                         </div> */}
 
-                        <div className="row mb-3">
+                        {/* <div className="row mb-3">
                             <div className="col-6 text-secondary">Transaction Type</div>
                             <div className="col-6 text-end text-muted">Transfer to Bank Account</div>
-                        </div>
+                        </div> */}
 
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Transaction No.</div>
                             <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
-                                2501220101009128376046
+                                {generatedNumber}
                                 <Copy size={14} className="text-secondary" />
                             </div>
                         </div>
@@ -309,7 +322,8 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Payment Method</div>
                             <div className="col-6 text-end">
-                                <div className="text-muted">Wallet
+                                <div className="text-muted">Wallet<i class="ri-arrow-right-s-line text-muted"></i>
+
                                     {/* -₦{transaction.amount.toLocaleString()}.00 */}
 
                                 </div>
@@ -331,8 +345,14 @@ const TransactionDetails = () => {
                         <div className="row mb-3">
                             <div className="col-6 text-secondary">Session ID</div>
                             <div className="col-6 text-end d-flex justify-content-end align-items-center gap-2 text-muted">
-                                {transaction._id}
-                                <Copy size={14} className="text-secondary" />
+                                <span>
+                                    {transaction._id}
+
+                                </span>
+                                <span>
+
+                                    <Copy size={14} className="text-secondary" />
+                                </span>
                             </div>
                         </div>
                     </div>
