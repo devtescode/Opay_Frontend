@@ -39,7 +39,7 @@ const Navbar = () => {
                                 <a class="nav-link" style={{cursor:"pointer"}} onClick={CreateBtn}>Create</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style={{cursor:"pointer"}} onClick={DetailsBtn}>Details</a>
+                                <a class="nav-link" style={{cursor:"pointer"}} onClick={DetailsBtn}>Password</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" style={{cursor:"pointer"}} onClick={HistoyBtn}>Histoy</a>
