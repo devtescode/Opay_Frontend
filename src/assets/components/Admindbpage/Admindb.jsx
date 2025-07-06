@@ -364,15 +364,23 @@ const Admindb = () => {
         console.log("Sessions:", sessions);
     }, [users, sessions]);
 
+
     const userTransactions = transactions.reduce((acc, transaction) => {
-        const userId = transaction.userId; // Assuming each transaction has a userId
-        const username = transaction.username; // Assuming each transaction has a userId        
+        // Only include outgoing transactions
+        if (transaction.type === "incoming") return acc;
+
+        const userId = transaction.userId;
+
         if (!acc[userId]) {
             acc[userId] = { userId, totalAmount: 0 };
         }
+
         acc[userId].totalAmount += transaction.amount;
         return acc;
     }, {});
+
+
+
 
 
     // const toggleUnlimited = async (userId, status) => {
@@ -684,14 +692,14 @@ const Admindb = () => {
                             <div className="modal-header">
                                 <h5 className="modal-title" id="transactionModalLabel">
                                     Transaction History
-                                    <span className='text-danger'> {transactions.length}</span>
+                                    <span className='text-danger ms-2'>{transactions.filter(txn => txn.type !== "incoming").length}</span>
                                     {Object.values(userTransactions).map(user => (
-                                        <p key={user.userId}>
-                                            {/* User ID: {user.userId} -  */}
-                                            Total ₦{Math.abs(user.totalAmount).toLocaleString()}.00
+                                        <p key={user.userId} className="mb-0 small">
+                                            Total Outgoing: ₦{Math.abs(user.totalAmount).toLocaleString()}.00
                                         </p>
                                     ))}
                                 </h5>
+
                                 <button
                                     type="button"
                                     className="btn-close"
@@ -739,12 +747,12 @@ const Admindb = () => {
                                                             <td>
                                                                 <span
                                                                     className={`badge bg-${transaction.status === "successful"
-                                                                            ? "success"
-                                                                            : transaction.status === "pending"
+                                                                        ? "success"
+                                                                        : transaction.status === "pending"
+                                                                            ? "warning"
+                                                                            : transaction.status === "Reversed"
                                                                                 ? "warning"
-                                                                                : transaction.status === "Reversed"
-                                                                                    ? "warning"
-                                                                                    : "danger"
+                                                                                : "danger"
                                                                         }`}
                                                                 >
                                                                     {transaction.status}
