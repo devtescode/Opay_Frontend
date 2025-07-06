@@ -68,7 +68,7 @@ const Funding = () => {
                                 <tr>
                                     <th>S/N</th>
                                     <th>Username</th>
-                                    <th>Account Name</th>
+                                    <th>Name</th>
                                     <th>Amount</th>
                                     <th>Date</th>
                                     <th>Action</th>
