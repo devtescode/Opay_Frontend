@@ -107,6 +107,8 @@ const Admindb = () => {
         try {
             const response = await axios.get(API_URLS.gettransactions(userId));
             setTransactions(response.data);
+            console.log(response, "yoooooo");
+
         } catch (error) {
             console.error("Error fetching transactions:", error);
         } finally {
@@ -364,6 +366,7 @@ const Admindb = () => {
 
     const userTransactions = transactions.reduce((acc, transaction) => {
         const userId = transaction.userId; // Assuming each transaction has a userId
+        const username = transaction.username; // Assuming each transaction has a userId        
         if (!acc[userId]) {
             acc[userId] = { userId, totalAmount: 0 };
         }
@@ -480,7 +483,6 @@ const Admindb = () => {
             }
         }
     };
-
 
 
 
@@ -678,7 +680,7 @@ const Admindb = () => {
                     aria-hidden="true"
                 >
                     <div className="modal-dialog modal-lg">
-                        <div className="modal-content">
+                        <div className="modal-content border-0">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="transactionModalLabel">
                                     Transaction History
@@ -712,10 +714,10 @@ const Admindb = () => {
                                         <table className="table">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Bank Name</th>
-                                                    <th>Account Number</th>
-                                                    <th>Account Name</th>
+                                                    <th>S/N</th>
+                                                    <th>Bank</th>
+                                                    <th>Account</th>
+                                                    <th>Name</th>
                                                     <th>Amount</th>
                                                     <th>Status</th>
                                                     <th>Date</th>
@@ -723,38 +725,42 @@ const Admindb = () => {
 
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody >
 
-                                                {transactions.map((transaction, index) => (
-                                                    <tr key={transaction._id}>
-                                                        <td>{index + 1}</td>
-                                                        <td>{transaction.bankName}</td>
-                                                        <td>{transaction.accountNumber}</td>
-                                                        <td>{transaction.accountName}</td>
-                                                        <td>₦{Math.abs(transaction.amount).toLocaleString()}.00</td>
-                                                        <td>
-                                                            <span
-                                                                className={`badge bg-${transaction.status === "successful"
-                                                                    ? "success"
-                                                                    : transaction.status === "pending"
-                                                                        ? "warning"
-                                                                        : transaction.status === "Reversed"
-                                                                            ? "warning"
-                                                                            : "danger"
-                                                                    }`}
-                                                            >
-                                                                {transaction.status}
-                                                            </span>
-                                                        </td>
-                                                        <td>
+                                                {transactions
+                                                    .filter(transaction => transaction.type !== "incoming") // 👈 Filter out incoming
+                                                    .map((transaction, index) => (
+                                                        <tr key={transaction._id}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{transaction.bankName}</td>
+                                                            <td>{transaction.accountNumber}</td>
+                                                            <td>{transaction.accountName}</td>
+                                                            <td>₦{Math.abs(transaction.amount).toLocaleString()}.00</td>
+                                                            <td>
+                                                                <span
+                                                                    className={`badge bg-${transaction.status === "successful"
+                                                                            ? "success"
+                                                                            : transaction.status === "pending"
+                                                                                ? "warning"
+                                                                                : transaction.status === "Reversed"
+                                                                                    ? "warning"
+                                                                                    : "danger"
+                                                                        }`}
+                                                                >
+                                                                    {transaction.status}
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
+                                                            </td>
+                                                            <td>
+                                                                <button className="btn btn-danger" onClick={() => handleDeleteTransaction(transaction._id)}>
+                                                                    <i className="ri-close-circle-line"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
 
-                                                            {format(new Date(transaction.createdAt), "MMM do, yyyy hh:mm:ss a")}
-                                                        </td>
-                                                        <td>
-                                                            <button className='btn btn-danger' onClick={() => handleDeleteTransaction(transaction._id)}><i class="ri-close-circle-line"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                ))}
                                             </tbody>
                                         </table>
                                     </div>

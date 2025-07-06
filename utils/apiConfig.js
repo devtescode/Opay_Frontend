@@ -36,4 +36,6 @@ export const API_URLS = {
     setUnlimited: `${baseURL}/useropay/setUnlimited`,
     fundaccount: `${baseURL}/useropay/fundaccount`,
     payments: `${baseURL}/useropay/payments`,
+    funding: `${baseURL}/useropay/funding`,
+    delectfunding: `${baseURL}/useropay/delectfunding`,
 };
