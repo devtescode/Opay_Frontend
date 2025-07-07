@@ -168,14 +168,6 @@ function TransactionReceipt({ initialStatus }) {
         </p>
       </div>
       <div className="col-md-6 mx-auto col-sm-12 mt-2" style={{ maxWidth: "580px" }}>
-
-
-        {/* <div
-          className='watermark'
-            style={{
-              backgroundImage: `url(${watermarkImage})`,
-            }}
-          >ds</div> */}
         <div className="receipt-container position-relative"
           style={{
             position: 'relative',
