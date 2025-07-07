@@ -176,7 +176,16 @@ function TransactionReceipt({ initialStatus }) {
               backgroundImage: `url(${watermarkImage})`,
             }}
           >ds</div> */}
-        <div className="receipt-container position-relative">
+        <div className="receipt-container position-relative"
+        style={{
+          // position: relative;
+          // background: #fff;
+          // overflow: hidden;
+          position:"relative",
+          background:"#fff",
+          overflow:"hidden"
+        }}
+        >
           <div className="card border-0">
             <div
               className="watermark"
