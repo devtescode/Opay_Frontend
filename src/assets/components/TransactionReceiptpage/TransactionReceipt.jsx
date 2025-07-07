@@ -207,7 +207,7 @@ function TransactionReceipt({ initialStatus }) {
                   style={{
                     fontSize: '30px',
                     color: '#000',
-                    opacity: 0.07,
+                    opacity: 0.09,
                     
                   }}
                   className='fw-bold'
