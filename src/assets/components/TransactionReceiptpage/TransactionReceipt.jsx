@@ -196,7 +196,7 @@ function TransactionReceipt({ initialStatus }) {
                 marginTop: '25%',
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '40px 60px', // vertical and horizontal gap
+                gap: '40px 50px', 
                 alignContent: 'flex-start',
                 padding: '20px'
               }}
