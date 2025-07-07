@@ -168,15 +168,34 @@ function TransactionReceipt({ initialStatus }) {
         </p>
       </div>
       <div className="col-md-6 mx-auto col-sm-12 mt-2" style={{ maxWidth: "580px" }}>
-       
 
-        <div className="receipt-container position-relative">
-          <div className="card border-0">
-            <div className="watermark"
-             style={{
+
+        {/* <div
+          className='watermark'
+            style={{
               backgroundImage: `url(${watermarkImage})`,
             }}
+          >ds</div> */}
+        <div className="receipt-container position-relative">
+          <div className="card border-0">
+            <div
+              className="watermark"
+              style={{
+                backgroundImage: `url(${watermarkImage})`,
+                backgroundRepeat: 'repeat',
+                backgroundSize: '130px 100px',
+                opacity: 0.04,
+                transform: 'rotate(-20deg)',
+                pointerEvents: 'none',
+                zIndex: 0,
+                position: 'absolute',
+                top: '-40px',
+                left: 0,
+                width: '150%',
+                height: '150%'
+              }}
             ></div>
+
             <div className="card-body position-relative " style={{ zIndex: 1 }}>
 
               <div className="text-center mb-1 d-flex justify-content-between" style={{ alignItems: "center", marginTop: "-10px" }}>
@@ -287,7 +306,7 @@ function TransactionReceipt({ initialStatus }) {
                 <p style={{ textAlign: "justify" }}>Enjoy a better life with OPay. Get free transfers, withdrawals, bill payments, instant loans, and good annual interest on your savings. OPay is licensed by the Central Bank of Nigeria and insured by the NDIC.</p>
               </div>
               {/* Wavy Bottom Edge */}
-             
+
 
             </div>
           </div>

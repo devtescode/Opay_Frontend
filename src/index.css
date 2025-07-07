@@ -24,12 +24,11 @@
   pointer-events: none;
   z-index: 0;
 } */
-.watermark {
+/* .watermark {
     position: absolute;
     top: -40px;
     left: 0;
     width: 150%;
-    /* Ensures rotation doesn't crop */
     height: 150%;
     background-image: url("../src/assets/Image/image.jpg");
     background-repeat: repeat;
@@ -38,4 +37,4 @@
     transform: rotate(-20deg);
     pointer-events: none;
     z-index: 0;
-}
+} */
