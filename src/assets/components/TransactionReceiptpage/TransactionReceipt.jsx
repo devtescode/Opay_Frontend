@@ -155,7 +155,7 @@ function TransactionReceipt({ initialStatus }) {
     }
   }, []);
   if (transactionId === null) {
-    return <p>Loading...</p>;
+    return ;
   }
 
   return (
