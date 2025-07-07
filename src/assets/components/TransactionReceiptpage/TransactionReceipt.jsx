@@ -166,7 +166,7 @@ function TransactionReceipt({ initialStatus }) {
         </p>
       </div>
       <div className="col-md-6 mx-auto col-sm-12 mt-2" style={{ maxWidth: "580px" }}>
-
+       
 
         <div className="receipt-container position-relative">
           <div className="card border-0">
@@ -211,9 +211,7 @@ function TransactionReceipt({ initialStatus }) {
                   }
                 </small>
               </div>
-
-
-
+              <hr />
               <div className="mb-3">
                 <div className="row mb-2">
                   <div className="col-5">
@@ -282,7 +280,8 @@ function TransactionReceipt({ initialStatus }) {
               <div className="text-center text-muted small " style={{ fontSize: "9px", marginTop: "50px" }}>
                 <p style={{ textAlign: "justify" }}>Enjoy a better life with OPay. Get free transfers, withdrawals, bill payments, instant loans, and good annual interest on your savings. OPay is licensed by the Central Bank of Nigeria and insured by the NDIC.</p>
               </div>
-
+              {/* Wavy Bottom Edge */}
+             
 
             </div>
           </div>
