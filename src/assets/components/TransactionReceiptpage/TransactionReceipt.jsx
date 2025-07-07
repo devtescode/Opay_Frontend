@@ -177,33 +177,38 @@ function TransactionReceipt({ initialStatus }) {
             }}
           >ds</div> */}
         <div className="receipt-container position-relative"
-        style={{
-          // position: relative;
-          // background: #fff;
-          // overflow: hidden;
-          position:"relative",
-          background:"#fff",
-          overflow:"hidden"
-        }}
+          style={{
+            position: 'relative',
+            width: '100%',
+            margin: '0 auto',
+            backgroundColor: 'white',
+            overflow: 'hidden'
+          }}
         >
           <div className="card border-0">
-            {/* <div
+            <div
               className="watermark"
               style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
                 backgroundImage: `url(${watermarkImage})`,
-                backgroundRepeat: 'repeat',
-                backgroundSize: '130px 100px',
-                opacity: 0.04,
-                transform: 'rotate(-20deg)',
+                backgroundSize: '170px 60px', // Size of each watermark element
+                opacity: 0.05,
+                transform: 'rotate(-15deg)',
+                transformOrigin: '0 0', // Ensures consistent rotation
                 pointerEvents: 'none',
                 zIndex: 0,
-                position: 'absolute',
-                top: '-40px',
-                left: 0,
-                width: '150%',
-                height: '150%'
+                width: '150%', // Extra width to account for rotation
+                height: '150%', // Extra height to account for rotation
+                marginLeft: '-25%', // Center the overflow
+                marginTop: '25%', // Center the overflow
               }}
-            ></div> */}
+            ></div>
+
+
 
             <div className="card-body position-relative " style={{ zIndex: 1 }}>
 
