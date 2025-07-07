@@ -160,178 +160,206 @@ function TransactionReceipt({ initialStatus }) {
 
   return (
     <>
-      <div className=" py-3 d-flex align-items-center shadow-lg col-md-5 col-sm-12 mx-auto p-2" >
-        {/* <ArrowLeft className="me-2" size={24} /> */}
+    <div className='shadow'>
+      <div className=" py-3 d-flex align-items-center shadow col-md-5 col-sm-12 mx-auto p-2" >
+      
         <p className=" mb-0 d-flex text-muted d-flex align-items-center" style={{ alignItems: "center" }}>
-          <ChevronLeft className='mx-2 ' size={15} onClick={BackBtn} />
+          <ChevronLeft className='mx-2' size={15} onClick={BackBtn} />
           Share Receipt
         </p>
       </div>
-      <div className="col-md-6 mx-auto col-sm-12 mt-2" style={{ maxWidth: "580px" }}>
-        <div className="receipt-container position-relative"
-          style={{
-            position: 'relative',
-            width: '100%',
-            margin: '0 auto',
-            backgroundColor: 'white',
-            overflow: 'hidden'
-          }}
-        >
-          <div className="card border-0">
-            <div
-              className="watermark-container"
+    </div>
+      <div className=''>
+        <div className='' style={{ backgroundColor: "#F8F8FA", height:"100vh !important" }}>
+
+          <div className="col-md-6 mx-auto col-sm-12 border border-light" style={{ maxWidth: "580px" }}>
+              <div
+                style={{
+                  mask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 27.75px 100%",
+                  WebkitMask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 36.75px 100%",
+                  height: "30px"
+                }}
+                className='bg-white mt-4'
+              >
+              </div>
+            <div className=''>
+
+            </div>
+            <div className="receipt-container"
               style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                transform: 'rotate(-15deg)',
-                transformOrigin: '0 0',
-                pointerEvents: 'none',
-                zIndex: 0,
-                width: '150%',
-                height: '150%',
-                marginLeft: '-25%',
-                marginTop: '25%',
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '40px 50px', 
-                alignContent: 'flex-start',
-                padding: '20px'
+                position: 'relative',
+                width: '100%',
+                margin: '0 auto',
+                backgroundColor: 'white',
+                overflow: 'hidden'
               }}
             >
-              {Array.from({ length: 200 }).map((_, i) => (
-                <span
-                  key={i}
+              <div className="card border-0">
+                <div
+                  className="watermark-container"
                   style={{
-                    fontSize: '30px',
-                    color: '#000',
-                    opacity: 0.09,
-                    
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    transform: 'rotate(-15deg)',
+                    transformOrigin: '0 0',
+                    pointerEvents: 'none',
+                    zIndex: 0,
+                    width: '150%',
+                    height: '150%',
+                    marginLeft: '-25%',
+                    marginTop: '25%',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '40px 50px',
+                    alignContent: 'flex-start',
+                    padding: '20px'
                   }}
-                  className='fw-bold'
                 >
-                  OPay
-                </span>
-              ))}
-            </div>
+                  {Array.from({ length: 200 }).map((_, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        fontSize: '30px',
+                        color: '#000',
+                        opacity: 0.09,
 
-
-
-
-            <div className="card-body position-relative " style={{ zIndex: 1 }}>
-
-              <div className="text-center mb-1 d-flex justify-content-between" style={{ alignItems: "center", marginTop: "-10px" }}>
-                <img
-                  src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
-                  alt="Image description"
-                  height="80"
-
-                />
-
-                <h5 className='text-muted'>Transaction Receipt</h5>
-              </div>
-
-              <div className="text-center mb-0">
-                <h2
-                  className="mb-1"
-                  style={{ color: "#01B575" }}
-                >
-                  {amount !== null
-                    ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
-                    : "Loading..."}
-                </h2>
-
-                <h5
-                  onClick={handleDoubleTap}
-                  className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "dark"} mb-0`}
-                  style={{ fontWeight: "normal", cursor: "pointer" }}
-                >
-                  {status
-                    ? status.charAt(0).toUpperCase() + status.slice(1)
-                    : "Loading..."}
-                </h5>
-
-                <small className="text-muted">
-                  {passedTransaction
-                    ? formatDate(passedTransaction.createdAt)
-                    : formatDate()
-                  }
-                </small>
-              </div>
-              <hr />
-              <div className="mb-3">
-                <div className="row mb-2">
-                  <div className="col-5">
-                    <span className="text-muted">Recipient Details</span>
-                  </div>
-                  <div className="col-7 text-end">
-
-                    {accountDetails ? (
-                      <div>
-                        <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>{accountDetails.accountName}</p>
-                        <p className="mb-0 text-muted">
-                          <span>{accountDetails.bankName}</span> | <span
-                            style={{ userSelect: "text" }}
-                            onClick={() => {
-                              setTimeout(() => {
-                                window.getSelection()?.removeAllRanges();
-                              }, 5000);
-                            }}
-                          >{accountDetails.accountNumber}</span>
-                        </p>
-                      </div>
-                    ) : (
-                      <p>No account details found. Please go back and select an account.</p>
-                    )}
-                  </div>
+                      }}
+                      className='fw-bold'
+                    >
+                      OPay
+                    </span>
+                  ))}
                 </div>
 
-                <div className="row mb-2">
-                  <div className="col-5">
-                    <span className="text-muted">Sender Details</span>
+
+
+
+                <div className="card-body position-relative " style={{ zIndex: 1 }}>
+
+                  <div className="text-center mb-1 d-flex justify-content-between" style={{ alignItems: "center", marginTop: "-10px" }}>
+                    <img
+                      src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
+                      alt="Image description"
+                      height="80"
+
+                    />
+
+                    <h5 className='text-muted'>Transaction Receipt</h5>
                   </div>
-                  <div className="col-7 text-end">
 
+                  <div className="text-center mb-0">
+                    <h2
+                      className="mb-1"
+                      style={{ color: "#01B575" }}
+                    >
+                      {amount !== null
+                        ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+                        : "Loading..."}
+                    </h2>
 
-                    <div>
+                    <h5
+                      onClick={handleDoubleTap}
+                      className={`text-${status === "pending" ? "warning" : status === "failed" ? "danger" : "dark"} mb-0`}
+                      style={{ fontWeight: "normal", cursor: "pointer" }}
+                    >
+                      {status
+                        ? status.charAt(0).toUpperCase() + status.slice(1)
+                        : "Loading..."}
+                    </h5>
 
-                      <p className="mb-1 text-muted" style={{ fontSize: "12px", textTransform: "uppercase" }}>{userfullName ? userfullName : "No user data found"}</p>
-                      <p className="mb-0 text-muted">
-                        Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)}`}
-                      </p>
+                    <small className="text-muted">
+                      {passedTransaction
+                        ? formatDate(passedTransaction.createdAt)
+                        : formatDate()
+                      }
+                    </small>
+                  </div>
+                  <hr />
+                  <div className="mb-3">
+                    <div className="row mb-2">
+                      <div className="col-5">
+                        <span className="text-muted">Recipient Details</span>
+                      </div>
+                      <div className="col-7 text-end">
 
+                        {accountDetails ? (
+                          <div>
+                            <p className="mb-1 text-muted" style={{ fontSize: "12px" }}>{accountDetails.accountName}</p>
+                            <p className="mb-0 text-muted">
+                              <span>{accountDetails.bankName}</span> | <span
+                                style={{ userSelect: "text" }}
+                                onClick={() => {
+                                  setTimeout(() => {
+                                    window.getSelection()?.removeAllRanges();
+                                  }, 5000);
+                                }}
+                              >{accountDetails.accountNumber}</span>
+                            </p>
+                          </div>
+                        ) : (
+                          <p>No account details found. Please go back and select an account.</p>
+                        )}
+                      </div>
                     </div>
 
-                  </div>
-                </div>
+                    <div className="row mb-2">
+                      <div className="col-5">
+                        <span className="text-muted">Sender Details</span>
+                      </div>
+                      <div className="col-7 text-end">
 
-                <div className="row mb-2">
-                  <div className="col-5">
-                    <span className="text-muted">Transaction No.</span>
-                  </div>
-                  <div className="col-7 text-end">
-                    <span className="text-break text-muted" >{transactionId}</span>
-                  </div>
-                </div>
 
-                <div className="row">
-                  <div className="col-5">
-                    <span className="text-muted">Session ID</span>
+                        <div>
+
+                          <p className="mb-1 text-muted" style={{ fontSize: "12px", textTransform: "uppercase" }}>{userfullName ? userfullName : "No user data found"}</p>
+                          <p className="mb-0 text-muted">
+                            Opay |  {phoneNumber && ` ${phoneNumber.slice(0, 3)}****${phoneNumber.slice(7)}`}
+                          </p>
+
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div className="row mb-2">
+                      <div className="col-5">
+                        <span className="text-muted">Transaction No.</span>
+                      </div>
+                      <div className="col-7 text-end">
+                        <span className="text-break text-muted" >{transactionId}</span>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-5">
+                        <span className="text-muted">Session ID</span>
+                      </div>
+                      <div className="col-7 text-end">
+                        <span className="text-break text-muted">100004250120135044125751241279</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="col-7 text-end">
-                    <span className="text-break text-muted">100004250120135044125751241279</span>
+
+                  <div className="text-center text-muted small " style={{ fontSize: "9px", marginTop: "50px" }}>
+                    <p style={{ textAlign: "justify" }}>Enjoy a better life with OPay. Get free transfers, withdrawals, bill payments, instant loans, and good annual interest on your savings. OPay is licensed by the Central Bank of Nigeria and insured by the NDIC.</p>
                   </div>
+                  {/* Wavy Bottom Edge */}
+
+
                 </div>
               </div>
-
-              <div className="text-center text-muted small " style={{ fontSize: "9px", marginTop: "50px" }}>
-                <p style={{ textAlign: "justify" }}>Enjoy a better life with OPay. Get free transfers, withdrawals, bill payments, instant loans, and good annual interest on your savings. OPay is licensed by the Central Bank of Nigeria and insured by the NDIC.</p>
-              </div>
-              {/* Wavy Bottom Edge */}
-
-
+            </div>
+            <div
+              style={{
+                mask: "radial-gradient(15px at bottom, #0000 calc(100% - 1px), #000) 50% / 27.75px 100%",
+                WebkitMask: "radial-gradient(15px at bottom, #0000 calc(100% - 1px), #000) 50% / 36.75px 100%",
+                height: "30px"
+              }}
+              className='bg-white'
+            >
             </div>
           </div>
         </div>
