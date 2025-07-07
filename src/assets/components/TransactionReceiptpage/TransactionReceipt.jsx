@@ -186,27 +186,44 @@ function TransactionReceipt({ initialStatus }) {
           }}
         >
           <div className="card border-0">
-            {/* <div
-              className="watermark"
+            <div
+              className="watermark-container"
               style={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundImage: `url(${watermarkImage})`,
-                backgroundSize: '60px 60px', // Size of each watermark element
-                opacity: 0.05,
                 transform: 'rotate(-15deg)',
-                transformOrigin: '0 0', // Ensures consistent rotation
+                transformOrigin: '0 0',
                 pointerEvents: 'none',
                 zIndex: 0,
-                width: '150%', // Extra width to account for rotation
-                height: '150%', // Extra height to account for rotation
-                marginLeft: '-25%', // Center the overflow
-                marginTop: '25%', // Center the overflow
+                width: '150%',
+                height: '150%',
+                marginLeft: '-25%',
+                marginTop: '25%',
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '40px 60px', // vertical and horizontal gap
+                alignContent: 'flex-start',
+                padding: '20px'
               }}
-            ></div> */}
+            >
+              {Array.from({ length: 200 }).map((_, i) => (
+                <span
+                  key={i}
+                  style={{
+                    fontSize: '30px',
+                    color: '#000',
+                    opacity: 0.02,
+                    fontWeight: 'bold'
+                  }}
+                >
+                  OPay
+                </span>
+              ))}
+            </div>
+
 
 
 
