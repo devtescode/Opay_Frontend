@@ -186,7 +186,7 @@ function TransactionReceipt({ initialStatus }) {
           }}
         >
           <div className="card border-0">
-            <div
+            {/* <div
               className="watermark"
               style={{
                 position: 'absolute',
@@ -195,7 +195,7 @@ function TransactionReceipt({ initialStatus }) {
                 right: 0,
                 bottom: 0,
                 backgroundImage: `url(${watermarkImage})`,
-                backgroundSize: '170px 60px', // Size of each watermark element
+                backgroundSize: '60px 60px', // Size of each watermark element
                 opacity: 0.05,
                 transform: 'rotate(-15deg)',
                 transformOrigin: '0 0', // Ensures consistent rotation
@@ -206,7 +206,7 @@ function TransactionReceipt({ initialStatus }) {
                 marginLeft: '-25%', // Center the overflow
                 marginTop: '25%', // Center the overflow
               }}
-            ></div>
+            ></div> */}
 
 
 
