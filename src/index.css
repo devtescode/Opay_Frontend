@@ -34,7 +34,6 @@
     background-image: url("../src/assets/Image/image.jpg");
     background-repeat: repeat;
     background-size: 130px 100px;
-    /* 100x60 image + 30px horizontal, 30px vertical gap */
     opacity: 0.04;
     transform: rotate(-20deg);
     pointer-events: none;

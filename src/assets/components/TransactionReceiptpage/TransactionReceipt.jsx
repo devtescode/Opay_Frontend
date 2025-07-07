@@ -5,6 +5,7 @@ import { API_URLS } from '../../../../utils/apiConfig';
 import { ChevronLeft } from 'react-bootstrap-icons';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { ArrowLeft } from 'react-bootstrap-icons';
+import watermarkImage from "../../Image/image.jpg"
 
 function TransactionReceipt({ initialStatus }) {
   const location = useLocation();
@@ -15,6 +16,7 @@ function TransactionReceipt({ initialStatus }) {
   const [userfullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(''); // For storing phone number
   const { state: transaction } = useLocation();
+
   // console.log("Received transaction:", transaction); // ✅ Must not be null
   const navigate = useNavigate()
 
@@ -170,7 +172,11 @@ function TransactionReceipt({ initialStatus }) {
 
         <div className="receipt-container position-relative">
           <div className="card border-0">
-            <div className="watermark"></div>
+            <div className="watermark"
+             style={{
+              backgroundImage: `url(${watermarkImage})`,
+            }}
+            ></div>
             <div className="card-body position-relative " style={{ zIndex: 1 }}>
 
               <div className="text-center mb-1 d-flex justify-content-between" style={{ alignItems: "center", marginTop: "-10px" }}>
