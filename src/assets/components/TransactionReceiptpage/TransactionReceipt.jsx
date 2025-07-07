@@ -187,7 +187,7 @@ function TransactionReceipt({ initialStatus }) {
         }}
         >
           <div className="card border-0">
-            <div
+            {/* <div
               className="watermark"
               style={{
                 backgroundImage: `url(${watermarkImage})`,
@@ -203,7 +203,7 @@ function TransactionReceipt({ initialStatus }) {
                 width: '150%',
                 height: '150%'
               }}
-            ></div>
+            ></div> */}
 
             <div className="card-body position-relative " style={{ zIndex: 1 }}>
 
