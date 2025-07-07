@@ -160,28 +160,32 @@ function TransactionReceipt({ initialStatus }) {
 
   return (
     <>
-    <div className='shadow'>
-      <div className=" py-3 d-flex align-items-center shadow col-md-5 col-sm-12 mx-auto p-2" >
-      
-        <p className=" mb-0 d-flex text-muted d-flex align-items-center" style={{ alignItems: "center" }}>
-          <ChevronLeft className='mx-2' size={15} onClick={BackBtn} />
-          Share Receipt
-        </p>
-      </div>
-    </div>
-      <div className=''>
-        <div className='' style={{ backgroundColor: "#F8F8FA", height:"100vh !important" }}>
+      <div className='shadow'>
+        <div className=" py-3 d-flex align-items-center shadow col-md-5 col-sm-12 mx-auto p-2" >
 
-          <div className="col-md-6 mx-auto col-sm-12 border border-light" style={{ maxWidth: "580px" }}>
-              <div
-                style={{
-                  mask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 27.75px 100%",
-                  WebkitMask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 36.75px 100%",
-                  height: "30px"
-                }}
-                className='bg-white mt-4'
-              >
-              </div>
+          <p className=" mb-0 d-flex text-muted d-flex align-items-center" style={{ alignItems: "center" }}>
+            <ChevronLeft className='mx-2' size={15} onClick={BackBtn} />
+            Share Receipt
+          </p>
+        </div>
+      </div>
+      <div className=''>
+        <div className='' style={{ backgroundColor: "#F8F8FA", height: "100vh" }}>
+
+          <div
+            className="col-md-5 mx-auto col-12 border border-light"
+            style={{ maxWidth: "95%" }}
+          >
+
+            <div
+              style={{
+                mask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 27.75px 100%",
+                WebkitMask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 36.75px 100%",
+                height: "30px"
+              }}
+              className='bg-white mt-4'
+            >
+            </div>
             <div className=''>
 
             </div>
@@ -203,14 +207,14 @@ function TransactionReceipt({ initialStatus }) {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    transform: 'rotate(-15deg)',
+                    transform: 'rotate(-18deg)',
                     transformOrigin: '0 0',
                     pointerEvents: 'none',
                     zIndex: 0,
                     width: '150%',
                     height: '150%',
                     marginLeft: '-25%',
-                    marginTop: '25%',
+                    marginTop: '30%',
                     display: 'flex',
                     flexWrap: 'wrap',
                     gap: '40px 50px',
