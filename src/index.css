@@ -40,21 +40,3 @@
     pointer-events: none;
     z-index: 0;
 }
-
-.box {
-  
-    
-        mask: 
-          radial-gradient(10px at 75% 100%,#0000 98%,#000) 50% calc(100% - 10px)/40px 100% repeat-x,
-          radial-gradient(10px at 25% 50%,#000 99%,#0000 101%) bottom/40px 20px repeat-x;
-    background-color: white;
-    height: 18px;
-}
-
-.boxbottom {
-    border: none !important;
-    border: "0" !important;
-    mask: radial-gradient(10px at bottom, #0000 calc(100% - 5px), #000) 50%/18.5px 100%;
-    background-color: white;
-    height: 30px;
-}
