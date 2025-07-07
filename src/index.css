@@ -5,3 +5,37 @@
 
 }
 
+.receipt-container {
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* .watermark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../src/assets/Image/image.jpg");
+  background-repeat: repeat;
+  background-size: 150px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+} */
+.watermark {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    width: 150%; /* Ensures rotation doesn't crop */
+    height: 150%;
+    background-image: url("../src/assets/Image/image.jpg");
+    background-repeat: repeat;
+    background-size: 130px 100px; /* 100x60 image + 30px horizontal, 30px vertical gap */
+    opacity: 0.04;
+    transform: rotate(-20deg);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
