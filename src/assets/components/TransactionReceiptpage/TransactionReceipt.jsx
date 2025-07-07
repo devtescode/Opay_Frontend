@@ -168,7 +168,7 @@ function TransactionReceipt({ initialStatus }) {
       <div className="col-md-6 mx-auto col-sm-12 mt-2" style={{ maxWidth: "580px" }}>
 
 
-        <div className="receipt-container position-relative border border-danger">
+        <div className="receipt-container position-relative">
           <div className="card border-0">
             <div className="watermark"></div>
             <div className="card-body position-relative " style={{ zIndex: 1 }}>
