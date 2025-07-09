@@ -14,6 +14,7 @@ export default defineConfig({
         // start_url: '/opaydb',
         description: 'My OPay Web App built with Vite',
         theme_color: '#ffffff',
+        display: "standalone",
         background_color: '#00B875',
         icons: [
           {

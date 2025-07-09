@@ -1,7 +1,7 @@
 {
     "name": "Opay",
     "short_name": "Opay",
-    "display": "fullscreen",
+    "display": "standalone",
     "background_color": "#00B875",
     "theme_color": "#ffffff",
     "icons": [
