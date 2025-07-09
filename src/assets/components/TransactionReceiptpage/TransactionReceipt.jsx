@@ -170,7 +170,7 @@ function TransactionReceipt({ initialStatus }) {
         </div>
       </div>
       <div className=''>
-        <div className='' style={{ backgroundColor: "#F8F8FA", height: "100vh" }}>
+        <div className='' style={{ backgroundColor: "#F8F8FA", height: "90vh" }}>
 
           <div
             className="col-md-5 mx-auto col-12 border border-light"
