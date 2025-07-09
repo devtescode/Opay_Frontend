@@ -160,22 +160,7 @@ function TransactionReceipt({ initialStatus }) {
   }
 
   const SharePDF = async() => {
-    // const element = document.querySelector(".receipt-container");
-
-    // if (!element) {
-    //   alert("Receipt not found!");
-    //   return;
-    // }
-
-    // const options = {
-    //   margin: 0.3,
-    //   filename: `Transaction-Receipt-${new Date().getTime()}.pdf`,
-    //   image: { type: "jpeg", quality: 0.98 },
-    //   html2canvas: { scale: 2 },
-    //   jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-    // };
-
-    // html2pdf().set(options).from(element).save();
+   
     const element = document.querySelector(".receipt-container");
 
     if (!element) {
