@@ -303,13 +303,13 @@ function TransactionReceipt({ initialStatus }) {
 
                 <div className="card-body position-relative" style={{ zIndex: 1 }}>
 
-                  <div className="text-center mb-1 d-flex justify-content-between" style={{ alignItems: "center", marginTop: "-10px" }}>
+                  <div className="text-center mb-3 d-flex justify-content-between" style={{ alignItems: "center", marginTop: "-10px" }}>
                     <img
                       // src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
                       src={opaylogo}
                       alt="Image description"
                       height="50"
-
+                      
                     />
 
                     <h5 className='text-muted'>Transaction Receipt</h5>
