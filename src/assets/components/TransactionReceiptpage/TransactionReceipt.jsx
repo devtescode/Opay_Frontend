@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { API_URLS } from '../../../../utils/apiConfig';
 import { ChevronLeft } from 'react-bootstrap-icons';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { ArrowLeft } from 'react-bootstrap-icons';
+import html2pdf from "html2pdf.js";
 import watermarkImage from "../../Image/image.jpg"
+import html2canvas from 'html2canvas';
+import opaylogo from "../../../../public/OPAY-LOGO.png"
 
 function TransactionReceipt({ initialStatus }) {
   const location = useLocation();
@@ -155,7 +156,55 @@ function TransactionReceipt({ initialStatus }) {
     }
   }, []);
   if (transactionId === null) {
-    return ;
+    return;
+  }
+
+  const SharePDF = async() => {
+    // const element = document.querySelector(".receipt-container");
+
+    // if (!element) {
+    //   alert("Receipt not found!");
+    //   return;
+    // }
+
+    // const options = {
+    //   margin: 0.3,
+    //   filename: `Transaction-Receipt-${new Date().getTime()}.pdf`,
+    //   image: { type: "jpeg", quality: 0.98 },
+    //   html2canvas: { scale: 2 },
+    //   jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    // };
+
+    // html2pdf().set(options).from(element).save();
+    const element = document.querySelector(".receipt-container");
+
+    if (!element) {
+      alert("Receipt not found!");
+      return;
+    }
+
+    // ✅ Wait for image to fully load before exporting
+    const logoImg = element.querySelector("img");
+    if (logoImg && !logoImg.complete) {
+      await new Promise((resolve) => {
+        logoImg.onload = resolve;
+        logoImg.onerror = resolve;
+      });
+    }
+
+    const options = {
+      margin: 0.3,
+      filename: `Transaction-Receipt-${new Date().getTime()}.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      // html2canvas
+      html2canvas: {
+        scale: 2,
+        useCORS: true, // ✅ Ensures cross-origin images load
+      },
+      jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+    };
+
+    html2pdf().set(options).from(element).save();
   }
 
   return (
@@ -169,7 +218,7 @@ function TransactionReceipt({ initialStatus }) {
           </p>
         </div>
       </div>
-      <div className=''>
+      <div className='receipt-container'>
         <div className='' style={{ backgroundColor: "#F8F8FA", height: "90vh" }}>
 
           <div
@@ -189,7 +238,7 @@ function TransactionReceipt({ initialStatus }) {
             <div className=''>
 
             </div>
-            <div className="receipt-container"
+            <div
               style={{
                 position: 'relative',
                 width: '100%',
@@ -241,13 +290,14 @@ function TransactionReceipt({ initialStatus }) {
 
 
 
-                <div className="card-body position-relative " style={{ zIndex: 1 }}>
+                <div className="card-body position-relative" style={{ zIndex: 1 }}>
 
                   <div className="text-center mb-1 d-flex justify-content-between" style={{ alignItems: "center", marginTop: "-10px" }}>
                     <img
-                      src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
+                      // src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
+                      src={opaylogo}
                       alt="Image description"
-                      height="80"
+                      height="50"
 
                     />
 
@@ -394,7 +444,7 @@ function TransactionReceipt({ initialStatus }) {
 
             <div className="text-center mx-3" style={{ alignItems: "center", color: "#01B575" }}>
 
-              <div className='d-flex' style={{ alignItems: "center" }}>
+              <div className='d-flex' onClick={SharePDF} style={{ alignItems: "center" }}>
                 <div className=''>
                   <i class="ri-file-pdf-2-line fs-5"></i>
                 </div>
