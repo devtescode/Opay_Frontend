@@ -247,7 +247,6 @@ function TransactionReceipt({ initialStatus }) {
             >
             </div>
             <div className=''>
-
             </div>
             <div
               style={{
