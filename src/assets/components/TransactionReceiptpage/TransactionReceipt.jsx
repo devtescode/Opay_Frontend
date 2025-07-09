@@ -239,8 +239,8 @@ function TransactionReceipt({ initialStatus }) {
 
             <div
               style={{
-                mask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 27.75px 100%",
-                WebkitMask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 36.75px 100%",
+                mask: "radial-gradient(10px at top, #0000 calc(100% - 1px), #000) 50% / 33px 100%",
+                WebkitMask: "radial-gradient(15px at top, #0000 calc(100% - 1px), #000) 50% / 41px 100%",
                 height: "30px"
               }}
               className='bg-white mt-4'
@@ -418,8 +418,10 @@ function TransactionReceipt({ initialStatus }) {
             </div>
             <div
               style={{
-                mask: "radial-gradient(15px at bottom, #0000 calc(100% - 1px), #000) 50% / 27.75px 100%",
-                WebkitMask: "radial-gradient(15px at bottom, #0000 calc(100% - 1px), #000) 50% / 36.75px 100%",
+                // mask: "radial-gradient(15px at bottom, #0000 calc(100% - 1px), #000) 50% / 27.75px 100%",
+                // WebkitMask: "radial-gradient(15px at bottom, #0000 calc(100% - 1px), #000) 50% / 36.75px 100%",
+                mask: "radial-gradient(10px at bottom, #0000 calc(100% - 1px), #000) 50% / 33px 100%",
+                WebkitMask: "radial-gradient(15px at bottom, #0000 calc(100% - 1px), #000) 50% / 41px 100%",
                 height: "30px"
               }}
               className='bg-white'
