@@ -159,8 +159,7 @@ function TransactionReceipt({ initialStatus }) {
     return;
   }
 
-  const SharePDF = async() => {
-   
+  const SharePDF = async () => {
     const element = document.querySelector(".receipt-container");
 
     if (!element) {
@@ -168,7 +167,6 @@ function TransactionReceipt({ initialStatus }) {
       return;
     }
 
-    // ✅ Wait for image to fully load before exporting
     const logoImg = element.querySelector("img");
     if (logoImg && !logoImg.complete) {
       await new Promise((resolve) => {
@@ -181,16 +179,25 @@ function TransactionReceipt({ initialStatus }) {
       margin: 0.3,
       filename: `Transaction-Receipt-${new Date().getTime()}.pdf`,
       image: { type: "jpeg", quality: 0.98 },
-      // html2canvas
       html2canvas: {
         scale: 2,
-        useCORS: true, // ✅ Ensures cross-origin images load
+        useCORS: true,
       },
       jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
     };
 
-    html2pdf().set(options).from(element).save();
-  }
+    await html2pdf().set(options).from(element).save();
+
+    // ✅ Show the saved message for 3 seconds
+    const messageDiv = document.getElementById("pdf-saved-message");
+    if (messageDiv) {
+      messageDiv.style.display = "block";
+
+      setTimeout(() => {
+        messageDiv.style.display = "none";
+      }, 3000);
+    }
+  };
 
   return (
     <>
@@ -203,6 +210,25 @@ function TransactionReceipt({ initialStatus }) {
           </p>
         </div>
       </div>
+      <div
+        id="pdf-saved-message"
+        style={{
+          position: 'fixed',
+          bottom: '40px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          backgroundColor: '#FBFBFB',
+          color: 'black',
+          padding: '10px 20px',
+          borderRadius: '10px',
+          fontSize: '16px',
+          display: 'none',
+          zIndex: 9999,
+        }}
+      >
+        PDF Saved
+      </div>
+
       <div className='receipt-container'>
         <div className='' style={{ backgroundColor: "#F8F8FA", height: "90vh" }}>
 
