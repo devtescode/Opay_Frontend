@@ -72,7 +72,7 @@ const Addmoney = () => {
       setIsLoading(false);
     }
   };
-
+  
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
       <div className="card shadow-lg p-4 rounded" style={{ width: '100%', maxWidth: '400px' }}>

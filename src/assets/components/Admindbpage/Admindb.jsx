@@ -95,10 +95,6 @@ const Admindb = () => {
 
 
 
-    // useEffect(() => {
-    //     console.log("Updated Users State:", users);
-    // }, [users]);
-
 
     const handleShowTransactions = async (userId) => {
         setSelectedUser(userId);
