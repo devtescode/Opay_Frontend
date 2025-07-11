@@ -5,7 +5,6 @@ import NavbarTop from '../NavbarToppage/NavbarTop';
 
 
 const AdminDetails = () => {
-
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
