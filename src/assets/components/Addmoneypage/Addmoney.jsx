@@ -106,6 +106,7 @@ const Addmoney = () => {
             </option>
           ))}
         </select>
+        
         <button
           className="btn btn-primary w-50 mx-auto"
           onClick={handleAddMoney}
