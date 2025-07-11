@@ -1,0 +1,27 @@
+.custom-shape-divider-bottom-1725966403 {
+   
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    position: absolute;
+    /* border: 2px solid; */
+    /* background-color: #23527c; */
+    /* bottom: 0; */
+    top: 0;
+    z-index: -1;   
+}
+
+.custom-shape-divider-bottom-1725966403 svg {
+    position: relative;
+    display: block;
+    width: calc(130% + 10%);
+    height: 113px;
+    transform: rotateX(180deg);
+    height: 500px ;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    
+}
+
+.custom-shape-divider-bottom-1725966403 .shape-fill {
+    fill: #00838d;
+}

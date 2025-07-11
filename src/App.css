@@ -1,0 +1,30 @@
+.appContainer {
+    max-width: 450px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+  }
+  
+  .bgEmerald {
+    background-color: #10B981;
+  }
+
+
+  
+  
+  .textEmerald {
+    color: #10B981;
+  }
+  
+  .btnEmerald {
+    background-color: #10B981;
+    border-color: #10B981;
+    color: white;
+  }
+  
+  .btnEmerald:hover {
+    background-color: #059669;
+    border-color: #059669;
+    color: white;
+  }
+  
+  

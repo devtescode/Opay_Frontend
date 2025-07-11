@@ -1,0 +1,36 @@
+.dotted-hr {
+    border: none;
+    border-top: 1px dotted #ccc;
+}
+
+
+/* This makes the modal stick to the bottom */
+/* .bottom-modal-dialog {
+  position: fixed;
+  bottom: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  transform: none !important;
+}
+
+.bottom-modal-content {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+
+@media (min-width: 576px) {
+  .bottom-modal-dialog {
+    bottom: 0;
+    position: fixed;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .bottom-modal-dialog {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+} */
