@@ -194,7 +194,7 @@ export default function Bank() {
                 {Data.banks.map((bank) => (
                   <option key={bank.code} value={bank.code}>
                     {bank.name}
-                  </option>
+                  </option>  
                 ))}
               </select>
 

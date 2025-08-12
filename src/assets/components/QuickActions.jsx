@@ -9,6 +9,9 @@ const QuickActions = () => {
   const ToBankBtn =()=>{
     navigate("/bank")
   }
+  const TOpayBtn =()=>{
+    navigate("/toopay")
+  }
   return (
 
     
@@ -18,6 +21,7 @@ const QuickActions = () => {
           variant="outline-light"
           className="text-dark w-100 h-100 d-flex flex-column align-items-center gap-2 py-3"
           style={{border:"0"}}
+          onClick={TOpayBtn}
         >
           <div
             className="rounded-circle d-flex border border-4 border-white align-items-center justify-content-center"

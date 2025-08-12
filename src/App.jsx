@@ -25,6 +25,7 @@ import AdminDetails from './assets/components/AdminDetails/AdminDetails'
 import Makepayment from './assets/components/Makepaymentpage/Makepayment'
 import Historyadmin from './assets/components/HistoryAdmin/Historyadmin'
 import Funding from './assets/components/Fundingpage/Funding'
+import ToOpay from './assets/components/ToOpaypage/ToOpay'
 // import { useEffect, useState } from 'react'
 // import Opaypage from './assets/components/Opaypage'
 
@@ -74,6 +75,7 @@ function App() {
       <Route path='/makepayment' element={<Makepayment/>}/>
       <Route path='/historyadmin' element={<Historyadmin/>}/>
       <Route path='/funding' element={<Funding/>}/>
+      <Route path='/toopay' element={<ToOpay/>}/>
       <Route path='*' element={<Notfound/>}/>
     </Routes>
     </>

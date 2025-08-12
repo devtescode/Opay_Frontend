@@ -20,6 +20,10 @@ export default function TransactionDetailsBanks({ onTransactionSelect }) {
 
                 const userId = userData.userId; // Access the userId
                 const response = await axios.get(API_URLS.getrecentransaction(userId, showAll));
+                
+                // console.log(transaction.bankName)
+                console.log(response.data);
+
 
                 // Ensure the response data is an array
                 if (Array.isArray(response.data)) {
@@ -57,14 +61,7 @@ export default function TransactionDetailsBanks({ onTransactionSelect }) {
     };
 
     const handleTransactionClick = (transaction) => {
-        // console.log("Clicked transaction:", transaction);
-        // console.log("Transaction ID:", transaction?._id);
-
-        // if (onTransactionSelect) {
-        //     onTransactionSelect(transaction); // Pass transaction to parent (if needed)
-        // }
-
-        // Store transaction in localStorage for backup
+       
         localStorage.setItem("selectedAccount", JSON.stringify(transaction));
 
         // Navigate to Transfer page with transaction data
@@ -77,21 +74,11 @@ export default function TransactionDetailsBanks({ onTransactionSelect }) {
         navigate("/search")
     }
 
+
     return (
         <div className="shadow-sm rounded-3">
             <div className="p-3">
-                {/* <div className="position-relative">
-                    <input
-                        type="text"
-                        className="form-control bg-white rounded-3 ps-5"
-                        placeholder="Account number or name"
-                        style={{ height: "30px",  }}
-                    />
-                    <Search
-                        className="position-absolute text-muted"
-                        style={{ left: "15px", top: "50%", transform: "translateY(-50%)" }}
-                    />
-                </div> */}
+              
             </div>
 
             <div className="px-3 border-bottom">
