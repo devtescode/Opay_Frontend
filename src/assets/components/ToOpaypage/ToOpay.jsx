@@ -186,11 +186,11 @@ const ToOpay = () => {
             <span className="text-danger">{errorMsg}</span>
           </div>
         )}
-        {accountName && (
+        {/* {accountName && (
           <div className="mt-3 text-center">
             <span className="fw-bold text-success">Account: {accountName}</span>
           </div>
-        )}
+        )} */}
         <p className="text-muted small mb-0 mt-2">
           Don't know the recipient's OPay account number?{" "}
           <button className="btn btn-link p-0 fw-medium text-decoration-none small" style={{ color: "#20b2aa" }}>
