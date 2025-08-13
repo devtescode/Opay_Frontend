@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronLeft, QrCode, XCircle } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { API_URLS } from "../../../../utils/apiConfig";
@@ -11,33 +11,13 @@ const ToOpay = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [accountName, setAccountName] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const recentContacts = [
-    {
-      id: 1,
-      name: "OMOLOLA PRAISE OYEGBILE",
-      phone: "811 074 7000",
-      avatar: "/woman-profile.png",
-    },
-    {
-      id: 2,
-      name: "ISAIAH OLUWATOBA IYIOLA",
-      phone: "916 683 4119",
-      avatar: "/man-profile.png",
-    },
-    {
-      id: 3,
-      name: "AYOBAMI FAITH OLATAIWO",
-      phone: "814 759 0731",
-      avatar: "/diverse-person-profiles.png",
-    },
-  ];
+
   const navigate = useNavigate();
   const BackToHome = () => {
     navigate("/userdb");
   };
 
-  // OPay account validation handler
-  // Automatically validate and proceed when input is 10 or 11 digits
+
   const validateAndProceed = async (value) => {
     setIsLoading(true);
     setAccountName("");
@@ -82,6 +62,27 @@ const ToOpay = () => {
       validateAndProceed(value);
     }
   };
+
+
+  const [recentOpay, setRecentOpay] = useState([]);
+  const userId = JSON.parse(localStorage.getItem("user")).userId;
+  useEffect(() => {
+    const fetchRecentOpay = async () => {
+      try {
+        const res = await fetch(`${API_URLS.getRecentTransactionsbyOpay}/${userId}`);
+        const data = await res.json();
+        if (data.status) {
+          setRecentOpay(data.recents);
+        }
+        // console.log(data.recents, "datarecent");
+
+      } catch (err) {
+        console.error("Error fetching OPay transactions", err);
+      }
+    };
+    fetchRecentOpay();
+  }, [userId]);
+
 
   return (
     <div
@@ -196,77 +197,129 @@ const ToOpay = () => {
       </div>
 
       {/* Tabs */}
-      <div className="px-3 mb-3">
-        <div className="border-bottom">
-          <div className="d-flex">
-            <button
-              onClick={() => setActiveTab("recents")}
-              className={`btn btn-link text-decoration-none pb-1 px-1 me-4  border-2 ${activeTab === "recents" ? "border-info" : "border-transparent"
-                }`}
-              style={{
-                color: activeTab === "recents" ? "#20b2aa" : "#6c757d",
-                fontSize: "16px",
-                fontWeight: "500",
-              }}
-            >
-              Recents
-            </button>
-            <button
-              onClick={() => setActiveTab("favourites")}
-              className={`btn btn-link text-decoration-none pb-1 px-1  border-2 ${activeTab === "favourites" ? "border-info" : "border-transparent"
-                }`}
-              style={{
-                color: activeTab === "favourites" ? "#20b2aa" : "#6c757d",
-                fontSize: "16px",
-                fontWeight: "500",
-              }}
-            >
-              Favourites
-            </button>
+      <div className="shadow-sm rounded-3 mx-2 mb-4 py-3">
+
+
+        <div className="px-3 mb-3">
+          <div className="border-bottom">
+            <div className="d-flex">
+              <button
+                onClick={() => setActiveTab("recents")}
+                className={`btn btn-link text-decoration-none pb-1 px-1 me-4  border-2 ${activeTab === "recents" ? "" : "border-transparent"
+                  }`}
+                style={{
+                  color: activeTab === "recents" ? "#20b2aa" : "#6c757d",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                }}
+              >
+                Recents
+              </button>
+              <button
+                onClick={() => setActiveTab("favourites")}
+                className={`btn btn-link text-decoration-none pb-1 px-1  border-2 ${activeTab === "favourites" ? "" : "border-transparent"
+                  }`}
+                style={{
+                  color: activeTab === "favourites" ? "#20b2aa" : "#6c757d",
+                  fontSize: "16px",
+                  fontWeight: "500",
+                }}
+              >
+                Favourites
+              </button>
+            </div>
           </div>
+        </div>
+        <div className="px-3">
+          {activeTab === "recents" && (
+            <>
+              <div className="mb-3">
+                {recentOpay.length > 0 ? (
+                  recentOpay.map((acc, index) => (
+                    <div
+                      key={index}
+                      className="p-2 mb-2 rounded d-flex justify-content-between align-items-center"
+                      onClick={() => {
+                        setAccountNumber(acc.accountNumber);
+                        validateAndProceed(acc.accountNumber);
+                      }}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <div>
+                        <div className="">{acc.accountName}</div>
+                        <small className="text-muted">{acc.accountNumber}</small>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <small className="text-muted">No recent OPay transactions</small>
+                )}
+              </div>
+
+              {/* View All only for recents */}
+              <div className="text-center mt-4">
+                <p style={{ fontSize: "12px" }} className="bg-light px-2 rounded-4 btn btn-link text-muted text-decoration-none">
+                  View All {">"}
+                </p>
+              </div>
+            </>
+          )}
+
+          {activeTab === "favourites" && (
+            <div className="text-center py-5 text-muted">
+              <p>No favourites yet</p>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="mx-2 d-flex align-items-center justify-content-between gap-2 shadow-sm rounded-3 p-2">
+        <div className="d-flex align-items-center gap-3">
+          <div
+            className="rounded-circle d-flex align-items-center justify-content-center"
+            style={{
+              height: "50px",
+              width: "50px",
+              backgroundColor: "#e7fcf5",
+              color: "#04b879"
+            }}
+          >
+            <i className="ri-group-line fs-3"></i>
+          </div>
+          <div className="d-flex flex-column justify-content-center">
+            <span className="fw-medium">See who else is using Opay</span>
+            <p className="text-muted mb-0">441 of your contacts use Opay</p>
+          </div>
+        </div>
+        <div className="fs-5 text-muted d-flex align-items-center">
+          <i className="ri-arrow-right-s-line"></i>
         </div>
       </div>
 
-      {/* Contact List */}
-      <div className="px-3">
-        {/* {activeTab === "recents" && (
-          <div className="d-flex flex-column gap-3">
-            {recentContacts.map((contact) => (
-              <button
-                key={contact.id}
-                className="btn btn-light d-flex align-items-center gap-3 w-100 p-2 rounded-3 text-start border-0"
-                onClick={() => setAccountNumber(contact.phone.replace(/\s/g, ""))}
-                style={{ backgroundColor: "transparent" }}
-                onMouseEnter={(e) => (e.target.style.backgroundColor = "#f8f9fa")}
-                onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
-              >
-                <img
-                  src={contact.avatar || "/placeholder.svg"}
-                  alt={contact.name}
-                  className="rounded-circle"
-                  style={{ width: "48px", height: "48px", objectFit: "cover" }}
-                />
-                <div className="flex-grow-1">
-                  <p className="fw-medium text-dark small mb-0">{contact.name}</p>
-                  <p className="text-muted small mb-0">{contact.phone}</p>
-                </div>
-              </button>
-            ))}
+      <div className="mx-2 shadow-sm mt-3 rounded-3 px-2 p-2">
+      <h5 className="fw-medium">More Events</h5>
+       <div className="mx-2 d-flex align-items-center justify-content-between gap-2 rounded-3 p-2">
+        <div className="d-flex align-items-center gap-3">
+          <div
+            className="rounded-3 d-flex align-items-center justify-content-center"
+            style={{
+              height: "50px",
+              width: "50px",
+              backgroundColor: "#f8f7fc",
+              color: "#04b879"
+            }}
+          >
+            <i class="ri-lifebuoy-fill fs-3"></i>
           </div>
-        )} */}
-        <p>No transaction display</p>
-
-        {activeTab === "favourites" && (
-          <div className="text-center py-5 text-muted">
-            <p>No favourites yet</p>
+          <div className="d-flex flex-column justify-content-center">
+            <span className="fw-medium">Get Your Betting Voucher Now</span>
+            <p className="text-muted mb-0">Get ₦100 off ₦1,000 top-up with voucher</p>
           </div>
-        )}
-
-        {/* <div className="text-center mt-4">
-          <button className="btn btn-link text-muted small text-decoration-none">View All {">"}</button>
-        </div> */}
+        </div>
+     
+      </div>
       </div>
     </div>
+
   )
 }
 

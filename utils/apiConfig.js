@@ -38,4 +38,5 @@ export const API_URLS = {
     payments: `${baseURL}/useropay/payments`,
     funding: `${baseURL}/useropay/funding`,
     delectfunding: `${baseURL}/useropay/delectfunding`,
+    getRecentTransactionsbyOpay: `${baseURL}/useropay/getRecentTransactionsbyOpay`,
 };
