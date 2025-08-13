@@ -192,7 +192,7 @@ const ToOpay = () => {
         ) : (
           <p className="text-muted small mb-0 mt-2 ">
             Don't know the recipient's OPay account number?{" "}
-            <button className="btn btn-link p-0 fw-medium text-decoration-none small" style={{ color: "#20b2aa" }}>
+            <button className="btn btn-link p-0  text-decoration-none small" style={{ color: "#20b2aa" }}>
               Ask them {">"}
             </button>
           </p>
