@@ -175,8 +175,8 @@ const ToOpay = () => {
         </div>
         {isLoading && (
           <div className="text-center mt-2">
-            <span className="text-info">
-              <span className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+            <span className="" style={{color:"#46b78f"}}>
+              <span style={{color:"#46b78f"}} className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
               Searching...
             </span>
           </div>
