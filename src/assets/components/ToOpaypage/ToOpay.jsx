@@ -83,7 +83,7 @@ const ToOpay = () => {
     fetchRecentOpay();
   }, [userId]);
 
-  const HistoryBtn=()=>{
+  const HistoryBtn = () => {
     navigate("/storetransaction")
   }
   return (
@@ -103,7 +103,7 @@ const ToOpay = () => {
       </div>
 
       {/* Promotional Banner */}
-      <div className="px-3 mb-3" style={{marginTop:"65px"}}>
+      <div className="px-3 mb-3" style={{ marginTop: "65px" }}>
         <div
           className="p-3 text-white position-relative overflow-hidden"
           style={{
@@ -153,10 +153,10 @@ const ToOpay = () => {
             value={accountNumber}
             onChange={handleAccountInput}
             maxLength={11}
-            style={{ paddingRight: "48px", fontSize: "16px", backgroundColor:"#f8f8fa" }}
+            style={{ paddingRight: "48px", fontSize: "16px", backgroundColor: "#f8f8fa" }}
             inputMode="numeric"
             disabled={isLoading}
-            
+
           />
           <button
             type="button"
@@ -175,8 +175,8 @@ const ToOpay = () => {
         </div>
         {isLoading && (
           <div className="text-center mt-2">
-            <span className="" style={{color:"#46b78f"}}>
-              <span style={{color:"#46b78f"}} className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+            <span className="" style={{ color: "#46b78f" }}>
+              <span style={{ color: "#46b78f" }} className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
               Searching...
             </span>
           </div>
@@ -191,12 +191,22 @@ const ToOpay = () => {
             <span className="fw-bold text-success">Account: {accountName}</span>
           </div>
         )} */}
-        <p className="text-muted small mb-0 mt-2">
+        {/* <p className="text-muted small mb-0 mt-2">
           Don't know the recipient's OPay account number?{" "}
           <button className="btn btn-link p-0 fw-medium text-decoration-none small" style={{ color: "#20b2aa" }}>
             Ask them {">"}
           </button>
-        </p>
+        </p> */}
+        {accountNumber ? (
+          <p></p>
+        ) : (
+          <p className="text-muted small mb-0 mt-2">
+            Don't know the recipient's OPay account number?{" "}
+            <button className="btn btn-link p-0 fw-medium text-decoration-none small" style={{ color: "#20b2aa" }}>
+              Ask them {">"}
+            </button>
+          </p>
+        )}
       </div>
 
       {/* Tabs */}
@@ -299,27 +309,27 @@ const ToOpay = () => {
       </div>
 
       <div className="mx-2 shadow-sm mt-3 rounded-3 px-2 p-2">
-      <h5 className="fw-medium">More Events</h5>
-       <div className="mx-2 d-flex align-items-center justify-content-between gap-2 rounded-3 p-2">
-        <div className="d-flex align-items-center gap-3">
-          <div
-            className="rounded-3 d-flex align-items-center justify-content-center"
-            style={{
-              height: "50px",
-              width: "50px",
-              backgroundColor: "#f8f7fc",
-              color: "#04b879"
-            }}
-          >
-            <i class="ri-lifebuoy-fill fs-3"></i>
+        <h5 className="fw-medium">More Events</h5>
+        <div className="mx-2 d-flex align-items-center justify-content-between gap-2 rounded-3 p-2">
+          <div className="d-flex align-items-center gap-3">
+            <div
+              className="rounded-3 d-flex align-items-center justify-content-center"
+              style={{
+                height: "50px",
+                width: "50px",
+                backgroundColor: "#f8f7fc",
+                color: "#04b879"
+              }}
+            >
+              <i class="ri-lifebuoy-fill fs-3"></i>
+            </div>
+            <div className="d-flex flex-column justify-content-center">
+              <span className="fw-medium">Get Your Betting Voucher Now</span>
+              <p className="text-muted mb-0">Get ₦100 off ₦1,000 top-up with voucher</p>
+            </div>
           </div>
-          <div className="d-flex flex-column justify-content-center">
-            <span className="fw-medium">Get Your Betting Voucher Now</span>
-            <p className="text-muted mb-0">Get ₦100 off ₦1,000 top-up with voucher</p>
-          </div>
+
         </div>
-     
-      </div>
       </div>
     </div>
 
