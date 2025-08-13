@@ -170,6 +170,7 @@ export default function Bank() {
                   padding: "8px 8px",           // Adds space above text
                   width: "100%",              // Ensures full width
                 }}
+                inputMode="numeric"
               />
 
             </div>

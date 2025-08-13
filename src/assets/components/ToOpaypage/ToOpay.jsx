@@ -83,25 +83,27 @@ const ToOpay = () => {
     fetchRecentOpay();
   }, [userId]);
 
-
+  const HistoryBtn=()=>{
+    navigate("/storetransaction")
+  }
   return (
     <div
       className="container-fluid p-0"
       style={{ maxWidth: "448px", margin: "0 auto", backgroundColor: "white", minHeight: "100vh" }}
     >
       {/* Header */}
-      <div className="d-flex align-items-center justify-content-between p-3 bg-white">
+      <div className="d-flex align-items-center justify-content-between p-3 bg-white fixed-top">
         <div className="d-flex align-items-center">
           <ChevronLeft className="me-1" style={{ width: "24px", height: "24px", color: "#6c757d" }} onClick={BackToHome} />
-          <p className=" mb-0 text-dark">Transfer to OPay Account</p>
+          <p className=" mb-0 text-muted">Transfer to OPay Account</p>
         </div>
-        <button className="btn btn-link p-0 text-decoration-none" style={{ color: "#20b2aa" }}>
+        <button className="btn btn-link p-0 text-decoration-none" style={{ color: "#20b2aa" }} onClick={HistoryBtn}>
           History
         </button>
       </div>
 
       {/* Promotional Banner */}
-      <div className="px-3 mb-3 ">
+      <div className="px-3 mb-3" style={{marginTop:"65px"}}>
         <div
           className="p-3 text-white position-relative overflow-hidden"
           style={{
@@ -122,18 +124,18 @@ const ToOpay = () => {
       </div>
 
       {/* Benefits Badge */}
-      <div className="px-3 mb-4 ">
+      <div className="px-3 mb-4">
         <div
-          className="border rounded-3 p-3 d-flex align-items-center"
-          style={{ backgroundColor: "#f0fdfa", borderColor: "#99f6e4" }}
+          className="border rounded-3 p-2 d-flex align-items-center"
+          style={{ backgroundColor: "#e1f5ea", borderColor: "#99f6e4" }}
         >
           <div
             className="rounded-circle d-flex align-items-center justify-content-center me-2"
-            style={{ width: "20px", height: "20px", backgroundColor: "#20b2aa" }}
+            style={{ width: "20px", height: "20px", backgroundColor: "#46b78f" }}
           >
             <div className="rounded-circle bg-white" style={{ width: "8px", height: "8px" }}></div>
           </div>
-          <span className="fw-medium" style={{ color: "#0f766e" }}>
+          <span className="fw-medium" style={{ color: "#46b78f" }}>
             Instant, Zero Issues, Free
           </span>
         </div>
@@ -146,14 +148,15 @@ const ToOpay = () => {
         <div className="position-relative mb-2">
           <input
             type="text"
-            className="form-control form-control-lg border-secondary"
+            className="form-control form-control-lg border-none"
             placeholder="Phone No./OPay Account No./ID"
             value={accountNumber}
             onChange={handleAccountInput}
             maxLength={11}
-            style={{ paddingRight: "48px", fontSize: "16px" }}
+            style={{ paddingRight: "48px", fontSize: "16px", backgroundColor:"#f8f8fa" }}
             inputMode="numeric"
             disabled={isLoading}
+            
           />
           <button
             type="button"

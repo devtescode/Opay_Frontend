@@ -187,6 +187,7 @@ function Transferform() {
                                     borderColor: "#ccc",
                                     backgroundColor: "transparent",
                                 }}
+                                inputMode="numeric"
                             />
 
 
