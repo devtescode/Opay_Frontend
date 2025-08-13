@@ -182,7 +182,7 @@ const ToOpay = () => {
           </div>
         )}
         {errorMsg && (
-          <div className="text-center mt-2">
+          <div className="mt-2">
             <span className="text-danger">{errorMsg}</span>
           </div>
         )}
