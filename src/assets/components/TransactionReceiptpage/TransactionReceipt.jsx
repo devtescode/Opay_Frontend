@@ -15,7 +15,7 @@ function TransactionReceipt({ initialStatus }) {
   const [amount, setAmount] = useState(null);
   const [accountDetails, setAccountDetails] = useState(null);
   const [userfullName, setFullName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(''); // For storing phone number
+  const [phoneNumber, setPhoneNumber] = useState(''); 
   const { state: transaction } = useLocation();
 
   // console.log("Received transaction:", transaction); // ✅ Must not be null
