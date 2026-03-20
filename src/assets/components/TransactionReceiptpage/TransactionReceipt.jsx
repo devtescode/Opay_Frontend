@@ -6,7 +6,7 @@ import { ChevronLeft } from 'react-bootstrap-icons';
 import html2pdf from "html2pdf.js";
 import watermarkImage from "../../Image/image.jpg"
 import html2canvas from 'html2canvas';
-import opaylogo from "../../../../public/pay-logo.png"
+import pay_logo from "../../../../public/pay-logo.png"
 
 function TransactionReceipt({ initialStatus }) {
   const location = useLocation();
@@ -305,7 +305,7 @@ function TransactionReceipt({ initialStatus }) {
                   <div className="text-center mb-2 d-flex justify-content-between" style={{ alignItems: "center", marginTop: "-10px" }}>
                     <img
                       // src="https://images.seeklogo.com/logo-png/50/1/opay-new-2023-logo-png_seeklogo-503616.png"
-                      src={opaylogo}
+                      src={pay_logo}
                       alt="Image description"
                       height="50"
                       
