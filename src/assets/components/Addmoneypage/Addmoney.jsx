@@ -3,6 +3,7 @@ import axios from 'axios';
 // import Swal from 'sweetalert2';
 import { API_URLS } from '../../../../utils/apiConfig';
 import Data from '../Data.json'; // Bank list
+import { useNavigate } from 'react-router-dom';
 
 const Addmoney = () => {
   const [amount, setAmount] = useState('');
@@ -10,6 +11,7 @@ const Addmoney = () => {
   const [bankCode, setBankCode] = useState('');
   const [bankName, setBankName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
 
   const handleBankChange = (e) => {
     const selectedCode = e.target.value;
@@ -36,7 +38,7 @@ const Addmoney = () => {
       bankCode,
       bankName
     });
-    
+
     try {
       const token = localStorage.getItem('token');
 
@@ -53,13 +55,14 @@ const Addmoney = () => {
         }
       );
       console.log(response, "Get response");
-      
+      navigate("/userdb")
 
-      Swal.fire(
-        'Success',
-        `${Number(amount).toLocaleString()} has been added successfully to your wallet!`,
-        'success'
-      );
+
+      // Swal.fire(
+      //   'Success',
+      //   `${Number(amount).toLocaleString()} has been added successfully to your wallet!`,
+      //   'success'
+      // );
 
       setAmount('');
       setAccountNumber('');
@@ -72,7 +75,7 @@ const Addmoney = () => {
       setIsLoading(false);
     }
   };
-  
+
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
       <div className="card shadow-lg p-4 rounded" style={{ width: '100%', maxWidth: '400px' }}>
