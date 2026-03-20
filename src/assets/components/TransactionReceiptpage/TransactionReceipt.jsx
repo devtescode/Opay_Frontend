@@ -6,7 +6,7 @@ import { ChevronLeft } from 'react-bootstrap-icons';
 import html2pdf from "html2pdf.js";
 import watermarkImage from "../../Image/image.jpg"
 import html2canvas from 'html2canvas';
-import opaylogo from "../../../../public/OPAY-LOGO.png"
+import opaylogo from "../../../../public/pay-logo.png"
 
 function TransactionReceipt({ initialStatus }) {
   const location = useLocation();
