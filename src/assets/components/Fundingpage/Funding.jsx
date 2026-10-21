@@ -14,7 +14,7 @@ const Funding = () => {
     const handleDelete = (txn) => {
         alert.confirm({
             title: 'Are you sure?',
-            html: `You are about to delete <strong>â‚¦${Math.abs(txn.amount).toLocaleString()}.00</strong> sent by <strong>${txn.userId?.username || 'N/A'}</strong>.`,
+            html: `You are about to delete <strong>₦${Math.abs(txn.amount).toLocaleString()}.00</strong> sent by <strong>${txn.userId?.username || 'N/A'}</strong>.`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -72,7 +72,7 @@ const Funding = () => {
                                         <td>{index + 1}</td>
                                         <td>{txn.userId?.username || 'N/A'}</td>
                                         <td>{txn.accountName}</td>
-                                        <td>â‚¦{Math.abs(txn.amount).toLocaleString()}.00</td>
+                                        <td>₦{Math.abs(txn.amount).toLocaleString()}.00</td>
                                         <td>{format(new Date(txn.createdAt), 'MMM dd, yyyy hh:mm a')}</td>
                                         <td>
                                             <button

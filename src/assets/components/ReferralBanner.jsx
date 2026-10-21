@@ -3,14 +3,14 @@ import './UserDbpage/UserDb.css';
 
 const slides = [
   {
-    emoji: 'ðŸ’°',
+    emoji: '💰',
     title: 'Cash up for grabs!',
-    text: 'Invite friends and earn up to â‚¦5,600 Bonus',
+    text: 'Invite friends and earn up to ₦5,600 Bonus',
   },
   {
-    emoji: 'ðŸ”¥',
+    emoji: '🔥',
     title: 'Hot Deals Just for You!',
-    text: 'Deposit â‚¦600, Get â‚¦40 Off Instantly!',
+    text: 'Deposit ₦600, Get ₦40 Off Instantly!',
   },
 ];
 

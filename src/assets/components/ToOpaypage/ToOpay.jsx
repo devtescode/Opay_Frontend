@@ -100,7 +100,7 @@ const ToOpay = () => {
         >
           {/* <div className="position-relative" style={{ zIndex: 10 }}>
             <p className="small mb-0 lh-base" style={{ color: '#fff', textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}>
-              OPay Partners with Olabisi Onabanjo University in Groundbreaking â‚¦1.2 Billion, 10-Year Scholarship Drive
+              OPay Partners with Olabisi Onabanjo University in Groundbreaking ₦1.2 Billion, 10-Year Scholarship Drive
             </p>
           </div> */}
         </div>
@@ -298,7 +298,7 @@ const ToOpay = () => {
             </div>
             <div className="d-flex flex-column justify-content-center">
               <span className="fw-medium">Get Your Betting Voucher Now</span>
-              <p className="text-muted mb-0">Get â‚¦100 off â‚¦1,000 top-up with voucher</p>
+              <p className="text-muted mb-0">Get ₦100 off ₦1,000 top-up with voucher</p>
             </div>
           </div>
 

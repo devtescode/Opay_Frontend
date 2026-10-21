@@ -38,12 +38,12 @@ const BalanceCard = () => {
 
       <p className={`opay-hero__amount${showBalance ? '' : ' opay-hero__amount--muted'}`}>
         {isPending
-          ? 'â‚¦ â€”'
+          ? '₦ —'
           : isError
             ? 'Unavailable'
             : showBalance
-              ? `â‚¦${Number(balance || 0).toLocaleString()}.00`
-              : 'â‚¦ ****'}
+              ? `₦${Number(balance || 0).toLocaleString()}.00`
+              : '₦ ****'}
       </p>
 
       {isError && (

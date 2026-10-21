@@ -96,7 +96,7 @@ const Historyadmin = () => {
                 {/* Modal */}
                 <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
                     <Modal.Header closeButton className='shadow-lg'>
-                        <Modal.Title className=''>Amout: â‚¦{Number(totalAmount || 0).toLocaleString()}
+                        <Modal.Title className=''>Amout: ₦{Number(totalAmount || 0).toLocaleString()}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="bg-light">
@@ -120,7 +120,7 @@ const Historyadmin = () => {
                             >
                                 <table
                                     className="table table-dark table-bordered"
-                                    style={{ minWidth: "700px" }} // ðŸ‘ˆ set a min width so content doesn't squeeze
+                                    style={{ minWidth: "700px" }} // 👈 set a min width so content doesn't squeeze
                                 >
                                     <thead>
                                         <tr>
@@ -141,7 +141,7 @@ const Historyadmin = () => {
                                             return (
                                                 <tr key={txn._id} className={rowClass}>
                                                     <td>{index + 1}</td>
-                                                    <td>â‚¦{txn.amount.toLocaleString()}</td>
+                                                    <td>₦{txn.amount.toLocaleString()}</td>
                                                     <td>
                                                         <span
                                                             className={`badge ${txn.status === "success"

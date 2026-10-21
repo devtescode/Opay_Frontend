@@ -37,11 +37,11 @@ function Transferform() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Remove â‚¦ and commas
-        const rawAmount = amount.replace(/[â‚¦,]/g, '');
+        // Remove ₦ and commas
+        const rawAmount = amount.replace(/[₦,]/g, '');
 
         if (!rawAmount || isNaN(rawAmount) || rawAmount < 100 || rawAmount > 5000000) {
-            alert("Please enter a valid amount between â‚¦100.00 and â‚¦5,000,000.00");
+            alert("Please enter a valid amount between ₦100.00 and ₦5,000,000.00");
             return;
         }
 
@@ -170,8 +170,8 @@ function Transferform() {
                             <input
                                 type="text"
                                 className="form-control border-0 border-bottom rounded-0 shadow-none border-success"
-                                placeholder="â‚¦100.00 - â‚¦5,000,000.00"
-                                value={amount ? `â‚¦${amount}` : ''}
+                                placeholder="₦100.00 - ₦5,000,000.00"
+                                value={amount ? `₦${amount}` : ''}
                                 onChange={handleAmountChange}
                                 style={{
                                     borderColor: "#ccc",
@@ -194,7 +194,7 @@ function Transferform() {
                                                 boxShadow: "none"
                                             }}
                                         >
-                                            â‚¦{val.toLocaleString()}
+                                            ₦{val.toLocaleString()}
                                         </button>
 
                                     </div>

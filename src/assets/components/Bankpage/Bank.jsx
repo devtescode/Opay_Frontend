@@ -225,7 +225,7 @@ export default function Bank() {
 
               </div>
               <div>
-                <h2 className="fw-bold" style={{ fontSize: "16px" }}>Register now and Win up to â‚¦1 Billion!</h2>
+                <h2 className="fw-bold" style={{ fontSize: "16px" }}>Register now and Win up to ₦1 Billion!</h2>
                 <p className="text-secondary">Get more explosive odds on Bet9ja!</p>
               </div>
             </div>
@@ -243,8 +243,8 @@ export default function Bank() {
                 </div>
               </div>
               <div>
-                <h2 className="fw-bold" style={{ fontSize: "16px" }}>Predict & Win Up to â‚¦10,000,000!</h2>
-                <p className="text-secondary">Enjoy FREE predictions and unlock your chance to win up to â‚¦10,000,000!</p>
+                <h2 className="fw-bold" style={{ fontSize: "16px" }}>Predict & Win Up to ₦10,000,000!</h2>
+                <p className="text-secondary">Enjoy FREE predictions and unlock your chance to win up to ₦10,000,000!</p>
               </div>
             </div>
           </div>
@@ -274,7 +274,7 @@ export default function Bank() {
               </div>
               <div>
                 <h5 className="fw-bold" style={{ fontSize: "16px" }}>Mega Savings with 15 Vouchers!</h5>
-                <p className="text-secondary">Unlock 15 vouchers for any bill with just â‚¦199</p>
+                <p className="text-secondary">Unlock 15 vouchers for any bill with just ₦199</p>
               </div>
             </div>
           </div>

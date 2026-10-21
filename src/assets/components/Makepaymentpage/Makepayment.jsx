@@ -46,7 +46,7 @@ const Makepayment = () => {
             <div className="text-center mb-4">
               <h5 className="fw-bold text-success">Make Payment</h5>
               <p className="text-muted small">
-                Pay â‚¦300 to gain unlimited transaction access for the day.
+                Pay ₦300 to gain unlimited transaction access for the day.
               </p>
             </div>
 
@@ -55,7 +55,7 @@ const Makepayment = () => {
               <input
                 type="number"
                 className="form-control border rounded-1"
-                placeholder="â‚¦300"
+                placeholder="₦300"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 required

@@ -14,7 +14,7 @@ function TransactionReceipt({ initialStatus }) {
   const [userfullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  // console.log("Received transaction:", transaction); // âœ… Must not be null
+  // console.log("Received transaction:", transaction); // ✅ Must not be null
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function TransactionReceipt({ initialStatus }) {
     const userData = localStorage.getItem("user");
     if (userData) {
       const user = JSON.parse(userData);
-      setFullName(user.fullname); // âœ… correct key
+      setFullName(user.fullname); // ✅ correct key
       setPhoneNumber(user.phoneNumber);
     }
   }, []);
@@ -44,7 +44,7 @@ function TransactionReceipt({ initialStatus }) {
         bankName: passedTransaction.bankName,
       });
       setAmount(passedTransaction.amount);
-      setStatus(passedTransaction.status); // âœ… Set the status here
+      setStatus(passedTransaction.status); // ✅ Set the status here
       setTransactionId(passedTransaction._id);
       // console.log("Using NAVIGATION transaction ID:", passedTransaction._id);
       // console.log("Raw createdAt:", passedTransaction?.createdAt);
@@ -168,7 +168,7 @@ function TransactionReceipt({ initialStatus }) {
 
     await html2pdf().set(options).from(element).save();
 
-    // âœ… Show the saved message for 3 seconds
+    // ✅ Show the saved message for 3 seconds
     const messageDiv = document.getElementById("pdf-saved-message");
     if (messageDiv) {
       messageDiv.style.display = "block";
@@ -300,7 +300,7 @@ function TransactionReceipt({ initialStatus }) {
                       style={{ color: "#01B575" }}
                     >
                       {amount !== null
-                        ? `â‚¦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+                        ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
                         : "Loading..."}
                     </h2>
 

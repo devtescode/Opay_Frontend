@@ -127,7 +127,7 @@ function BeneficiaryItem({ icon, iconBg, name, account, bank, transactionId, han
 
             <div className="position-relative">
                 <button className="btn btn-link text-muted p-0" onClick={handleDeleteClick} aria-label={`Actions for ${name}`}>
-                    â‹®
+                    ⋮
                 </button>
                 {showDelete && (
                     <div

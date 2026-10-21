@@ -146,7 +146,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
               <X size={18} />
             </Button>
             <Modal.Title className="w-100 text-center h4 mb-0">
-              â‚¦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </Modal.Title>
           </Modal.Header>
 
@@ -187,13 +187,13 @@ const Transfermodal = ({ showModal, setShowModal }) => {
               </div>
               <div className="d-flex justify-content-between">
                 <span className="text-secondary">Amount</span>
-                <span className="fw-medium"> â‚¦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+                <span className="fw-medium"> ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
               </div>
               <div className="d-flex justify-content-between">
                 <span className="text-secondary">Transaction Fee</span>
                 <span className="fw-medium">
-                  <s className="text-secondary me-2">â‚¦10.00</s>
-                  â‚¦0.00
+                  <s className="text-secondary me-2">₦10.00</s>
+                  ₦0.00
                 </span>
               </div>
 
@@ -210,7 +210,7 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                         <div>
                           <span className="fw-medium mb-1 d-block">Available Balance</span>
                           <span className="text-muted mx-1 mb-1 align-items-center">
-                            (â‚¦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15} />
+                            (₦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15} />
                           </span>
                         </div>
                       </div>
@@ -229,10 +229,10 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                     <div className="rounded d-flex justify-content-between align-items-center">
                       <div className="d-flex align-items-center gap-2">
                         <div>
-                          <p className="fw-medium mb-1 text-muted">Wallet (â‚¦{balance.toLocaleString()}.00)</p>
+                          <p className="fw-medium mb-1 text-muted">Wallet (₦{balance.toLocaleString()}.00)</p>
                         </div>
                       </div>
-                      <div className="p-0 text-muted">-â‚¦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
+                      <div className="p-0 text-muted">-₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                     </div>
                   </div>
                 </div>

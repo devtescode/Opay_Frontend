@@ -105,13 +105,13 @@ const RecentTransactions = ({ userId }) => {
                   {isIncoming ? 'Transfer from' : 'Transfer to'} {transaction.accountName}
                 </p>
                 <p className="opay-txn__meta">
-                  {format(new Date(transaction.createdAt), 'MMM do, yyyy â€¢ hh:mm a')}
+                  {format(new Date(transaction.createdAt), 'MMM do, yyyy • hh:mm a')}
                 </p>
               </div>
 
               <div className="opay-txn__right">
                 <span className={`opay-txn__amount${isCredit ? ' opay-txn__amount--in' : ''}`}>
-                  {isCredit ? '+' : '-'}â‚¦{Math.abs(transaction.amount).toLocaleString()}.00
+                  {isCredit ? '+' : '-'}₦{Math.abs(transaction.amount).toLocaleString()}.00
                 </span>
                 <span className={statusClass(transaction.status)}>{transaction.status}</span>
               </div>

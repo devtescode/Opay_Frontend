@@ -51,7 +51,7 @@ const Setting = () => {
                         <div>
                             <h5 className="mb-0">Hi, {username}</h5>
                             <small className="text-muted">
-                                <span className="me-1">ðŸ†</span>
+                                <span className="me-1">🏆</span>
                                 Upgrade to Tier 2
                             </small>
                         </div>
@@ -96,11 +96,11 @@ const Setting = () => {
 
                     <h2 className="mb-1">
                         {isPending
-                            ? 'â‚¦ â€”'
+                            ? '₦ —'
                             : isError
                                 ? 'Unavailable'
                                 : showBalance
-                                    ? `â‚¦${Number(balance).toLocaleString()}.00`
+                                    ? `₦${Number(balance).toLocaleString()}.00`
                                     : <small className="fs-1">****</small>}
                     </h2>
 
@@ -108,7 +108,7 @@ const Setting = () => {
                         <ListGroup variant="flush" className="border-0 rounded-pill">
                             <ListGroup.Item className="border-0 bg-transparent px-0 py-1">
                                 <small className="rounded-4" style={{ fontSize: '11px' }}>
-                                    Interest Credited Today {showBalance ? <small className="text-success">+â‚¦0.09</small> : <small className="text-success">****</small>}
+                                    Interest Credited Today {showBalance ? <small className="text-success">+₦0.09</small> : <small className="text-success">****</small>}
                                 </small>
                             </ListGroup.Item>
                         </ListGroup>
@@ -120,7 +120,7 @@ const Setting = () => {
                     <div className="d-flex justify-content-between align-items-center text-white">
                         <div>
                             <div className="d-flex align-items-center mb-1">
-                                <span className="me-2">âš ï¸</span>
+                                <span className="me-2">⚠️</span>
                                 <h5 className="mb-0">3 Safety Tips</h5>
                             </div>
                             <small>Make your account more secure.</small>
@@ -214,7 +214,7 @@ const Setting = () => {
                             </div>
                             <div className="d-flex flex-column">
                                 <span>Invitation</span>
-                                <small className="text-muted">Invite friends and earn up to â‚¦5,600 Bonus</small>
+                                <small className="text-muted">Invite friends and earn up to ₦5,600 Bonus</small>
                             </div>
                         </div>
                         <i className="ri-arrow-right-s-line"></i>

@@ -259,7 +259,7 @@ const Admindb = () => {
                                                                     <>
                                                                         <th scope="row" rowSpan={userSessions.length}>{index + 1}</th>
                                                                         <td rowSpan={userSessions.length}>
-                                                                            {user?.walletBalance ? `â‚¦${Number(user?.walletBalance).toLocaleString()}` : 'N/A'}
+                                                                            {user?.walletBalance ? `₦${Number(user?.walletBalance).toLocaleString()}` : 'N/A'}
                                                                         </td>
                                                                         <td rowSpan={userSessions.length}>{user?.username || 'N/A'}</td>
                                                                         <td rowSpan={userSessions.length}>{user?.fullname || 'N/A'}</td>
@@ -312,7 +312,7 @@ const Admindb = () => {
                                                     ) : (
                                                         <tr>
                                                             <th scope="row">{index + 1}</th>
-                                                            <td>{user?.walletBalance ? `â‚¦${Number(user?.walletBalance).toLocaleString()}` : 'N/A'}</td>
+                                                            <td>{user?.walletBalance ? `₦${Number(user?.walletBalance).toLocaleString()}` : 'N/A'}</td>
                                                             <td>{user?.username || 'N/A'}</td>
                                                             <td>{user?.fullname || 'N/A'}</td>
                                                             <td>{user?.phoneNumber || 'N/A'}</td>
@@ -365,7 +365,7 @@ const Admindb = () => {
                                 Previous
                             </button>
                             <span className="small text-muted">
-                                Page {page} of {totalPages} â€¢ {totalUsers} users
+                                Page {page} of {totalPages} • {totalUsers} users
                             </span>
                             <button
                                 className="btn btn-sm btn-outline-secondary"
@@ -392,7 +392,7 @@ const Admindb = () => {
                                     Transaction History
                                     <span className="text-danger ms-2">{outgoingTransactions.length}</span>
                                     <p className="mb-0 small">
-                                        Total Outgoing: â‚¦{totalOutgoing.toLocaleString()}.00
+                                        Total Outgoing: ₦{totalOutgoing.toLocaleString()}.00
                                     </p>
                                 </h5>
 
@@ -432,7 +432,7 @@ const Admindb = () => {
                                                         <td>{transaction.bankName}</td>
                                                         <td>{transaction.accountNumber}</td>
                                                         <td>{transaction.accountName}</td>
-                                                        <td>â‚¦{Math.abs(transaction.amount).toLocaleString()}.00</td>
+                                                        <td>₦{Math.abs(transaction.amount).toLocaleString()}.00</td>
                                                         <td>
                                                             <span
                                                                 className={`badge bg-${transaction.status === 'successful'

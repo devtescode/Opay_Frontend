@@ -269,7 +269,7 @@ const StoreTransaction = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
                   <span style={{ fontWeight: 'bold', borderBottom: '2px solid #00c853', paddingBottom: '5px' }}>Month</span>
                   <span style={{ color: '#aaa' }}>Time Frame</span>
-                  <span onClick={toggleModal} style={{ fontWeight: 'bold', cursor: 'pointer' }}>âœ•</span>
+                  <span onClick={toggleModal} style={{ fontWeight: 'bold', cursor: 'pointer' }}>✕</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '20px', position: 'relative' }}>
@@ -345,8 +345,8 @@ const StoreTransaction = () => {
         </div>
 
         <div className="text-muted small">
-          <span>In: {`â‚¦${(balance * 2).toLocaleString()}.00`}</span>
-          <span className="ms-3">Out: â‚¦{moneyOut.toLocaleString()}.00</span>
+          <span>In: {`₦${(balance * 2).toLocaleString()}.00`}</span>
+          <span className="ms-3">Out: ₦{moneyOut.toLocaleString()}.00</span>
         </div>
       </div>
 
@@ -395,8 +395,8 @@ const StoreTransaction = () => {
                     }}
                   >
                     {transaction.status === 'Reversed' || isIncoming
-                      ? `+â‚¦${Math.abs(transaction.amount).toLocaleString()}.00`
-                      : `-â‚¦${Math.abs(transaction.amount).toLocaleString()}.00`}
+                      ? `+₦${Math.abs(transaction.amount).toLocaleString()}.00`
+                      : `-₦${Math.abs(transaction.amount).toLocaleString()}.00`}
                   </span>
                   <div
                     className="rounded-1 px-1 text-center"
