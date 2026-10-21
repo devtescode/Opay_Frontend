@@ -35,7 +35,7 @@
 .opay-page__shell {
   max-width: 450px;
   margin: 0 auto;
-  padding: 0 16px;
+  /* padding: 0 16px; */
 }
 
 /* Optional column wrappers (used by the two column desktop layout). */
@@ -216,13 +216,13 @@
    Grabber
  * ------------------------------------------------------------------ */
 
-.opay-grabber {
+/* .opay-grabber {
   width: 36px;
   height: 5px;
   border-radius: 999px;
   background: var(--opay-grabber);
   margin: 14px auto 0;
-}
+} */
 
 /* ------------------------------------------------------------------ *
    Wallet card
