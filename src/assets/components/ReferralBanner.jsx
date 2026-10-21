@@ -1,46 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import './UserDbpage/UserDb.css';
+
+const slides = [
+  {
+    emoji: 'ðŸ’°',
+    title: 'Cash up for grabs!',
+    text: 'Invite friends and earn up to â‚¦5,600 Bonus',
+  },
+  {
+    emoji: 'ðŸ”¥',
+    title: 'Hot Deals Just for You!',
+    text: 'Deposit â‚¦600, Get â‚¦40 Off Instantly!',
+  },
+];
 
 const ReferralBanner = () => {
-    const slides = [
-    {
-      emoji: "💰",
-      title: "Cash up for grabs!",
-      text: "Invite friends and earn up to ₦5,600 Bonus",
-    },
-    {
-      emoji: "🔥",
-      title: "Hot Deals Just for You!",
-      text: "Deposit ₦600, Get ₦40 Off Instantly!",
-    },
-  ];
-
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000); // 5 seconds
+    }, 6000);
 
-    return () => clearInterval(interval); // Clean up
-  }, [slides.length]);
+    return () => clearInterval(interval);
+  }, []);
+
+  const slide = slides[currentSlide];
+
   return (
-    <Card className="mb-4 rounded-2" style={{ border: "0" }}>
-      <Card.Body className="d-flex align-items-center gap-3">
-        <div
-          className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-          style={{ width: 40, height: 40 }}
-        >
-          <span className="fs-5">{slides[currentSlide].emoji}</span>
-        </div>
+    <section className="opay-section" aria-live="polite">
+      <div className="opay-promo opay-promo--accent">
+        <span className="opay-promo__icon" aria-hidden="true">
+          {slide.emoji}
+        </span>
         <div>
-          <div className="fw-medium">{slides[currentSlide].title}</div>
-          <div className="small text-muted">{slides[currentSlide].text}</div>
+          <p className="opay-promo__title">{slide.title}</p>
+          <p className="opay-promo__text">{slide.text}</p>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </section>
   );
 };
 
 export default ReferralBanner;
-

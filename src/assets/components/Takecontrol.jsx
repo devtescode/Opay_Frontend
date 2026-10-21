@@ -1,26 +1,18 @@
-import React from 'react'
-import { Card } from 'react-bootstrap'
-import message from '../Image/message.png'
+import message from '../Image/message.png';
+import './UserDbpage/UserDb.css';
 
-const Takecontrol = () => {
-  return (
-    <div className="mb-4 bg-white p-3">
-    <Card.Body className="d-flex align-items-center gap-3 border-none mx-3">
-      <div className="rounded-circle bg-light d-flex align-items-center justify-content-center" style={{ width: 40, height: 40 }}>
-        <span className="fs-5" >
-            <img src={message} alt="" />
-        </span>
-      </div>
+const Takecontrol = () => (
+  <section className="opay-section">
+    <div className="opay-promo">
+      <span className="opay-promo__icon">
+        <img src={message} alt="" width={20} height={20} />
+      </span>
       <div>
-        <div className="fw-medium">Take Control, Stay Informed</div>
-        <div className="small text-muted">Add your email to get the  latest from Opay</div>
+        <p className="opay-promo__title">Take Control, Stay Informed</p>
+        <p className="opay-promo__text">Add your email to get the latest from Opay</p>
       </div>
-      {/* <div>
-        <button className='btn btn-success px-3' >GO</button>
-      </div> */}
-    </Card.Body>
-  </div>
-  )
-}
+    </div>
+  </section>
+);
 
-export default Takecontrol
+export default Takecontrol;

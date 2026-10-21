@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
@@ -24,31 +23,31 @@ const Navbar = () => {
     }
     return (
         <div>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-                <div class="container-fluid text-center">
-                    <a class="navbar-brand" style={{cursor:"pointer"}} onClick={HomeBtn}>Admin</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+            <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+                <div className="container-fluid text-center">
+                    <a className="navbar-brand" style={{cursor:"pointer"}} onClick={HomeBtn}>Admin</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" style={{cursor:"pointer"}} onClick={HomeBtn}>Home</a>
+                    <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" style={{cursor:"pointer"}} onClick={HomeBtn}>Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style={{cursor:"pointer"}} onClick={CreateBtn}>Create</a>
+                            <li className="nav-item">
+                                <a className="nav-link" style={{cursor:"pointer"}} onClick={CreateBtn}>Create</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style={{cursor:"pointer"}} onClick={DetailsBtn}>Password</a>
+                            <li className="nav-item">
+                                <a className="nav-link" style={{cursor:"pointer"}} onClick={DetailsBtn}>Password</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style={{cursor:"pointer"}} onClick={HistoyBtn}>Histoy</a>
+                            <li className="nav-item">
+                                <a className="nav-link" style={{cursor:"pointer"}} onClick={HistoyBtn}>Histoy</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style={{cursor:"pointer"}} onClick={FundingBtn}>Funding</a>
+                            <li className="nav-item">
+                                <a className="nav-link" style={{cursor:"pointer"}} onClick={FundingBtn}>Funding</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style={{cursor:"pointer"}} onClick={logoutBtn}>Logout</a>
+                            <li className="nav-item">
+                                <a className="nav-link" style={{cursor:"pointer"}} onClick={logoutBtn}>Logout</a>
                             </li>
                         </ul>
                     </div>

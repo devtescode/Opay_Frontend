@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Transfermodal from "../Transfermodalpage/Transfarmodal";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { getBankLogoByName } from '../BankUtils'
-import axios from "axios";
-import { API_URLS } from "../../../../utils/apiConfig";
+import { useCheckTransactionLimit } from '../../../hooks/useMutations';
+import { getToken } from '../../../lib/apiClient';
 
 function Transferform() {
     const [amount, setAmount] = useState(""); // Changed `amountenter` to `amount`
     const [remark, setRemark] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [accountDetails, setAccountDetails] = useState(null);
-    const [isLoading, setIsLoading] = useState(false); // Track loading state
+    const { mutate: checkLimit, isPending: isLoading } = useCheckTransactionLimit();
 
 
     // const handleAmountClick = (value) => {
@@ -34,54 +34,47 @@ function Transferform() {
 
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setIsLoading(true);
 
-        // Remove ₦ and commas
-        const rawAmount = amount.replace(/[₦,]/g, '');
+        // Remove â‚¦ and commas
+        const rawAmount = amount.replace(/[â‚¦,]/g, '');
 
         if (!rawAmount || isNaN(rawAmount) || rawAmount < 100 || rawAmount > 5000000) {
-            alert("Please enter a valid amount between ₦100.00 and ₦5,000,000.00");
-            setIsLoading(false);
+            alert("Please enter a valid amount between â‚¦100.00 and â‚¦5,000,000.00");
             return;
         }
 
-        const token = localStorage.getItem("token");
-
-        if (!token) {
+        if (!getToken()) {
             alert("You are not logged in. Please log in again.");
-            setIsLoading(false);
             return;
         }
 
-        try {
-            const res = await axios.post(API_URLS.checkTransactionLimit, { token });
-
-            if (res.data.status) {
-                localStorage.setItem("transferAmount", rawAmount); // Save as plain number
-                setShowModal(true);
-            } else {
-                alert(res.data.message);
-            }
-        } catch (err) {
-            if (err.response?.status === 403) {
-                Swal.fire({
-                    text: "You have reached your daily transaction limit (1 per day).",
-                    showClass: {
-                        popup: `animate__animated animate__fadeInUp animate__faster`,
-                    },
-                    hideClass: {
-                        popup: `animate__animated animate__fadeOutDown animate__faster`,
-                    },
-                });
-                navigate("/makepayment");
-            } else {
-                alert("Could not check transaction limit. Try again.");
-            }
-        } finally {
-            setIsLoading(false);
-        }
+        checkLimit(undefined, {
+            onSuccess: (res) => {
+                if (res?.status) {
+                    localStorage.setItem("transferAmount", rawAmount); // Save as plain number
+                    setShowModal(true);
+                } else {
+                    alert(res?.message);
+                }
+            },
+            onError: (err) => {
+                if (err?.response?.status === 403) {
+                    window.Swal?.fire({
+                        text: "You have reached your daily transaction limit (1 per day).",
+                        showClass: {
+                            popup: `animate__animated animate__fadeInUp animate__faster`,
+                        },
+                        hideClass: {
+                            popup: `animate__animated animate__fadeOutDown animate__faster`,
+                        },
+                    }).then(() => navigate("/makepayment"));
+                } else {
+                    alert("Could not check transaction limit. Try again.");
+                }
+            },
+        });
     };
 
 
@@ -117,9 +110,6 @@ function Transferform() {
         }
     }, [location.state]);
 
-    const closeModal = () => {
-        setShowModal(false); // Close modal and reset its visibility state
-    };
     const navigate = useNavigate()
     const TransfarBtn = () => {
         navigate("/bank")
@@ -180,8 +170,8 @@ function Transferform() {
                             <input
                                 type="text"
                                 className="form-control border-0 border-bottom rounded-0 shadow-none border-success"
-                                placeholder="₦100.00 - ₦5,000,000.00"
-                                value={amount ? `₦${amount}` : ''}
+                                placeholder="â‚¦100.00 - â‚¦5,000,000.00"
+                                value={amount ? `â‚¦${amount}` : ''}
                                 onChange={handleAmountChange}
                                 style={{
                                     borderColor: "#ccc",
@@ -204,7 +194,7 @@ function Transferform() {
                                                 boxShadow: "none"
                                             }}
                                         >
-                                            ₦{val.toLocaleString()}
+                                            â‚¦{val.toLocaleString()}
                                         </button>
 
                                     </div>

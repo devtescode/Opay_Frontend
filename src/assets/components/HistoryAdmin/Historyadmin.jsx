@@ -1,31 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { API_URLS } from '../../../../utils/apiConfig';
+import { useState } from 'react';
 import Navbar from '../Navbarpage/Navbar';
 import NavbarTop from '../NavbarToppage/NavbarTop';
 import { Modal, Button } from 'react-bootstrap';
+import { useAdminPayments } from '../../../hooks/useQueries';
 
 const Historyadmin = () => {
-    const [payments, setPayments] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [selectedUser, setSelectedUser] = useState(null);
     const [showModal, setShowModal] = useState(false);
+
     const todayDate = new Date().toISOString().slice(0, 10);
+    const { data: paymentsData, isPending, isError, refetch } = useAdminPayments({ limit: 200 });
 
-    useEffect(() => {
-        const fetchPayments = async () => {
-            try {
-                const res = await axios.get(API_URLS.payments);
-                setPayments(res.data.data);
-            } catch (err) {
-                console.error("Error fetching payments:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchPayments();
-    }, []);
+    const payments = paymentsData?.items ?? [];
 
     // Group payments by customer email
     const groupedPayments = payments.reduce((acc, payment) => {
@@ -39,6 +25,7 @@ const Historyadmin = () => {
         setSelectedUser(groupedPayments[email]);
         setShowModal(true);
     };
+
     const totalAmount = selectedUser?.reduce((sum, txn) => sum + (txn.amount || 0), 0);
 
 
@@ -48,8 +35,15 @@ const Historyadmin = () => {
             <NavbarTop />
             <div className="container" style={{ marginTop: "70px" }}>
                 <h4 className="fw-bold mb-2 text-white">Payment History</h4>
-                {loading ? (
+                {isPending ? (
                     <p className='text-white'>Loading...</p>
+                ) : isError ? (
+                    <div>
+                        <p className='text-danger'>Could not load payments.</p>
+                        <Button size="sm" variant="outline-light" onClick={() => refetch()}>
+                            Try again
+                        </Button>
+                    </div>
                 ) : Object.keys(groupedPayments).length > 0 ? (
                     <div className="table-responsive">
                         <table className="table table-bordered table-hover bg-white">
@@ -102,7 +96,7 @@ const Historyadmin = () => {
                 {/* Modal */}
                 <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
                     <Modal.Header closeButton className='shadow-lg'>
-                        <Modal.Title className=''>Amout: ₦{Number(totalAmount || 0).toLocaleString()}
+                        <Modal.Title className=''>Amout: â‚¦{Number(totalAmount || 0).toLocaleString()}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="bg-light">
@@ -126,7 +120,7 @@ const Historyadmin = () => {
                             >
                                 <table
                                     className="table table-dark table-bordered"
-                                    style={{ minWidth: "700px" }} // 👈 set a min width so content doesn't squeeze
+                                    style={{ minWidth: "700px" }} // ðŸ‘ˆ set a min width so content doesn't squeeze
                                 >
                                     <thead>
                                         <tr>
@@ -147,7 +141,7 @@ const Historyadmin = () => {
                                             return (
                                                 <tr key={txn._id} className={rowClass}>
                                                     <td>{index + 1}</td>
-                                                    <td>₦{txn.amount.toLocaleString()}</td>
+                                                    <td>â‚¦{txn.amount.toLocaleString()}</td>
                                                     <td>
                                                         <span
                                                             className={`badge ${txn.status === "success"

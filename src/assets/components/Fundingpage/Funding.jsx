@@ -1,64 +1,56 @@
-import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbarpage/Navbar';
 import NavbarTop from '../NavbarToppage/NavbarTop';
-import axios from 'axios';
 import { format } from 'date-fns';
-import { API_URLS } from '../../../../utils/apiConfig';
+import { useAdminFunding } from '../../../hooks/useQueries';
+import { useDeleteFunding } from '../../../hooks/useMutations';
+import { alert } from '../../../lib/alert';
 
 const Funding = () => {
-    const [incomingTransactions, setIncomingTransactions] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { data: fundingData, isPending, isError, refetch } = useAdminFunding({ limit: 100 });
+    const { mutate: deleteFunding } = useDeleteFunding();
 
-    useEffect(() => {
-        fetchIncoming();
-    }, []);
+    const incomingTransactions = fundingData?.items ?? [];
 
-    const fetchIncoming = async () => {
-        try {
-            const res = await axios.get(API_URLS.funding); // Should return only incoming transactions
-            setIncomingTransactions(res.data);
-        } catch (err) {
-            console.error("Error fetching incoming transactions", err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleDelete = async (txn) => {
-        const result = await Swal.fire({
+    const handleDelete = (txn) => {
+        alert.confirm({
             title: 'Are you sure?',
-            html: `You are about to delete <strong>₦${Math.abs(txn.amount).toLocaleString()}.00</strong> sent by <strong>${txn.userId?.username || 'N/A'}</strong>.`,
+            html: `You are about to delete <strong>â‚¦${Math.abs(txn.amount).toLocaleString()}.00</strong> sent by <strong>${txn.userId?.username || 'N/A'}</strong>.`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
             confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+            if (!result?.isConfirmed) return;
+
+            deleteFunding(txn._id, {
+                onSuccess: () => {
+                    alert.success('Deleted!', 'The transaction has been deleted.');
+                },
+                onError: () => {
+                    alert.error('Error', 'Failed to delete the transaction.');
+                },
+            });
         });
-
-        if (result.isConfirmed) {
-            try {
-                await axios.delete(`${API_URLS.delectfunding}/${txn._id}`);
-                setIncomingTransactions(prev => prev.filter(t => t._id !== txn._id));
-
-                Swal.fire('Deleted!', 'The transaction has been deleted.', 'success');
-            } catch (err) {
-                console.error("Error deleting transaction", err);
-                Swal.fire('Error', 'Failed to delete the transaction.', 'error');
-            }
-        }
     };
-
 
     return (
         <div>
             <Navbar />
             <NavbarTop />
 
-            <div className="container" style={{ marginTop: "70px" }}>
+            <div className="container" style={{ marginTop: '70px' }}>
                 <h4 className="fw-bold mb-2 text-white">Incoming Transactions</h4>
 
-                {loading ? (
-                    <p className='text-white'>Loading...</p>
+                {isPending ? (
+                    <p className="text-white">Loading...</p>
+                ) : isError ? (
+                    <div>
+                        <p className="text-danger">Could not load incoming transactions.</p>
+                        <button className="btn btn-sm btn-outline-light" onClick={() => refetch()}>
+                            Try again
+                        </button>
+                    </div>
                 ) : incomingTransactions.length === 0 ? (
                     <p>No incoming transactions found.</p>
                 ) : (
@@ -78,18 +70,18 @@ const Funding = () => {
                                 {incomingTransactions.map((txn, index) => (
                                     <tr key={txn._id}>
                                         <td>{index + 1}</td>
-                                        <td>{txn.userId?.username || "N/A"}</td>
+                                        <td>{txn.userId?.username || 'N/A'}</td>
                                         <td>{txn.accountName}</td>
-                                        <td>₦{Math.abs(txn.amount).toLocaleString()}.00</td>
-                                        <td>{format(new Date(txn.createdAt), "MMM dd, yyyy hh:mm a")}</td>
+                                        <td>â‚¦{Math.abs(txn.amount).toLocaleString()}.00</td>
+                                        <td>{format(new Date(txn.createdAt), 'MMM dd, yyyy hh:mm a')}</td>
                                         <td>
                                             <button
                                                 className="btn btn-danger btn-sm"
                                                 onClick={() => handleDelete(txn)}
+                                                aria-label={`Delete transaction ${txn._id}`}
                                             >
                                                 <i className="ri-delete-bin-6-line"></i>
                                             </button>
-
                                         </td>
                                     </tr>
                                 ))}
@@ -98,7 +90,6 @@ const Funding = () => {
                     </div>
                 )}
             </div>
-
         </div>
     );
 };

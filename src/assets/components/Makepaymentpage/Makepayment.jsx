@@ -1,50 +1,35 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { API_URLS } from '../../../../utils/apiConfig';
+import { useState } from 'react'
+import { useFundAccount } from '../../../hooks/useMutations';
+import { useCurrentUser } from '../../../lib/auth';
 
 const Makepayment = () => {
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const getUserFromLocal = JSON.parse(localStorage.getItem('user'));
-    // console.log(getUserFromLocal, "gettttttttt");
+  const { user } = useCurrentUser();
+  const { mutate: fundAccount, isPending: isLoading } = useFundAccount();
 
-    if (!getUserFromLocal) {
-      alert('User not found, please log in again');
-    } else {
-      setUser(getUserFromLocal);
-    }
-  }, []);
-
-  const handlePayment = async (e) => {
+  const handlePayment = (e) => {
     e.preventDefault();
     if (!user) return;
 
-    setIsLoading(true);
+    setMessage('');
 
-    try {
-      const response = await axios.post(API_URLS.fundaccount, {
-        username: user.username,
-        amount: parseInt(amount, 10)
-      });
-
-      console.log(response, "get response");
-
-
-      if (response.data.status) {
-        window.location.href = response.data.authorization_url;
-      } else {
-        setMessage('Funding failed');
-      }
-    } catch (error) {
-      console.error('Error funding account:', error);
-      setMessage('Something went wrong while processing payment');
-    } finally {
-      setIsLoading(false);
-    }
+    fundAccount(
+      { username: user.username, amount },
+      {
+        onSuccess: (data) => {
+          if (data?.status) {
+            window.location.href = data.authorization_url;
+          } else {
+            setMessage('Funding failed');
+          }
+        },
+        onError: () => {
+          setMessage('Something went wrong while processing payment');
+        },
+      },
+    );
   };
 
   return (
@@ -61,7 +46,7 @@ const Makepayment = () => {
             <div className="text-center mb-4">
               <h5 className="fw-bold text-success">Make Payment</h5>
               <p className="text-muted small">
-                Pay ₦300 to gain unlimited transaction access for the day.
+                Pay â‚¦300 to gain unlimited transaction access for the day.
               </p>
             </div>
 
@@ -70,7 +55,7 @@ const Makepayment = () => {
               <input
                 type="number"
                 className="form-control border rounded-1"
-                placeholder="₦300"
+                placeholder="â‚¦300"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 required

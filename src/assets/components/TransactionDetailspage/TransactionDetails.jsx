@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { ArrowLeft, CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircleFill, ChevronLeft } from "react-bootstrap-icons"
+import { useEffect, useState } from "react"
+import { CheckCircle, ChevronRight, Copy, XCircle, Clock, CheckCircleFill, ChevronLeft } from "react-bootstrap-icons"
 import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import profileimage from "../../Image/image.png"
@@ -9,6 +9,19 @@ const TransactionDetails = () => {
     const navigate = useNavigate();
     const { state: transaction } = useLocation();
     // console.log("Received transaction:", transaction); // ✅ Must not be null
+
+    const [generatedNumber, setGeneratedNumber] = useState("");
+
+    useEffect(() => {
+        const prefix = "25012201"; // Keep fixed part
+        const randomPart = Math.floor(Math.random() * 1e14).toString().padStart(14, '0');
+        setGeneratedNumber(prefix + randomPart); // Always 22 digits
+    }, []);
+
+    if (!transaction) {
+        return <p className="text-center text-danger">No transaction details available</p>;
+    }
+
     const BankToBtn = (transaction) => {
         navigate('/storetransaction', { state: transaction });
     }
@@ -17,9 +30,6 @@ const TransactionDetails = () => {
 
     const logo = getBankLogoByName(transaction.bankName);
     const showLogo = Boolean(logo);
-    if (!transaction) {
-        return <p className="text-center text-danger">No transaction details available</p>;
-    }
 
     const shareReceipt = (transaction) => {
         localStorage.removeItem("transactionId"); // Clear old ID
@@ -30,17 +40,6 @@ const TransactionDetails = () => {
         // });
     }
 
-    const generateSimilarNumber = () => {
-        const prefix = "25012201"; // Keep fixed part
-        const randomPart = Math.floor(Math.random() * 1e14).toString().padStart(14, '0');
-        return prefix + randomPart; // Always 22 digits
-    }
-    const [generatedNumber, setGeneratedNumber] = useState("");
-
-    useEffect(() => {
-        const newNumber = generateSimilarNumber();
-        setGeneratedNumber(newNumber);
-    }, []);
     const isIncoming = transaction.type === "incoming"; // or however you identify incoming
 
     //  console.log(transaction, "transactionsssssssssssss"); 

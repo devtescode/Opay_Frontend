@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-// import Swal from 'sweetalert2';
-import { API_URLS } from '../../../../utils/apiConfig';
+import { useState } from 'react';
 import Data from '../Data.json'; // Bank list
 import { useNavigate } from 'react-router-dom';
+import { useAddMoney } from '../../../hooks/useMutations';
+import { getErrorMessage } from '../../../lib/apiClient';
+import { alert } from '../../../lib/alert';
 
 const Addmoney = () => {
   const [amount, setAmount] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
   const [bankCode, setBankCode] = useState('');
   const [bankName, setBankName] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
+  const { mutate: addMoney, isPending: isLoading } = useAddMoney();
 
   const handleBankChange = (e) => {
     const selectedCode = e.target.value;
@@ -22,58 +23,32 @@ const Addmoney = () => {
     }
   };
 
-  const handleAddMoney = async () => {
+  const handleAddMoney = () => {
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      return Swal.fire('Error', 'Please enter a valid amount', 'error');
+      alert.error('Error', 'Please enter a valid amount');
+      return;
     }
 
     if (!accountNumber || !bankCode || !bankName) {
-      return Swal.fire('Error', 'All bank details are required', 'error');
+      alert.error('Error', 'All bank details are required');
+      return;
     }
 
-    setIsLoading(true);
-    console.log({
-      amount: Number(amount),
-      accountNumber,
-      bankCode,
-      bankName
-    });
-
-    try {
-      const token = localStorage.getItem('token');
-
-      const response = await axios.post(
-        API_URLS.addmoney,
-        {
-          amount: Number(amount),
-          accountNumber,
-          bankCode,
-          bankName,
+    addMoney(
+      { amount: Number(amount), accountNumber, bankCode, bankName },
+      {
+        onSuccess: () => {
+          setAmount('');
+          setAccountNumber('');
+          setBankCode('');
+          setBankName('');
+          navigate('/userdb');
         },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      console.log(response, "Get response");
-      navigate("/userdb")
-
-
-      // Swal.fire(
-      //   'Success',
-      //   `${Number(amount).toLocaleString()} has been added successfully to your wallet!`,
-      //   'success'
-      // );
-
-      setAmount('');
-      setAccountNumber('');
-      setBankCode('');
-      setBankName('');
-    } catch (error) {
-      console.error('Add money error:', error);
-      Swal.fire('Error', error.response?.data?.message || 'Failed to add money', 'error');
-    } finally {
-      setIsLoading(false);
-    }
+        onError: (error) => {
+          alert.error('Error', getErrorMessage(error, 'Failed to add money'));
+        },
+      },
+    );
   };
 
   return (

@@ -1,0 +1,828 @@
+/* ==================================================================
+   Opay user dashboard
+   Design tokens live here so the whole page can be re-skinned from
+   one place (colours, radii, spacing, shadows).
+   ================================================================== */
+
+.opay-dash {
+  --opay-green: #10b981;
+  --opay-green-deep: #059669;
+  --opay-green-dark: #047857;
+  --opay-green-soft: #e1f5ea;
+  --opay-green-tint: #f0f8f4;
+  --opay-pay-green: #01b575;
+  --opay-txn-green: #1fab7c;
+  --opay-ink: #0f172a;
+  --opay-muted: #64748b;
+  --opay-line: #e8eef3;
+  --opay-surface: #ffffff;
+  --opay-bg: #f5f7f9;
+  --opay-danger: #dc2626;
+  --opay-radius-lg: 20px;
+  --opay-radius-md: 14px;
+  --opay-radius-sm: 10px;
+  --opay-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --opay-shadow-md: 0 6px 18px rgba(15, 23, 42, 0.06);
+  --opay-shadow-lg: 0 14px 34px rgba(15, 23, 42, 0.1);
+
+  min-height: 100vh;
+  background: var(--opay-bg);
+  color: var(--opay-ink);
+  padding-bottom: 92px;
+}
+
+.opay-dash__shell {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ------------------------------------------------------------------ *
+   Header
+ * ------------------------------------------------------------------ */
+
+.opay-dash__header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--opay-line);
+}
+
+.opay-dash__header-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.opay-dash__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--opay-green-soft);
+  border: 2px solid #fff;
+  box-shadow: var(--opay-shadow-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.opay-dash__greeting {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.opay-dash__greeting-sub {
+  font-size: 0.72rem;
+  color: var(--opay-muted);
+  margin: 2px 0 0;
+}
+
+.opay-dash__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.opay-dash__icon-btn {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--opay-green-tint);
+  color: var(--opay-green-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.opay-dash__icon-btn:hover {
+  background: var(--opay-green-soft);
+}
+
+.opay-dash__icon-btn:active {
+  transform: scale(0.94);
+}
+
+.opay-dash__icon-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--opay-danger);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+
+/* ------------------------------------------------------------------ *
+   Hero balance card
+ * ------------------------------------------------------------------ */
+
+.opay-hero {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--opay-radius-lg);
+  background: linear-gradient(135deg, var(--opay-green) 0%, var(--opay-green-deep) 62%, var(--opay-green-dark) 100%);
+  color: #fff;
+  padding: 20px;
+  box-shadow: 0 12px 28px rgba(5, 150, 105, 0.28);
+}
+
+.opay-hero::after {
+  content: '';
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  right: -70px;
+  top: -95px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.opay-hero::before {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  right: 30px;
+  bottom: -70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.opay-hero__label {
+  font-size: 0.78rem;
+  opacity: 0.9;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.opay-hero__toggle {
+  background: rgba(255, 255, 255, 0.18);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: background 0.18s ease;
+}
+
+.opay-hero__toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.opay-hero__amount {
+  font-size: clamp(1.9rem, 8vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 10px 0 0;
+}
+
+.opay-hero__amount--muted {
+  letter-spacing: 0.18em;
+  opacity: 0.75;
+}
+
+.opay-hero__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.opay-hero__cta {
+  background: #fff;
+  color: var(--opay-green-deep);
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.opay-hero__cta:hover {
+  color: var(--opay-green-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+}
+
+.opay-hero__link {
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  opacity: 0.92;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+
+.opay-hero__link:hover {
+  color: #fff;
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------ *
+   Stat strip
+ * ------------------------------------------------------------------ */
+
+.opay-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.opay-stat {
+  background: var(--opay-surface);
+  border-radius: var(--opay-radius-md);
+  padding: 12px 14px;
+  box-shadow: var(--opay-shadow-sm);
+  border: 1px solid var(--opay-line);
+}
+
+.opay-stat__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--opay-muted);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.opay-stat__value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 4px 0 0;
+}
+
+.opay-stat__value--in {
+  color: var(--opay-txn-green);
+}
+
+.opay-stat__value--out {
+  color: var(--opay-ink);
+}
+
+/* ------------------------------------------------------------------ *
+   Quick actions
+ * ------------------------------------------------------------------ */
+
+.opay-quick {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.opay-quick__item {
+  background: var(--opay-surface);
+  border: 1px solid var(--opay-line);
+  border-radius: var(--opay-radius-md);
+  padding: 14px 8px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: var(--opay-shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.opay-quick__item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--opay-shadow-md);
+}
+
+.opay-quick__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--opay-green);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+
+.opay-quick__label {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--opay-ink);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------ *
+   Services grid
+ * ------------------------------------------------------------------ */
+
+.opay-services {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+  background: var(--opay-surface);
+  border: 1px solid var(--opay-line);
+  border-radius: var(--opay-radius-md);
+  padding: 14px 8px;
+  box-shadow: var(--opay-shadow-sm);
+}
+
+.opay-service {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 2px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--opay-radius-sm);
+  transition: background 0.18s ease;
+}
+
+.opay-service:hover {
+  background: var(--opay-green-tint);
+}
+
+.opay-service__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--opay-green);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.opay-service__label {
+  font-size: 0.7rem;
+  color: var(--opay-ink);
+  text-align: center;
+  line-height: 1.25;
+}
+
+/* ------------------------------------------------------------------ *
+   Sections
+ * ------------------------------------------------------------------ */
+
+.opay-section {
+  margin-top: 18px;
+}
+
+.opay-section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.opay-section__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.opay-section__action {
+  background: transparent;
+  border: 0;
+  color: var(--opay-green-deep);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0;
+}
+
+.opay-section__action:hover {
+  color: var(--opay-green-dark);
+}
+
+/* ------------------------------------------------------------------ *
+   Transaction list
+ * ------------------------------------------------------------------ */
+
+.opay-txn-list {
+  background: var(--opay-surface);
+  border: 1px solid var(--opay-line);
+  border-radius: var(--opay-radius-md);
+  box-shadow: var(--opay-shadow-sm);
+  overflow: hidden;
+}
+
+.opay-txn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--opay-line);
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+
+.opay-txn:last-child {
+  border-bottom: 0;
+}
+
+.opay-txn:hover {
+  background: var(--opay-green-tint);
+}
+
+.opay-txn__icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: var(--opay-green-soft);
+  color: var(--opay-txn-green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.opay-txn__icon--in {
+  background: #e7fcf5;
+}
+
+.opay-txn__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.opay-txn__title {
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.opay-txn__meta {
+  font-size: 0.7rem;
+  color: var(--opay-muted);
+  margin: 3px 0 0;
+}
+
+.opay-txn__right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.opay-txn__amount {
+  font-size: 0.86rem;
+  font-weight: 700;
+  display: block;
+  white-space: nowrap;
+}
+
+.opay-txn__amount--in {
+  color: var(--opay-txn-green);
+}
+
+.opay-txn__status {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: capitalize;
+}
+
+.opay-txn__status--successful {
+  background: #cafbf0;
+  color: #2f9e7b;
+}
+
+.opay-txn__status--pending {
+  background: #fff3cd;
+  color: #8a6d1f;
+}
+
+.opay-txn__status--failed {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.opay-txn__status--reversed {
+  background: #eef2f7;
+  color: #475569;
+}
+
+/* ------------------------------------------------------------------ *
+   States: loading / empty / error
+ * ------------------------------------------------------------------ */
+
+.opay-skeleton {
+  background: linear-gradient(90deg, #eef2f6 25%, #f8fafc 37%, #eef2f6 63%);
+  background-size: 400% 100%;
+  animation: opay-shimmer 1.3s ease-in-out infinite;
+  border-radius: var(--opay-radius-sm);
+  height: 14px;
+}
+
+@keyframes opay-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.opay-skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid var(--opay-line);
+}
+
+.opay-skeleton-row:last-child {
+  border-bottom: 0;
+}
+
+.opay-skeleton-circle {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+}
+
+.opay-state {
+  padding: 26px 18px;
+  text-align: center;
+  color: var(--opay-muted);
+  font-size: 0.82rem;
+}
+
+.opay-state__icon {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  opacity: 0.65;
+}
+
+.opay-state--error {
+  color: var(--opay-danger);
+}
+
+.opay-state__retry {
+  margin-top: 10px;
+  background: var(--opay-green);
+  border: 0;
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+/* Refetching indicator */
+.opay-refetch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  color: var(--opay-muted);
+}
+
+.opay-refetch__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--opay-green);
+  animation: opay-pulse 1s ease-in-out infinite;
+}
+
+@keyframes opay-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+   Promo / info cards
+ * ------------------------------------------------------------------ */
+
+.opay-promo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--opay-surface);
+  border: 1px solid var(--opay-line);
+  border-radius: var(--opay-radius-md);
+  padding: 13px 14px;
+  box-shadow: var(--opay-shadow-sm);
+}
+
+.opay-promo__icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: var(--opay-green-tint);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.opay-promo__title {
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.opay-promo__text {
+  font-size: 0.72rem;
+  color: var(--opay-muted);
+  margin: 2px 0 0;
+}
+
+.opay-promo--accent {
+  background: linear-gradient(135deg, #4cd4a1 0%, #10b981 100%);
+  border: 0;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.24);
+}
+
+.opay-promo--accent .opay-promo__text {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.opay-promo--accent .opay-promo__icon {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ------------------------------------------------------------------ *
+   Bottom navigation
+ * ------------------------------------------------------------------ */
+
+.opay-bottomnav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1040;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--opay-line);
+  box-shadow: 0 -4px 18px rgba(15, 23, 42, 0.05);
+}
+
+.opay-bottomnav__inner {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.opay-bottomnav__item {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  padding: 9px 4px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--opay-muted);
+  font-size: 0.68rem;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.opay-bottomnav__item:hover {
+  color: var(--opay-green-deep);
+}
+
+.opay-bottomnav__item--active {
+  color: var(--opay-green-deep);
+  font-weight: 600;
+}
+
+.opay-bottomnav__item svg {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .opay-bottomnav__inner {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .opay-bottomnav__inner {
+    max-width: 1080px;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+   Desktop / tablet
+ * ------------------------------------------------------------------ */
+
+@media (min-width: 768px) {
+  .opay-dash__shell {
+    max-width: 960px;
+    padding: 0 24px;
+  }
+
+  .opay-dash__header-inner {
+    max-width: 960px;
+    padding: 14px 24px;
+  }
+
+  .opay-dash__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0 24px;
+    align-items: start;
+  }
+
+  .opay-dash__col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .opay-services {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .opay-dash__shell {
+    max-width: 1080px;
+  }
+
+  .opay-dash__header-inner {
+    max-width: 1080px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opay-skeleton,
+  .opay-refetch__dot {
+    animation: none;
+  }
+
+  .opay-hero__cta,
+  .opay-quick__item {
+    transition: none;
+  }
+}

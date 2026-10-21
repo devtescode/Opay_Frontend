@@ -1,50 +1,34 @@
-import React, { useState } from 'react';
-import { API_URLS } from '../../../../utils/apiConfig';
+import { useState } from 'react';
+import { useChangePassword } from '../../../hooks/useMutations';
+import { getErrorMessage } from '../../../lib/apiClient';
+import { alert } from '../../../lib/alert';
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const { mutate: changePassword, isPending: isSubmitting } = useChangePassword();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    try {
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        Swal.fire("Error", "User not logged in.", "error");
-        return;
-      }
-
-      const response = await fetch(API_URLS.changepassword, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    changePassword(
+      { oldPassword, newPassword },
+      {
+        onSuccess: (result) => {
+          if (result?.status) {
+            alert.success('Success', result.message || 'Password changed successfully!');
+            setOldPassword('');
+            setNewPassword('');
+          } else {
+            alert.error('Error', result?.message || 'Failed to change password.');
+          }
         },
-        body: JSON.stringify({
-          token,
-          OldPassword: oldPassword,
-          NewPassword: newPassword,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (result.status) {
-        Swal.fire("Success", result.message || "Password changed successfully!", "success");
-        setOldPassword('');
-        setNewPassword('');
-      } else {
-        Swal.fire("Error", result.message || "Failed to change password.", "error");
-      }
-    } catch (err) {
-      console.error("Error changing password:", err);
-      Swal.fire("Error", "Something went wrong.", "error");
-    } finally {
-      setIsSubmitting(false);
-    }
+        onError: (error) => {
+          alert.error('Error', getErrorMessage(error, 'Something went wrong.'));
+        },
+      },
+    );
   };
 
   return (
@@ -52,8 +36,11 @@ const ChangePassword = () => {
       <h3 className="mb-4">Change Password</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className="form-label">Old Password</label>
+          <label className="form-label" htmlFor="oldPassword">
+            Old Password
+          </label>
           <input
+            id="oldPassword"
             type="text"
             className="form-control"
             placeholder="Old Password"
@@ -63,8 +50,11 @@ const ChangePassword = () => {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">New Password</label>
+          <label className="form-label" htmlFor="newPassword">
+            New Password
+          </label>
           <input
+            id="newPassword"
             type="text"
             className="form-control"
             placeholder="New Password"

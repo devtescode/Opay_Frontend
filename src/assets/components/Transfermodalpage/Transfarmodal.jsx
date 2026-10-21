@@ -1,139 +1,108 @@
-import axios from "axios";
-import { X, Wallet, Check, AlertCircle } from "lucide-react";
-import { useState, useEffect } from "react";
+import { X, Check, AlertCircle } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Modal, Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { API_URLS } from "../../../../utils/apiConfig";
-import { getBankLogoByName } from '../BankUtils'
+import { getBankLogoByName } from '../BankUtils';
+import { useBalance } from '../../../hooks/useQueries';
+import { useCreateTransaction, useUpdateBalance, useUpdateMoneyOut } from '../../../hooks/useMutations';
+import { useCurrentUser } from '../../../lib/auth';
+import { getErrorMessage } from '../../../lib/apiClient';
+import { alert } from '../../../lib/alert';
 
 const Transfermodal = ({ showModal, setShowModal }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [accountData, setAccountData] = useState(null);
   const [amount, setAmount] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { userId } = useCurrentUser();
+  const { data: balance = 0 } = useBalance();
+  const { mutate: updateBalance } = useUpdateBalance();
+  const { mutate: createTransaction } = useCreateTransaction();
+  const { mutate: updateMoneyOut } = useUpdateMoneyOut();
 
   const handleClose = () => {
-    setShowModal(false); // Close modal and reset its visibility state
-  };
-
-
-  const [balance, setBalance] = useState(0);
-
-  const fetchUserBalance = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get(API_URLS.getuserbalance, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setBalance(response.data.walletBalance); // Assuming your backend returns walletBalance
-    } catch (error) {
-      console.error('Failed to fetch balance:', error);
-      Swal.fire('Error', 'Failed to fetch balance', 'error');
-    }
+    setShowModal(false);
   };
 
   useEffect(() => {
-    fetchUserBalance();
-  }, []);
-
-  const PaymodelBtn = async () => {
-    const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
-    const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      Swal.fire('Error', 'User not authenticated', 'error');
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-
-      // Step 1: Fetch Current Wallet Balance
-      const balanceResponse = await axios.get(API_URLS.getuserbalance, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      const currentBalance = balanceResponse.data.walletBalance;
-
-      if (currentBalance < savedAmount) {
-        Swal.fire('Error', 'Insufficient balance', 'error');
-        setIsLoading(false);
-        return;
-      }
-
-      // Step 2: Subtract Amount and Update Balance
-      await axios.post(API_URLS.updatebalance, {
-        amount: savedAmount
-      }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      // Step 3: Get User ID
-      const userData = JSON.parse(localStorage.getItem("user"));
-      const userId = userData?.userId;
-
-      if (!userId) {
-        console.error('No userId found in localStorage');
-        return;
-      }
-
-      // Step 4: Store Transaction (Including Money Out)
-      const transactionData = {
-        userId,
-        bankName: savedAccount?.bankName,
-        accountNumber: savedAccount?.accountNumber,
-        accountName: savedAccount?.accountName,
-        amount: savedAmount,
-      };
-
-      const response = await axios.post(API_URLS.transactions, transactionData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      if (response.data.transactionId) {
-        const transaction = response.data; // or construct it manually if needed
-        localStorage.setItem("transactionId", transaction.transactionId);
-
-        await axios.post(API_URLS.updatemoneyout, {
-          userId,
-          amount: savedAmount
-        }, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-
-        // navigate('/transfersuccess', { state: transaction }); // ✅ Pass transaction here
-        navigate('/transfersuccess', {
-          state: response.data.transaction,
-        });
-
-
-      } else {
-        Swal.fire('Error', 'Transaction failed', 'error');
-      }
-
-
-    } catch (error) {
-      console.error('Error processing payment:', error);
-      Swal.fire('Error', 'Failed to complete payment', 'error');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const [isLoading, setIsLoading] = useState(false); // Track loading stat
-  useEffect(() => {
-    const savedAccount = localStorage.getItem("selectedAccount");
+    const savedAccount = localStorage.getItem('selectedAccount');
     if (savedAccount) {
       setAccountData(JSON.parse(savedAccount));
     }
 
-    const savedAmount = localStorage.getItem("transferAmount");
+    const savedAmount = localStorage.getItem('transferAmount');
     if (savedAmount) {
       setAmount(parseFloat(savedAmount));
     }
   }, []);
 
-  // If accountData is not yet loaded or is null, show a loading state
+  const PaymodelBtn = () => {
+    const savedAccount = JSON.parse(localStorage.getItem('selectedAccount'));
+    const savedAmount = parseFloat(localStorage.getItem('transferAmount'));
+
+    if (!savedAmount || Number.isNaN(savedAmount)) {
+      alert.error('Error', 'No transfer amount found.');
+      return;
+    }
+
+    if (balance < savedAmount) {
+      alert.error('Error', 'Insufficient balance');
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Step 1: subtract the amount from the wallet
+    updateBalance(savedAmount, {
+      onSuccess: () => {
+        const transactionData = {
+          userId,
+          bankName: savedAccount?.bankName,
+          accountNumber: savedAccount?.accountNumber,
+          accountName: savedAccount?.accountName,
+          amount: savedAmount,
+        };
+
+        // Step 2: record the transaction
+        createTransaction(transactionData, {
+          onSuccess: (response) => {
+            if (!response?.transactionId) {
+              setIsLoading(false);
+              alert.error('Error', 'Transaction failed');
+              return;
+            }
+
+            localStorage.setItem('transactionId', response.transactionId);
+
+            // Step 3: keep the money-out counter in sync
+            updateMoneyOut(
+              { userId, amount: savedAmount },
+              {
+                onSuccess: () => {
+                  setIsLoading(false);
+                  navigate('/transfersuccess', { state: response.transaction });
+                },
+                onError: (error) => {
+                  setIsLoading(false);
+                  alert.error('Error', getErrorMessage(error, 'Failed to update money out'));
+                },
+              },
+            );
+          },
+          onError: (error) => {
+            setIsLoading(false);
+            alert.error('Error', getErrorMessage(error, 'Failed to complete payment'));
+          },
+        });
+      },
+      onError: (error) => {
+        setIsLoading(false);
+        alert.error('Error', getErrorMessage(error, 'Failed to complete payment'));
+      },
+    });
+  };
+
   if (!accountData) {
     return (
       <Container fluid>
@@ -156,59 +125,56 @@ const Transfermodal = ({ showModal, setShowModal }) => {
         show={showModal}
         onHide={handleClose}
         centered
-        clas
-
         backdrop="static"
         className="custom-modal"
       >
-        <div className="bg-white"
+        <div
+          className="bg-white"
           style={{
-            position: "fixed",
+            position: 'fixed',
             bottom: 0,
             left: 0,
             right: 0,
             margin: 0,
-            zIndex: 1050, // Ensure it's on top of other elements
-            borderTopLeftRadius: "12px",
-            borderTopRightRadius: "12px",
+            zIndex: 1050,
+            borderTopLeftRadius: '12px',
+            borderTopRightRadius: '12px',
           }}
         >
-
-
-          <Modal.Header className="border-bottom ">
+          <Modal.Header className="border-bottom">
             <Button variant="link" className="position-absolute me-2 p-0" onClick={handleClose}>
               <X size={18} />
             </Button>
             <Modal.Title className="w-100 text-center h4 mb-0">
-              ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+              â‚¦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </Modal.Title>
           </Modal.Header>
 
-          <Modal.Body className="p-4  ">
+          <Modal.Body className="p-4">
             <div className="d-flex flex-column gap-3">
               <div className="d-flex justify-content-between">
                 <span className="text-secondary">Bank</span>
                 <div>
                   <img
-                    src={accountData ? getBankLogoByName(accountData.bankName) : ""}
+                    src={getBankLogoByName(accountData.bankName)}
                     onError={(e) => {
-                      e.target.onerror = null; // Prevent infinite loop in case fallback also fails
-                      e.target.src = "";        // Optional: Clear the src so no broken icon shows
-                      e.target.style.backgroundColor = "#f8f9fa"; // Bootstrap's `bg-light` color
-                      e.target.style.objectFit = "cover";
-                      e.target.alt = "Bank logo not available";
+                      e.target.onerror = null;
+                      e.target.src = '';
+                      e.target.style.backgroundColor = '#f8f9fa';
+                      e.target.style.objectFit = 'cover';
+                      e.target.alt = 'Bank logo not available';
                     }}
                     style={{
                       width: 15,
                       height: 15,
-                      objectFit: "contain",
-                      borderRadius: "50%",
-                      backgroundColor: "#f0f0f0", // Initial color before failure
-                      // padding: 1
+                      objectFit: 'contain',
+                      borderRadius: '50%',
+                      backgroundColor: '#f0f0f0',
                     }}
                     className="me-1 mb-1"
+                    alt={accountData.bankName}
                   />
-                <span className="fw-medium"> {accountData.bankName}</span>
+                  <span className="fw-medium"> {accountData.bankName}</span>
                 </div>
               </div>
               <div className="d-flex justify-content-between">
@@ -221,13 +187,13 @@ const Transfermodal = ({ showModal, setShowModal }) => {
               </div>
               <div className="d-flex justify-content-between">
                 <span className="text-secondary">Amount</span>
-                <span className="fw-medium">  ₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+                <span className="fw-medium"> â‚¦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
               </div>
               <div className="d-flex justify-content-between">
                 <span className="text-secondary">Transaction Fee</span>
                 <span className="fw-medium">
-                  <s className="text-secondary me-2">₦10.00</s>
-                  ₦0.00
+                  <s className="text-secondary me-2">â‚¦10.00</s>
+                  â‚¦0.00
                 </span>
               </div>
 
@@ -242,13 +208,9 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                     <div className="rounded d-flex justify-content-between align-items-center">
                       <div className="d-flex align-items-center gap-2">
                         <div>
-                          {/* <p >Available Balance </p> */}
-
-                          <span className="fw-medium mb-1">
-                            Available Balance
-                          </span>
+                          <span className="fw-medium mb-1 d-block">Available Balance</span>
                           <span className="text-muted mx-1 mb-1 align-items-center">
-                            (₦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15} />
+                            (â‚¦{balance.toLocaleString()}.00) <AlertCircle className="text-muted mb-1" size={15} />
                           </span>
                         </div>
                       </div>
@@ -257,23 +219,20 @@ const Transfermodal = ({ showModal, setShowModal }) => {
 
                     <hr
                       style={{
-                        border: "none",
-                        borderTop: "2px dotted #ccc",
-                        marginTop: "0.25rem",  // equivalent to Bootstrap's `my-1`
-                        marginBottom: "0.25rem"
+                        border: 'none',
+                        borderTop: '2px dotted #ccc',
+                        marginTop: '0.25rem',
+                        marginBottom: '0.25rem',
                       }}
                     />
-
 
                     <div className="rounded d-flex justify-content-between align-items-center">
                       <div className="d-flex align-items-center gap-2">
                         <div>
-                          <p className="fw-medium mb-1 text-muted">Wallet (₦{balance.toLocaleString()}.00)</p>
+                          <p className="fw-medium mb-1 text-muted">Wallet (â‚¦{balance.toLocaleString()}.00)</p>
                         </div>
                       </div>
-                      <div className="p-0 text-muted">
-                        -₦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-                      </div>
+                      <div className="p-0 text-muted">-â‚¦{amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                     </div>
                   </div>
                 </div>
@@ -282,13 +241,12 @@ const Transfermodal = ({ showModal, setShowModal }) => {
               <Button
                 disabled={isLoading}
                 variant="success"
-                style={{ backgroundColor: "#01B575" }}
+                style={{ backgroundColor: '#01B575' }}
                 className="w-75 py-2 mt-2 mx-auto rounded-5 fs-5 border-0"
                 onClick={PaymodelBtn}
               >
-                {isLoading ? "Pay" : "Pay"}
+                {isLoading ? 'Processing...' : 'Pay'}
               </Button>
-
             </div>
           </Modal.Body>
         </div>

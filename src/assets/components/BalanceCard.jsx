@@ -1,99 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'react-bootstrap';
-import { EyeFill, EyeSlashFill, ChevronRight } from 'react-bootstrap-icons';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { API_URLS } from '../../../utils/apiConfig';
+import { useBalance } from '../../hooks/useQueries';
+import './UserDbpage/UserDb.css';
 
 const BalanceCard = () => {
-    const navigate = useNavigate();
-    const [showBalance, setShowBalance] = useState(true);
-    const [balance, setBalance] = useState(null);
+  const navigate = useNavigate();
+  const [showBalance, setShowBalance] = useState(true);
 
-    // const fetchUserBalance = async () => {
-    //     try {
-    //         const token = localStorage.getItem('token');
-    //         const response = await axios.get(API_URLS.getuserbalance, {
-    //             headers: { Authorization: `Bearer ${token}` }
-    //         });
-    //         setBalance(response.data.walletBalance); // Assuming your backend returns walletBalance
-    //     } catch (error) {
-    //         console.error('Failed to fetch balance:', error);
-    //         Swal.fire('Error', 'Failed to fetch balance', 'error');
-    //     }
-    // };
+  const { data: balance, isPending, isError, refetch, isFetching } = useBalance();
 
-    // useEffect(() => {
-    //     fetchUserBalance();
-    // }, []);
+  const goToHistory = () => navigate('/storetransaction');
+  const goToAddMoney = () => navigate('/addmoney');
 
+  return (
+    <section className="opay-hero" aria-label="Wallet balance">
+      <div className="d-flex justify-content-between align-items-center">
+        <p className="opay-hero__label">
+          Available Balance
+          <button
+            type="button"
+            className="opay-hero__toggle"
+            onClick={() => setShowBalance((prev) => !prev)}
+            aria-label={showBalance ? 'Hide balance' : 'Show balance'}
+            aria-pressed={!showBalance}
+          >
+            <i className={showBalance ? 'ri-eye-line' : 'ri-eye-off-line'} aria-hidden="true" />
+          </button>
+        </p>
 
+        {isFetching && !isPending && (
+          <span className="opay-refetch" style={{ color: 'rgba(255,255,255,0.85)' }}>
+            <span className="opay-refetch__dot" style={{ background: '#fff' }} />
+            Updating
+          </span>
+        )}
+      </div>
 
-    const fetchUserBalance = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await axios.get(API_URLS.getuserbalance, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setBalance(response.data.walletBalance);
-        } catch (error) {
-            console.error('Failed to fetch balance:', error);
+      <p className={`opay-hero__amount${showBalance ? '' : ' opay-hero__amount--muted'}`}>
+        {isPending
+          ? 'â‚¦ â€”'
+          : isError
+            ? 'Unavailable'
+            : showBalance
+              ? `â‚¦${Number(balance || 0).toLocaleString()}.00`
+              : 'â‚¦ ****'}
+      </p>
 
-            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-                // Token is expired or invalid — log the user out
-                localStorage.removeItem("token"); // Or just remove specific items
-                Swal.fire({
-                    title: 'Session Expired',
-                    text: 'Your session has expired. Please log in again.',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    navigate('/'); // Navigate to login page
-                });
-            } else {
-                Swal.fire('Error', 'Failed to fetch balance', 'error');
-            }
-        }
-    };
+      {isError && (
+        <div className="d-flex align-items-center gap-2 mt-2">
+          <span style={{ fontSize: '0.78rem', opacity: 0.9 }}>Could not load your balance.</span>
+          <button
+            type="button"
+            className="opay-hero__link"
+            onClick={() => refetch()}
+            style={{ textDecoration: 'underline' }}
+          >
+            Retry
+          </button>
+        </div>
+      )}
 
-    useEffect(() => {
-        fetchUserBalance();
-    }, []);
-    const TransactionBtn = () => {
-        navigate("/storetransaction");
-    };
+      <div className="opay-hero__meta">
+        <button type="button" className="opay-hero__cta" onClick={goToAddMoney}>
+          <i className="ri-add-line" aria-hidden="true" /> Add Money
+        </button>
 
-    const AddMoneyBtn = () => {
-        navigate("/addmoney");
-    };
-
-    return (
-        <Card className="styles bgEmerald text-white p-3 mb-2 rounded-3" style={{ marginTop: "73px", border: "none" }}>
-            <div className="d-flex justify-content-between align-items-center mb-2">
-                <div className="d-flex align-items-center gap-2">
-                    <span className="small">Available Balance</span>
-                    <span style={{ cursor: "pointer" }} onClick={() => setShowBalance(!showBalance)}>
-                        {showBalance ? <EyeFill size={16} /> : <EyeSlashFill size={16} />}
-                    </span>
-                </div>
-                <div className="text-white" style={{ cursor: "pointer" }} onClick={TransactionBtn}>
-                    Transaction History <ChevronRight />
-                </div>
-            </div>
-            <div className="d-flex justify-content-between align-items-center">
-                <span className="fs-2 fw-bold d-flex" style={{ alignItems: "center" }}>
-                    {balance === null
-                        ? "****"
-                        : showBalance
-                            ? `₦${balance.toLocaleString()}.00`
-                            : "****"}
-                    {/* <ChevronRight className='fw-bold' style={{ fontSize: "12px" }} /> */}
-                </span>
-
-                <Button variant="light" className="text-success rounded-5" onClick={AddMoneyBtn}>+ Add Money</Button>
-            </div>
-        </Card>
-    );
+        <button type="button" className="opay-hero__link" onClick={goToHistory}>
+          Transaction History <i className="ri-arrow-right-s-line" aria-hidden="true" />
+        </button>
+      </div>
+    </section>
+  );
 };
 
 export default BalanceCard;

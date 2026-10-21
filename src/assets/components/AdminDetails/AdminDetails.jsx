@@ -1,66 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { API_URLS } from '../../../../utils/apiConfig';
+import { useState } from 'react';
 import Navbar from '../Navbarpage/Navbar';
 import NavbarTop from '../NavbarToppage/NavbarTop';
-
+import { useChangeAdminPassword } from '../../../hooks/useMutations';
+import { getErrorMessage } from '../../../lib/apiClient';
+import { alert } from '../../../lib/alert';
 
 const AdminDetails = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const { mutate: changePassword, isPending: isSubmitting } = useChangeAdminPassword();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    try {
-      const adminToken = localStorage.getItem("adminToken");
-
-      if (!adminToken) {
-        Swal.fire("Error", "User not logged in.", "error");
-        return;
-      }
-
-      const response = await fetch(API_URLS.changeadminpassword, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+    changePassword(
+      { oldPassword, newPassword },
+      {
+        onSuccess: (result) => {
+          if (result?.status) {
+            alert.success('Success', result.message || 'Password changed successfully!');
+            setOldPassword('');
+            setNewPassword('');
+          } else {
+            alert.error('Error', result?.message || 'Failed to change password.');
+          }
         },
-        body: JSON.stringify({
-          adminToken,
-          OldPassword: oldPassword,
-          NewPassword: newPassword,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (result.status) {
-        Swal.fire("Success", result.message || "Password changed successfully!", "success");
-        setOldPassword('');
-        setNewPassword('');
-      } else {
-        Swal.fire("Error", result.message || "Failed to change password.", "error");
-      }
-    } catch (err) {
-      console.error("Error changing password:", err);
-      Swal.fire("Error", "Something went wrong.", "error");
-    } finally {
-      setIsSubmitting(false);
-    }
+        onError: (error) => {
+          alert.error('Error', getErrorMessage(error, 'Something went wrong.'));
+        },
+      },
+    );
   };
-
 
   return (
     <>
       <Navbar />
-      <NavbarTop/>
-      <div className="container col-md-4 bg-white p-4 rounded-3" style={{ marginTop: "60px" }}>
+      <NavbarTop />
+      <div className="container col-md-4 bg-white p-4 rounded-3" style={{ marginTop: '60px' }}>
         <h3 className="mb-4">Admin Password</h3>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label className="form-label">Old Password</label>
+            <label className="form-label" htmlFor="adminOldPassword">
+              Old Password
+            </label>
             <input
+              id="adminOldPassword"
               type="text"
               className="form-control"
               placeholder="Old Password"
@@ -70,8 +55,11 @@ const AdminDetails = () => {
             />
           </div>
           <div className="mb-3">
-            <label className="form-label">New Password</label>
+            <label className="form-label" htmlFor="adminNewPassword">
+              New Password
+            </label>
             <input
+              id="adminNewPassword"
               type="text"
               className="form-control"
               placeholder="New Password"

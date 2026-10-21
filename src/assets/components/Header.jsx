@@ -1,65 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { Navbar, Container } from 'react-bootstrap';
-import { BellFill, EyeFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
-// import styles from '../App.css';
+import { useCurrentUser } from '../../lib/auth';
+import { DEFAULT_AVATAR } from '../../lib/constants';
+import './UserDbpage/UserDb.css';
 
 const Header = () => {
-  const [username, setUsername] = useState('');
-  const userData = JSON.parse(localStorage.getItem('user'));
-  const profilePicture = userData?.profilePicture;
-  useEffect(() => {
-    // Retrieve the user object from localStorage and parse it
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser); // Parse the stored string into an object
-      setUsername(parsedUser.username);
-    }
-  }, []);
-  const navigate = useNavigate()
-  const Uploadimage=()=>{
-    navigate("/upload")
-  }
+  const navigate = useNavigate();
+  const { user } = useCurrentUser();
+
+  const username = user?.username || 'User';
+  const profilePicture = user?.profilePicture || DEFAULT_AVATAR;
+
+  const openUpload = () => navigate('/upload');
+
   return (
-    <Navbar bg="white" className="fixed-top">
-      <Container className="d-flex justify-content-between align-items-center my-2">
-        <div className="d-flex align-items-center gap-2">
-          <div className="rounded-circle overflow-hidden bg-secondary" style={{ width: 32, height: 32 }}>
-            {/* <img 
-              src='https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc'
-                        
-            alt="Profile" className="w-100 h-100 object-fit-cover" /> */}
-
-
-            <img
-              src={
-                profilePicture
-                  ? profilePicture
-                  : "https://imgs.search.brave.com/bxCCyib87iQyOj5bfkpD7EJYOE_guuCNV5dH5-6folo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzExLzY5LzIz/LzM2MF9GXzExMTY5/MjM0Nl9GbUZsc29W/NHBhcFRmbVV2OEhC/S0lHbTNtT1ZKeENW/My5qcGc"
-              }
-              alt="Profile"
-              className="w-100 h-100 object-fit-cover" 
-              roundedCircle
-              // style={{ width: '80px', height: '80px', objectFit: 'cover' }}
-              onClick={Uploadimage}
-            />
+    <header className="opay-dash__header">
+      <div className="opay-dash__header-inner">
+        <div className="d-flex align-items-center gap-2" style={{ minWidth: 0 }}>
+          <img
+            src={profilePicture}
+            alt={`${username} profile`}
+            className="opay-dash__avatar"
+            onClick={openUpload}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && openUpload()}
+            aria-label="Update profile picture"
+          />
+          <div style={{ minWidth: 0 }}>
+            <p className="opay-dash__greeting">Hi, {username}</p>
+            <p className="opay-dash__greeting-sub">Welcome back to your wallet</p>
           </div>
-          <span className="fw-medium">Hi, {username || 'User'}</span>
         </div>
-        <div className="d-flex align-items-center gap-4">
-          <i class="ri-qr-scan-2-line fs-2"></i>
-          <div className="position-relative">
-            {/* <BellFill size={24} /> */}
-            <i class="ri-notification-line fs-2"></i>
-            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+        <div className="opay-dash__header-actions">
+          <button type="button" className="opay-dash__icon-btn" aria-label="Scan QR code">
+            <i className="ri-qr-scan-2-line" aria-hidden="true" />
+          </button>
+
+          <button type="button" className="opay-dash__icon-btn" aria-label="Notifications">
+            <i className="ri-notification-3-line" aria-hidden="true" />
+            <span className="opay-dash__icon-dot" aria-hidden="true">
               9
             </span>
-          </div>
+          </button>
         </div>
-      </Container>
-    </Navbar>
+      </div>
+    </header>
   );
 };
 
 export default Header;
-

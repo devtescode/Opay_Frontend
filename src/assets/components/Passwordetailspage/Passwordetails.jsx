@@ -1,42 +1,26 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import {
     Container,
-    Row,
-    Col,
-    Card,
-    Button,
     ListGroup,
-    Badge
 } from 'react-bootstrap';
-import {
-    CreditCard,
-    ClockHistory,
-    ShieldCheck,
-    ArrowRight,
-    Eye,
-    EyeSlash,
-    Headset,
-    Gift,
-    CurrencyDollar,
-    Bank,
-    Shop
-} from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
+import { useCurrentUser, useLogout } from '../../../lib/auth';
+
 const Passwordetails = () => {
-    
+
     const navigate = useNavigate()
+    const { token, isAuthenticated } = useCurrentUser();
+    const { logoutUser } = useLogout();
+
     // If there's no token, redirect to the login page
-    
-    const token = localStorage.getItem('token'); // Check if token exists in localStorage
     useEffect(() => {
-        if (!token) {
+        if (!token || !isAuthenticated) {
              navigate("/")
         }
-      
-    }, [])
-    
+    }, [token, isAuthenticated, navigate])
+
     const LogoutBtn = () => {
-        Swal.fire({
+        window.Swal?.fire({
             text: "Are you sure you want to log out of Opay?",
             showCancelButton: true,
             confirmButtonText: "Yes",
@@ -48,8 +32,7 @@ const Passwordetails = () => {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                navigate("/");
-                localStorage.removeItem("token");
+                logoutUser();
             }
         });
     }
@@ -61,7 +44,7 @@ const Passwordetails = () => {
         <>
             <Container fluid className="p-0 bg-light" style={{ maxWidth: '480px', minHeight: '100vh', }}>
                 <div className="d-flex align-items-center p-2 bg-white fixed-top">
-                    <span><i class="ri-arrow-left-s-line"></i>  <span className=''>Settings</span></span>
+                    <span><i className="ri-arrow-left-s-line"></i>  <span className=''>Settings</span></span>
                 </div>
                 <div className='mx-auto mx-3' style={{ marginTop: "70px" }}>
                     <div className=' p-2 rounded-3 bg-white rounded-3 mx-3'>
@@ -70,7 +53,7 @@ const Passwordetails = () => {
                                 <span>Login Settings</span>
                             </div>
 
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
 
                         <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
@@ -79,7 +62,7 @@ const Passwordetails = () => {
                                     <span>Payment Settings</span>
                                 </div>
                             </div>
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
 
                         <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
@@ -88,7 +71,7 @@ const Passwordetails = () => {
                                     <span>Saving Settings</span>
                                 </div>
                             </div>
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
                     </div>
                 </div>
@@ -100,7 +83,7 @@ const Passwordetails = () => {
                                 <span>Homepage Settings</span>
                             </div>
 
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
 
                         <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
@@ -109,7 +92,7 @@ const Passwordetails = () => {
                                     <span>Security Questions</span>
                                 </div>
                             </div>
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
 
                         <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
@@ -118,7 +101,7 @@ const Passwordetails = () => {
                                     <span>SMS Alert Subscription</span>
                                 </div>
                             </div>
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
 
                         <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
@@ -127,7 +110,7 @@ const Passwordetails = () => {
                                     <span>Themes</span>
                                 </div>
                             </div>
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
 
                         <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3 ">
@@ -136,7 +119,7 @@ const Passwordetails = () => {
                                     <span>Access to clipboard</span>
                                 </div>
                             </div>
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
                     </div>
                 </div>
@@ -148,7 +131,7 @@ const Passwordetails = () => {
                                 <span>Security center</span>
                             </div>
 
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
                     </div>
                 </div>
@@ -159,7 +142,7 @@ const Passwordetails = () => {
                                 <span>Close Account</span>
                             </div>
 
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
                     </div>
                 </div>
@@ -170,7 +153,7 @@ const Passwordetails = () => {
                                 <span>About</span>
                             </div>
 
-                            <i class="ri-arrow-right-s-line"></i>
+                            <i className="ri-arrow-right-s-line"></i>
                         </ListGroup.Item>
                     </div>
                 </div>

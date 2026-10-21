@@ -1,57 +1,59 @@
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { ChevronLeft, QrCode, XCircle } from "lucide-react"
 import { useNavigate } from "react-router-dom"
-import { API_URLS } from "../../../../utils/apiConfig";
 import Toopay from "../../Image/Toopay.png" // Adjust the import path as necessary
+import { useOpayRecents } from '../../../hooks/useQueries';
+import { useValidateAccount } from '../../../hooks/useMutations';
+import { useCurrentUser } from '../../../lib/auth';
 
 const ToOpay = () => {
   const [activeTab, setActiveTab] = useState("recents");
   const [accountNumber, setAccountNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [accountName, setAccountName] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
+  const { userId } = useCurrentUser();
+  const { data: recentOpay = [] } = useOpayRecents(userId);
+  const { mutate: validateAccount } = useValidateAccount();
+
   const BackToHome = () => {
     navigate("/userdb");
   };
 
-
-  const validateAndProceed = async (value) => {
+  const validateAndProceed = (value) => {
     setIsLoading(true);
-    setAccountName("");
     setErrorMsg("");
-    try {
-      const response = await fetch(API_URLS.useraccount, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          AccountNumber: value,
-          Bankcode: "999992", // OPay's bank code (commonly used, adjust if your backend uses a different code)
-        }),
-      });
-      const data = await response.json();
-      if (response.ok && data.status) {
-        setAccountName(data.accountName);
-        setErrorMsg("");
-        const accountDetails = {
-          accountName: data.accountName,
-          accountNumber: value,
-          bankName: "OPay",
-        };
-        localStorage.setItem("selectedAccount", JSON.stringify(accountDetails));
-        navigate("/transfer");
-      } else {
-        setErrorMsg("Invalid phone number or account number");
-        setAccountName("");
-      }
-    } catch (err) {
-      setErrorMsg("Failed to connect to the server. Please try again later.");
-      setAccountName("");
-    } finally {
-      setIsLoading(false);
-    }
+
+    validateAccount(
+      { accountNumber: value, bankCode: "999992" }, // OPay's bank code
+      {
+        onSuccess: (data) => {
+          setIsLoading(false);
+
+          if (!data?.status) {
+            setErrorMsg("Invalid phone number or account number");
+            return;
+          }
+
+          setErrorMsg("");
+
+          const accountDetails = {
+            accountName: data.accountName,
+            accountNumber: value,
+            bankName: "OPay",
+          };
+
+          localStorage.setItem("selectedAccount", JSON.stringify(accountDetails));
+          navigate("/transfer");
+        },
+        onError: () => {
+          setIsLoading(false);
+          setErrorMsg("Failed to connect to the server. Please try again later.");
+        },
+      },
+    );
   };
 
   // Input handler: triggers validation when 10 or 11 digits
@@ -63,25 +65,6 @@ const ToOpay = () => {
     }
   };
 
-
-  const [recentOpay, setRecentOpay] = useState([]);
-  const userId = JSON.parse(localStorage.getItem("user")).userId;
-  useEffect(() => {
-    const fetchRecentOpay = async () => {
-      try {
-        const res = await fetch(`${API_URLS.getRecentTransactionsbyOpay}/${userId}`);
-        const data = await res.json();
-        if (data.status) {
-          setRecentOpay(data.recents);
-        }
-        // console.log(data.recents, "datarecent");
-
-      } catch (err) {
-        console.error("Error fetching OPay transactions", err);
-      }
-    };
-    fetchRecentOpay();
-  }, [userId]);
 
   const HistoryBtn = () => {
     navigate("/storetransaction")
@@ -117,7 +100,7 @@ const ToOpay = () => {
         >
           {/* <div className="position-relative" style={{ zIndex: 10 }}>
             <p className="small mb-0 lh-base" style={{ color: '#fff', textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}>
-              OPay Partners with Olabisi Onabanjo University in Groundbreaking ₦1.2 Billion, 10-Year Scholarship Drive
+              OPay Partners with Olabisi Onabanjo University in Groundbreaking â‚¦1.2 Billion, 10-Year Scholarship Drive
             </p>
           </div> */}
         </div>
@@ -191,7 +174,7 @@ const ToOpay = () => {
           <p></p>
         ) : (
           <p className="text-muted small mb-0 mt-2 ">
-            Don't know the recipient's OPay account number?{" "}
+            Don&apos;t know the recipient&apos;s OPay account number?{" "}
             <button className="btn btn-link p-0  text-decoration-none small" style={{ color: "#20b2aa" }}>
               Ask them {">"}
             </button>
@@ -311,11 +294,11 @@ const ToOpay = () => {
                 color: "#04b879"
               }}
             >
-              <i class="ri-lifebuoy-fill fs-3"></i>
+              <i className="ri-lifebuoy-fill fs-3"></i>
             </div>
             <div className="d-flex flex-column justify-content-center">
               <span className="fw-medium">Get Your Betting Voucher Now</span>
-              <p className="text-muted mb-0">Get ₦100 off ₦1,000 top-up with voucher</p>
+              <p className="text-muted mb-0">Get â‚¦100 off â‚¦1,000 top-up with voucher</p>
             </div>
           </div>
 

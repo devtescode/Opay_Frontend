@@ -1,12 +1,9 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { API_URLS } from '../../../../utils/apiConfig';
 import { ChevronLeft } from 'react-bootstrap-icons';
 import html2pdf from "html2pdf.js";
-import watermarkImage from "../../Image/image.jpg"
-import html2canvas from 'html2canvas';
 import pay_logo from "../../../../public/pay-logo.png"
+import { useChangeTransactionStatus } from '../../../hooks/useMutations';
 
 function TransactionReceipt({ initialStatus }) {
   const location = useLocation();
@@ -15,10 +12,9 @@ function TransactionReceipt({ initialStatus }) {
   const [amount, setAmount] = useState(null);
   const [accountDetails, setAccountDetails] = useState(null);
   const [userfullName, setFullName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(''); 
-  const { state: transaction } = useLocation();
+  const [phoneNumber, setPhoneNumber] = useState('');
 
-  // console.log("Received transaction:", transaction); // ✅ Must not be null
+  // console.log("Received transaction:", transaction); // âœ… Must not be null
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -35,13 +31,10 @@ function TransactionReceipt({ initialStatus }) {
     const userData = localStorage.getItem("user");
     if (userData) {
       const user = JSON.parse(userData);
-      setFullName(user.fullname); // ✅ correct key
+      setFullName(user.fullname); // âœ… correct key
       setPhoneNumber(user.phoneNumber);
     }
   }, []);
-
-  const [transactionTime, setTransactionTime] = useState("");
-  // This creates a state variable to store the formatted time
 
   useEffect(() => {
     if (passedTransaction) {
@@ -51,20 +44,8 @@ function TransactionReceipt({ initialStatus }) {
         bankName: passedTransaction.bankName,
       });
       setAmount(passedTransaction.amount);
-      setStatus(passedTransaction.status); // ✅ Set the status here
+      setStatus(passedTransaction.status); // âœ… Set the status here
       setTransactionId(passedTransaction._id);
-      if (passedTransaction.createdAt) {
-        const formattedTime = new Date(passedTransaction.createdAt)
-          .toLocaleString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false
-          });
-        setTransactionTime(formattedTime); // Update the state
-      }
       // console.log("Using NAVIGATION transaction ID:", passedTransaction._id);
       // console.log("Raw createdAt:", passedTransaction?.createdAt);
 
@@ -119,8 +100,9 @@ function TransactionReceipt({ initialStatus }) {
 
 
   const [status, setStatus] = useState(initialStatus || "successful");
+  const { mutate: changeStatus } = useChangeTransactionStatus();
 
-  const handleDoubleTap = async () => {
+  const handleDoubleTap = () => {
     let newStatus;
     if (status === 'successful') {
       newStatus = 'pending';
@@ -135,15 +117,13 @@ function TransactionReceipt({ initialStatus }) {
       return;
     }
 
-
-    try {
-      // http://localhost:4000/useropay/changetransactions/${transactionId}
-      await axios.put(API_URLS.changetransactions(transactionId), { status: newStatus });
-      setStatus(newStatus); // Update status locally after the request succeeds
-      // console.log("✅ Status updated for:", transactionId);
-    } catch (error) {
-      console.error('Error updating transaction status:', error);
-    }
+    changeStatus(
+      { transactionId, status: newStatus },
+      {
+        onSuccess: () => setStatus(newStatus),
+        onError: (error) => console.error('Error updating transaction status:', error),
+      },
+    );
   };
 
 
@@ -188,7 +168,7 @@ function TransactionReceipt({ initialStatus }) {
 
     await html2pdf().set(options).from(element).save();
 
-    // ✅ Show the saved message for 3 seconds
+    // âœ… Show the saved message for 3 seconds
     const messageDiv = document.getElementById("pdf-saved-message");
     if (messageDiv) {
       messageDiv.style.display = "block";
@@ -320,7 +300,7 @@ function TransactionReceipt({ initialStatus }) {
                       style={{ color: "#01B575" }}
                     >
                       {amount !== null
-                        ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
+                        ? `â‚¦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}`
                         : "Loading..."}
                     </h2>
 
@@ -432,11 +412,11 @@ function TransactionReceipt({ initialStatus }) {
           <div className='d-flex justify-content-between p-2' style={{ alignItems: "center" }}>
 
 
-            <div lassName="text-center" style={{ alignItems: "center", color: "#01B575" }}>
+            <div className="text-center" style={{ alignItems: "center", color: "#01B575" }}>
 
               <div className='d-flex mx-2' style={{ alignItems: "center" }}>
                 <div className=''>
-                  <i class="ri-image-2-line fs-5"></i>
+                  <i className="ri-image-2-line fs-5"></i>
                 </div>
                 <div className='mx-1'>
                   Share as image
@@ -458,7 +438,7 @@ function TransactionReceipt({ initialStatus }) {
 
               <div className='d-flex' onClick={SharePDF} style={{ alignItems: "center" }}>
                 <div className=''>
-                  <i class="ri-file-pdf-2-line fs-5"></i>
+                  <i className="ri-file-pdf-2-line fs-5"></i>
                 </div>
                 <div className='mx-1'>
                   Share as PDF

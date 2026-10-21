@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import {
     Share,
-    PersonPlusFill,
     List,
     CheckCircleFill
 } from 'react-bootstrap-icons';
