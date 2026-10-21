@@ -365,7 +365,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
+  gap: 3px;
   margin: 12px 0 0;
   font-size: 22px;
   font-weight: 700;
@@ -393,9 +393,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
+  gap: 3px;
   margin: 12px 0 0;
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -415,7 +415,7 @@
 
 .opay-wallet__chev {
   display: inline-block;
-  margin-left: 6px;
+  margin-left: 3px;
   vertical-align: middle;
   font-size: 18px;
   line-height: 1;
