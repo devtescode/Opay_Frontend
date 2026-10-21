@@ -337,8 +337,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 9px 18px;
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  padding: 7px 14px;
+  border: 1.5px solid rgba(205, 205, 205, 0.7);
   border-radius: 999px;
   background: transparent;
   color: var(--opay-white);
