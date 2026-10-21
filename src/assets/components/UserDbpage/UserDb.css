@@ -439,16 +439,16 @@
   z-index: 1;
   display: flex;
   /* align-items: center; */
-  gap: 10px;
+  gap: 5px;
   margin: -10px 16px 0;
-  padding: 13px 16px;
+  padding: 5px 6px;
   border-radius: 0 0 20px 20px;
   background: var(--opay-mint-soft);
 }
 
 .opay-transferstrip__icon {
   flex-shrink: 0;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1;
   color: var(--opay-green-deep);
 }
@@ -456,7 +456,7 @@
 .opay-transferstrip__who {
   flex: 1;
   min-width: 0;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -465,7 +465,7 @@
 
 .opay-transferstrip__amount {
   flex-shrink: 0;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
   /* text-decoration: line-through; */
@@ -474,15 +474,15 @@
 
 .opay-transferstrip__label {
   flex-shrink: 0;
-  font-size: 15px;
+  font-size: 13px;
   color: var(--opay-muted);
   white-space: nowrap;
 }
 
 .opay-transferstrip__chev {
   flex-shrink: 0;
-  font-size: 16px;
-  line-height: 1;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--opay-faint);
 }
 
