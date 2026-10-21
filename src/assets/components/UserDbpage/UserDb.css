@@ -234,7 +234,9 @@
   margin: 16px 16px 0;
   padding: 18px;
   border: 0;
-  border-radius: 24px;
+  /* border-radius: 24px; */
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
   background: linear-gradient(135deg, #10b981 0%, #0fa36f 55%, #059669 100%);
   color: var(--opay-white);
   box-shadow: 0 12px 28px rgba(5, 150, 105, 0.25);
