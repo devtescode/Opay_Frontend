@@ -99,7 +99,7 @@ const UserLogin = () => {
             style={{ backgroundColor: '#01B575', borderColor: '#00D632' }}
             disabled={isLoading || !password}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? 'Log in' : 'Login'}
           </Button>
         </div>
 

@@ -50,7 +50,9 @@ export const useCurrentUser = () => {
 
 export const useLogout = () => {
   const logoutUser = useCallback(() => {
-    clearUserSession();
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(SESSION_ID_KEY);
+
     window.location.replace('/');
   }, []);
 

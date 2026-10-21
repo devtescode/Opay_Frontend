@@ -399,7 +399,7 @@
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   gap: 10px;
   margin: -10px 16px 0;
   padding: 13px 16px;
@@ -429,7 +429,7 @@
   font-size: 15px;
   font-weight: 600;
   white-space: nowrap;
-  text-decoration: line-through;
+  /* text-decoration: line-through; */
   color: var(--opay-ink);
 }
 
