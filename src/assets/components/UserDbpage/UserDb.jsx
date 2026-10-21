@@ -1,50 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BalanceCard from '../BalanceCard';
-import RecentTransactions from '../RecentTransactions';
-import QuickActions from '../QuickActions';
-import ReferralBanner from '../ReferralBanner';
-import BottomNavigation from '../BottomNavigation';
 import Header from '../Header';
-import Services from '../Services';
+import WalletHero from './WalletHero';
+import TransferStrip from './TransferStrip';
+import BusinessServiceRow from '../BusinessServiceRow';
+import QuickActions from '../QuickActions';
 import Takecontrol from '../Takecontrol';
+import Services from '../Services';
+import BottomNavigation from '../BottomNavigation';
 import './UserDb.css';
 import { useCurrentUser } from '../../../lib/auth';
 import { clearUserSession } from '../../../lib/apiClient';
-import { useMoneyOut, useSessionStatus, useTransactions } from '../../../hooks/useQueries';
-
-const RECENT_LIMIT = 5;
-
-const DashboardStats = ({ userId }) => {
-  const { data: moneyOut = 0, isPending: moneyOutPending } = useMoneyOut(userId);
-  const { data: transactions, isPending: txPending } = useTransactions(userId, { limit: RECENT_LIMIT });
-
-  const totalTransactions = transactions?.total ?? 0;
-
-  return (
-    <div className="opay-stats">
-      <div className="opay-stat">
-        <p className="opay-stat__label">
-          <i className="ri-arrow-down-line" aria-hidden="true" /> Money out
-        </p>
-        <p className="opay-stat__value opay-stat__value--out">
-          {moneyOutPending ? '—' : `₦${Number(moneyOut).toLocaleString()}.00`}
-        </p>
-      </div>
-
-      <div className="opay-stat">
-        <p className="opay-stat__label">
-          <i className="ri-arrow-left-right-line" aria-hidden="true" /> Transactions
-        </p>
-        <p className="opay-stat__value">{txPending ? '—' : totalTransactions.toLocaleString()}</p>
-      </div>
-    </div>
-  );
-};
+import { useBalance, useLastTransfer, useSessionStatus, useTodayTotals } from '../../../hooks/useQueries';
 
 const UserDb = () => {
   const navigate = useNavigate();
   const { userId } = useCurrentUser();
+
+  // The balance starts masked, like the reference design.
+  const [isBalanceVisible, setIsBalanceVisible] = useState(false);
+
+  const { data: balance = 0, isPending, isError, refetch } = useBalance();
+  const { data: lastTransfer, isPending: transferPending } = useLastTransfer(userId);
+  const { data: todayTotals } = useTodayTotals(userId);
 
   // Polls the backend instead of listening on a socket: when an admin ends
   // this session the poll comes back inactive and we sign the user out.
@@ -67,25 +45,39 @@ const UserDb = () => {
     }
   }, [session, navigate]);
 
+  const toggleBalance = () => setIsBalanceVisible((prev) => !prev);
+
   return (
-    <div className="opay-dash">
+    <div className="opay-page">
       <Header />
 
-      <main className="opay-dash__shell">
-        <div className="opay-dash__grid">
-          <div className="opay-dash__col">
-            <BalanceCard />
-            <DashboardStats userId={userId} />
-            <QuickActions />
-            <Services />
-          </div>
+      <main className="opay-page__shell">
+        <div className="opay-grabber" aria-hidden="true" />
 
-          <div className="opay-dash__col">
-            <RecentTransactions userId={userId} />
-            <ReferralBanner />
-            <Takecontrol />
-          </div>
-        </div>
+        <WalletHero
+          balance={balance}
+          isBalanceVisible={isBalanceVisible}
+          onToggleBalance={toggleBalance}
+          earnedToday={todayTotals?.earnedToday ?? 0}
+          isEarnedVisible={isBalanceVisible}
+          isLoading={isPending}
+          isError={isError}
+          onRetry={() => refetch()}
+        />
+
+        <TransferStrip
+          transfer={lastTransfer}
+          isLoading={transferPending}
+          onOpenTransactions={() => navigate('/storetransaction')}
+        />
+
+        <BusinessServiceRow sales={todayTotals?.salesToday ?? 0} />
+
+        <QuickActions />
+
+        <Takecontrol />
+
+        <Services />
       </main>
 
       <BottomNavigation />

@@ -1,57 +1,63 @@
 /* ==================================================================
-   Opay user dashboard
-   Design tokens live here so the whole page can be re-skinned from
-   one place (colours, radii, spacing, shadows).
+   Opay user dashboard — redesigned mobile dashboard
+   ------------------------------------------------------------------
+   Design tokens live on .opay-page so the whole page can be
+   re-skinned from one place (colours, radii, spacing, shadows).
+   The global reset in src/index.css zeroes every margin/padding, so
+   each block below sets its own spacing.
    ================================================================== */
 
-.opay-dash {
+/* ------------------------------------------------------------------ *
+   Page shell + design tokens
+ * ------------------------------------------------------------------ */
+
+.opay-page {
   --opay-green: #10b981;
   --opay-green-deep: #059669;
   --opay-green-dark: #047857;
-  --opay-green-soft: #e1f5ea;
-  --opay-green-tint: #f0f8f4;
-  --opay-pay-green: #01b575;
-  --opay-txn-green: #1fab7c;
-  --opay-ink: #0f172a;
-  --opay-muted: #64748b;
-  --opay-line: #e8eef3;
-  --opay-surface: #ffffff;
-  --opay-bg: #f5f7f9;
-  --opay-danger: #dc2626;
-  --opay-radius-lg: 20px;
-  --opay-radius-md: 14px;
-  --opay-radius-sm: 10px;
-  --opay-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --opay-shadow-md: 0 6px 18px rgba(15, 23, 42, 0.06);
-  --opay-shadow-lg: 0 14px 34px rgba(15, 23, 42, 0.1);
+  --opay-mint: #e7f7f0;
+  --opay-mint-soft: #eafaf3;
+  --opay-grabber: #a7e8cf;
+  --opay-page-bg: #f1f2f6;
+  --opay-ink: #111827;
+  --opay-muted: #6b7280;
+  --opay-faint: #9ca3af;
+  --opay-white: #ffffff;
 
+  position: relative;
   min-height: 100vh;
-  background: var(--opay-bg);
+  background: var(--opay-page-bg);
   color: var(--opay-ink);
-  padding-bottom: 92px;
+  padding-bottom: 110px;
 }
 
-.opay-dash__shell {
-  max-width: 480px;
+/* The centred column that holds every dashboard section. */
+.opay-page__shell {
+  max-width: 450px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
+/* Optional column wrappers (used by the two column desktop layout). */
+.opay-page__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 /* ------------------------------------------------------------------ *
-   Header
+   Top bar
  * ------------------------------------------------------------------ */
 
-.opay-dash__header {
+.opay-topbar {
   position: sticky;
   top: 0;
   z-index: 1030;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--opay-line);
+  background: var(--opay-white);
 }
 
-.opay-dash__header-inner {
-  max-width: 480px;
+.opay-topbar__inner {
+  max-width: 450px;
   margin: 0 auto;
   padding: 12px 16px;
   display: flex;
@@ -60,501 +66,732 @@
   gap: 12px;
 }
 
-.opay-dash__avatar {
-  width: 40px;
-  height: 40px;
+.opay-topbar__avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   border-radius: 50%;
   object-fit: cover;
-  background: var(--opay-green-soft);
-  border: 2px solid #fff;
-  box-shadow: var(--opay-shadow-sm);
+  background: var(--opay-mint);
+  border: 2px solid var(--opay-white);
+  box-shadow: 0 2px 10px rgba(17, 24, 39, 0.14);
   cursor: pointer;
+}
+
+.opay-topbar__avatar:hover {
+  opacity: 0.85;
+}
+
+/* The little currency chip that sits on the avatar edge. The wrapper
+   is not named in the design, so anchor it with :has(). */
+.opay-topbar__inner > :has(> .opay-topbar__avatar-badge):not(.opay-topbar__avatar-badge) {
+  position: relative;
+  display: inline-flex;
   flex-shrink: 0;
 }
 
-.opay-dash__greeting {
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1.2;
+.opay-topbar__avatar-badge {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--opay-white);
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  box-shadow: 0 1px 4px rgba(17, 24, 39, 0.16);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: var(--opay-green-deep);
+  font-size: 9px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.opay-topbar__avatar-badge i {
+  font-style: normal;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.opay-topbar__avatar-badge-text {
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--opay-green-deep);
+}
+
+.opay-topbar__avatar-badge span {
+  font-size: 8px;
+  line-height: 1;
+}
+
+.opay-topbar__title {
+  flex: 1;
+  min-width: 0;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--opay-ink);
   margin: 0;
 }
 
-.opay-dash__greeting-sub {
-  font-size: 0.72rem;
-  color: var(--opay-muted);
-  margin: 2px 0 0;
-}
-
-.opay-dash__header-actions {
+.opay-topbar__actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 18px;
 }
 
-.opay-dash__icon-btn {
+.opay-topbar__action {
   position: relative;
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--opay-green-tint);
-  color: var(--opay-green-dark);
+  background: transparent;
+  color: #374151;
+  font-size: 20px;
+  line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
-  line-height: 1;
-  transition: background 0.18s ease, transform 0.18s ease;
+  cursor: pointer;
+  transition: opacity 0.18s ease, background 0.18s ease;
 }
 
-.opay-dash__icon-btn:hover {
-  background: var(--opay-green-soft);
+.opay-topbar__action:hover {
+  opacity: 0.7;
+  background: #f3f4f6;
 }
 
-.opay-dash__icon-btn:active {
-  transform: scale(0.94);
+.opay-topbar__action:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--opay-green-deep);
+  outline-offset: 2px;
 }
 
-.opay-dash__icon-dot {
+.opay-help-pill {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  min-width: 16px;
-  height: 16px;
+  top: -7px;
+  left: -6px;
+  min-width: 30px;
+  height: 15px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #f43f5e;
+  color: var(--opay-white);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 15px;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.opay-count-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 20px;
+  height: 20px;
   padding: 0 4px;
   border-radius: 999px;
-  background: var(--opay-danger);
-  color: #fff;
-  font-size: 0.6rem;
+  background: #b91c1c;
+  color: var(--opay-white);
+  font-size: 9px;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #fff;
+  line-height: 16px;
+  text-align: center;
+  white-space: nowrap;
+  border: 2px solid var(--opay-white);
 }
 
 /* ------------------------------------------------------------------ *
-   Hero balance card
+   Grabber
  * ------------------------------------------------------------------ */
 
-.opay-hero {
+.opay-grabber {
+  width: 36px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--opay-grabber);
+  margin: 14px auto 0;
+}
+
+/* ------------------------------------------------------------------ *
+   Wallet card
+ * ------------------------------------------------------------------ */
+
+.opay-wallet {
   position: relative;
   overflow: hidden;
+  margin: 16px 16px 0;
+  padding: 18px;
   border: 0;
-  border-radius: var(--opay-radius-lg);
-  background: linear-gradient(135deg, var(--opay-green) 0%, var(--opay-green-deep) 62%, var(--opay-green-dark) 100%);
-  color: #fff;
-  padding: 20px;
-  box-shadow: 0 12px 28px rgba(5, 150, 105, 0.28);
+  border-radius: 24px;
+  background: linear-gradient(135deg, #10b981 0%, #0fa36f 55%, #059669 100%);
+  color: var(--opay-white);
+  box-shadow: 0 12px 28px rgba(5, 150, 105, 0.25);
 }
 
-.opay-hero::after {
-  content: '';
+.opay-wallet::before {
+  content: "";
   position: absolute;
+  top: -70px;
+  right: -60px;
   width: 190px;
   height: 190px;
-  right: -70px;
-  top: -95px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   pointer-events: none;
 }
 
-.opay-hero::before {
-  content: '';
+.opay-wallet::after {
+  content: "";
   position: absolute;
-  width: 120px;
-  height: 120px;
-  right: 30px;
-  bottom: -70px;
+  bottom: -75px;
+  right: 10px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.07);
   pointer-events: none;
 }
 
-.opay-hero__label {
-  font-size: 0.78rem;
-  opacity: 0.9;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-}
-
-.opay-hero__toggle {
-  background: rgba(255, 255, 255, 0.18);
-  border: 0;
-  border-radius: 999px;
-  color: #fff;
-  width: 26px;
-  height: 26px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  transition: background 0.18s ease;
-}
-
-.opay-hero__toggle:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.opay-hero__amount {
-  font-size: clamp(1.9rem, 8vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin: 10px 0 0;
-}
-
-.opay-hero__amount--muted {
-  letter-spacing: 0.18em;
-  opacity: 0.75;
-}
-
-.opay-hero__meta {
+.opay-wallet__row {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 16px;
-  position: relative;
-  z-index: 1;
 }
 
-.opay-hero__cta {
-  background: #fff;
-  color: var(--opay-green-deep);
-  border: 0;
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.opay-hero__cta:hover {
-  color: var(--opay-green-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
-}
-
-.opay-hero__link {
-  background: transparent;
-  border: 0;
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 500;
-  opacity: 0.92;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 0;
-}
-
-.opay-hero__link:hover {
-  color: #fff;
-  opacity: 1;
-  text-decoration: underline;
-}
-
-/* ------------------------------------------------------------------ *
-   Stat strip
- * ------------------------------------------------------------------ */
-
-.opay-stats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.opay-stat {
-  background: var(--opay-surface);
-  border-radius: var(--opay-radius-md);
-  padding: 12px 14px;
-  box-shadow: var(--opay-shadow-sm);
-  border: 1px solid var(--opay-line);
-}
-
-.opay-stat__label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--opay-muted);
-  margin: 0;
+.opay-wallet__label {
   display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.opay-stat__value {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 4px 0 0;
-}
-
-.opay-stat__value--in {
-  color: var(--opay-txn-green);
-}
-
-.opay-stat__value--out {
-  color: var(--opay-ink);
-}
-
-/* ------------------------------------------------------------------ *
-   Quick actions
- * ------------------------------------------------------------------ */
-
-.opay-quick {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.opay-quick__item {
-  background: var(--opay-surface);
-  border: 1px solid var(--opay-line);
-  border-radius: var(--opay-radius-md);
-  padding: 14px 8px 12px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 8px;
-  cursor: pointer;
-  box-shadow: var(--opay-shadow-sm);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
 }
 
-.opay-quick__item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--opay-shadow-md);
-}
-
-.opay-quick__icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--opay-green);
-  color: #fff;
+.opay-wallet__shield {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.18);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.05rem;
 }
 
-.opay-quick__label {
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: var(--opay-ink);
-  text-align: center;
+.opay-wallet__shield i {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.opay-wallet__eye {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--opay-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.opay-wallet__eye i {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.opay-wallet__eye:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.opay-wallet__eye:focus-visible {
+  outline: 2px solid var(--opay-white);
+  outline-offset: 2px;
+}
+
+.opay-wallet__cta {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--opay-white);
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.opay-wallet__cta:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+.opay-wallet__cta:focus-visible {
+  outline: 2px solid var(--opay-white);
+  outline-offset: 2px;
+}
+
+.opay-wallet__masked {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.opay-wallet__amount {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.opay-wallet__chev {
+  display: inline-block;
+  margin-left: 6px;
+  vertical-align: middle;
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.opay-wallet__earned {
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+  font-size: 16px;
+  opacity: 0.88;
 }
 
 /* ------------------------------------------------------------------ *
-   Services grid
+   Transfer strip (tucked under the wallet card)
+ * ------------------------------------------------------------------ */
+
+.opay-transferstrip {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -10px 16px 0;
+  padding: 13px 16px;
+  border-radius: 0 0 20px 20px;
+  background: var(--opay-mint-soft);
+}
+
+.opay-transferstrip__icon {
+  flex-shrink: 0;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--opay-green-deep);
+}
+
+.opay-transferstrip__who {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.opay-transferstrip__amount {
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: line-through;
+  color: var(--opay-ink);
+}
+
+.opay-transferstrip__label {
+  flex-shrink: 0;
+  font-size: 15px;
+  color: var(--opay-muted);
+  white-space: nowrap;
+}
+
+.opay-transferstrip__chev {
+  flex-shrink: 0;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--opay-faint);
+}
+
+/* ------------------------------------------------------------------ *
+   Business row
+ * ------------------------------------------------------------------ */
+
+.opay-bizrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px;
+  padding: 16px;
+  border: 0;
+  border-radius: 18px;
+  background: var(--opay-white);
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+  color: var(--opay-ink);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.opay-bizrow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.08);
+}
+
+.opay-bizrow:focus-visible {
+  outline: 2px solid var(--opay-green-deep);
+  outline-offset: 2px;
+}
+
+.opay-bizrow__icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--opay-mint);
+  color: var(--opay-green-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.opay-bizrow__text {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  color: var(--opay-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.opay-bizrow__value {
+  font-weight: 600;
+  color: var(--opay-green-deep);
+  white-space: nowrap;
+}
+
+.opay-bizrow__chev {
+  flex-shrink: 0;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--opay-faint);
+}
+
+/* ------------------------------------------------------------------ *
+   Quick actions (squircles)
+ * ------------------------------------------------------------------ */
+
+.opay-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin: 16px;
+  padding: 18px 8px;
+  border-radius: 18px;
+  background: var(--opay-white);
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+}
+
+.opay-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 2px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--opay-ink);
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.opay-tile:hover {
+  background: #f7faf9;
+  transform: translateY(-1px);
+}
+
+.opay-tile:focus-visible {
+  outline: 2px solid var(--opay-green-deep);
+  outline-offset: 2px;
+}
+
+.opay-tile__icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: var(--opay-mint);
+  color: var(--opay-green-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.opay-tile__label {
+  font-size: 14px;
+  color: var(--opay-ink);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ *
+   Take control promo
+ * ------------------------------------------------------------------ */
+
+.opay-promo {
+  margin: 16px;
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--opay-white);
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+}
+
+.opay-promo__inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.opay-promo__art {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.opay-promo__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.opay-promo__title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.opay-promo__text {
+  font-size: 14px;
+  color: var(--opay-muted);
+  margin-top: 2px;
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.opay-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.opay-dots__dot {
+  width: 12px;
+  height: 4px;
+  border-radius: 999px;
+  background: #d7dbe0;
+}
+
+.opay-dots__dot--active {
+  width: 18px;
+  background: #111827;
+}
+
+/* ------------------------------------------------------------------ *
+   Services grid (circles)
  * ------------------------------------------------------------------ */
 
 .opay-services {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 14px;
-  background: var(--opay-surface);
-  border: 1px solid var(--opay-line);
-  border-radius: var(--opay-radius-md);
-  padding: 14px 8px;
-  box-shadow: var(--opay-shadow-sm);
+  row-gap: 20px;
+  column-gap: 6px;
+  margin: 16px;
+  padding: 18px 8px;
+  border-radius: 18px;
+  background: var(--opay-white);
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
 }
 
 .opay-service {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7px;
-  padding: 6px 2px;
+  gap: 9px;
+  padding: 4px 2px;
   border: 0;
+  border-radius: 12px;
   background: transparent;
+  color: var(--opay-ink);
   cursor: pointer;
-  border-radius: var(--opay-radius-sm);
-  transition: background 0.18s ease;
+  transition: background 0.18s ease, transform 0.18s ease;
 }
 
 .opay-service:hover {
-  background: var(--opay-green-tint);
+  background: #f7faf9;
+  transform: translateY(-1px);
+}
+
+.opay-service:focus-visible {
+  outline: 2px solid var(--opay-green-deep);
+  outline-offset: 2px;
 }
 
 .opay-service__icon {
-  width: 40px;
-  height: 40px;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
   border-radius: 50%;
-  background: var(--opay-green);
-  color: #fff;
+  background: var(--opay-mint);
+  color: var(--opay-green-deep);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 24px;
+  line-height: 1;
 }
 
 .opay-service__label {
-  font-size: 0.7rem;
+  font-size: 14px;
   color: var(--opay-ink);
   text-align: center;
   line-height: 1.25;
 }
 
 /* ------------------------------------------------------------------ *
-   Sections
+   Floating bottom navigation
  * ------------------------------------------------------------------ */
 
-.opay-section {
-  margin-top: 18px;
+.opay-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  z-index: 1040;
+  padding: 0 12px;
+  pointer-events: none;
 }
 
-.opay-section__head {
+.opay-nav__bar {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 8px 6px;
+  border-radius: 28px;
+  background: var(--opay-white);
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
+  pointer-events: auto;
 }
 
-.opay-section__title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.opay-section__action {
-  background: transparent;
-  border: 0;
-  color: var(--opay-green-deep);
-  font-size: 0.78rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 0;
-}
-
-.opay-section__action:hover {
-  color: var(--opay-green-dark);
-}
-
-/* ------------------------------------------------------------------ *
-   Transaction list
- * ------------------------------------------------------------------ */
-
-.opay-txn-list {
-  background: var(--opay-surface);
-  border: 1px solid var(--opay-line);
-  border-radius: var(--opay-radius-md);
-  box-shadow: var(--opay-shadow-sm);
-  overflow: hidden;
-}
-
-.opay-txn {
+.opay-nav__item {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 13px 14px;
-  border-bottom: 1px solid var(--opay-line);
+  gap: 3px;
+  padding: 6px 2px;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  color: var(--opay-faint);
   cursor: pointer;
-  transition: background 0.16s ease;
+  transition: color 0.18s ease, background 0.18s ease;
 }
 
-.opay-txn:last-child {
-  border-bottom: 0;
+.opay-nav__item:hover {
+  color: var(--opay-green-deep);
 }
 
-.opay-txn:hover {
-  background: var(--opay-green-tint);
+.opay-nav__item:focus-visible {
+  outline: 2px solid var(--opay-green-deep);
+  outline-offset: 2px;
 }
 
-.opay-txn__icon {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  border-radius: 50%;
-  background: var(--opay-green-soft);
-  color: var(--opay-txn-green);
+.opay-nav__item--active {
+  color: var(--opay-green-deep);
+}
+
+.opay-nav__icon {
+  width: 44px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 17px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 22px;
+  line-height: 1;
+  transition: background 0.18s ease;
 }
 
-.opay-txn__icon--in {
-  background: #e7fcf5;
+.opay-nav__icon i {
+  font-size: 22px;
+  line-height: 1;
 }
 
-.opay-txn__body {
-  flex: 1;
-  min-width: 0;
+.opay-nav__item--active .opay-nav__icon {
+  background: var(--opay-mint);
+  color: var(--opay-green-deep);
 }
 
-.opay-txn__title {
-  font-size: 0.84rem;
-  font-weight: 600;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.opay-nav__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: inherit;
 }
 
-.opay-txn__meta {
-  font-size: 0.7rem;
-  color: var(--opay-muted);
-  margin: 3px 0 0;
-}
-
-.opay-txn__right {
-  text-align: right;
+.opay-nav__logo {
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
-}
-
-.opay-txn__amount {
-  font-size: 0.86rem;
-  font-weight: 700;
-  display: block;
-  white-space: nowrap;
-}
-
-.opay-txn__amount--in {
-  color: var(--opay-txn-green);
-}
-
-.opay-txn__status {
-  display: inline-block;
-  margin-top: 4px;
-  font-size: 0.62rem;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 999px;
-  text-transform: capitalize;
-}
-
-.opay-txn__status--successful {
-  background: #cafbf0;
-  color: #2f9e7b;
-}
-
-.opay-txn__status--pending {
-  background: #fff3cd;
-  color: #8a6d1f;
-}
-
-.opay-txn__status--failed {
-  background: #f8d7da;
-  color: #842029;
-}
-
-.opay-txn__status--reversed {
-  background: #eef2f7;
-  color: #475569;
+  border-radius: 50%;
+  object-fit: contain;
+  filter: none;
 }
 
 /* ------------------------------------------------------------------ *
@@ -562,11 +799,11 @@
  * ------------------------------------------------------------------ */
 
 .opay-skeleton {
-  background: linear-gradient(90deg, #eef2f6 25%, #f8fafc 37%, #eef2f6 63%);
+  height: 14px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #eef1f4 25%, #f8fafb 37%, #eef1f4 63%);
   background-size: 400% 100%;
   animation: opay-shimmer 1.3s ease-in-out infinite;
-  border-radius: var(--opay-radius-sm);
-  height: 14px;
 }
 
 @keyframes opay-shimmer {
@@ -578,251 +815,169 @@
   }
 }
 
-.opay-skeleton-row {
+.opay-skeleton--circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.opay-skeleton--row {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 14px;
-  border-bottom: 1px solid var(--opay-line);
-}
-
-.opay-skeleton-row:last-child {
-  border-bottom: 0;
-}
-
-.opay-skeleton-circle {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  border-radius: 50%;
 }
 
 .opay-state {
   padding: 26px 18px;
   text-align: center;
   color: var(--opay-muted);
-  font-size: 0.82rem;
-}
-
-.opay-state__icon {
-  font-size: 1.6rem;
-  margin-bottom: 8px;
-  opacity: 0.65;
+  font-size: 14px;
 }
 
 .opay-state--error {
-  color: var(--opay-danger);
+  color: #dc2626;
+}
+
+.opay-state__icon {
+  font-size: 26px;
+  line-height: 1;
+  opacity: 0.6;
+  margin-bottom: 8px;
 }
 
 .opay-state__retry {
   margin-top: 10px;
-  background: var(--opay-green);
-  border: 0;
-  color: #fff;
-  border-radius: 999px;
   padding: 6px 16px;
-  font-size: 0.76rem;
-  font-weight: 600;
-}
-
-/* Refetching indicator */
-.opay-refetch {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.68rem;
-  color: var(--opay-muted);
-}
-
-.opay-refetch__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+  border: 0;
+  border-radius: 999px;
   background: var(--opay-green);
-  animation: opay-pulse 1s ease-in-out infinite;
-}
-
-@keyframes opay-pulse {
-  0%,
-  100% {
-    opacity: 0.25;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* ------------------------------------------------------------------ *
-   Promo / info cards
- * ------------------------------------------------------------------ */
-
-.opay-promo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--opay-surface);
-  border: 1px solid var(--opay-line);
-  border-radius: var(--opay-radius-md);
-  padding: 13px 14px;
-  box-shadow: var(--opay-shadow-sm);
-}
-
-.opay-promo__icon {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  border-radius: 50%;
-  background: var(--opay-green-tint);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-
-.opay-promo__title {
-  font-size: 0.84rem;
+  color: var(--opay-white);
+  font-size: 13px;
   font-weight: 600;
-  margin: 0;
-}
-
-.opay-promo__text {
-  font-size: 0.72rem;
-  color: var(--opay-muted);
-  margin: 2px 0 0;
-}
-
-.opay-promo--accent {
-  background: linear-gradient(135deg, #4cd4a1 0%, #10b981 100%);
-  border: 0;
-  color: #fff;
-  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.24);
-}
-
-.opay-promo--accent .opay-promo__text {
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.opay-promo--accent .opay-promo__icon {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* ------------------------------------------------------------------ *
-   Bottom navigation
- * ------------------------------------------------------------------ */
-
-.opay-bottomnav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1040;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--opay-line);
-  box-shadow: 0 -4px 18px rgba(15, 23, 42, 0.05);
-}
-
-.opay-bottomnav__inner {
-  max-width: 480px;
-  margin: 0 auto;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-}
-
-.opay-bottomnav__item {
-  flex: 1;
-  background: transparent;
-  border: 0;
-  padding: 9px 4px 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  color: var(--opay-muted);
-  font-size: 0.68rem;
   cursor: pointer;
-  transition: color 0.18s ease;
+  transition: background 0.18s ease;
 }
 
-.opay-bottomnav__item:hover {
-  color: var(--opay-green-deep);
+.opay-state__retry:hover {
+  background: var(--opay-green-deep);
 }
 
-.opay-bottomnav__item--active {
-  color: var(--opay-green-deep);
-  font-weight: 600;
+.opay-state__retry:focus-visible {
+  outline: 2px solid var(--opay-green-dark);
+  outline-offset: 2px;
 }
 
-.opay-bottomnav__item svg {
-  font-size: 1.2rem;
-  line-height: 1;
+/* Retry button reused inside the green wallet card. */
+.opay-wallet .opay-state__retry {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.55);
 }
 
-@media (min-width: 768px) {
-  .opay-bottomnav__inner {
-    max-width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .opay-bottomnav__inner {
-    max-width: 1080px;
-  }
+.opay-wallet .opay-state__retry:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* ------------------------------------------------------------------ *
-   Desktop / tablet
+   Tablet / desktop — two column dashboard
  * ------------------------------------------------------------------ */
 
 @media (min-width: 768px) {
-  .opay-dash__shell {
+  .opay-page__shell {
     max-width: 960px;
-    padding: 0 24px;
-  }
-
-  .opay-dash__header-inner {
-    max-width: 960px;
-    padding: 14px 24px;
-  }
-
-  .opay-dash__grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 0 24px;
+    grid-template-rows: auto auto auto auto auto;
+    column-gap: 0;
     align-items: start;
   }
 
-  .opay-dash__col {
-    display: flex;
-    flex-direction: column;
+  .opay-topbar__inner {
+    max-width: 960px;
+  }
+
+  .opay-nav__bar {
+    max-width: 960px;
+  }
+
+  /* Left column: wallet + transfer strip + business row + quick actions */
+  .opay-grabber {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .opay-wallet {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .opay-transferstrip {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .opay-bizrow {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .opay-tiles {
+    grid-column: 1;
+    grid-row: 5;
+  }
+
+  /* Right column: take control + services */
+  .opay-promo {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    align-self: start;
   }
 
   .opay-services {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-column: 2;
+    grid-row: 4 / span 2;
+    align-self: start;
   }
 }
 
 @media (min-width: 1200px) {
-  .opay-dash__shell {
+  .opay-page__shell {
     max-width: 1080px;
   }
 
-  .opay-dash__header-inner {
+  .opay-topbar__inner {
+    max-width: 1080px;
+  }
+
+  .opay-nav__bar {
     max-width: 1080px;
   }
 }
 
+/* ------------------------------------------------------------------ *
+   Reduced motion
+ * ------------------------------------------------------------------ */
+
 @media (prefers-reduced-motion: reduce) {
-  .opay-skeleton,
-  .opay-refetch__dot {
+  .opay-skeleton {
     animation: none;
+    background-position: 50% 50%;
   }
 
-  .opay-hero__cta,
-  .opay-quick__item {
+  .opay-tile:hover,
+  .opay-service:hover,
+  .opay-bizrow:hover {
+    transform: none;
+  }
+
+  .opay-tile,
+  .opay-service,
+  .opay-bizrow,
+  .opay-wallet__cta,
+  .opay-wallet__eye,
+  .opay-topbar__action,
+  .opay-nav__item,
+  .opay-state__retry {
     transition: none;
   }
 }

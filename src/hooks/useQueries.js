@@ -64,6 +64,54 @@ export const useLastTransactions = (userId) =>
     staleTime: 30 * 1000,
   });
 
+/**
+ * The most recent person the user transferred money TO.
+ * Comes from the same transaction history the store-transaction page uses.
+ */
+export const useLastTransfer = (userId) =>
+  useQuery({
+    queryKey: [...queryKeys.transactions(userId), 'last-transfer'],
+    queryFn: async () => {
+      const { data } = await api.get(API_URLS.getransactions(userId), {
+        params: { type: 'outgoing', limit: 1 },
+      });
+      return Array.isArray(data) ? data[0] ?? null : null;
+    },
+    enabled: Boolean(userId),
+    staleTime: 30 * 1000,
+  });
+
+/**
+ * Totals for the current day, derived from the current month's transactions.
+ * `earnedToday` is everything credited to the wallet today, `salesToday` is
+ * the same figure (incoming volume) shown on the business row.
+ */
+export const useTodayTotals = (userId) =>
+  useQuery({
+    queryKey: [...queryKeys.transactions(userId), 'today-totals'],
+    queryFn: async () => {
+      const now = new Date();
+      const { data } = await api.get(API_URLS.getransactions(userId), {
+        params: { month: now.getMonth() + 1, year: now.getFullYear(), limit: 200 },
+      });
+
+      const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+
+      const todays = (Array.isArray(data) ? data : []).filter((transaction) => {
+        const created = new Date(transaction.createdAt);
+        return created >= startOfDay && created < endOfDay;
+      });
+
+      const incoming = todays.filter((transaction) => transaction.type === 'incoming');
+      const earned = incoming.reduce((sum, transaction) => sum + Math.abs(transaction.amount || 0), 0);
+
+      return { earnedToday: earned, salesToday: earned, transactionsToday: todays.length };
+    },
+    enabled: Boolean(userId),
+    staleTime: 60 * 1000,
+  });
+
 export const useBeneficiaries = (userId, showAll = false) =>
   useQuery({
     queryKey: queryKeys.beneficiaries(userId, showAll),

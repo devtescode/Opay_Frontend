@@ -1,33 +1,24 @@
-import {
-  RiSmartphoneLine,
-  RiBarChartLine,
-  RiTvLine,
-  RiMoneyDollarCircleLine,
-  RiBankCardLine,
-  RiGamepadLine,
-  RiMore2Line,
-  RiFootballLine,
-} from 'react-icons/ri';
 import './UserDbpage/UserDb.css';
 
 const services = [
-  { key: 'airtime', icon: <RiSmartphoneLine />, label: 'Airtime', badge: 'Up to 6%' },
-  { key: 'data', icon: <RiBarChartLine />, label: 'Data', badge: 'Up to 6%' },
-  { key: 'betting', icon: <RiFootballLine />, label: 'Betting' },
-  { key: 'tv', icon: <RiTvLine />, label: 'TV' },
-  { key: 'owalth', icon: <RiMoneyDollarCircleLine />, label: 'Owealth' },
-  { key: 'loan', icon: <RiBankCardLine />, label: 'Loan' },
-  { key: 'play4achild', icon: <RiGamepadLine />, label: 'Play4achild' },
-  { key: 'more', icon: <RiMore2Line />, label: 'More' },
+  { key: 'airtime', label: 'Airtime', icon: 'ri-bar-chart-2-line' },
+  { key: 'data', label: 'Data', icon: 'ri-arrow-down-line' },
+  { key: 'betting', label: 'Betting', icon: 'ri-game-line' },
+  { key: 'electricity', label: 'Electricity', icon: 'ri-plug-line' },
+  { key: 'fixed', label: 'Fixed', icon: 'ri-shopping-bag-line' },
+  { key: 'loan-center', label: 'Loan Center', icon: 'ri-wallet-3-line' },
+  { key: 'invitation', label: 'Invitation', icon: 'ri-megaphone-line' },
+  { key: 'more', label: 'More', icon: 'ri-more-2-line' },
 ];
 
 const Services = () => (
   <section className="opay-services" aria-label="Services">
-    {services.map(({ key, icon, label, badge }) => (
+    {services.map(({ key, label, icon }) => (
       <button type="button" className="opay-service" key={key}>
-        <span className="opay-service__icon">{icon}</span>
+        <span className="opay-service__icon">
+          <i className={icon} aria-hidden="true" />
+        </span>
         <span className="opay-service__label">{label}</span>
-        {badge && <span className="visually-hidden">{badge}</span>}
       </button>
     ))}
   </section>
