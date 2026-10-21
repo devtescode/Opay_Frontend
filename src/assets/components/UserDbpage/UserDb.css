@@ -270,7 +270,7 @@
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
   gap: 12px;
 }
@@ -362,18 +362,55 @@
 .opay-wallet__masked {
   position: relative;
   z-index: 1;
-  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 12px 0 0;
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.12em;
+  line-height: 1.2;
+}
+
+.opay-wallet__masked > span {
+  display: inline-block;
+  min-width: 0;
+}
+
+.opay-wallet__masked .opay-wallet__chev {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  letter-spacing: normal;
 }
 
 .opay-wallet__amount {
   position: relative;
   z-index: 1;
-  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 12px 0 0;
   font-size: 22px;
   font-weight: 700;
+  line-height: 1.2;
+}
+
+.opay-wallet__amount > span {
+  display: inline-block;
+  min-width: 0;
+}
+
+.opay-wallet__amount .opay-wallet__chev {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
 }
 
 .opay-wallet__chev {
