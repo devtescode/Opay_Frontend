@@ -10,6 +10,7 @@ import {
   getStoredUser,
   getToken,
 } from './apiClient';
+import { useNavigate } from 'react-router-dom';
 
 export const isTokenExpired = (token) => {
   if (!token) return true;
@@ -48,20 +49,24 @@ export const useCurrentUser = () => {
   };
 };
 
+
+
 export const useLogout = () => {
+  const navigate = useNavigate();
+
   const logoutUser = useCallback(() => {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(SESSION_ID_KEY);
 
-    window.location.replace('/');
-  }, []);
+    navigate("/", { replace: true });
+  }, [navigate]);
 
   const logoutAdmin = useCallback(() => {
     clearAdminSession();
-    window.location.replace('/admin');
-  }, []);
+
+    navigate("/admin", { replace: true });
+  }, [navigate]);
 
   return { logoutUser, logoutAdmin };
 };
-
 export { TOKEN_KEY, ADMIN_TOKEN_KEY, USER_KEY, SESSION_ID_KEY };
