@@ -40,4 +40,5 @@ export const API_URLS = {
     delectfunding: `${baseURL}/useropay/delectfunding`,
     getRecentTransactionsbyOpay: (userId)=>`${baseURL}/useropay/getRecentTransactionsbyOpay/${userId}`,
     sessionstatus: `${baseURL}/useropay/sessionstatus`,
+    logout: `${baseURL}/useropay/logout`,
 };

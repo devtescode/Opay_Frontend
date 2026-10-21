@@ -11,6 +11,7 @@ import {
   getToken,
 } from './apiClient';
 import { useNavigate } from 'react-router-dom';
+import { API_URLS } from '../../utils/apiConfig';
 
 export const isTokenExpired = (token) => {
   if (!token) return true;
@@ -54,16 +55,35 @@ export const useCurrentUser = () => {
 export const useLogout = () => {
   const navigate = useNavigate();
 
-  const logoutUser = useCallback(() => {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(SESSION_ID_KEY);
+  const logoutUser = useCallback(async () => {
+    const token = localStorage.getItem(TOKEN_KEY);
 
-    navigate("/", { replace: true });
+    try {
+      if (token) {
+        await fetch(
+          API_URLS.logout,
+          
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      }
+    } catch (error) {
+      console.error("Backend logout failed:", error);
+    } finally {
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(SESSION_ID_KEY);
+
+      // Preserve USER_KEY and the stored user profile.
+      navigate("/", { replace: true });
+    }
   }, [navigate]);
 
   const logoutAdmin = useCallback(() => {
     clearAdminSession();
-
     navigate("/admin", { replace: true });
   }, [navigate]);
 
