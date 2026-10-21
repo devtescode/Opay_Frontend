@@ -19,7 +19,7 @@ export const getStoredUser = () => {
 
 export const clearUserSession = () => {
   localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(USER_KEY);
+  // localStorage.removeItem(USER_KEY);
   localStorage.removeItem(SESSION_ID_KEY);
 };
 
