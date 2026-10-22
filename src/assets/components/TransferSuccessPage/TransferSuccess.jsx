@@ -116,7 +116,7 @@ const TransferSuccess = () => {
                 <Card.Body>
                     <h5 className="mb-3">Special Bonus For Your</h5>
 
-                    <div className="mb-3 d-flex align-items-center justify-content-between">
+                    <div className="mb-4 d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center gap-3">
                             <div className="bg-white p-2 rounded">
                                 <span className="h5 mb-0">💰</span>
@@ -129,7 +129,7 @@ const TransferSuccess = () => {
                         <Button variant="success px-4 rounded-5" style={{ backgroundColor: "#01B575", border: "0" }}>GO</Button>
                     </div>
 
-                    <div className="mb-3 d-flex align-items-center justify-content-between">
+                    <div className="mb-4 d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center gap-3">
                             <div className="p-2 rounded bg-white">
                                 <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-01-21%20at%2011.24.09_4bcc526b.jpg-QHkMHGac3ONE7A77vW9bZDjYWmsv1T.jpeg" alt="" width="24" height="24" />
@@ -142,7 +142,7 @@ const TransferSuccess = () => {
                         <Button variant="success px-4 rounded-5" style={{ backgroundColor: "#01B575", border: "0" }}>GO</Button>
                     </div>
 
-                    <div className="mb-3 d-flex align-items-center justify-content-between">
+                    <div className="mb-4 d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center gap-3">
                             <div className="bg-white p-2 rounded">
                                 <span className="h5 mb-0">⚙️</span>
@@ -155,7 +155,7 @@ const TransferSuccess = () => {
                         <Button variant="success px-4 rounded-5" style={{ backgroundColor: "#01B575", border: "0" }}>GO</Button>
                     </div>
 
-                    <div className="d-flex align-items-center justify-content-between">
+                    <div className=" d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center gap-3">
                             <div className="bg-white p-2 rounded">
                                 <span className="h5 mb-0">💡</span>
