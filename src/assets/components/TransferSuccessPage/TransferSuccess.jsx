@@ -66,7 +66,7 @@ const TransferSuccess = () => {
             <Row className="mb-1 justify-content-center text-center">
                 <Col xs={6} md="auto" className="mb-3 mb-md-0">
                     <div
-                        className="py-2 rounded-3 px-3 d-flex justify-content-center align-items-center gap-3 shadow-sm"
+                        className="py-2 rounded-3 px-2 d-flex justify-content-center align-items-center gap-3 shadow-sm"
                         onClick={shareBtn}
                         style={{ height: "65px", cursor: "pointer" }}
                     >
@@ -88,7 +88,7 @@ const TransferSuccess = () => {
             <Row className="mb-1 justify-content-center text-center">
                 <Col xs={6} md="auto" className="mb-3 mb-md-0">
                     <div
-                        className="py-2 rounded-3 px-3 d-flex justify-content-center align-items-center gap-3 shadow-sm"
+                        className="py-2 rounded-3 px-2 d-flex justify-content-center align-items-center gap-3 shadow-sm"
                         // onClick={shareBtn}
                         style={{ height: "65px", cursor: "pointer" }}
                     >
