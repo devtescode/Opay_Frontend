@@ -78,7 +78,7 @@ const TransferSuccess = () => {
                     <div
                         className="py-2 px-3 rounded-3 d-flex justify-content-center align-items-center gap-3 shadow-sm"
                         style={{ height: "65px", cursor: "pointer" }}
-                        onClick={() => navigate("/transactiondetails", { state: transaction })}
+                        // onClick={() => navigate("/transactiondetails", { state: transaction })}
                     >
                         <PlusCircleFill className="mb-0 tfstyling" size={20} />
                         <div className="small" style={{ fontSize: "14px" }}>Add Money</div>
