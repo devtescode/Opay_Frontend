@@ -57,7 +57,7 @@ const TransferSuccess = () => {
                     {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}
                 </h3>
 
-                <p className="rounded p-1 shadow-sm " style={{fontSize:"13px"}}>
+                <p className="rounded p-2 shadow-sm " style={{fontSize:"13px"}}>
                     The recipient account is expected to be credited within 5 minutes,
                     subject to notification by the bank.
                 </p>
