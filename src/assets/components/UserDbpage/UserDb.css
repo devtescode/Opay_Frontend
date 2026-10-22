@@ -323,9 +323,9 @@
   line-height: 1;
 }
 
-.opay-wallet__eye:hover {
+/* .opay-wallet__eye:hover {
   background: rgba(255, 255, 255, 0.28);
-}
+} */
 
 .opay-wallet__eye:focus-visible {
   outline: 2px solid var(--opay-white);
