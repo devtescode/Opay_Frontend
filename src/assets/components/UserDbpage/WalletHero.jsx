@@ -79,9 +79,9 @@ const WalletHero = ({
 
     return (
       <p className="opay-wallet__label">
-        <span className="opay-wallet__shield">
+        {/* <span className="opay-wallet__shield"> */}
           <i className="ri-shield-check-line" aria-hidden="true" />
-        </span>
+        {/* </span> */}
         Available
         <button
           type="button"

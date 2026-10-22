@@ -22,7 +22,7 @@
   --opay-ink: #111827;
   --opay-muted: #6b7280;
   --opay-faint: #9ca3af;
-  --opay-white: #ffffff;
+  --opay-white: #F8F8FA;
 
   position: relative;
   min-height: 100vh;
@@ -53,7 +53,8 @@
   position: sticky;
   top: 0;
   z-index: 1030;
-  background: var(--opay-white);
+  /* background: var(--opay-white); */
+  background: #F8F8FA;
 }
 
 .opay-topbar__inner {
@@ -278,8 +279,8 @@
 .opay-wallet__label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 18px;
+  gap: 5px;
+  font-size: 16.5px;
   font-weight: 500;
   margin: 0;
 }
@@ -307,7 +308,8 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(155, 155, 155, 0.00);
+  /* background: #0FA872; */
   color: var(--opay-white);
   display: inline-flex;
   align-items: center;
@@ -496,7 +498,7 @@
   align-items: center;
   gap: 12px;
   margin: 16px;
-  padding: 16px;
+  padding: 10px;
   border: 0;
   border-radius: 18px;
   background: var(--opay-white);
@@ -518,8 +520,8 @@
 }
 
 .opay-bizrow__icon {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--opay-mint);
