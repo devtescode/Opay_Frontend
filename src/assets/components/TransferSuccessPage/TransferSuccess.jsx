@@ -71,7 +71,7 @@ const TransferSuccess = () => {
                         style={{ height: "65px", cursor: "pointer" }}
                     >
                         <Share className="mb-1  tfstyling mt-1" size={20} />
-                        <div className="small" style={{ fontSize: "12px" }}>Share Receipt</div>
+                        <div className="small" style={{ fontSize: "11px" }}>Share Receipt</div>
                     </div>
                 </Col>
                 <Col xs={6} md="auto">
@@ -81,7 +81,7 @@ const TransferSuccess = () => {
                         // onClick={() => navigate("/transactiondetails", { state: transaction })}
                     >
                         <PlusCircleFill className="mb-0 tfstyling" size={20} />
-                        <div className="small" style={{ fontSize: "12px" }}>Add Money</div>
+                        <div className="small" style={{ fontSize: "11px" }}>Add Money</div>
                     </div>
                 </Col>
             </Row>
@@ -94,7 +94,7 @@ const TransferSuccess = () => {
                     >
                         {/* Person plus fill */}
                         <PersonPlusFill className="mb-1 mt-1 tfstyling" size={20} />
-                        <div className="small" style={{ fontSize: "12px" }}>Add to favourites</div>
+                        <div className="small" style={{ fontSize: "11px" }}>Add to favourites</div>
                     </div>
                 </Col>
                 <Col xs={6} md="auto">
@@ -104,7 +104,7 @@ const TransferSuccess = () => {
                         onClick={() => navigate("/transactiondetails", { state: transaction })}
                     >
                         <List className="mb-0 tfstyling" size={20} />
-                        <div className="small" style={{ fontSize: "12px" }}>View Details</div>
+                        <div className="small" style={{ fontSize: "11px" }}>View Details</div>
                     </div>
                 </Col>
             </Row>
