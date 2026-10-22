@@ -245,7 +245,8 @@ const Transfermodal = ({ showModal, setShowModal }) => {
                 className="w-75 py-2 mt-2 mx-auto rounded-5 fs-5 border-0"
                 onClick={PaymodelBtn}
               >
-                {isLoading ? 'Processing...' : 'Pay'}
+                {/* Processing... */}
+                {isLoading ? 'Pay' : 'Pay'}
               </Button>
             </div>
           </Modal.Body>

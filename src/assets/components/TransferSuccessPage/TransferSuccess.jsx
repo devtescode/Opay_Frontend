@@ -3,7 +3,11 @@ import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import {
     Share,
     List,
-    CheckCircleFill
+    CheckCircleFill,
+    CashCoin,
+    Heart,
+    PlusCircleFill,
+    PersonPlusFill
 } from 'react-bootstrap-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -22,6 +26,10 @@ const TransferSuccess = () => {
     const shareBtn = () => {
         navigate('/transactionreceipt')
     }
+
+    const DoneBtn = ()=>{
+        navigate("/userdb")
+    }
     // if (!transaction) {
     //     return <p className="text-center text-danger">No transaction available</p>;
     // }
@@ -30,7 +38,7 @@ const TransferSuccess = () => {
         <Container className="py-4 px-3 max-width-500">
             {/* Success Header */}
             <div className="text-center mb-4">
-                <div className='text-end text-success' style={{ fontSize: "18px" }}>
+                <div className='text-end text-success' style={{ fontSize: "18px" }} onClick={DoneBtn}>
                     <p className='fw-bold' style={{ color: "#01B575" }}>
                         Done
                     </p>
@@ -49,7 +57,7 @@ const TransferSuccess = () => {
                     {amount !== null ? `₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}` : 'Loading...'}
                 </h3>
 
-                <p className="text-success">
+                <p className="rounded p-1 shadow-sm ">
                     The recipient account is expected to be credited within 5 minutes,
                     subject to notification by the bank.
                 </p>
@@ -62,8 +70,8 @@ const TransferSuccess = () => {
                         onClick={shareBtn}
                         style={{ height: "65px", cursor: "pointer" }}
                     >
-                        <Share className="mb-1 text-success mt-1" size={20} />
-                        <div className="small" style={{ fontSize: "16px" }}>Share Receipt</div>
+                        <Share className="mb-1  tfstyling mt-1" size={20} />
+                        <div className="small" style={{ fontSize: "14px" }}>Share Receipt</div>
                     </div>
                 </Col>
                 <Col xs={6} md="auto">
@@ -72,8 +80,31 @@ const TransferSuccess = () => {
                         style={{ height: "65px", cursor: "pointer" }}
                         onClick={() => navigate("/transactiondetails", { state: transaction })}
                     >
-                        <List className="mb-0 text-success" size={20} />
-                        <div className="small" style={{ fontSize: "16px" }}>View Details</div>
+                        <PlusCircleFill className="mb-0 tfstyling" size={20} />
+                        <div className="small" style={{ fontSize: "14px" }}>Add Money</div>
+                    </div>
+                </Col>
+            </Row>
+            <Row className="mb-1 justify-content-center text-center">
+                <Col xs={6} md="auto" className="mb-3 mb-md-0">
+                    <div
+                        className="py-2 rounded-3 px-3 d-flex justify-content-center align-items-center gap-3 shadow-sm"
+                        // onClick={shareBtn}
+                        style={{ height: "65px", cursor: "pointer" }}
+                    >
+                        {/* Person plus fill */}
+                        <PersonPlusFill className="mb-1 mt-1 tfstyling" size={20} />
+                        <div className="small" style={{ fontSize: "14px" }}>Add to favourites</div>
+                    </div>
+                </Col>
+                <Col xs={6} md="auto">
+                    <div
+                        className="py-2 px-3 rounded-3 d-flex justify-content-center align-items-center gap-3 shadow-sm"
+                        style={{ height: "65px", cursor: "pointer" }}
+                        onClick={() => navigate("/transactiondetails", { state: transaction })}
+                    >
+                        <List className="mb-0 tfstyling" size={20} />
+                        <div className="small" style={{ fontSize: "14px" }}>View Details</div>
                     </div>
                 </Col>
             </Row>
